@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mis Eventos</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="resources/css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+<div class = "box">
+  <div class="row row-offcanvas row-offcanvas-left">
+<!-- sidebar -->
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+
+                <ul class="nav">
+                <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+              </ul>
+
+                <ul class="nav hidden-xs" id="lg-menu">
+                    <li><a href="viajes.html"><i class="glyphicon glyphicon-globe"></i> Mis Viajes</a></li>
+                    <li><a href="experiencias.html"><i class="glyphicon glyphicon-heart-empty"></i> Mis Experiencias</a></li>
+                    <li><a href="itinerario.html"><i class="glyphicon glyphicon-calendar"></i> Mi itinerario</a></li>
+                    <li><a href="lugares.html"><i class="glyphicon glyphicon-map-marker"></i> Mis Lugares</a></li>
+                    <li  class="active"><a href="eventos.html"><i class="glyphicon glyphicon-tags"></i> Mis Eventos</a></li>
+                </ul>
+
+
+
+                <!-- tiny only nav-->
+              <ul class="nav visible-xs" id="xs-menu">
+                    <li><a href="#featured" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+                    <li><a href="#stories" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
+                    <li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
+                    <li><a href="#" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a></li>
+                </ul>
+
+            </div>
+    <!-- /sidebar -->
+   <!-- main right col -->
+            <div class="column col-sm-10 col-xs-11" id="main">
+
+                <!-- top nav -->
+                <div class="navbar navbar-blue navbar-static-top">
+                    <div class="navbar-header">
+                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle</span>
+                        <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                      </button>
+                      <a href="index.html" class="navbar-brand logo">Unitrip</a>
+                    </div>
+                    <nav class="collapse navbar-collapse" role="navigation">
+                    <form class="navbar-form navbar-left">
+                        <div class="input-group input-group-sm" style="max-width:360px;">
+                          <input type="text" class="form-control" placeholder="Busca Lugares" name="srch-term" id="srch-term">
+                          <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                          </div>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav">
+                      <li>
+                        <a href="#"><i class="glyphicon glyphicon-home"></i> Inicio</a>
+                      </li>
+                      <li>
+                        <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Nueva Experiencia</a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="badge">Mi perfil viajero</span></a>
+                      </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#featured"><i class="glyphicon glyphicon-cog"></i>   Configuración</a></li>
+                          <li><a href="#privacy"> <i class = "glyphicon glyphicon-ban-circle"> Privacidad</i></a></li>
+                          <li><a href="#log-out"> <i class = "glyphicon glyphicon-log-out">  Cerrar Sesion</i></a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    </nav>
+                </div>
+
+<!--Titulo-->
+                          <div class = "container" id="titulo">
+                              <div class = "jumbotron text-center">
+                              <h2>
+                              Tus Eventos
+                              </h2>
+                                <p> ¡Mira los eventos a los que has ido y a los que vas a ir!</p>
+                                <p style="text-align:right;"><br>
+                                <br>
+                                <br>
+                                Agrega uno nuevo:
+                                </p>
+                              <a class = "btn btn-info pull-right"> Agregar evento</a>
+                              </div>
+                          </div>
+
+<!-- Grid -->
+
+   <div class="padding" >
+                    <div class="full col-sm-9 less" >
+
+
+                        <!-- content -->
+                        <div class="row">
+                        <!-- main col rleft -->
+                          <div class="col-sm-6">
+
+
+
+
+                               <div class="panel panel-default">
+                                  <h3 style= "text-align:center;">A los que vas a ir:</h3>
+                                </div>
+                               <div class="panel panel-default">
+                                <div class="panel-thumbnail"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Santuario_de_Monserrate,_Bogot%C3%A1.jpg" class="img-responsive center-block"></div>
+                                <div class="panel-body">
+                                  <p class="lead">Monserrate</p>
+                                  <p>
+                                    Lugar: Centro de Bogotá
+                                    <br>
+                                    Hora: Todo el día
+                                    <br>
+                                    Descripción breve: Iglesia ubicada en la cima del cerro oriental de Bogotá con gran vista.
+                                  </p>
+
+
+                                  <p>Lo visitarás el 10 de junio de 2016</p>
+
+
+                                </div>
+                              </div>
+
+                          </div>
+                         <!-- main col right -->
+
+                         <div class="col-sm-6">
+
+
+                                <div class="panel panel-default">
+                                  <h3 style= "text-align:center;">A los que ya fuiste:</h3>
+                                </div>
+                              <div class="panel panel-default">
+                                <div class="panel-thumbnail"><img src="http://media1.fcbarcelona.com/media/asset_publics/resources/000/197/221/size_640x360/pic_2015-03-22_BARCELONA-MADRID_37.v1447841645.JPG" class="img-responsive center-block"></div>
+                                <div class="panel-body">
+                                  <p class="lead">Estadio Camp Nou</p>
+                                  <p>Lo visitaste el 2 de junio de 2015
+                                    <br>
+                                    Lugar: Ciudad de Barcelona
+                                    <br>
+                                    Hora : 3:00pm
+                                    <br>
+                                    Descripción: El equipo Fútbol Club barcelona enfrentó a un equipo compitiendo en la Liga BBVA
+                                  </p>
+
+                                 </div>
+                              </div>
+
+                              <div class="panel panel-default">
+                                <div class="panel-thumbnail"><img src="http://extroversia.universia.net.co/imgs2011/imagenes-noticias/musica/0-2013731-85553_1.jpg" class="img-responsive center-block" ></div>
+                                <div class="panel-body">
+                                  <p class="lead">Feria de las Flores</p>
+                                  <p>Lo visitaste en marzo 15 de 2014
+                                    <br>
+                                    Lugar: Ciudad de Medellín.
+                                    <br>
+                                    Hora: Todo el día.
+                                    <br>
+                                    Descripción: Cada año en medellín se lleva a cabo la feria de las flores y la ciudad gira en torno al espectáculo.
+                                  </p>
+
+                                 </div>
+                              </div>
+                               </div>
+                              </div>
+                          </div>
+
+
+                       </div><!--/row-->
+
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+<!--/Grid-->
+ </div>
+
+
+<!--post modal-->
+<div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      Update Status
+      </div>
+      <div class="modal-body">
+          <form class="form center-block">
+            <div class="form-group">
+              <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">what
+          <div>
+          <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+      </div>
+      </div>
+  </div>
+  </div>
+</div>
+<!--  barra que se queda abajo en la palntalla-->
+
+    <div class  = "navbar navbar-default navbar-fixed-bottom" >
+
+      <div class = "container">
+        <p class  = "navbar-text" style="text-align:center"> Barra de abajo. Bootstrap</p>
+
+      </div>
+    </div>
+
+    <!-- script references -->
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>﻿
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/scripts.js"></script>
+</body>
+</html>

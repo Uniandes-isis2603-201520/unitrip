@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>Mis Lugares</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Unitrip</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -13,54 +13,50 @@
 		<link href="resources/css/styles.css" rel="stylesheet">
 	</head>
 	<body>
-<div class="wrapper">
-    <div class="box">
-        <div class="row row-offcanvas row-offcanvas-left">
-
-
-            <!-- sidebar -->
+    <div class = "box">
+      <div class="row row-offcanvas row-offcanvas-left">
+           <!-- sidebar -->
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
 
-              	<ul class="nav">
-          			<li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
-            	</ul>
+                <ul class="nav">
+                <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+              </ul>
 
                 <ul class="nav hidden-xs" id="lg-menu">
                     <li class="active"><a href="viajes.html"><i class="glyphicon glyphicon-globe"></i> Mis Viajes</a></li>
                     <li><a href="experiencias.html"><i class="glyphicon glyphicon-heart-empty"></i> Mis Experiencias</a></li>
-                     <li><a href="itinerario.html"><i class="glyphicon glyphicon-calendar"></i> Mi itinerario</a></li>
-                     <li><a href="lugares.html"><i class="glyphicon glyphicon-map-marker"></i> Mis Lugares</a></li>
+                    <li><a href="itinerario.html"><i class="glyphicon glyphicon-calendar"></i> Mi itinerario</a></li>
+                    <li><a href="lugares.html"><i class="glyphicon glyphicon-map-marker"></i> Mis Lugares</a></li>
                     <li  class="active"><a href="eventos.html"><i class="glyphicon glyphicon-tags"></i> Mis Eventos</a></li>
                 </ul>
 
 
 
-              	<!-- tiny only nav-->
+                <!-- tiny only nav-->
               <ul class="nav visible-xs" id="xs-menu">
-                  	<li><a href="#featured" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+                    <li><a href="#featured" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
                     <li><a href="#stories" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
-                  	<li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
+                    <li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
                     <li><a href="#" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a></li>
                 </ul>
 
             </div>
             <!-- /sidebar -->
-
-            <!-- main right col -->
+   <!-- main right col -->
             <div class="column col-sm-10 col-xs-11" id="main">
 
                 <!-- top nav -->
-              	<div class="navbar navbar-blue navbar-static-top">
+                <div class="navbar navbar-blue navbar-static-top">
                     <div class="navbar-header">
                       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle</span>
                         <span class="icon-bar"></span>
-          				<span class="icon-bar"></span>
-          				<span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
                       </button>
                       <a href="index.html" class="navbar-brand logo">Unitrip</a>
-                  	</div>
-                  	<nav class="collapse navbar-collapse" role="navigation">
+                    </div>
+                    <nav class="collapse navbar-collapse" role="navigation">
                     <form class="navbar-form navbar-left">
                         <div class="input-group input-group-sm" style="max-width:360px;">
                           <input type="text" class="form-control" placeholder="Busca Lugares" name="srch-term" id="srch-term">
@@ -90,44 +86,87 @@
                         </ul>
                       </li>
                     </ul>
-                  	</nav>
+                    </nav>
                 </div>
-                <!-- /top nav -->
 
-                <!-- Container para un jmbotron de informacion imporante -->
-                <div class = "container">
+<!--Titulo-->
+                          <div class = "container" id="titulo">
+                              <div class = "jumbotron text-center">
+                              <h2>
+                              Tus Lugares
+                              </h2>
+                                <p> ¡Mira los lugares que has visitado y los que tienes por visitar!</p>
+                                <p style="text-align:right;"><br>
+                                <br>
+                                <br>
+                                Agrega uno nuevo:
+                                </p>
+                              <a class = "btn btn-info pull-right"> Agregar lugar</a>
+                              </div>
+                          </div>
 
-                  <div class  ="jumbotron">
-                    <center>
-                      <h1>Búsqueda</h1>
-                      <p>Busca lo que se te ocurra</p>
-                      <div class="well">
-                                   <form class="form-horizontal" role="form">
-                                     <div class="input-group input-group-lg" style="padding:14px;">
-										<div class="input-group-btn">
-										<button class="btn btn-danger" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-										</div>
-                                      <textarea class="form-control" placeholder="ingresa tu búsqueda acá"></textarea>
+<!-- Grid -->
 
-                                    </div>
-							<label class="checkbox-inline"><input type="checkbox" value="">Hoteles</label>
-							<label class="checkbox-inline"><input type="checkbox" value="">Eventos</label>
-							<label class="checkbox-inline"><input type="checkbox" value="">Lugares</label>
-                                    </form>
+   <div class="padding" >
+                    <div class="full col-sm-9 less" >
+
+
+                        <!-- content -->
+                        <div class="row">
+                        <!-- main col rleft -->
+                          <div class="col-sm-6">
+
+
+
+
+                               <div class="panel panel-default">
+                                  <h3 style= "text-align:center;">Los que vas a visitar:</h3>
+                                </div>
+                               <div class="panel panel-default">
+                                <div class="panel-thumbnail"><img src="http://www.canalcapital.gov.co/blogs/wp-content/uploads/2014/02/Bogot%C3%A1.jpg" class="img-responsive center-block"></div>
+                                <div class="panel-body">
+                                  <p class="lead">Bogotá</p>
+                                  <p>Lo visitarás en junio de 2016</p>
+
+
+                                </div>
                               </div>
 
-                    </center>
-                  </div>
-                </div>
+                          </div>
+                         <!-- main col right -->
 
-                <!-- grid system -->
+                         <div class="col-sm-6">
 
-            </div>
-            <!-- /main -->
 
-        </div>
-    </div>
-</div>
+                                <div class="panel panel-default">
+                                  <h3 style= "text-align:center;">Los que ya visitaste:</h3>
+                                </div>
+                              <div class="panel panel-default">
+                                <div class="panel-thumbnail"><img src="http://www.airpano.com/files/Barcelona-Spain/image3a.jpg" class="img-responsive center-block"></div>
+                                <div class="panel-body">
+                                  <p class="lead">Barcelona</p>
+                                  <p>Lo visitaste en junio de 2015</p>
+
+                                 </div>
+                              </div>
+
+                              <div class="panel panel-default">
+                                <div class="panel-thumbnail"><img src="http://4.bp.blogspot.com/_jyH-Z9AuPSg/S43qwYs7i6I/AAAAAAAAAG4/g8YBwdisCoQ/s400/medellin.jpg" class="img-responsive center-block" ></div>
+                                <div class="panel-body">
+                                  <p class="lead">Medellín</p>
+                                  <p>Lo visitaste en marzo de 2014</p>
+
+                                 </div>
+                              </div>
+                          </div>
+
+                          </div>
+                       </div><!--/row-->
+
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+<!--/Grid-->
+ </div>
 
 
 <!--post modal-->
@@ -136,7 +175,7 @@
   <div class="modal-content">
       <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			Update Status
+      Update Status
       </div>
       <div class="modal-body">
           <form class="form center-block">
@@ -145,32 +184,31 @@
             </div>
           </form>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer">what
           <div>
           <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
             <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
-		  </div>
       </div>
+      </div>
+    </div>
+
   </div>
   </div>
 </div>
-
-
 <!--  barra que se queda abajo en la palntalla-->
 
     <div class  = "navbar navbar-default navbar-fixed-bottom" >
 
       <div class = "container">
-        <p class  = "navbar-text" style="text-align:center"> Site built with by Unitrip team using Bootstrap</p>
+        <p class  = "navbar-text" style="text-align:center"> Barra de abajo. Bootstrap</p>
 
       </div>
     </div>
 
-
-	<!-- script references -->
-		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
+    <!-- script references -->
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>﻿
-		<script src="resources/js/bootstrap.min.js"></script>
-		<script src="resources/js/scripts.js"></script>
-	</body>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/scripts.js"></script>
+</body>
 </html>

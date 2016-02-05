@@ -39,12 +39,7 @@ hr {
     clear: both;
 }
 
-.full-area {
-    height: 100%;
-    overflow: auto;
-    *zoom:1;
-    
-}
+
 
 .column {
     height: 100%;
@@ -58,7 +53,7 @@ hr {
 
 .full{
 	padding-top:70px;
-    width:100%
+     /* width:100% */
 }
 /* ------profile -------*/
 
@@ -201,7 +196,7 @@ hr {
     font-family:arial,sans-serif;
     top:0;
     position:fixed;
-    width:100%;
+    width:inherit; /* 100%*/
 }
 
 .navbar-blue li > a,.navbar-toggle  {
@@ -412,4 +407,10 @@ small.text-muted {
   #sidebar, #sidebar a, #sidebar-footer a {
     padding-left:3px;
   }
+    
+  .tab{
+	  position:relative;
+		top: 100px;
+		left: 2.5px;
+  }	
 }
