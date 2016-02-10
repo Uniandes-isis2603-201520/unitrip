@@ -7,11 +7,11 @@
         }]);
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("/evento");
+            $urlRouterProvider.otherwise("/ perfil");
             $stateProvider
-                    .state('evento', {
-                        url: '/evento',
-                        templateUrl: "src/modules/evento/evento.tpl.html"
+                    .state('config', {
+                        url: '/config',
+                        templateUrl: "src/modules/cuenta/config.tpl.html"
                     });
 
         }]);
