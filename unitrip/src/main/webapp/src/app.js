@@ -7,11 +7,15 @@
         }]);
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("/ perfil");
+            $urlRouterProvider.otherwise("/viajes");
             $stateProvider
                     .state('config', {
                         url: '/config',
                         templateUrl: "src/modules/cuenta/config.tpl.html"
+                    })
+                    .state('viajes', {
+                    url: '/viajes',
+                    templateUrl: "src/modules/misViajes/misViajes.tpl.html"
                     });
 
         }]);
