@@ -1,4 +1,16 @@
+.texto-jumbo {
+    
+  
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .columnas-viaje-experiencias {
     text-align: center
     
+}
+
+.test {
+    
+    background-color: yellow
 }
