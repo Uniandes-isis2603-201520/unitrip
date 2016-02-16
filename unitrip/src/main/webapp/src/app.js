@@ -26,7 +26,13 @@
                     .state('viajes', {
                     url: '/viajes',
                     templateUrl: "src/modules/misViajes/misViajes.tpl.html"
+                    })
+                    .state('itinerario', {
+                    url: '/itinerario',
+                    templateUrl: "src/modules/itinerario/itinerario.tpl.html"
                     });
+            
+            
 
         }]);
 })(window.angular);
