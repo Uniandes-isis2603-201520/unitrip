@@ -25,7 +25,7 @@
                     })
                     .state('viajes', {
                     url: '/viajes',
-                    templateUrl: "src/modules/misViajes/misViajes.tpl.html"
+                    templateUrl: "src/modules/viajes/viajes.tpl.html"
                     })
                     .state('itinerario', {
                     url: '/itinerario',
