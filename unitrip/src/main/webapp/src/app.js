@@ -18,7 +18,10 @@
                         url: '/config',
                         templateUrl: "src/modules/cuenta/config.tpl.html"
                     })
-
+                    .state('evento', {
+                    url: '/evento',
+                    templateUrl: "src/modules/evento/evento.tpl.html"
+                    })
                     .state('experiencias', {
                     url: '/experiencias',
                     templateUrl: "src/modules/experiencias/experiencias.tpl.html"
