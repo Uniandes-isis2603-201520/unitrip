@@ -11,35 +11,44 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
-		<link href="resources/css/styles.css" rel="stylesheet">
+		<!-- stylesheets -->
+        <link href="resources/css/styles2.css" rel="stylesheet">
         <link href="resources/css/config-styles.css" rel="stylesheet">
         <link href="resources/css/inicio-styles.css" rel="stylesheet">
+        <link href="resources/css/evento-styles.css" rel="stylesheet">
 
-
+        <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
         <script src="resources/js/angular-ui-router.min.js" type="text/javascript"></script>
         <script src="src/app.js" type="text/javascript"> </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>﻿
+		<script src="resources/js/bootstrap.min.js"></script>
+		<script src="resources/js/scripts.js"></script>
+
 	</head>
 	<body>
-    <div class="wrapper">
-    <div class="box">
-        <div class="row row-offcanvas row-offcanvas-left">
 
-            <!-- main right col -->
-            <div class="column col-sm-12" id="main">
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
 
-                <!-- top nav -->
-              	<div class="navbar navbar-yellow navbar-static-top">
-                    <div class="navbar-header">
-                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle</span>
-                        <span class="icon-bar"></span>
-          				<span class="icon-bar"></span>
-          				<span class="icon-bar"></span>
-                      </button>
-                      <a href="index.html" class="navbar-brand logo">Unitrip</a>
-                  	</div>
-                  	<nav class="collapse navbar-collapse" role="navigation">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+
+
+    <a href="index.html" class="navbar-brand ">Unitrip</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+
+
+    <nav class="collapse navbar-collapse" role="navigation">
                     <form class="navbar-form navbar-left">
                         <div class="input-group input-group-sm" style="max-width:700px;">
                           <input type="text" class="form-control" placeholder="Busca Lugares" name="srch-term" id="srch-term">
@@ -56,16 +65,16 @@
                           <a  ui-sref="viajes" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plane"></i> Mis Viajes</a>
                       </li>
                       <li>
-                        <a ui-sref="experiencias" role="button" data-toggle="modal"><i class="glyphicon glyphicon-comment"></i> Mis Experiencias</a>
+                        <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-comment"></i> Mis Experiencias</a>
                       </li>
                       <li>
                           <a ui-sref="itinerario" role="button" data-toggle="modal"><i class="glyphicon glyphicon-calendar"></i> Itinerario</a>
                       </li>
-                      <li>
+                       <li>
                           <a ui-sref="evento" role="button" data-toggle="modal"><i class="glyphicon glyphicon-flag"></i> Evento</a>
                       </li>
                       <li>
-                        <a href="#postModal"><span class="badge">Mi perfil viajero</span></a>
+                        <a href="#postModal">Mi perfil viajero</a>
                       </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -79,29 +88,27 @@
                         </ul>
                       </li>
                     </ul>
-                  	</nav>
-                </div>
-                <!-- /top nav -->
-
-                <div class="padding">
-                    <div ui-view>
-
-                </div>
-
-                </div><!-- /padding -->
-            </div>
-            <!-- /main -->
-
-        </div>
-    </div>
-</div>
+                    </nav>
+  </div><!-- /.container-fluid -->
+</nav>
 
 
+
+
+
+
+
+
+<ol class="breadcrumb ubicacion">
+  <li><a ui-sref="inicio">Inicio</a></li>
+  <li><a  ui-sref="viajes">Mis Viajes</a></li>
+  <li class="active">Itinerario 1 </li>
+</ol>
+<div ui-view>
+
+  </div>
 	<!-- script references -->
 		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>﻿
-		<script src="resources/js/bootstrap.min.js"></script>
-		<script src="resources/js/scripts.js"></script>
 
 	</body>
 </html>
