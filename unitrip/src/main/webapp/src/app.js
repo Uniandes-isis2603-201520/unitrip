@@ -34,6 +34,18 @@
                     .state('itinerario', {
                     url: '/itinerario',
                     templateUrl: "src/modules/itinerario/itinerario.tpl.html"
+                    })
+                    .state('itinerario.calendario', {
+                    url: '/itinerario',
+                    templateUrl: "src/modules/itinerario/calendario.html"
+                    })
+                    .state('itinerario.timeline', {
+                    url: '/itinerario',
+                    templateUrl: "src/modules/itinerario/timeline.html"
+                    })  
+                    .state('itinerario.lista', {
+                    url: '/itinerario',
+                    templateUrl: "src/modules/itinerario/lista.html"
                     });
 
 
