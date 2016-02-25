@@ -1,8 +1,8 @@
 (function (ng) {
 
     var mod = ng.module("mainApp", [
-        "ui.router",
-        
+        "ui.router","viajesModule","viajesMock"
+
     ]);
 
     mod.config(['$logProvider', function ($logProvider) {
@@ -10,9 +10,9 @@
         }]);
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        
+
             $urlRouterProvider.otherwise("/inicio");
-            
+
             $stateProvider
                     .state ('inicio', {
                     url: '/inicio',
@@ -41,6 +41,8 @@
             $stateProvider
                     .state('viajes', {
                     url: '/viajes',
+                    controller: "viajesCtrl",
+                    controllerAs: "ctrl",
                     templateUrl: "src/modules/viajes/viajes.tpl.html"
                     })
             $stateProvider
@@ -61,6 +63,11 @@
                     .state('itinerario.lista', {
                     url: '/itinerario',
                     templateUrl: "src/modules/itinerario/lista.html"
+                    });
+            $stateProvider
+                    .state('viajes.vistaPrev', {
+                    url: '/viajes',
+                    templateUrl: "src/modules/viajes/panelViaje.tpl.html"
                     });
 
 
