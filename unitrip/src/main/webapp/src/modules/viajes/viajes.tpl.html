@@ -1,250 +1,88 @@
-<div class="container">
-
-                  <div class="jumbotron">
+<div class="viajes">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 jumbotronViaje">
                     <center>
                       <h1>Mis Viajes</h1>
-                      
-                     
                     </center>
-                  </div>
-                </div>
-              <div class="container">
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus"></i> Agregar nuevo viaje</button>
-  <div class="input-group input-group-lg pull-right" style="max-width:500px;">
-  <div class="input-group-btn">
-                            <button class="btn btn-danger" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                          </div>
-                          <input type="text" class="form-control" placeholder="Busca aqui" name="srch-term" id="srch-term">
-                          
+            </div>
+        </div>
+    </div> 
+<!--Contenido ui-view-->
+    <div class = "container">
+
+            <div class="row">
+
+                <div class="col-md-5" >
+                   <div class ="container">
+                        <div class ="row">
+
+                            <div class="col-md-2" >
+                              <button type="button" class="btn btn-danger btn-block" data-toggle="collapse" data-target="#agregarViaje">
+                                  <span class="glyphicon glyphicon-plus"></span>Crear</button>
+
+                                <div id="agregarViaje" class="collapse"> 
+                                        <div class ="container">
+                                        <form class="contact_form" action="#" id="contact_form" runat="server"> 
+                                        <div class="from-group"> 
+                                            <h2>Agregar viaje</h2>                                
+                                                <br>
+                                                <div class ="form-group">
+                                                <label for ="inputName"> Nombre Viaje:</label>
+                                                <input type = "text" id ="inputName" class ="form-control-md" placeholder = "Nombre" required autofocus>
+                                                </div>
+                                                <div class="form-group">
+                                                <label for ="inputFechaI">Fecha Inicial  :</label>
+                                                <input type ="date" id ="inputFechaI" class ="form-control-sm" required autofocus>
+                                                </div>
+                                                <div class="form-group">
+                                                <label for ="inputFechaF">Fecha Final  :</label>
+                                                <input type ="date" id ="inputFechaF" class ="form-control-sm" required autofocus>
+                                                </div>
+                                            <button class="submit btn-danger" type="submit">
+                                                <span class="glyphicon glyphicon-ok"></span>Agregar Viaje
+                                            </button> 
+                                            <br>
+                                            <br>
+                                        </div> 
+                                        </form>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" >
+                               <button type="button" class="btn btn-danger btn-block" data-toggle="collapse" data-target="#listarViaje">
+                                   <span class="glyphicon glyphicon-list"></span>Viajes
+                               </button>
+                                <br>
+                                <div id="listarViaje" class="collapse" > 
+                                    <div class ="global" id="global">
+                                      <div class ="container" id="mensajes">
+                                        <ul>
+                                          <li>Viaje 1</li>
+                                          <li>Viaje 2</li>
+                                          <li>Viaje 3</li>
+                                          <li>Viaje 4</li>
+                                          <li>Viaje 5</li>
+                                          <li>Viaje 6</li>
+                                        </ul>
+                                      </div>
+                                    </div>                            
+                                </div>
+                            </div>
                         </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-			<div class="jumbotron">
-				<center>
-					<h3>Agregar nuevo viaje</h3>
-				</center>
-			</div>
-        </div>
-		<hr>
-        <div class="modal-body">
-		
-			<form class="form-horizontal" role="form">
-			<div class="form-group">
-			  <label class="control-label col-sm-2" for="Name">Nombre:</label>
-			  <div class="col-sm-10">
-				<input type="name" class="form-control" id="Name" placeholder="Nombre del viaje">
-			  </div>
-			</div>
-			<div class="container">
-				<div class='col-md-2'>
-				<label class="control-label" for="Name">Fecha inicio:</label>
-					<div class="form-group">
-					
-						<div class='input-group date' id='datetimepicker6'>
-							<input type='text' class="form-control" />
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class='col-md-2'>
-				<label class="control-label" for="Name">Fecha final:</label>
-					<div class="form-group">
-					
-						<div class='input-group date' id='datetimepicker7'>
-							<input type='text' class="form-control" />
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-		
-		<center>
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Destino
-				<span class="caret"></span></button>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-						<li role="presentation"><a role="menuitem" href="#">Europa</a></li>
-						<li role="presentation"><a role="menuitem" href="#">Asia</a></li>
-						<li role="presentation"><a role="menuitem" href="#">Caribe</a></li>
-						<li role="presentation" class="divider"></li>
-						<li role="presentation"><a role="menuitem" href="#">Otros</a></li>
-					</ul>
-			</div>
-		</center>
-        </div>
-        <div class="modal-footer">
-			<button type="button" class="btn btn-success" data-dismiss="modal">Agregar</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-      
+                    </div>
+                </div>
+                <!-----Siguiente View---->
+                <div class="col-md-7" style="background-color:lavenderblush;">
+                        
+                </div>
+            </div>
     </div>
-  </div>
-                
-<p><div class="row">
-  <div class="col-sm-2">
-	  <div><ul class="nav nav-pills nav-stacked">
-			<li class="active"><a href="#ALL"data-toggle="tab">TODOS</a></li>
-			<li><a href="#a2014" data-toggle="tab">2014</a></li>
-			<li><a href="#a2015" data-toggle="tab">2015</a></li>
-			<li><a href="#a2016" data-toggle="tab">2016</a></li>
-		</ul></div>
-  </div>
-  
-  <div class="tab-content">
-	<div id="ALL" class="tab-pane fade in active">
-		
-		<div class="col-sm-3"> 
-
-			<div class="panel panel-default">
-				<div class="panel-heading"><a href="#" class="pull-right">Open</a> <h4>Viaje Ecuador</h4></div>
-				<div class="panel-body">
-					<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Flag_of_Ecuador.svg/2000px-Flag_of_Ecuador.svg.png" class="img-circle img-responsive"></center>
-					<div class="clearfix"></div>
-					<hr>
-					<p> Enero del 2014</p>
-                                        <center><a ui-sref="evento" class="btn btn-primary btn-lg">   Ver evento </a></center>
-					
-
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-sm-3"> 
-
-			<div class="panel panel-default">
-				<div class="panel-heading"><a href="#" class="pull-right">Open</a> <h4>Viaje China</h4></div>
-				<div class="panel-body">
-					<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People's_Republic_of_China.svg/2000px-Flag_of_the_People's_Republic_of_China.svg.png" class="img-circle img-responsive"></center>
-					<div class="clearfix"></div>
-					<hr>
-					<p> Marzo del 2015</p>
-            				<center><a ui-sref="evento" class="btn btn-primary btn-lg">   Ver evento </a></center>
-					
-
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-sm-3"> 
-
-			<div class="panel panel-default">
-				<div class="panel-heading"><a href="#" class="pull-right">Open</a> <h4>Viaje África</h4></div>
-				<div class="panel-body">
-					<center><img src="http://static.wixstatic.com/media/df0b24_b7e0f2b90a4e42a4bce074604587ba62.png" class="img-circle img-responsive"></center>
-					<div class="clearfix"></div>
-					<hr>
-					<p> Enero del 2016</p>
-            				<center><a ui-sref="evento" class="btn btn-primary btn-lg">   Ver evento </a></center>
-				
-					
-
-				</div>
-			</div>
-		</div>
-		
-	</div>
-    <div id="a2014" class="tab-pane fade in active">
-		<div class="col-sm-4"> 
-
-			<div class="panel panel-default">
-				<div class="panel-heading"><a href="#" class="pull-right">Open</a> <h4>Viaje Ecuador</h4></div>
-				<div class="panel-body">
-					<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Flag_of_Ecuador.svg/2000px-Flag_of_Ecuador.svg.png" class="img-circle img-responsive"></center>
-					<div class="clearfix"></div>
-					<hr>
-					<p> Enero del 2014</p>
-            				<a ui-sref="evento" class="btn btn-primary btn-lg">   Ver evento </a>
-					<hr>
-							
-					
-					<form>
-					<div class="input-group">
-					<div class="input-group-btn">
-					<button class="btn btn-danger"><i class="glyphicon glyphicon-heart"></i></button>
-					</div>
-					<input type="text" class="form-control" placeholder="Add a comment..">
-					</div>
-					</form>
-
-				</div>
-			</div>
-		</div>
-	</div>
-		
-    <div id="a2015" class="tab-pane fade">
-		<div class="col-sm-4"> 
-
-			<div class="panel panel-default">
-				<div class="panel-heading"><a href="#" class="pull-right">Open</a> <h4>Viaje China</h4></div>
-				<div class="panel-body">
-					<center><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People's_Republic_of_China.svg/2000px-Flag_of_the_People's_Republic_of_China.svg.png" class="img-circle img-responsive"></center>
-					<div class="clearfix"></div>
-					<hr>
-					<p> Marzo del 2015</p>
-            				<a ui-sref="evento" class="btn btn-primary btn-lg">   Ver evento </a>
-					<hr>
-							
-					
-					<form>
-					<div class="input-group">
-					<div class="input-group-btn">
-					<button class="btn btn-danger"><i class="glyphicon glyphicon-heart"></i></button>
-					</div>
-					<input type="text" class="form-control" placeholder="Add a comment..">
-					</div>
-					</form>
-
-				</div>
-			</div>
-		</div>
-    </div>
-	<div id="a2016" class="tab-pane fade">
-		<div class="col-sm-4"> 
-
-			<div class="panel panel-default">
-				<div class="panel-heading"><a href="#" class="pull-right">Open</a> <h4>Viaje África</h4></div>
-				<div class="panel-body">
-					<center><img src="http://static.wixstatic.com/media/df0b24_b7e0f2b90a4e42a4bce074604587ba62.png" class="img-circle img-responsive"></center>
-					<div class="clearfix"></div>
-					<hr>
-					<p> Enero del 2016</p>
-            				<a ui-sref="evento" class="btn btn-primary btn-lg">   Ver evento </a>
-					<hr>
-							
-					
-					<form>
-					<div class="input-group">
-					<div class="input-group-btn">
-					<button class="btn btn-danger"><i class="glyphicon glyphicon-heart"></i></button>
-					</div>
-					<input type="text" class="form-control" placeholder="Add a comment..">
-					</div>
-					</form>
-
-				</div>
-			</div>
-		</div>
-    </div>
-  </div>
-  </div>
-  
 
 </div>
+              
 	
 	
                 
-            </div>
+          
