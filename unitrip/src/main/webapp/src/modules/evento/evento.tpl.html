@@ -3,47 +3,54 @@
 
         <div class="jumbotron text-center">
           <h1>Misa en Monserrate</h1>
-          
-        
+
+
          <p class="lead">Monserrate</p>
                                   <p>
                                     Lugar: Centro de Bogotá
                                     <br>
-                                    Hora: Todo el día
+                                    Hora: 7:00am-8:00pm
                                     <br>
                                     Descripción breve: Iglesia ubicada en la cima del cerro oriental de Bogotá con gran vista.
                                   </p>
 
 
                                   <p>Lo visitarás el 10 de junio de 2016</p>
-            
+
         <div >
-            
-            <button type="button" class="btn btn-danger btn-lg">Eliminar evento</button>
-              <button type="button" class="btn btn-primary btn-lg">Editar Descrpción</button>
-            
-          
+
+            <button  type = "button" class="btn btn-danger btn-lg" ng-hide = "ctrl.editMode">Eliminar evento</button>
+            <button class="btn btn-primary btn-lg" ng-click="ctrl.editRecord(record)" ng-hide="ctrl.editMode" >Editar Descripción</button>
         </div>
-        
-        </div>    
-        <!--div to incorporate the  ui-view-->  
+  <div id= "edit" ng-show="ctrl.editMode" class="col-md-6 well">
+     <div class="navbar navbar-default" >
+                    <p><strong>Nombre:</strong></p>
+                    <p><strong>Lugar:</strong></p>
+                    <p><strong>Hora:</strong></p>
+                    <p><strong>Descripción breve:</strong></p>
+                </div>
+
+</div>
+
+        </div>
+        <!--div to incorporate the  ui-view-->
         <div>
-        
+
         </div>
-        
-        
-        
-         
+
+
+
+
     </div>
     <div class = "col-sm-5">
-        
-        <!--div to incorporate an image of the event--> 
+
+        <!--div to incorporate an image of the event-->
        <div class="panel-thumbnail"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Santuario_de_Monserrate,_Bogot%C3%A1.jpg" class="img-responsive center-block"></div>
-        
-        <!--div to incorporate a map of the event--> 
+
+        <!--div to incorporate a map of the event-->
         <div>
         <div id="googleMap" style="width:500px;height:380px;"></div>
-        
+
         </div>
     </div>
 
