@@ -1,8 +1,16 @@
 (function (ng) {
 
     var mod = ng.module("mainApp", [
-        "ui.router","viajesModule","viajesMock"
-
+        "ui.router",
+        "itinerarioModule",
+        "viajeModule",
+        "eventoModule",
+        "experienciaModule",
+        "itinerarioMock",
+        "viajeMock",
+        "eventoMock",
+        "experienciaMock",
+        "ngMessages"
     ]);
 
     mod.config(['$logProvider', function ($logProvider) {
@@ -10,67 +18,31 @@
         }]);
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-
-            $urlRouterProvider.otherwise("/inicio");
-
-            $stateProvider
-                    .state ('inicio', {
-                    url: '/inicio',
-                    templateUrl: "src/modules/inicio/inicio.tpl.html"
-                    })
-            $stateProvider
-                    .state('config', {
-                    url: '/config',
-                    templateUrl: "src/modules/cuenta/config.tpl.html"
-                    })
-            $stateProvider
-                    .state('evento', {
-                    url: '/evento',
-                    templateUrl: "src/modules/evento/evento.tpl.html"
-                    })
-            $stateProvider
-                    .state('experiencias', {
-                    url: '/experiencias',
-                    templateUrl: "src/modules/experiencias/exp.tpl.html"
-                    })
-            $stateProvider
-                    .state('parada', {
-                    url: '/parada',
-                    templateUrl: "src/modules/parada/parada.tpl.html"
-                    })
-            $stateProvider
-                    .state('viajes', {
-                    url: '/viajes',
-                    controller: "viajesCtrl",
-                    controllerAs: "ctrl",
-                    templateUrl: "src/modules/viajes/viajes.tpl.html"
-                    })
+            $urlRouterProvider.otherwise("/itinerario");
             $stateProvider
                     .state('itinerario', {
-                    url: '/itinerario',
-                    templateUrl: "src/modules/itinerario/itinerario.tpl.html"
+                        url: '/itinerario',
+                        controller: "itinerarioCtrl",
+                        controllerAs: "ctrl",
+                        templateUrl: "src/modules/itinerario/itinerario.tpl.html"
                     })
-            $stateProvider
-                    .state('itinerario.calendario', {
-                    url: '/itinerario',
-                    templateUrl: "src/modules/itinerario/calendario.html"
+                    .state('viaje', {
+                        url: '/viaje',
+                        controller: "viajeCtrl",
+                        controllerAs: "ctrl",
+                        templateUrl: "src/modules/viaje/viaje.tpl.html"
                     })
-                    .state('itinerario.timeline', {
-                    url: '/itinerario',
-                    templateUrl: "src/modules/itinerario/timeline.html"
+                    .state('evento', {
+                        url: '/evento',
+                        controller: "eventoCtrl",
+                        controllerAs: "ctrl",
+                        templateUrl: "src/modules/evento/evento.tpl.html"
                     })
-            $stateProvider
-                    .state('itinerario.lista', {
-                    url: '/itinerario',
-                    templateUrl: "src/modules/itinerario/lista.html"
+                    .state('experiencia', {
+                        url: '/experiencia',
+                        controller: "experienciaCtrl",
+                        controllerAs: "ctrl",
+                        templateUrl: "src/modules/experiencia/experiencia.tpl.html"
                     });
-            $stateProvider
-                    .state('viajes.vistaPrev', {
-                    url: '/viajes',
-                    templateUrl: "src/modules/viajes/panelViaje.tpl.html"
-                    });
-
-
-
         }]);
 })(window.angular);

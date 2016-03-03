@@ -1,136 +1,91 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="mainApp">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<title>Unitrip</title>
-		<meta name="generator" content="Bootply" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+<html ng-app="mainApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Unitrip</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-		<!-- stylesheets -->
-        <link href="resources/css/styles2.css" rel="stylesheet">
-        <link href="resources/css/config-styles.css" rel="stylesheet">
-        <link href="resources/css/inicio-styles.css" rel="stylesheet">
-        <link href="resources/css/evento-styles.css" rel="stylesheet">
-        <link href="src/viajes-botones.css" rel="stylesheet">
-        <link href="resources/css/styleJB.css" rel="stylesheet">
-        <link href="resources/css/tabla.css" rel="stylesheet">
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/styleJB.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/styleJBItinerario.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/styleJBEventos.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/styleJBExperiencia.css" rel="stylesheet" type="text/css"/>
 
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="resources/js/jquery-1.12.0.min.js" type="text/javascript"></script>
+        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="resources/js/angular.min.js" type="text/javascript"></script>
         <script src="resources/js/angular-ui-router.min.js" type="text/javascript"></script>
-        <script src="src/app.js" type="text/javascript"> </script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>﻿
-		<script src="resources/js/bootstrap.min.js"></script>
-		<script src="resources/js/scripts.js"></script>
-        <script src="resources/js/scriptBotonViaje.js"></script>
-
-         <script src="src/modules/viajes/viajes.mod.js" type="text/javascript"></script>
-        <script src="src/modules/viajes/viajes.ctrl.js" type="text/javascript"></script>
-        <script src="src/modules/viajes/viajes.svc.js" type="text/javascript"></script>
-        <script src="src/modules/viajes/viajes.mock.js" type="text/javascript"></script>
+        <script src="resources/js/ui-bootstrap-tpls-0.13.4.min.js" type="text/javascript"></script>
         <script src="resources/js/angular-mocks.js" type="text/javascript"></script>
-
-        <script src="src/modules/parada/parada.mod.js" type="text/javascript"></script>
-        <script src="src/modules/parada/parada.ctrl.js" type="text/javascript"></script>
-        <script src="src/modules/parada/parada.svc.js" type="text/javascript"></script>
-        <script src="src/modules/parada/parada.mock.js" type="text/javascript"></script>
-
+        <script src="resources/js/angular-messages.min.js" type="text/javascript"></script>
+        
+        <script src="src/app.js" type="text/javascript"></script>
+        
+        <!-- se gregan todas los archivos JavaScript de cada modulo que necesita el index.-->
+        <script src="src/modules/itinerario/itinerario.mod.js" type="text/javascript"></script>
+        <script src="src/modules/itinerario/itinerario.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/itinerario/itinerario.svc.js" type="text/javascript"></script>
+        <script src="src/modules/itinerario/itinerario.mock.js" type="text/javascript"></script>
+        
+        <script src="src/modules/viaje/viaje.mod.js" type="text/javascript"></script>
+        <script src="src/modules/viaje/viaje.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/viaje/viaje.svc.js" type="text/javascript"></script>
+        <script src="src/modules/viaje/viaje.mock.js" type="text/javascript"></script>
+        
+        <script src="src/modules/evento/evento.mod.js" type="text/javascript"></script>
         <script src="src/modules/evento/evento.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/evento/evento.svc.js" type="text/javascript"></script>
-
-
-	</head>
-	<body>
-
-  <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-
-
-
-    <a href="index.html" class="navbar-brand ">Unitrip</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-
-
-    <nav class="collapse navbar-collapse" role="navigation">
-                    <form class="navbar-form navbar-left">
-                        <div class="input-group input-group-sm" style="max-width:700px;">
-                          <input type="text" class="form-control" placeholder="Busca Lugares" name="srch-term" id="srch-term">
-                          <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                          </div>
+        <script src="src/modules/evento/evento.mock.js" type="text/javascript"></script>
+        
+        <script src="src/modules/experiencia/experiencia.mod.js" type="text/javascript"></script>
+        <script src="src/modules/experiencia/experiencia.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/experiencia/experiencia.svc.js" type="text/javascript"></script>
+        <script src="src/modules/experiencia/experiencia.mock.js" type="text/javascript"></script>
+        
+    </head>
+    <body style="padding-top: 60px;">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-bar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href style="font-size:xx-large">Unitrip</a>
                         </div>
-                    </form>
-                    <ul class="nav navbar-nav">
-                      <li>
-                        <a href="#"><i class="glyphicon glyphicon-home"  ></i> Inicio</a>
-                      </li>
-                      <li>
-                          <a  ui-sref="viajes" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plane"></i> Mis Viajes</a>
-                      </li>
-                      <li>
-                        <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-comment"></i> Mis Experiencias</a>
-                      </li>
-                      <li>
-                          <a ui-sref="itinerario" role="button" data-toggle="modal"><i class="glyphicon glyphicon-calendar"></i> Itinerario</a>
-                      </li>
-                       <li>
-                          <a ui-sref="evento" role="button" data-toggle="modal"><i class="glyphicon glyphicon-flag"></i> Evento</a>
-                      </li>
-                       <li>
-                          <a ui-sref="parada" role="button" data-toggle="modal"><i class="glyphicon glyphicon-flag"></i>Paradas</a>
-                      </li>
-                      <li>
-                        <a href="#postModal">Mi perfil viajero</a>
-                      </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                      <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
-                        <ul class="dropdown-menu">
-                          <li><a ui-sref="config"><i class="glyphicon glyphicon-cog"></i> Configuración</a></li>
-                          <li><a href="#privacy"> <i class = "glyphicon glyphicon-ban-circle"> </i> Privacidad</a></li>
-                          <li><a href="log-out.html"> <i class = "glyphicon glyphicon-log-out">
-                          </i> Cerrar sesion</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                    </nav>
-  </div><!-- /.container-fluid -->
-</nav>
 
-
-
-
-
-
-
-
-<ol class="breadcrumb ubicacion">
-  <li><a ui-sref="inicio">Inicio</a></li>
-  <li><a  ui-sref="viajes">Mis Viajes</a></li>
-  <li class="active">Itinerario 1 </li>
-</ol>
-<div ui-view>
-
-  </div>
-	<!-- script references -->
-		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
-
-	</body>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="main-bar">
+                            <ul class="nav navbar-nav">
+                                <li><a ui-sref="viaje" style = "color:#6e1352;font-size:large">Viaje</a></li>
+                                <li><a ui-sref="itinerario" style="color:#001586;font-size:large">Itinerario</a></li>
+                                <li><a ui-sref="evento" style="color:#ffa500;font-size:large">Evento</a></li>
+                                <li><a ui-sref="experiencia" style="color:#006400;font-size:large">Experiencia</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                              <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
+                                <ul class="dropdown-menu">
+                                  <li><a ui-sref="config"><i class="glyphicon glyphicon-cog"></i> Configuración</a></li>
+                                  <li><a href="#privacy"> <i class = "glyphicon glyphicon-ban-circle"> </i> Privacidad</a></li>
+                                  <li><a href="log-out.html"> <i class = "glyphicon glyphicon-log-out">
+                                  </i> Cerrar sesion</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                        </div> <!-- /.navbar-collapse -->
+                    </div> <!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div ui-view></div>
+        </div>
+    </body>
 </html>

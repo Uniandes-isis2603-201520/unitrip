@@ -1,60 +1,80 @@
-<div class = "padding-evento">
-    <div class = "col-sm-7">
+<div id="evento-header">
+    <nav class="navbar navbar-default" role="navigation" style="background-color:#fec04c">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#evento-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="color:#ffffff;font-size:x-large">Eventos</a>
+            </div>
 
-        <div class="jumbotron text-center">
-          <h1>Misa en Monserrate</h1>
-
-
-         <p class="lead">Monserrate</p>
-                                  <p>
-                                    Lugar: Centro de Bogotá
-                                    <br>
-                                    Hora: 7:00am-8:00pm
-                                    <br>
-                                    Descripción breve: Iglesia ubicada en la cima del cerro oriental de Bogotá con gran vista.
-                                  </p>
-
-
-                                  <p>Lo visitarás el 10 de junio de 2016</p>
-
-        <div >
-
-            <button  type = "button" class="btn btn-danger btn-lg" ng-hide = "ctrl.editMode">Eliminar evento</button>
-            <button class="btn btn-primary btn-lg" ng-click="ctrl.editRecord(record)" ng-hide="ctrl.editMode" >Editar Descripción</button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="evento-navbar">
+                <button id="create-eventoa" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.createRecord()" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-plus"></span> Create</button>
+                <button id="refresh-evento" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.fetchRecords()" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                <button id="save-evento" type="submit" form="evento-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-save"></span> Save</button>
+                <button id="cancel-evento" type="button" form="evento-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" ng-click="form.$setPristine();
+                            ctrl.fetchRecords();" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            </div>
         </div>
-  <div id= "edit" ng-show="ctrl.editMode" class="col-md-6 well">
-     <div class="navbar navbar-default" >
-                    <p><strong>Nombre:</strong></p>
-                    <p><strong>Lugar:</strong></p>
-                    <p><strong>Hora:</strong></p>
-                    <p><strong>Descripción breve:</strong></p>
+    </nav>
+</div>
+
+<div class="jumbotronEventos">
+</div>
+
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="background-color:#ffc965">{{alert.msg}}</alert>
+<div ng-hide="ctrl.editMode" class="col-md-6">
+    <table class="table table-striped table-bordered" style="color:#ffffff;background-color:#fec04c" >
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="record in records" style="color:#ffffff;background-color:#ffc965">
+                <td>{{record.name}}</td>
+                <td>{{record.birthDate | date}}</td>
+                <td>
+                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div ng-show="ctrl.editMode" class="col-md-6 well" style="color:#ffffff;background-color:#fec04c">
+    <form novalidate name="form" id="evento-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()">
+        <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required">
+                <div ng-message="required">
+                    Please, Fill the required fields!
                 </div>
-
+            </alert>
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="name" class="col-md-2 control-label">Name</label>
+                <div class="col-md-10">
+                    <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
+                </div>
+            </div>
+            <div class="form-group col-md-12" ng-class="{'has-success': !form.name.$error.required && form.name.$dirty, 'has-error': form.name.$error.required && (form.name.$dirty || form.$submitted)}">
+                <label for="birthDate" class="col-md-2 control-label">Birth Date</label>
+                <div class="col-md-10">
+                    <p class="input-group">
+                        <input type="text" id="birthDate" name="birthDate" class="form-control" ng-model="currentRecord.birthDate" ng-required="model.required" datepicker-popup is-open="opened" readonly required />
+                        <span class="input-group-btn">
+                            <button type="button" id="birthDate-datepicker" class="btn btn-default" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </div>
-
-        </div>
-        <!--div to incorporate the  ui-view-->
-        <div>
-
-        </div>
-
-
-
-
-    </div>
-    <div class = "col-sm-5">
-
-        <!--div to incorporate an image of the event-->
-       <div class="panel-thumbnail"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Santuario_de_Monserrate,_Bogot%C3%A1.jpg" class="img-responsive center-block"></div>
-
-        <!--div to incorporate a map of the event-->
-        <div>
-        <div id="googleMap" style="width:500px;height:380px;"></div>
-
-        </div>
-    </div>
-
-</div>
-
-
-
