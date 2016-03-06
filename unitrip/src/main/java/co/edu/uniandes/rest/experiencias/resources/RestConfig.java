@@ -7,13 +7,7 @@ package co.edu.uniandes.rest.experiencias.resources;
 
 import javax.ws.rs.core.Application;
 import javax.ws.rs.ApplicationPath;
-/**
- *
- * @author n.vasquez10
- */
-public class RestConfig {
-
-    /**
+ /**
  * Clase que indica que este proyecto web ofrece servicios REST.
  * Adicionalmente, esta clase define el prefijo por defecto de las rutas a los recursos.
  *
@@ -22,4 +16,3 @@ public class RestConfig {
  */
 @ApplicationPath("/api")
 public class RestConfig extends Application { }
-}

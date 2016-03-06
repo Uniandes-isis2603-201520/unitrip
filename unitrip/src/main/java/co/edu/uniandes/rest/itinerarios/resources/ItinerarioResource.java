@@ -1,14 +1,14 @@
 /*
  * ItinerarioResource.java
- * Clase que representa el recurso "/cities"
+ * Clase que representa el recurso "/itinerarios"
  * Implementa varios métodos para manipular los itinerarios
  */
 
 package co.edu.uniandes.rest.itinerarios.resources;
 
+import co.edu.uniandes.rest.Itinerarios.mocks.ItinerarioLogicMock;
 import co.edu.uniandes.rest.itinerarios.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.itinerarios.exceptions.ItinerarioLogicException;
-import co.edu.uniandes.rest.itinerarios.mocks.ItenarioLogicMock;
 
 
 

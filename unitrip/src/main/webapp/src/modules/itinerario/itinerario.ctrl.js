@@ -66,7 +66,7 @@
             };
             
             //Ejemplo alerta
-            showMessage("Bienvenido!, Esto es un ejemplo para mostrar un mensaje de información","info");
+            showMessage("Bienvenido!","info");
             
 
             /*

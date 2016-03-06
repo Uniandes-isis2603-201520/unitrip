@@ -24,11 +24,11 @@
              */
             var records = [{
                     id: 1,
-                    name: 'Norma'
+                    name: 'Europa'
                 },
                 {
                     id: 2,
-                    name: 'Castellana'
+                    name: 'Colombia'
                 }];
 
             function getQueryParams(url) {

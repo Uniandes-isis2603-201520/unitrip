@@ -1,7 +1,7 @@
-package co.edu.uniandes.rest.cities.mocks;
+package co.edu.uniandes.rest.Itinerarios.mocks;
 
 /**
- * Mock del recurso Ciudades (Mock del servicio REST)
+ * Mock del recurso Itinerarios (Mock del servicio REST)
  * @author Asistente
  */
 import java.util.ArrayList;
@@ -14,170 +14,170 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 
-import co.edu.uniandes.rest.cities.dtos.CityDTO;
-import co.edu.uniandes.rest.cities.exceptions.CityLogicException;
+import co.edu.uniandes.rest.itinerarios.dtos.ItinerarioDTO;
+import co.edu.uniandes.rest.itinerarios.exceptions.ItinerarioLogicException;
 
 /*
- * CityLogicMock
- * Mock del recurso Ciudades (Mock del servicio REST)
+ * ItinerarioLogicMock
+ * Mock del recurso Itinerarios (Mock del servicio REST)
  */
 @Named
 @ApplicationScoped
-public class CityLogicMock {
+public class ItinerarioLogicMock {
 	
 	// objeto para presentar logs de las operaciones
-	private final static Logger logger = Logger.getLogger(CityLogicMock.class.getName());
+	private final static Logger logger = Logger.getLogger(ItinerarioLogicMock.class.getName());
 	
-	// listado de ciudades
-    private static ArrayList<CityDTO> cities;
+	// listado de Itinerarios
+    private static ArrayList<ItinerarioDTO> itinerarios;
 
     /**
      * Constructor. Crea los datos de ejemplo.
      */
-    public CityLogicMock() {
+    public ItinerarioLogicMock() {
 
-    	if (cities == null) {
-            cities = new ArrayList<>();
-            cities.add(new CityDTO(1L, "Bogota"));
-            cities.add(new CityDTO(2L, "Cali"));
-            cities.add(new CityDTO(3L, "Medellin"));
+    	if (itinerarios == null) {
+            itinerarios = new ArrayList<>();
+            itinerarios.add(new ItinerarioDTO(1L, "Bogota","Muy bueno","2016-10-12","2016-10-12"));
+            itinerarios.add(new ItinerarioDTO(2L, "Cali","Muy bueno","2016-10-12","2016-10-12"));
+            itinerarios.add(new ItinerarioDTO(3L, "Medellin","Muy bueno","2016-10-12","2016-10-12"));
         }
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
     	
     	// muestra información 
-    	logger.info("Inicializa la lista de ciudades");
-    	logger.info("ciudades" + cities );
+    	logger.info("Inicializa la lista de Itinerarios");
+    	logger.info("Itinerarios" + itinerarios );
     }    
     
 	/**
-	 * Obtiene el listado de personas. 
-	 * @return lista de ciudades
-	 * @throws CityLogicException cuando no existe la lista en memoria  
+	 * Obtiene el listado de Itinerarios. 
+	 * @return lista de Itinerarios
+	 * @throws ItinerarioLogicException cuando no existe la lista en memoria  
 	 */    
-    public List<CityDTO> getCities() throws CityLogicException {
-    	if (cities == null) {
-    		logger.severe("Error interno: lista de ciudades no existe.");
-    		throw new CityLogicException("Error interno: lista de ciudades no existe.");    		
+    public List<ItinerarioDTO> getItinerarios() throws ItinerarioLogicException {
+    	if (itinerarios == null) {
+    		logger.severe("Error interno: lista de Itinerarios no existe.");
+    		throw new ItinerarioLogicException("Error interno: lista de Itinerarios no existe.");    		
     	}
     	
-    	logger.info("retornando todas las ciudades");
-    	return cities;
+    	logger.info("retornando todas los Itinerarios");
+    	return itinerarios;
     }
 
     /**
-     * Obtiene una ciudad
-     * @param id identificador de la ciudad
-     * @return ciudad encontrada
-     * @throws CityLogicException cuando la ciudad no existe
+     * Obtiene un Itinerarios
+     * @param id identificador del Itinerario
+     * @return Itinerarios encontrado
+     * @throws ItinerariosLogicException cuando el Itinerario no existe
      */
-    public CityDTO getCity(Long id) throws CityLogicException {
-    	logger.info("recibiendo solicitud de ciudad con id " + id);
+    public ItinerarioDTO getItinerario(Long id) throws ItinerarioLogicException {
+    	logger.info("recibiendo solicitud de Itinerario con id " + id);
     	
-    	// busca la ciudad con el id suministrado
-        for (CityDTO city : cities) {
-            if (Objects.equals(city.getId(), id)){
-            	logger.info("retornando ciudad " + city);
-                return city;
+    	// busca el Itinerario con el id suministrado
+        for (ItinerarioDTO itinerario : itinerarios) {
+            if (Objects.equals(itinerario.getId(), id)){
+            	logger.info("retornando itinerario " + itinerario);
+                return itinerario;
             }
         }
         
-        // si no encuentra la ciudad
-        logger.severe("No existe ciudad con ese id");
-        throw new CityLogicException("No existe ciudad con ese id");
+        // si no encuentra el Itinerario
+        logger.severe("No existe Itinerario con ese id");
+        throw new ItinerarioLogicException("No existe Itinerario con ese id");
     }
 
     /**
-     * Agrega una ciudad a la lista.
-     * @param newCity ciudad a adicionar
-     * @throws CityLogicException cuando ya existe una ciudad con el id suministrado
-     * @return ciudad agregada
+     * Agrega un Itinerario a la lista.
+     * @param newItinerario Itinerario a adicionar
+     * @throws ItinerarioLogicException cuando ya existe un Itinerario con el id suministrado
+     * @return Itinerario agregado
      */
-    public CityDTO createCity(CityDTO newCity) throws CityLogicException {
-    	logger.info("recibiendo solicitud de agregar ciudad " + newCity);
+    public ItinerarioDTO createItinerario(ItinerarioDTO newItinerario) throws ItinerarioLogicException {
+    	logger.info("recibiendo solicitud de agregar Itinerario " + newItinerario);
     	
-    	// la nueva ciudad tiene id ?
-    	if ( newCity.getId() != null ) {
+    	// el nuevo Itinerario tiene id ?
+    	if ( newItinerario.getId() != null ) {
 	    	// busca la ciudad con el id suministrado
-	        for (CityDTO city : cities) {
-	        	// si existe una ciudad con ese id
-	            if (Objects.equals(city.getId(), newCity.getId())){
-	            	logger.severe("Ya existe una ciudad con ese id");
-	                throw new CityLogicException("Ya existe una ciudad con ese id");
+	        for (ItinerarioDTO itinerario : itinerarios) {
+	        	// si existe un Itinerario con ese id
+	            if (Objects.equals(itinerario.getId(), newItinerario.getId())){
+	            	logger.severe("Ya existe un Itinerario con ese id");
+	                throw new ItinerarioLogicException("Ya existe un Itinerario con ese id");
 	            }
 	        }
 	        
-	    // la nueva ciudad no tiene id ? 
+	    // el nuevo Itinerario no tiene id ? 
     	} else {
 
-    		// genera un id para la ciudad
-    		logger.info("Generando id paa la nueva ciudad");
+    		// genera un id para el Itinerario
+    		logger.info("Generando id para el nueva Itinerario");
     		long newId = 1;
-	        for (CityDTO city : cities) {
-	            if (newId <= city.getId()){
-	                newId =  city.getId() + 1;
+	        for (ItinerarioDTO itinerario : itinerarios) {
+	            if (newId <= itinerario.getId()){
+	                newId =  itinerario.getId() + 1;
 	            }
 	        }
-	        newCity.setId(newId);
+	        newItinerario.setId(newId);
     	}
     	
-        // agrega la ciudad
-    	logger.info("agregando ciudad " + newCity);
-        cities.add(newCity);
-        return newCity;
+        // agrega el Itinerario
+    	logger.info("agregando Itinerario " + newItinerario);
+        itinerarios.add(newItinerario);
+        return newItinerario;
     }
 
     /**
-     * Actualiza los datos de una ciudad
-     * @param id identificador de la ciudad a modificar
-     * @param city ciudad a modificar
-     * @return datos de la ciudad modificada 
-     * @throws CityLogicException cuando no existe una ciudad con el id suministrado
+     * Actualiza los datos de un Itinerario
+     * @param id identificador del Itinerario a modificar
+     * @param itinerario Itinerario a modificar
+     * @return datos del Itinerario modificada 
+     * @throws ItinerariosLogicException cuando no existe un Itinerario con el id suministrado
      */
-    public CityDTO updateCity(Long id, CityDTO updatedCity) throws CityLogicException {
-    	logger.info("recibiendo solictud de modificar ciudad " + updatedCity);
+    public ItinerarioDTO updateItinerario(Long id, ItinerarioDTO updatedItinerario) throws ItinerarioLogicException {
+    	logger.info("recibiendo solictud de modificar Itinerario " + updatedItinerario);
     	
-    	// busca la ciudad con el id suministrado
-        for (CityDTO city : cities) {
-            if (Objects.equals(city.getId(), id)) {
+    	// busca el Itinerario con el id suministrado
+        for (ItinerarioDTO itinerario : itinerarios) {
+            if (Objects.equals(itinerario.getId(), id)) {
             	
-            	// modifica la ciudad
-            	city.setId(updatedCity.getId());
-                city.setName(updatedCity.getName());
+            	// modifica el Itinerario
+            	itinerario.setId(updatedItinerario.getId());
+                itinerario.setName(updatedItinerario.getName());
                 
-                // retorna la ciudad modificada
-            	logger.info("Modificando ciudad " + city);
-                return city;
+                // retorna el Itinerario modificada
+            	logger.info("Modificando Itinerario " + itinerario);
+                return itinerario;
             }
         }
         
-        // no encontró la ciudad con ese id ?
-        logger.severe("No existe una ciudad con ese id");
-        throw new CityLogicException("No existe una ciudad con ese id");
+        // no encontró el Itinerario con ese id ?
+        logger.severe("No existe un Itinerario con ese id");
+        throw new ItinerarioLogicException("No existe un Itinerario con ese id");
     }
 
     /**
-     * Elimina los datos de una ciudad
-     * @param id identificador de la ciudad a eliminar
-     * @throws CityLogicException cuando no existe una ciudad con el id suministrado
+     * Elimina los datos de un Itinerario
+     * @param id identificador del Itinerarios a eliminar
+     * @throws ItinerariosLogicException cuando no existe un Itinerario con el id suministrado
      */
-    public void deleteCity(Long id) throws CityLogicException {
-    	logger.info("recibiendo solictud de eliminar ciudad con id " + id);
+    public void deleteItinerario(Long id) throws ItinerarioLogicException {
+    	logger.info("recibiendo solictud de eliminar Itinerario con id " + id);
     	
-    	// busca la ciudad con el id suministrado
-        for (CityDTO city : cities) {
-            if (Objects.equals(city.getId(), id)) {
+    	// busca el Itinerario con el id suministrado
+        for (ItinerarioDTO itinerario : itinerarios) {
+            if (Objects.equals(itinerario.getId(), id)) {
             	
-            	// elimina la ciudad
-            	logger.info("eliminando ciudad " + city);
-                cities.remove(city);
+            	// elimina el Itinerario
+            	logger.info("eliminandoItinerario " + itinerario);
+                itinerarios.remove(itinerario);
                 return;
             }
         }
 
-        // no encontró la ciudad con ese id ?
-        logger.severe("No existe una ciudad con ese id");
-        throw new CityLogicException("No existe una ciudad con ese id");
+        // no encontró el Itinerario con ese id ?
+        logger.severe("No existe un Itinerario con ese id");
+        throw new ItinerarioLogicException("No existe un Itinerario con ese id");
     }
 }

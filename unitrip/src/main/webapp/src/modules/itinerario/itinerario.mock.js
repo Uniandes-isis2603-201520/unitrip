@@ -24,17 +24,15 @@
              */
             var records = [
                 {id: 1,
-                    name: 'La nieve del Almirante',
-                    description: 'Libro Mock',
-                    isbn: '12345-1',
-                    image: 'http://unlibrocadadia.es/wp-content/uploads/2013/05/La_nieve_del_almirante_alvaro_mutis.jpg',
-                    publishDate: '2016-01-22'},
+                    name: 'Primer Itinerario',
+                    descripcion: 'El mejor',
+                    fechaI: '2016-01-22',
+                    fechaF: '2016-02-22'},
                 {id: 2,
-                    name: 'Java 8',
-                    description: 'Libro Mock 2',
-                    isbn: '12345-2',
-                    image: 'http://image.casadellibro.com/a/l/t0/55/9788441536555.jpg',
-                    publishDate: '2015-01-22'}
+                    name: 'Segundo Itinerario',
+                    description: 'Lo mejor',
+                    fechaI: '2016-01-24',
+                    fechaF: '2016-02-26'},
             ];
 
             function getQueryParams(url) {
