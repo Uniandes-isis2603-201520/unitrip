@@ -26,12 +26,12 @@ import javax.ws.rs.Produces;
 
 /**
  * Clase que implementa el recurso REST correspondiente a "itinerarios".
- * 
+ *
  * Note que el aplicación (definida en RestConfig.java) define el ruta
- * "/api" y este recurso tiene el ruta "itinerarios". 
- * Al ejecutar el aplicación, el recurse será accesible a través de el 
- * ruta "/api/itinerarios" 
- * 
+ * "/api" y este recurso tiene el ruta "itinerarios".
+ * Al ejecutar el aplicación, el recurse será accesible a través de el
+ * ruta "/api/itinerarios"
+ *
  * @author Asistente
  */
 @Path("itinerarios")
@@ -42,9 +42,9 @@ public class ItinerarioResource {
 	ItinerarioLogicMock itinerarioLogic;
 
 	/**
-	 * Obtiene el listado de itinerarioes. 
+	 * Obtiene el listado de itinerarioes.
 	 * @return lista de itinerarios
-	 * @throws ItinerarioLogicException excepción retornada por el lógica  
+	 * @throws ItinerarioLogicException excepción retornada por el lógica
 	 */
     @GET
     public List<ItinerarioDTO> getItinerarios() throws ItinerarioLogicException {
@@ -78,7 +78,7 @@ public class ItinerarioResource {
      * Actualiza los datos de un itinerario
      * @param id identificador de el itinerario a modificar
      * @param itinerario itinerario a modificar
-     * @return datos de el itinerario modificada 
+     * @return datos de el itinerario modificada
      * @throws ItinerarioLogicException cuando no existe un itinerario con el id suministrado
      */
     @PUT
@@ -94,7 +94,7 @@ public class ItinerarioResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteItinerario(@PathParam("id") Long id) throws ItinerarioLogicException {
+    public void deleteItinrario(@PathParam("id") Long id) throws ItinerarioLogicException {
     	itinerarioLogic.deleteItinerario(id);
     }
 
