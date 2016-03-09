@@ -22,7 +22,7 @@ GET|/viajes/:viajeid |Obtener los atributos de una instancia de Viaje (READ) |@P
 POST|/viajes |Crear una nueva instancia de la entidad Viaje (CREATE) | |Atributos de la instancia de Viaje a crear | Instancia de Viaje creada, incluyendo su nuevo ID| 
 PUT|/viajes/:viajeid |Actualiza una instancia de la entidad Viaje (UPDATE) |@PathParam viajeid: Identificador del registro |Objeto JSON de Viaje | Instancia de Viaje actualizada
 DELETE|/viajes/:viajesid |Borra instancia de Viaje en el servidor (DELETE) |@PathParam viajeid: Identificador del registro | | | 
-
+GET|/viajes/:viajeid |Obtener los atributos de una instancia de Viaje (READ) |@PathParamviajesid: Identificador del registro  | | Atributos de la instancia de Viaje| 
 
 ## Entidad Itinerario
 ### Estructura de objeto Itinerario
@@ -40,10 +40,15 @@ DELETE|/viajes/:viajesid |Borra instancia de Viaje en el servidor (DELETE) |@Pat
 Método | URL | Acción | Parametros | Cuerpo | Retorno 
 ------------ | ------------- | ------------- | ------------- | ------------- | -------------
 GET|/itinerarios |Lista los registros de Itinerario (READ) |@QueryParam page: página a consultar.@QueryParam maxRecords: cantidad de registros a consultar.Si se omite alguno de estos parámetros se obtiene todos los registros en la base de datos|	|Colección de registros de Itinerario y el total de registros en la base de datos en el header X-Total-Count|
-GET|/itinerarios/:itinerariosid |Obtener los atributos de una instancia de Itinerario (READ) |@PathParamviajesid: Identificador del registro  | | Atributos de la instancia de Itinerario| 
+GET|/itinerarios/:itinerariosid |Obtener los atributos de una instancia de Itinerario (READ) |@PathParam itinerariosid: Identificador del registro  | | Atributos de la instancia de Itinerario| 
 POST|/itinerarios |Crear una nueva instancia de la entidad Itinerario (CREATE) | |Atributos de la instancia de Itinerario a crear | Instancia de itinerariosid creada, incluyendo su nuevo ID| 
 PUT|/itinerarios/:itinerariosid |Actualiza una instancia de la entidad Itinerario (UPDATE) |@PathParam itinerariosid: Identificador del registro |Objeto JSON de Itinerario | Instancia de Itinerario actualizada
-DELETE|/itinerarios/:itinerariosid |Borra instancia de Itinerario en el servidor (DELETE) |@PathParam itinerariosid: Identificador del registro | | | 
+DELETE|/itinerarios/:itinerariosid |Borra instancia de Itinerario en el servidor (DELETE) |@PathParam itinerariosid: Identificador del registro | | |
+GET|/itinerarios/:itinerariosid/paradas |Listar registros de paradas (Parada) asociados a Itinerario|@PathParam itinerarioid: Identificador del itinerario  | | Colección de objetos JSON de paradas(Parada)|
+GET|/itinerarios/:itinerariosid/paradas/:paradasid |Obtener un registro de parada (parada) asociado a un Itinerario|@PathParam itinerariosid: Identificador de instancia de Itinerario - @PathParam paradasid: Identificador de instancia de Parada | | Lista de registros de paraddas(Paradas)|
+POST|/itinerarios/:itinerariosid/paradas/:paradasid |Asocia una instancia de Parada a una de itinerario|@PathParam itinerariosid: Identificador de instancia de Itinerario - @PathParam paradasid: Identificador de instancia de Parada |Registro de parada(Parada) para asociar a Itinerario |Instancia de paradas(Parada) asociada a instancia de Itinerario|
+DELETE|/itinerarios/:itinerariosid/paradas/:paradasid |Actualización de instancias de paradas (Parada) asociadas a Itinerario|@PathParam itinerariosid: Identificador de instancia de Itinerario - @PathParam paradasid: Identificador de instancia de Parada |Colección de instancias de paradas(Parada) a actualizar|Colección de instancias de paradas(Parada) actualizados|
+
 
 ## Entidad Parada
 ### Estructura de objeto Parada
