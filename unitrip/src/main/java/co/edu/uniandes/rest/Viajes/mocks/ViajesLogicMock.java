@@ -15,7 +15,7 @@ import javax.inject.Named;
 
 
 import co.edu.uniandes.rest.Viajes.dtos.ViajesDTO;
-import co.edu.uniandes.rest.Viajes.exceptions.ViajesLogicException;
+import co.edu.uniandes.rest.Viajes.exceptions.paradaLogicException;
 
 /*
  * ViajeLogicMock
@@ -56,10 +56,10 @@ public class ViajesLogicMock {
 	 * @return lista de ciudades
 	 * @throws CityLogicException cuando no existe la lista en memoria  
 	 */    
-    public List<ViajesDTO> getViajes() throws ViajesLogicException {
+    public List<ViajesDTO> getViajes() throws paradaLogicException {
     	if (viajes == null) {
     		logger.severe("Error interno: lista de viajes no existe.");
-    		throw new ViajesLogicException("Error interno: lista de viajes no existe.");    		
+    		throw new paradaLogicException("Error interno: lista de viajes no existe.");    		
     	}
     	
     	logger.info("retornando todas las viajes");
@@ -70,9 +70,9 @@ public class ViajesLogicMock {
      * Obtiene un viaje
      * @param id identificador del viaje
      * @return viaje encontrado
-     * @throws ViajesLogicException cuando el viaje no existe
+     * @throws paradaLogicException cuando el viaje no existe
      */
-    public ViajesDTO getViaje(Long id) throws ViajesLogicException {
+    public ViajesDTO getViaje(Long id) throws paradaLogicException {
     	logger.info("recibiendo solicitud de viaje con id " + id);
     	
     	// busca la ciudad con el id suministrado
@@ -85,16 +85,16 @@ public class ViajesLogicMock {
         
         // si no encuentra el viaje
         logger.severe("No existe viaje con ese id");
-        throw new ViajesLogicException("No existe viaje con ese id");
+        throw new paradaLogicException("No existe viaje con ese id");
     }
 
     /**
      * Agrega un vijae a la lista.
      * @param newViaje viaje a adicionar
-     * @throws ViajesLogicException cuando ya existe un viaje con el id suministrado
+     * @throws paradaLogicException cuando ya existe un viaje con el id suministrado
      * @return ciudad agregada
      */
-    public ViajesDTO createViaje(ViajesDTO newViaje) throws ViajesLogicException {
+    public ViajesDTO createViaje(ViajesDTO newViaje) throws paradaLogicException {
     	logger.info("recibiendo solicitud de agregar viaje " + newViaje);
     	
     	// la nueva ciudad tiene id ?
@@ -104,7 +104,7 @@ public class ViajesLogicMock {
 	        	// si existe una ciudad con ese id
 	            if (Objects.equals(viaje.getId(), newViaje.getId())){
 	            	logger.severe("Ya existe un viaje con ese id");
-	                throw new ViajesLogicException("Ya existe un viaje con ese id");
+	                throw new paradaLogicException("Ya existe un viaje con ese id");
 	            }
 	        }
 	        
@@ -133,9 +133,9 @@ public class ViajesLogicMock {
      * @param id identificador de la ciudad a modificar
      * @param viaje viaje a modificar
      * @return datos del viaje modificada 
-     * @throws ViajesLogicException cuando no existe un viaje con el id suministrado
+     * @throws paradaLogicException cuando no existe un viaje con el id suministrado
      */
-    public ViajesDTO updateViaje(Long id, ViajesDTO updatedViaje) throws ViajesLogicException {
+    public ViajesDTO updateViaje(Long id, ViajesDTO updatedViaje) throws paradaLogicException {
     	logger.info("recibiendo solictud de modificar viaje " + updatedViaje);
     	
     	// busca el viaje con el id suministrado
@@ -154,15 +154,15 @@ public class ViajesLogicMock {
         
         // no encontró el viaje con ese id ?
         logger.severe("No existe un viaje con ese id");
-        throw new ViajesLogicException("No existe un viaje con ese id");
+        throw new paradaLogicException("No existe un viaje con ese id");
     }
 
     /**
      * Elimina los datos de un viaje
      * @param id identificador del viaje a eliminar
-     * @throws ViajesLogicException cuando no existe un viaje con el id suministrado
+     * @throws paradaLogicException cuando no existe un viaje con el id suministrado
      */
-    public void deleteViaje(Long id) throws ViajesLogicException {
+    public void deleteViaje(Long id) throws paradaLogicException {
     	logger.info("recibiendo solictud de eliminar un viaje con id " + id);
     	
     	// busca el viaje con el id suministrado
@@ -178,6 +178,6 @@ public class ViajesLogicMock {
 
         // no encontró el viaje con ese id ?
         logger.severe("No existe un viaje con ese id");
-        throw new ViajesLogicException("No existe un viaje con ese id");
+        throw new paradaLogicException("No existe un viaje con ese id");
     }
 }

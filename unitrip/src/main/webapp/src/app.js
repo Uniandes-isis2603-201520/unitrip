@@ -5,10 +5,12 @@
         "itinerarioModule",
         "viajeModule",
         "eventoModule",
+        "paradaModule",
         "experienciaModule",
         "itinerarioMock",
         "viajeMock",
         "eventoMock",
+        "paradaMock",
         "experienciaMock",
         "ngMessages"
     ]);
@@ -37,6 +39,12 @@
                         controller: "eventoCtrl",
                         controllerAs: "ctrl",
                         templateUrl: "src/modules/evento/evento.tpl.html"
+                    })
+                    .state('parada', {
+                        url: '/parada',
+                        controller: "paradaCtrl",
+                        controllerAs: "ctrl",
+                        templateUrl: "src/modules/parada/parada.tpl.html"
                     })
                     .state('experiencia', {
                         url: '/experiencia',

@@ -1,16 +1,16 @@
-package co.edu.uniandes.rest.Viajes.mappers;
+package co.edu.uniandes.rest.parada.mappers;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import co.edu.uniandes.rest.Viajes.exceptions.paradaLogicException;
+import co.edu.uniandes.rest.parada.exceptions.paradaLogicException;
 
 /**
- * Convertidor de Excepciones ViajesLogicException a mensajes REST.
+ * Convertidor de Excepciones paradaLogicException a mensajes REST.
  */
 @Provider
-public class ViajesLogicExceptionMapper implements ExceptionMapper<paradaLogicException> {
+public class paradaLogicExceptionMapper implements ExceptionMapper<paradaLogicException> {
 
 	/**
 	 * Generador de una respuesta a partir de una excepción

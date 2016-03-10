@@ -1,7 +1,7 @@
-/*
+/* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor. Psy
+ * and open the template in the editor.
  */
 
 (function (ng) {
@@ -9,17 +9,9 @@
     var mod = ng.module("itinerarioModule");
 
     mod.controller("itinerarioCtrl", ["$scope", "itinerarioService", function ($scope, svc) {
-           //Se almacenan todas las alertas
+           //Se almacenan todas las alertas 
             $scope.alerts = [];
-            $scope.currentRecord = {
-                id: '' /*Tipo Long*/,
-                name: '' /*Tipo String*/,
-                description: '' /*Tipo String*/,
-                fechaInicio:  '' /*Tipo Date*/,
-                fechaFin:  '' /*Tipo Date*/,
-                paradas: [] /*Colección de registros de Paradas*/
-
-            };
+            $scope.currentRecord = {};
             $scope.records = [];
 
             $scope.today = function () {
@@ -64,7 +56,7 @@
             function responseError(response) {
                 self.showError(response.data);
             }
-
+            
             //Variables para el controlador
             this.readOnly = false;
             this.editMode = false;
@@ -72,17 +64,17 @@
             this.changeTab = function (tab) {
                 $scope.tab = tab;
             };
-
+            
             //Ejemplo alerta
             showMessage("Bienvenido!","info");
-
+            
 
             /*
-             * Funcion createRecord emite un evento a los $scope hijos del controlador por medio de la
-             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos
+             * Funcion createRecord emite un evento a los $scope hijos del controlador por medio de la 
+             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos 
              * al actual modulo.
              * Habilita el modo de edicion. El template de la lista cambia por el formulario.
-             *
+             * 
              */
 
             this.createRecord = function () {
@@ -93,11 +85,11 @@
             };
 
             /*
-             * Funcion editRecord emite el evento ("pre-edit") a los $Scope hijos del controlador por medio de la
-             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos
+             * Funcion editRecord emite el evento ("pre-edit") a los $Scope hijos del controlador por medio de la 
+             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos 
              * al actual modulo.
              * Habilita el modo de edicion.  Carga el template de formulario con los datos del record a editar.
-             *
+             * 
              */
 
             this.editRecord = function (record) {
@@ -111,7 +103,7 @@
             };
 
             /*
-             * Funcion fetchRecords consulta el servicio svc.fetchRecords con el fin de consultar
+             * Funcion fetchRecords consulta el servicio svc.fetchRecords con el fin de consultar 
              * todos los registros del modulo book.
              * Guarda los registros en la variable $scope.records
              * Muestra el template de la lista de records.
@@ -134,7 +126,7 @@
             this.saveRecord = function () {
                     return svc.saveRecord($scope.currentRecord).then(function () {
                         self.fetchRecords();
-                    }, responseError);
+                    }, responseError);                
             };
 
             /*

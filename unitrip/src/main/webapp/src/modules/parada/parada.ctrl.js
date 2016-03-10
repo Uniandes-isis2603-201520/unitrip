@@ -1,19 +1,19 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 (function (ng) {
+    var mod = ng.module("paradaModule");
 
-    var mod = ng.module("experienciaModule");
-
-    mod.controller("experienciaCtrl", ["$scope", "experienciaService", function ($scope, svc) {
-
-            $scope.alerts = [];
-            $scope.currentRecord = {};
+    mod.controller("paradaCtrl", ["$scope", "paradaService", function ($scope, svc) {
+            $scope.currentRecord = {
+                     id: 0 /*Tipo Long*/,
+                     name: '' /*Tipo String*/,
+                     latitude: ''/*Tipo Long*/,
+                     longitude: ''/*Tipo Long*/,
+                     description: '' /*Tipo String*/,
+                     fechaLlegeda:  '' /*Tipo Date*/,
+                     fechaSalida:  '' /*Tipo Date*/,
+                     eventos: [] /*Colección de registros de Eventos*/
+            };
             $scope.records = [];
+            $scope.alerts = [];
 
             $scope.today = function () {
                 $scope.value = new Date();
@@ -48,34 +48,22 @@
                 showMessage(msg, "danger");
             };
 
-            this.showSuccess = function (msg) {
-                showMessage(msg, "success");
-            };
-
             var self = this;
             function responseError(response) {
                 self.showError(response.data);
             }
+
             //Variables para el controlador
             this.readOnly = false;
             this.editMode = false;
-            
 
             this.changeTab = function (tab) {
                 $scope.tab = tab;
             };
 
             //Ejemplo alerta
-            showMessage("Bienvenido!", "success");
+            showMessage("Bienvenido!", "warning");
 
-
-            /*
-             * Funcion createRecord emite un evento a los $scope hijos del controlador por medio de la 
-             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos 
-             * al actual modulo.
-             * Habilita el modo de edicion. El template de la lista cambia por el formulario.
-             * 
-             */
 
             this.createRecord = function () {
                 $scope.$broadcast("pre-create", $scope.currentRecord);
@@ -83,14 +71,6 @@
                 $scope.currentRecord = {};
                 $scope.$broadcast("post-create", $scope.currentRecord);
             };
-
-            /*
-             * Funcion editRecord emite el evento ("pre-edit") a los $Scope hijos del controlador por medio de la 
-             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos 
-             * al actual modulo.
-             * Habilita el modo de edicion.  Carga el template de formulario con los datos del record a editar.
-             * 
-             */
 
             this.editRecord = function (record) {
                 $scope.$broadcast("pre-edit", $scope.currentRecord);
@@ -102,13 +82,6 @@
                 }, responseError);
             };
 
-            /*
-             * Funcion fetchRecords consulta el servicio svc.fetchRecords con el fin de consultar 
-             * todos los registros del modulo experiencia.
-             * Guarda los registros en la variable $scope.records
-             * Muestra el template de la lista de records.
-             */
-
             this.fetchRecords = function () {
                 return svc.fetchRecords().then(function (response) {
                     $scope.records = response.data;
@@ -117,36 +90,18 @@
                     return response;
                 }, responseError);
             };
-
-            /*
-             * Funcion saveRecord hace un llamado al servicio svc.saveRecord con el fin de
-             * persistirlo en base de datos.
-             * Muestra el template de la lista de records al finalizar la operación saveRecord
-             */
             this.saveRecord = function () {
                 return svc.saveRecord($scope.currentRecord).then(function () {
                     self.fetchRecords();
-                  
                 }, responseError);
             };
-
-            /*
-             * Funcion deleteRecord hace un llamado al servicio svc.deleteRecord con el fin
-             * de eliminar el registro asociado.
-             * Muestra el template de la lista de records al finalizar el borrado del registro.
-             */
             this.deleteRecord = function (record) {
                 return svc.deleteRecord(record.id).then(function () {
                     self.fetchRecords();
                 }, responseError);
             };
 
-            /*
-             * Funcion fetchRecords consulta todos los registros del módulo editorial en base de datos
-             * para desplegarlo en el template de la lista.
-             */
             this.fetchRecords();
-
         }]);
 
 })(window.angular);

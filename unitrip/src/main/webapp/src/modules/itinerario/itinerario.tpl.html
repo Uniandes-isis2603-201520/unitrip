@@ -45,11 +45,22 @@
                 <p class="text-center">
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                    <button ui-sref="paradas" class="btn btn-default btn-sm" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-list"></span> Paradas </button>
                 </p>
+                
+                <div class="row">
+                <div class="span">
+                    <div class="well" ui-view></div>        
+                </div>
             </div>
+            </div>
+            
         </div>
+        
     </div>
+    
 </div>
+
 <div ng-show="ctrl.editMode" class="col-md-6 well" style="background-color:#6677a1"> 
     <form novalidate name="form" id="itinerario-form" role="form" ng-submit="ctrl.saveRecord()" style ="color:#ffffff;background-color:#6677a1">
         <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required">

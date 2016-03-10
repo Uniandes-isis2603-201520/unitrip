@@ -17,8 +17,7 @@
                 <button id="create-eventoa" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.createRecord()" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-plus"></span> Create</button>
                 <button id="refresh-evento" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.fetchRecords()" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
                 <button id="save-evento" type="submit" form="evento-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-save"></span> Save</button>
-                <button id="cancel-evento" type="button" form="evento-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" ng-click="form.$setPristine();
-                            ctrl.fetchRecords();" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                <button id="cancel-evento" type="button" form="evento-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" ng-click="form.$setPristine();ctrl.fetchRecords();" style="color:#ffffff;background-color:#ffa500"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
             </div>
         </div>
     </nav>
@@ -33,7 +32,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Fecha de Evento</th>
+                <th>Birth Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
