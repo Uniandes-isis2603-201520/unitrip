@@ -43,9 +43,9 @@ public class EventoLogicMock {
 
     	if (eventos == null) {
             eventos = new ArrayList<>();
-            eventos.add(new EventoDTO(1L, "Bogota", 4L,4L,"Divertido","07/06/2016","08/06/2016"));
-            eventos.add(new EventoDTO(2L, "Cali",4L,4L,"Divertido","07/06/2016","08/06/2016"));
-            eventos.add(new EventoDTO(3L, "Medellin",4L,4L,"Divertido","07/06/2016","08/06/2016"));
+            eventos.add(new EventoDTO(1L, "Bogota",4L,4L,"Divertido","2016-10-12","2016-10-12"));
+            eventos.add(new EventoDTO(2L, "Cali",4L,4L,"Divertido","2016-10-12","2016-10-12"));
+            eventos.add(new EventoDTO(3L, "Medellin",4L,4L,"Divertido","2016-10-12","2016-10-12"));
         }
 
     	// indica que se muestren todos los mensajes
