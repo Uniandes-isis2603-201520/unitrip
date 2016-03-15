@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.unitrip.entities;
+package co.edu.uniandes.csw.unitrip.persistence;
 
-import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
-import java.io.Serializable;
+import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,8 +15,8 @@ import javax.persistence.Query;
  *
  * @author ANDRES
  */
-public class ItinerarioEntity implements Serializable{
-    
+public class ItinerarioPersistence {
+
      @PersistenceContext(unitName = "Itinerario")
     protected EntityManager em;
 
@@ -44,11 +43,5 @@ public class ItinerarioEntity implements Serializable{
          q = em.createQuery("select u from AuthorEntity u");
         return q.getResultList();
     }
-    
-    public void setId(Long itinerarioId) throws BusinesLogicException {
-        throw new BusinesLogicException("Not supported yet.");
-    }
-
-    
     
 }
