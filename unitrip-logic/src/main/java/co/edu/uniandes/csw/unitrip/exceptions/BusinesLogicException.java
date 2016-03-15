@@ -10,8 +10,10 @@ package co.edu.uniandes.csw.unitrip.exceptions;
  * @author ANDRES
  */
 public class BusinesLogicException extends Exception{
-    
-        public BusinesLogicException() {
+
+
+	
+    public BusinessLogicException() {
     }
 
     /**
@@ -19,7 +21,7 @@ public class BusinesLogicException extends Exception{
      *
      * @param message mensaje de la excepción
      */
-    public BusinesLogicException(String message) {
+    public BusinessLogicException(String message) {
         super(message);
     }
 
@@ -28,7 +30,7 @@ public class BusinesLogicException extends Exception{
      *
      * @param cause causa de la excepción. Usada para generar la traza.
      */
-    public BusinesLogicException(Throwable cause) {
+    public BusinessLogicException(Throwable cause) {
         super(cause);
     }
 
@@ -38,8 +40,8 @@ public class BusinesLogicException extends Exception{
      * @param message mensaje de la excepción
      * @param cause causa de la excepción. Usada para generar la traza.
      */
-    public BusinesLogicException(String message, Throwable cause) {
+    public BusinessLogicException(String message, Throwable cause) {
         super(message, cause);
     }
-
+    
 }

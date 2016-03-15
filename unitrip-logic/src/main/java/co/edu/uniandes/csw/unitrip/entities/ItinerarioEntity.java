@@ -1,54 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.unitrip.entities;
 
-import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
+//import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- *
- * @author ANDRES
- */
-public class ItinerarioEntity implements Serializable{
+@Entity
+public class ItinerarioEntity {
     
-     @PersistenceContext(unitName = "Itinerario")
-    protected EntityManager em;
 
-    public ItinerarioEntity create(ItinerarioEntity entity) {
-        em.persist(entity);
-        return entity;
-    }
-
-    public ItinerarioEntity update(ItinerarioEntity entity) {
-        return em.merge(entity);
-    }
-
-    public void delete(Long id) {
-        ItinerarioEntity entity = em.find(ItinerarioEntity.class, id);
-        em.remove(entity);
-    }
-
-    public ItinerarioEntity find(Long id) {
-        return em.find(ItinerarioEntity.class, id);
-    }
-
-    public List<ItinerarioEntity> findAll() {
-        Query q;
-         q = em.createQuery("select u from AuthorEntity u");
-        return q.getResultList();
-    }
-    
-    public void setId(Long itinerarioId) throws BusinesLogicException {
-        throw new BusinesLogicException("Not supported yet.");
-    }
+    private String description;
 
     
-    
+    @ManyToOne
+    private ViajeEntity viaje;
+
+    @OneToMany //(mappedBy = "parada", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ParadaEntity> paradas = new ArrayList<>();
+
+
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<ParadaEntity> getParadas() {
+        return paradas;
+    }
+
+    public void setParadas(List<ParadaEntity> paradas) {
+        this.paradas = paradas;
+    }
+
+    public ViajeEntity getViaje() {
+        return viaje;
+    }
+
+    public void setViaje(ViajeEntity viaje) {
+        this.viaje = viaje;
+    }
+
 }
