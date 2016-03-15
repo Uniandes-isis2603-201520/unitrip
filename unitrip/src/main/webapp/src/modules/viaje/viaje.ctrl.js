@@ -3,9 +3,18 @@
     var mod = ng.module("viajeModule");
 
     mod.controller("viajeCtrl", ["$scope", "viajeService", function ($scope, svc) {
+            
+            
 
             $scope.alerts = [];
-            $scope.currentRecord = {};
+            $scope.currentRecord = { 
+                id: '' /*Tipo Long*/,
+                name: '' /*Tipo String*/,
+                description: '' /*Tipo String*/,
+                image: '' /*Tipo String*/,
+                itinerarios: [] /*Colección de registros de Itinerarios*/,
+                experiencias: [] /*Colección de registros de Experiencias*/
+            };
             $scope.records = [];
 
             $scope.today = function () {

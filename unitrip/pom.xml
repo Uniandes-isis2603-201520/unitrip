@@ -8,7 +8,13 @@
     <packaging>war</packaging>
 
     <name>unitrip-web</name>
-
+    
+    <parent>
+        <groupId>co.edu.uniandes.csw.unitrip</groupId>
+        <artifactId>unitrip</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

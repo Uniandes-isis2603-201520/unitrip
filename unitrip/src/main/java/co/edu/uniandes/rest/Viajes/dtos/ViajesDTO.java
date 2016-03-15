@@ -5,6 +5,10 @@
  */
 package co.edu.uniandes.rest.Viajes.dtos;
 
+import co.edu.uniandes.rest.experiencias.dto.ExperienciaDTO;
+import co.edu.uniandes.rest.itinerarios.dtos.ItinerarioDTO;
+import java.util.ArrayList;
+
 /**
  * Objeto de transferencia de datos de itinerarios.
  * @author Asistente
@@ -12,6 +16,10 @@ package co.edu.uniandes.rest.Viajes.dtos;
 public class ViajesDTO {
     private Long id;
     private String name;
+    private String descripcion;
+    private String image;
+    private ArrayList<ItinerarioDTO> itinerarios;
+    private ArrayList<ExperienciaDTO> experiencias;
 
     /**
      * Constructor por defecto
@@ -23,14 +31,20 @@ public class ViajesDTO {
      * Constructor con parámetros.
      * @param id identificador del  viaje
      * @param name nombre del viaje
+     * @param desc descripcion del viaje
+     * @param imagen Imagen descriptiva del viaje
      */
-    public ViajesDTO(Long id, String name) {
+    public ViajesDTO(Long id, String name, String desc, String imagen) {
 		super();
 		this.id = id;
 		this.name = name;
+                this.descripcion=desc;
+                this.image = imagen;
+                this.experiencias = new ArrayList<>();
+                this.itinerarios = new ArrayList<>();
 	}
 
-	/**
+    /**
      * @return the id
      */
     public Long getId() {
@@ -59,7 +73,64 @@ public class ViajesDTO {
     }
     
     /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descrip the description to set
+     */
+    public void setDescripcion(String descrip) {
+        this.descripcion = descrip;
+    }
+    
+    /**
+     * @return the Image URL
+     */
+    public String getImg() {
+        return image;
+    }
+
+    /**
+     * @param img the image ubication to set
+     */
+    public void setImg(String img) {
+        this.image = img;
+    }
+    
+    /**
+     * @return the Itineraries colection
+     */
+    public ArrayList<ItinerarioDTO> getItinerarios() {
+        return itinerarios;
+    }
+
+    /**
+     * @param iti itinerario a agregar
+     */
+    public void addItinerario(ItinerarioDTO iti) {
+        this.itinerarios.add(iti);
+    }
+    
+    /**
+     * @return the expiriences colection
+     */
+    public ArrayList<ExperienciaDTO> getExperiencias() {
+        return experiencias;
+    }
+
+    /**
+     * @param exp itinerario a agregar
+     */
+    public void addItinerario(ExperienciaDTO exp) {
+        this.experiencias.add(exp);
+    }
+    
+    /**
      * Convierte el objeto a una cadena
+     * @return Cadena de caracteres con informacion de un viaje
      */
     @Override
     public String toString() {
