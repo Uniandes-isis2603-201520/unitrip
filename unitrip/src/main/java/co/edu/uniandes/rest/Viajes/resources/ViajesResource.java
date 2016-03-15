@@ -3,12 +3,14 @@ package co.edu.uniandes.rest.Viajes.resources;
 import co.edu.uniandes.rest.Viajes.converters.ViajesConverter;
 import co.edu.uniandes.rest.Viajes.dtos.ViajesDTO;
 import co.edu.uniandes.rest.Viajes.exceptions.ViajesLogicException;
-import co.edu.uniandes.rest.Viajes.mocks.ViajesLogicMock;
-//
+import co.edu.uniandes.rest.itinerarios.dtos.ItinerarioDTO;
+
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -20,7 +22,7 @@ import javax.ws.rs.Produces;
 public class ViajesResource {
 
     @Inject
-    private ViajesLogicMock viajeLogic;
+    private IViajesLogic viajeLogic;
 
     /**
      * Obtiene la lista de los registros de Viajes.
@@ -29,7 +31,7 @@ public class ViajesResource {
      * Review
      * @throws ViajesLogicException Lanza excepcion cuando no hay viajes
      * @generated
-     *
+     */
     @GET
     public List<ViajesDTO> getViajes() throws ViajesLogicException {
         return ViajesConverter.listEntity2DTO(viajeLogic.getViajes());
@@ -42,7 +44,7 @@ public class ViajesResource {
      * @return Instancia de ViajesDTO con los datos del Viajes consultado y sus
      * Review
      * @generated
-     *
+     */
     @GET
     @Path("{id: \\d+}")
     public ViajesDTO getViaje(@PathParam("id") Long id) throws BusinessLogicException {
@@ -55,109 +57,109 @@ public class ViajesResource {
      * @param dto Objeto de ViajesDTO con los datos nuevos
      * @return Objeto de ViajesDTO con los datos nuevos y su ID.
      * @generated
-     *
+     */
     @POST
     public ViajesDTO createViaje(ViajesDTO dto) {
-        ViajesEntity entity = BookConverter.fullDTO2Entity(dto);
-        return BookConverter.fullEntity2DTO(bookLogic.createBook(entity));
+        ViajesEntity entity = ViajesConverter.fullDTO2Entity(dto);
+        return ViajesConverter.fullEntity2DTO(viajeLogic.createViaje(entity));
     }
 
     /**
-     * Actualiza la información de una instancia de Book.
+     * Actualiza la información de una instancia de Viaje.
      *
-     * @param id Identificador de la instancia de Book a modificar
-     * @param dto Instancia de BookDTO con los nuevos datos.
-     * @return Instancia de BookDTO con los datos actualizados.
+     * @param id Identificador de la instancia de Viaje a modificar
+     * @param dto Instancia de ViajeDTO con los nuevos datos.
+     * @return Instancia de ViajeDTO con los datos actualizados.
      * @generated
-     *
+     */
     @PUT
     @Path("{id: \\d+}")
-    public BookDTO updateBook(@PathParam("id") Long id, BookDTO dto) {
-        BookEntity entity = BookConverter.fullDTO2Entity(dto);
+    public ViajesDTO updateBook(@PathParam("id") Long id, ViajesDTO dto) {
+        ViajesEntity entity = ViajesConverter.fullDTO2Entity(dto);
         entity.setId(id);
-        return BookConverter.fullEntity2DTO(bookLogic.updateBook(entity));
+        return ViajesConverter.fullEntity2DTO(viajeLogic.updateViajes(entity));
     }
 
     /**
-     * Elimina una instancia de Book de la base de datos.
+     * Elimina una instancia de Viaje de la base de datos.
      *
      * @param id Identificador de la instancia a eliminar.
      * @generated
-     *
+     */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteBook(@PathParam("id") Long id) {
-        bookLogic.deleteBook(id);
+    public void deleteViaje(@PathParam("id") Long id) {
+        viajeLogic.deleteViaje(id);
     }
 
     /**
-     * Obtiene una colección de instancias de AuthorDTO asociadas a una
-     * instancia de Book
+     * Obtiene una colección de instancias de ItinerarioDTO asociadas a una
+     * instancia de Viaje
      *
-     * @param bookId Identificador de la instancia de Book
-     * @return Colección de instancias de AuthorDTO asociadas a la instancia de
-     * Book
+     * @param viajeId Identificador de la instancia de Viaje
+     * @return Colección de instancias de ItinerarioDTO asociadas a la instancia de
+     * Viaje
      * @generated
-     *
+     */
     @GET
-    @Path("{bookId: \\d+}/authors")
-    public List<AuthorDTO> listAuthors(@PathParam("bookId") Long bookId) {
-        return AuthorConverter.listEntity2DTO(bookLogic.getAuthors(bookId));
+    @Path("{viajeId: \\d+}/itinerarios")
+    public List<ItinerarioDTO> listItinerarios(@PathParam("viajeId") Long viajeId) {
+        return ItinerarioConverter.listEntity2DTO(viajeLogic.getItinerarios(viajeId));
     }
 
     /**
-     * Obtiene una instancia de Author asociada a una instancia de Book
+     * Obtiene una instancia de Itinerario asociada a una instancia de Viaje
      *
-     * @param bookId Identificador de la instancia de Book
-     * @param authorId Identificador de la instancia de Author
+     * @param viajeId Identificador de la instancia de Viaje
+     * @param itinerarioId Identificador de la instancia de Itinerario
+     * @return ItinerarioDTO una instancia de itinerario
      * @generated
-     *
+     */
     @GET
-    @Path("{bookId: \\d+}/authors/{authorId: \\d+}")
-    public AuthorDTO getAuthors(@PathParam("bookId") Long bookId, @PathParam("authorId") Long authorId) {
-        return AuthorConverter.fullEntity2DTO(bookLogic.getAuthor(bookId, authorId));
+    @Path("{viajeId: \\d+}/itinerarios/{itinerarioId: \\d+}")
+    public ItinerarioDTO getItinerario(@PathParam("viajeId") Long viajeId, @PathParam("itinerarioId") Long itinerarioId) {
+        return ItinerarioConverter.fullEntity2DTO(viajeLogic.getItinerario(viajeId, itinerarioId));
     }
 
     /**
-     * Asocia un Author existente a un Book
+     * Asocia un Itinerario existente a un Viaje
      *
-     * @param bookId Identificador de la instancia de Book
-     * @param authorId Identificador de la instancia de Author
-     * @return Instancia de AuthorDTO que fue asociada a Book
+     * @param viajeId Identificador de la instancia de Viaje
+     * @param itinerarioId Identificador de la instancia de Itinerario
+     * @return Instancia de ItinerarioDTO que fue asociada a Viaje
      * @generated
-     *
+     */
     @POST
-    @Path("{bookId: \\d+}/authors/{authorId: \\d+}")
-    public AuthorDTO addAuthors(@PathParam("bookId") Long bookId, @PathParam("authorId") Long authorId) {
-        return AuthorConverter.fullEntity2DTO(bookLogic.addAuthor(bookId, authorId));
+    @Path("{viajeId: \\d+}/itinerarios/{itinerarioId: \\d+}")
+    public ItinerarioDTO addItinerario(@PathParam("viajeId") Long viajeId, @PathParam("itinerarioId") Long itinerarioId) {
+        return ItinerarioConverter.fullEntity2DTO(viajeLogic.addAuthor(viajeId, itinerarioId));
     }
 
     /**
-     * Remplaza las instancias de Author asociadas a una instancia de Book
+     * Remplaza las instancias de Itinerario asociadas a una instancia de Viaje
      *
-     * @param bookId Identificador de la instancia de Book
-     * @param authors Colección de instancias de AuthorDTO a asociar a instancia
-     * de Book
-     * @return Nueva colección de AuthorDTO asociada a la instancia de Book
+     * @param viajeId Identificador de la instancia de Viaje
+     * @param itinerarios Colección de instancias de ItinerarioDTO a asociar a instancia
+     * de Viaje
+     * @return Nueva colección de ItinerarioDTO asociada a la instancia de Viaje
      * @generated
-     *
+     */
     @PUT
-    @Path("{bookId: \\d+}/authors")
-    public List<AuthorDTO> replaceAuthors(@PathParam("bookId") Long bookId, List<AuthorDTO> authors) {
-        return AuthorConverter.listEntity2DTO(bookLogic.replaceAuthors(AuthorConverter.listDTO2Entity(authors), bookId));
+    @Path("{viajeId: \\d+}/itinerarios")
+    public List<ItinerarioDTO> replaceAuthors(@PathParam("viajeId") Long viajeId, List<ItinerarioDTO> itinerarios) {
+        return ItinerarioConverter.listEntity2DTO(viajeLogic.replaceItinerario(ItinerarioConverter.listDTO2Entity(itinerarios), viajeId));
     }
 
     /**
-     * Desasocia un Author existente de un Book existente
+     * Desasocia un Itinerario existente de un Viaje existente
      *
-     * @param bookId Identificador de la instancia de Book
-     * @param authorId Identificador de la instancia de Author
+     * @param viajeId Identificador de la instancia de Viaje
+     * @param itinerarioId Identificador de la instancia de Itinerario
      * @generated
-     *
+     */
     @DELETE
-    @Path("{bookId: \\d+}/authors/{authorId: \\d+}")
-    public void removeAuthors(@PathParam("bookId") Long bookId, @PathParam("authorId") Long authorId) {
-        bookLogic.removeAuthor(bookId, authorId);
+    @Path("{viajeId: \\d+}/itinerarios/{itinerarioId: \\d+}")
+    public void removeItinerario(@PathParam("viajeId") Long viajeId, @PathParam("itinerarioId") Long itinerarioId) {
+        viajeLogic.removeItinerario(viajeId, itinerarioId);
     }
-    */
 }
