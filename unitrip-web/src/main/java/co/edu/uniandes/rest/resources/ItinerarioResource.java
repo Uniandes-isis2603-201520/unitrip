@@ -8,10 +8,10 @@ package co.edu.uniandes.rest.resources;
 
 
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
-import co.edu.uniandes.rest.Itinerarios.mocks.ItinerarioLogicMock;
 import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.dtos.ParadaDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
+import co.edu.uniandes.rest.mocks.ItinerarioLogicMock;
 
 import java.util.List;
 
