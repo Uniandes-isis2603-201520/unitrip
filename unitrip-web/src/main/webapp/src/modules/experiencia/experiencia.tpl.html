@@ -1,0 +1,93 @@
+<div id="experiencia-header">
+    <nav class="navbar navbar-default" role="navigation" style="background-color:#8edb68">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#experiencia-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="font-size:x-large">Experiencias</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="experiencia-navbar">
+                <button id="create-experiencia" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.createRecord()" style="color:#ffffff;background-color:#006400"><span class="glyphicon glyphicon-plus"></span> Create</button>
+                <button id="refresh-experiencia" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.fetchRecords()" style="color:#ffffff;background-color:#006400"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                <button id="save-experiencia" type="submit" form="experiencia-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" style="color:#ffffff;background-color:#006400"><span class="glyphicon glyphicon-save"></span> Save</button>
+                <button id="cancel-experiencia" type="button" form="experiencia-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" ng-click="form.$setPristine(); ctrl.fetchRecords();" style="color:#ffffff;background-color:#006400"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="jumbotronExperiencia">
+</div>
+
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style=";background-color:#d0f0c0">{{alert.msg}}</alert>
+<div ng-hide="ctrl.editMode" class="col-md-12">
+    <table class="table table-striped table-bordered" style="background-color:#8edb68">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Descripcion</th>
+                <th>Fecha de Publicacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="record in records">
+                <td id="{{$index}}-name">{{record.name}}</td>
+                <td id="{{$index}}-descripcion">{{record.descripcion}}</td>
+                <td id="{{$index}}-fechaPublicacion">{{record.fechaP | date}}</td>
+                <td>
+                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)" style="color:#ffffff;background-color:#006400"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style="color:#ffffff;background-color:#006400"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div ng-show="ctrl.editMode" class="col-md-6 well" style="background-color:#8edb68">
+    <form novalidate name="form" id="experiencia-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()">
+        <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required">
+            <div ng-message="required">
+                Please, Fill the required field!
+            </div>
+        </alert>
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                
+                
+                <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                    <label for="name" class="col-md-2 control-label">Name</label>
+                    <div class="col-md-10">
+                        <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-12" ng-class="{'has-success': form.descripcion.$valid && form.descripcion.$dirty, 'has-error': form.descripcion.$invalid && (form.descripcion.$dirty || form.$submitted)}" >
+                    <label for="descripcion" class="col-md-2 control-label">Descripcion</label>
+                    <div class="col-md-10">
+                        <input id="descripcion" name="descripcion" class="form-control" type="text" ng-model="currentRecord.descripcion" required />
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-12" ng-class="{'has-success': !form.fechaP.$error.required && form.fechaP.$dirty, 'has-error': form.fechaP.$error.required && (form.fechaP.$dirty || form.$submitted)}">
+                <label for="fechaP" class="col-md-2 control-label">Fecha Publicacion:</label>
+                <div class="col-md-10">
+                    <p class="input-group">
+                        <input type="text" id="fechaP" name="fechaP" class="form-control" ng-model="currentRecord.fechaP" ng-required="model.required" datepicker-popup is-open="opened" readonly required />
+                        <span class="input-group-btn">
+                            <button type="button" id="fechaP-datepicker" class="btn btn-default" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

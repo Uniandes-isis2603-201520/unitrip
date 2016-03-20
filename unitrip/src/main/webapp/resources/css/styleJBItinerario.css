@@ -1,0 +1,10 @@
+.jumbotronItinerario
+{
+    background-image: url('../../images/misItinerarios.jpg'); 
+    min-height: 300px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    max-height: 500px;
+    min-width: 1200px;
+    max-width: 2000px;
+}

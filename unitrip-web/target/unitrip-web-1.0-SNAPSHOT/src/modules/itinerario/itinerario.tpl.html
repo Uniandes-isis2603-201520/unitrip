@@ -1,0 +1,110 @@
+<div id="itinerario-header">
+    <nav class="navbar navbar-default" role="navigation" style = "background-color:#6977a1">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#itinerario-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style ="color:#ffffff; font-size:x-large">Itinerarios</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="itinerario-navbar">
+                <button id="create-itinerario" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.createRecord()" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-plus"></span> Create</button>
+                <button id="refresh-itinerario" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.fetchRecords()" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                <button id="save-itinerario" type="submit" form="itinerario-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-save"></span> Save</button>
+                <button id="cancel-itinerario" type="button" form="itinerario-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode"  ng-click="form.$setPristine(); ctrl.fetchRecords();" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="jumbotronItinerario">
+</div>
+
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="color:#ffffff;background-color:#9dc1e0">{{alert.msg}} </alert>
+<div ng-hide="ctrl.editMode" style="text-align:center">
+    <div class="col-sm-12">
+        <div ng-repeat="record in records">
+            <div class="col-md-4 col-sm-6 col-lg-3 well" style="color:#ffffff;background-color:#6977a1">
+                <div class="col-md-12">
+                    <div class="img-thumbnail" id="image" ng-if="record.image" style="background-color:#9dc1e0">
+                        <a ng-href="{{record.image}}" target="_blank"><img class="img-responsive" style="height: 20vmax;" ng-src="{{record.image}}" alt="{{record.image}}"></a>
+                    </div>
+                </div>
+                <div class="caption" >
+                    <p><strong>Name:</strong> <span id="{{$index}}-name">{{record.name}}</span></p>
+                    <p><strong>Descripcion:</strong> <span id="{{$index}}-description">{{record.descripcion}}</span></p>
+                    <p><strong>Fecha Inicio:</strong> <span id="{{$index}}-fechaI">{{record.fechaI| date}}</span></p>
+                    <p><strong>Fecha Final:</strong> <span id="{{$index}}-fechaF">{{record.fechaF| date}}</span></p>
+                </div>
+                <p class="text-center">
+                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                    <button ui-sref="paradas" class="btn btn-default btn-sm" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-list"></span> Paradas </button>
+                </p>
+                
+                <div class="row">
+                <div class="span">
+                    <div class="well" ui-view></div>        
+                </div>
+            </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+<div ng-show="ctrl.editMode" class="col-md-6 well" style="background-color:#6677a1"> 
+    <form novalidate name="form" id="itinerario-form" role="form" ng-submit="ctrl.saveRecord()" style ="color:#ffffff;background-color:#6677a1">
+        <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required">
+            <div ng-message="required">
+                Please, Fill the required fields!
+            </div>
+        </alert>  
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="name" class="col-md-2 control-label">Name</label>
+                <div class="col-md-10">
+                    <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
+                </div>
+            </div>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.descripcion.$valid && form.descripcion.$dirty, 'has-error': form.descripcion.$invalid && (form.descripcion.$dirty || form.$submitted)}" >
+                <label for="descripcion" class="col-md-2 control-label">Descripcion</label>
+                <div class="col-md-10">
+                    <input id="descripcion" name="descripcion" class="form-control" type="text" ng-model="currentRecord.descripcion" required />
+                </div>
+            </div>
+            <div class="form-group col-md-12" ng-class="{'has-success': !form.fechaI.$error.required && form.fechaI.$dirty, 'has-error': form.fechaI.$error.required && (form.fechaI.$dirty || form.$submitted)}" >
+                <label for="fechaI" class="col-md-2 control-label">Fecha Inicial</label>
+                <div class="col-md-10">
+                    <p class="input-group">
+                        <input type="text" id="fechaI" name="fechaI" class="form-control" ng-model="currentRecord.fechaI" ng-required="model.required" datepicker-popup is-open="opened" />
+                        <span class="input-group-btn">
+                            <button type="button" id="fechaI-datepicker" class="btn btn-default" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="form-group col-md-12" ng-class="{'has-success': !form.fechaF.$error.required && form.fechaF.$dirty, 'has-error': form.fechaF.$error.required && (form.fechaF.$dirty || form.$submitted)}" >
+                <label for="fechaF" class="col-md-2 control-label">Fecha Final</label>
+                <div class="col-md-10">
+                    <p class="input-group">
+                        <input type="text" id="fechaF" name="fechaF" class="form-control" ng-model="currentRecord.fechaF" ng-required="model.required" datepicker-popup is-open="opened" />
+                        <span class="input-group-btn">
+                            <button type="button" id="fechaF-datepicker" class="btn btn-default" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
