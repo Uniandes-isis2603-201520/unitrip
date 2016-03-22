@@ -7,11 +7,11 @@
         "eventoModule",
         "paradaModule",
         "experienciaModule",
-        "itinerarioMock",
-        "viajeMock",
-        "eventoMock",
-        "paradaMock",
-        "experienciaMock",
+      //"itinerarioMock",
+      //"viajeMock",
+      //"eventoMock",
+      //"paradaMock",
+      //"experienciaMock",
         "ngMessages"
     ]);
 

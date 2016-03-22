@@ -24,18 +24,12 @@
              */
             var records = [{
                     id: 1,
-                    name: 'Para los amantes de la lectura',
-                    source: 'El Tiempo',
-                    description: 'El periódico El Tiempo recomienda a sus lectores más seleccionados este ejemplar. '
+                    name: 'Mi primer viaje',
+                    descripcion: 'El mejor viaje',
+                    fechaP: '2016-02-16'
                    
                 },
-                {
-                    id: 2,
-                    name: 'Solo para programadores',
-                    source: 'Universidad de Los Andes',
-                    description: 'Se recomienda el libro únicamente para programadores.'
-                   
-                }];
+                ];
 
             function getQueryParams(url) {
                 var vars = {}, hash;
