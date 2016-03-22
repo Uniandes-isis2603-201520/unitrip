@@ -1,7 +1,7 @@
 <div id="itinerario-header">
     <nav class="navbar navbar-default" role="navigation" style = "background-color:#6977a1">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Brand and toggle get grouped for better mobile display s -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#itinerario-navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -47,27 +47,27 @@
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-minus"></span> Remove</button>
                     <button ui-sref="paradas" class="btn btn-default btn-sm" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-list"></span> Paradas </button>
                 </p>
-                
+
                 <div class="row">
                 <div class="span">
-                    <div class="well" ui-view></div>        
+                    <div class="well" ui-view></div>
                 </div>
             </div>
             </div>
-            
+
         </div>
-        
+
     </div>
-    
+
 </div>
 
-<div ng-show="ctrl.editMode" class="col-md-6 well" style="background-color:#6677a1"> 
+<div ng-show="ctrl.editMode" class="col-md-6 well" style="background-color:#6677a1">
     <form novalidate name="form" id="itinerario-form" role="form" ng-submit="ctrl.saveRecord()" style ="color:#ffffff;background-color:#6677a1">
         <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required">
             <div ng-message="required">
                 Please, Fill the required fields!
             </div>
-        </alert>  
+        </alert>
         <fieldset>
             <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
@@ -93,7 +93,7 @@
                     </p>
                 </div>
             </div>
-            
+
             <div class="form-group col-md-12" ng-class="{'has-success': !form.fechaF.$error.required && form.fechaF.$dirty, 'has-error': form.fechaF.$error.required && (form.fechaF.$dirty || form.$submitted)}" >
                 <label for="fechaF" class="col-md-2 control-label">Fecha Final</label>
                 <div class="col-md-10">
