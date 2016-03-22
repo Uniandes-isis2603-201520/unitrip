@@ -31,8 +31,8 @@ Método | URL | Acción | Parametros | Cuerpo | Retorno
 GET|/viajeros |Lista los registros de Viajeros (READ) |@QueryParam page: página a consultar.@QueryParam maxRecords: cantidad de registros a consultar.Si se omite alguno de estos parámetros se obtiene todos los registros en la base de datos|	|Colección de registros de Viajero y el total de registros en la base de datos en el header X-Total-Count|
 GET|/viajeros/:viajeroId |Obtener los atributos de una instancia de Viajero (READ) |@PathParamviajerosid: Identificador del registro  | | Atributos de la instancia de Viajero| 
 POST|/viajeros |Crear una nueva instancia de la entidad Viajero (CREATE) | |Atributos de la instancia de Experiencia a crear | Instancia de Viajero creada, incluyendo su nuevo ID| 
-PUT|/viajeros/:viajerossid |Actualiza una instancia de la entidad Viajero (UPDATE) |@PathParam viajerosid: Identificador del registro |Objeto JSON de Viajerro | Instancia de Viajero actualizada
-DELETE|/viajeros/:viajerossid |Borra instancia de Viajero en el servidor (DELETE) |@PathParam viajerosid: Identificador del registro | | | 
+PUT|/viajeros/:viajeroid |Actualiza una instancia de la entidad Viajero (UPDATE) |@PathParam viajerosid: Identificador del registro |Objeto JSON de Viajerro | Instancia de Viajero actualizada
+DELETE|/viajeros/:viajeroid |Borra instancia de Viajero en el servidor (DELETE) |@PathParam viajerosid: Identificador del registro | | | 
 
 
 ## Entidad Viaje
