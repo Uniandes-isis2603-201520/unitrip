@@ -141,11 +141,11 @@ DELETE|/viajeros/:viajeroid/viajes/:viajeid/itinerarios/:itinerariosid/:paradas/
 ### Servicios
 Método | URL | Acción | Parametros | Cuerpo | Retorno 
 ------------ | ------------- | ------------- | ------------- | ------------- | -------------
-GET|/experiencias |Lista los registros de Experiencia (READ) |@QueryParam page: página a consultar.@QueryParam maxRecords: cantidad de registros a consultar.Si se omite alguno de estos parámetros se obtiene todos los registros en la base de datos|	|Colección de registros de Experiencia y el total de registros en la base de datos en el header X-Total-Count|
-GET|/experiencias/:viajeid |Obtener los atributos de una instancia de Experiencia (READ) |@PathParamexperienciasid: Identificador del registro  | | Atributos de la instancia de Experiencia| 
-POST|/experiencias |Crear una nueva instancia de la entidad Experiencia (CREATE) | |Atributos de la instancia de Experiencia a crear | Instancia de Experiencia creada, incluyendo su nuevo ID| 
-PUT|/experiencias/:experienciasid |Actualiza una instancia de la entidad Experiencia (UPDATE) |@PathParam experienciasid: Identificador del registro |Objeto JSON de Experiencia | Instancia de Experiencia actualizada
-DELETE|/experiencias/:experienciasid |Borra instancia de Experiencia en el servidor (DELETE) |@PathParam experienciasid: Identificador del registro | | | 
+GET|/viajeros/:viajeroid/viajes/:viajeid/experiencias |Lista los registros de Experiencia (READ) |@QueryParam page: página a consultar.@QueryParam maxRecords: cantidad de registros a consultar.Si se omite alguno de estos parámetros se obtiene todos los registros en la base de datos|	|Colección de registros de Experiencia y el total de registros en la base de datos en el header X-Total-Count|
+GET|/viajeros/:viajeroid/viajes/:viajeid/experiencias/:viajeid |Obtener los atributos de una instancia de Experiencia (READ) |@PathParamexperienciasid: Identificador del registro  | | Atributos de la instancia de Experiencia| 
+POST|/viajeros/:viajeroid/viajes/:viajeid/experiencias |Crear una nueva instancia de la entidad Experiencia (CREATE) | |Atributos de la instancia de Experiencia a crear | Instancia de Experiencia creada, incluyendo su nuevo ID| 
+PUT|/viajeros/:viajeroid/viajes/:viajeid/experiencias/:experienciasid |Actualiza una instancia de la entidad Experiencia (UPDATE) |@PathParam experienciasid: Identificador del registro |Objeto JSON de Experiencia | Instancia de Experiencia actualizada
+DELETE|/viajeros/:viajeroid/viajes/:viajeid/experiencias/:experienciasid |Borra instancia de Experiencia en el servidor (DELETE) |@PathParam experienciasid: Identificador del registro | | | 
 
 
 
