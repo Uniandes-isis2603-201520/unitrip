@@ -1,5 +1,40 @@
 # API de la aplicación UNITRIP
 
+
+## Entidad Viajero
+### Estructura de objeto Viajero
+```javascript
+{ 
+    id: '' /*Tipo Long*/,
+    name: '' /*Tipo String*/,
+    edad: '' /*Tipo Integer*/,
+    apellido: '' /*Tipo String*/,
+    sexo: '' /*Tipo String*/,
+    dirección: '' /*Tipo String*/,
+    usuario: '' /*Tipo String*/,
+    contraseña: '' /*Tipo String*/,
+    tipoDocumento: '' /*Tipo String*/,
+    numeroId: '' /*Tipo Integer*/,
+    email: '' /*Tipo String*/,
+    ciudad: '' /*Tipo String*/,
+    telefono: '' /*Tipo String*/,
+    nacionalidad: '' /*Tipo String*/,
+    preguntaS: '' /*Tipo String*/,
+    respuesta: '' /*Tipo String*/,
+    
+    
+}
+```
+### Servicios
+Método | URL | Acción | Parametros | Cuerpo | Retorno 
+------------ | ------------- | ------------- | ------------- | ------------- | -------------
+GET|/viajeros |Lista los registros de Viajeros (READ) |@QueryParam page: página a consultar.@QueryParam maxRecords: cantidad de registros a consultar.Si se omite alguno de estos parámetros se obtiene todos los registros en la base de datos|	|Colección de registros de Viajero y el total de registros en la base de datos en el header X-Total-Count|
+GET|/viajeros/:viajeroId |Obtener los atributos de una instancia de Viajero (READ) |@PathParamviajerosid: Identificador del registro  | | Atributos de la instancia de Viajero| 
+POST|/viajeros |Crear una nueva instancia de la entidad Viajero (CREATE) | |Atributos de la instancia de Experiencia a crear | Instancia de Viajero creada, incluyendo su nuevo ID| 
+PUT|/viajeros/:viajerossid |Actualiza una instancia de la entidad Viajero (UPDATE) |@PathParam viajerosid: Identificador del registro |Objeto JSON de Viajerro | Instancia de Viajero actualizada
+DELETE|/viajeros/:viajerossid |Borra instancia de Viajero en el servidor (DELETE) |@PathParam viajerosid: Identificador del registro | | | 
+
+
 ## Entidad Viaje
 ### Estructura de objeto Viaje
 ```javascript
