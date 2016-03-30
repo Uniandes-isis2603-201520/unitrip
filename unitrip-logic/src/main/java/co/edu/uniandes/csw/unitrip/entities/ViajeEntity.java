@@ -31,7 +31,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     private String description;
     private String image;
     @Temporal(TemporalType.DATE)
-   
+
 
     //@ManyToMany
     //private List<AuthorEntity> authors = new ArrayList<>();
@@ -39,11 +39,11 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     //@ManyToOne
     //private EditorialEntity editorial;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItinerarioEntity> itinerarios = new ArrayList<>();
-    
+
     private List<ExperienciaEntity> experiencias = new ArrayList<>();
-    
+
 
     /**
      * @return the id
@@ -58,7 +58,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * @return the name
      */
@@ -72,7 +72,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     /**
      * @return the description
      */
@@ -86,7 +86,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     public void setDescription(String descr) {
         this.description = descr;
     }
-    
+
     /**
      * @return the image
      */
