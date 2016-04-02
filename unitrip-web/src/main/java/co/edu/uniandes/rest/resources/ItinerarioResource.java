@@ -17,6 +17,7 @@ import co.edu.uniandes.rest.exceptions.LogicException;
 
 
 import java.util.List;
+import javax.inject.Inject;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -43,7 +44,7 @@ import javax.ws.rs.core.Response;
 @Produces("application/json")
 public class ItinerarioResource {
 
-
+        @Inject
 	private IItinerarioLogic itinerarioLogic;
 
 	/**
