@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -25,12 +26,10 @@ import javax.persistence.TemporalType;
 @Entity
 public class ViajeEntity extends BaseEntity implements Serializable {
 
-    @Id
-    private Long id;
-    private String name;
+
     private String description;
     private String image;
-    @Temporal(TemporalType.DATE)
+
 
 
     //@ManyToMany
@@ -39,39 +38,11 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     //@ManyToOne
     //private EditorialEntity editorial;
 
-    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItinerarioEntity> itinerarios = new ArrayList<>();
 
+    @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExperienciaEntity> experiencias = new ArrayList<>();
-
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the image to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * @return the description

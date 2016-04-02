@@ -11,7 +11,10 @@ package co.edu.uniandes.rest.mocks;
  */
 import co.edu.uniandes.rest.dtos.EventoDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -44,9 +47,20 @@ public class EventoLogicMock {
 
     	if (eventos == null) {
             eventos = new ArrayList<>();
-            eventos.add(new EventoDTO(1L, "Bogota", 4L,4L,"Divertido","07/06/2016","08/06/2016"));
-            eventos.add(new EventoDTO(2L, "Cali",4L,4L,"Divertido","07/06/2016","08/06/2016"));
-            eventos.add(new EventoDTO(3L, "Medellin",4L,4L,"Divertido","07/06/2016","08/06/2016"));
+            String fechaA = "07/06/2016";
+            String fechaB="08/06/2016";
+            DateFormat df2 = new SimpleDateFormat("dd/mm/yy");
+            Date fecha1 = null;
+            Date fecha2 = null;
+            try{
+	    fecha1 = df2.parse(fechaA);
+            fecha2= df2.parse(fechaB);}
+            catch(Exception e){
+
+            }
+            eventos.add(new EventoDTO(1L, "Bogota", 4L,4L,"Divertido",fecha1,fecha2));
+            eventos.add(new EventoDTO(2L, "Cali",4L,4L,"Divertido",fecha1,fecha2));
+            eventos.add(new EventoDTO(3L, "Medellin",4L,4L,"Divertido",fecha1,fecha2));
         }
 
     	// indica que se muestren todos los mensajes

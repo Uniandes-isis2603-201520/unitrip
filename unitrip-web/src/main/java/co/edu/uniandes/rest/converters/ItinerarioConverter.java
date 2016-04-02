@@ -113,7 +113,7 @@ public abstract class ItinerarioConverter {
             return null;
         }
     }
-     
+
     // TERMINAR... CICLO 3
     /**
      * Convierte instancias de ItinerarioEntity a ItinerarioDTO incluyendo sus relaciones
@@ -122,17 +122,17 @@ public abstract class ItinerarioConverter {
      * @param entity Instancia de ItinerarioEntity a convertir
      * @return Instancia de ItinerarioDTO con los datos recibidos por parámetro
      * @generated
-     *
+     */
     public static ItinerarioDTO fullEntity2DTO(ItinerarioEntity entity) {
         if (entity != null) {
             ItinerarioDTO dto = basicEntity2DTO(entity);
-            dto.setParada(ParadaConverter.listEntity2DTO(entity.getParadas()));
+            dto.setParadas(ParadaConverter.listEntity2DTO(entity.getParadas()));
             return dto;
         } else {
             return null;
         }
     }
-    * /
+
 
     /**
      * Convierte una instancia de ItinerarioDTO a ItinerarioEntity.
@@ -141,7 +141,7 @@ public abstract class ItinerarioConverter {
      * @param dto Instancia de ItinerarioDTO a convertir
      * @return Instancia de ItinerarioEntity con los datos recibidos por parámetro
      * @generated
-     *
+     */
     public static ItinerarioEntity fullDTO2Entity(ItinerarioDTO dto) {
         if (dto != null) {
             ItinerarioEntity entity = basicDTO2Entity(dto);
@@ -151,7 +151,7 @@ public abstract class ItinerarioConverter {
             return null;
         }
     }
-    * /
+
 
     /**
      * Convierte una colección de instancias de ItinerarioEntity a ItinerarioDTO. Para cada
@@ -190,5 +190,5 @@ public abstract class ItinerarioConverter {
         }
         return entities;
     }
-    
+
 }

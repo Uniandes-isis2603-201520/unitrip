@@ -44,7 +44,7 @@ public class EventoLogic implements IEventoLogic {
         return entity;
     }
 
-
+    @Override
     public EventoEntity updateEvento(EventoEntity entity) {
         EventoEntity newEntity = entity;
         return persistence.update(newEntity);
@@ -55,6 +55,6 @@ public class EventoLogic implements IEventoLogic {
         persistence.delete(id);
     }
 
-    
+
 
 }

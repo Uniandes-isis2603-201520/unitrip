@@ -11,60 +11,26 @@ package co.edu.uniandes.csw.unitrip.entities;
  */
 import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 
 @Entity
 public class EventoEntity extends BaseEntity implements Serializable {
 
-    private Long id;
-    private String nombre;
+
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
+    @Temporal(TemporalType.DATE)
     private Date fechaFin;
     private String descripcion;
     private Long latitud;
     private Long longitud;
 
      @ManyToOne
-    private ItinerarioEntity itinerario;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return nombre
-     */
-    public String getName() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setName(String nombre) {
-        this.nombre = nombre;
-    }
+    private ParadaEntity parada;
 
     /**
      * @return fechaInicio
@@ -95,20 +61,20 @@ public class EventoEntity extends BaseEntity implements Serializable {
     }
 
 
-    public ItinerarioEntity getItinerario() {
-        return itinerario;
+    public ParadaEntity getParada() {
+        return parada;
     }
 
-    public void setItinerario(ItinerarioEntity itinerario) {
-        this.itinerario = itinerario;
+    public void setParada(ParadaEntity parada) {
+        this.parada = parada;
     }
 
     public String getDescription() {
         return descripcion;
     }
 
-    public void setDescription(ItinerarioEntity itinerario) {
-        this.itinerario = itinerario;
+    public void setDescription(String descripcion) {
+        this.descripcion = descripcion;
     }
     public Long getLatitud() {
         return latitud;

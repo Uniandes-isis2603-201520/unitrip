@@ -17,15 +17,15 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class ItinerarioEntity extends BaseEntity implements Serializable {
-    
-    @Id
-    private Long id;
-    private String name;
-    private String descripcion;
-    private String fechaI;
-    private String fechaF;
 
-    
+
+    private String descripcion;
+    @Temporal(TemporalType.DATE)
+    private Date fechaI;
+    @Temporal(TemporalType.DATE)
+    private Date fechaF;
+
+
     @ManyToOne
     private ViajeEntity viaje;
 
@@ -63,7 +63,7 @@ public class ItinerarioEntity extends BaseEntity implements Serializable {
     public void setParadas(List<ParadaEntity> paradas) {
         this.paradas = paradas;
     }
-    
+
     /**
      *
      * @param parada
@@ -80,53 +80,32 @@ public class ItinerarioEntity extends BaseEntity implements Serializable {
         this.viaje = viaje;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-   /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
 
     /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-        /**
      * @return fechaI fecha de inicio
      */
-    public String getFechaI() {
+    public Date getFechaI() {
         return fechaI;
     }
 
     /**
      * @param fechaI fecha Inicial a modificar
      */
-    public void setFechaI(String fechaI) {
+    public void setFechaI(Date fechaI) {
         this.fechaI = fechaI;
     }
-    
+
          /**
      * @return fechaI fecha de inicio
      */
-    public String getFechaF() {
+    public Date getFechaF() {
         return fechaF;
     }
 
     /**
      * @param fechaF fecha Inicial a modificar
      */
-    public void setFechaF(String fechaF) {
+    public void setFechaF(Date fechaF) {
         this.fechaF = fechaF;
     }
 

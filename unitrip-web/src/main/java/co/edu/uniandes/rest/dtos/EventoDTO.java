@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.dtos;
 
+import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -13,14 +14,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class EventoDTO {
-    
+
     private Long id;
     private String name;
     private Long latitud;
     private Long longitud;
     private String description;
-    private String fechaInicio;
-    private String fechaFin;
+    private Date fechaInicio;
+    private Date fechaFin;
+    private ParadaDTO parada;
 
     /**
      * Constructor por defecto
@@ -38,7 +40,7 @@ public class EventoDTO {
      * @param fechaInicio fecha de inicio del evento
      * @param fechaFin fecha donde el evento finaliza
      */
-    public EventoDTO(Long id, String name, Long latitud, long longitud, String description, String fechaInicio, String fechaFin) {
+    public EventoDTO(Long id, String name, Long latitud, long longitud, String description, Date fechaInicio, Date fechaFin) {
         super();
         this.id = id;
         this.name = name;
@@ -119,28 +121,35 @@ public class EventoDTO {
     /**
      * @return the fechaInicio
      */
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
     /**
      * @param fechaInicio the fechaInicio to set
      */
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
     /**
      * @return the fechaFin
      */
-    public String getFechaFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
     /**
      * @param fechaFin the fechaFin to set
      */
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public ParadaDTO getParada(){
+        return parada;
+    }
+    public void setParada(ParadaDTO parada){
+        this.parada=parada;
     }
 
     /**

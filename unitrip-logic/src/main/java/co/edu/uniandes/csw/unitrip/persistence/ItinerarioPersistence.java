@@ -10,7 +10,7 @@ import javax.persistence.Query;
 @Stateless
 public class ItinerarioPersistence {
 
-    @PersistenceContext(unitName = "ItinerarioStorePU")
+    @PersistenceContext(unitName = "UnitripPU")
     protected EntityManager em;
 
     public ItinerarioEntity find(Long id) {

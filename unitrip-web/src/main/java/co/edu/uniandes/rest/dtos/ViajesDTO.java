@@ -17,8 +17,8 @@ public class ViajesDTO {
     private String name;
     private String descripcion;
     private String image;
-    private ArrayList<ItinerarioDTO> itinerarios;
-    private ArrayList<ExperienciaDTO> experiencias;
+    private List<ItinerarioDTO> itinerarios;
+    private List<ExperienciaDTO> experiencias;
 
     /**
      * Constructor por defecto
@@ -70,7 +70,7 @@ public class ViajesDTO {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     /**
      * @return the descripcion
      */
@@ -84,7 +84,7 @@ public class ViajesDTO {
     public void setDescripcion(String descrip) {
         this.descripcion = descrip;
     }
-    
+
     /**
      * @return the Image URL
      */
@@ -98,11 +98,11 @@ public class ViajesDTO {
     public void setImg(String img) {
         this.image = img;
     }
-    
+
     /**
      * @return the Itineraries colection
      */
-    public ArrayList<ItinerarioDTO> getItinerarios() {
+    public List<ItinerarioDTO> getItinerarios() {
         return itinerarios;
     }
 
@@ -112,15 +112,15 @@ public class ViajesDTO {
     public void addItinerario(ItinerarioDTO iti) {
         this.itinerarios.add(iti);
     }
-    
+
     public void setItinerarios(List<ItinerarioDTO> iti){
         this.itinerarios=(ArrayList<ItinerarioDTO>) iti;
     }
-    
+
     /**
      * @return the expiriences colection
      */
-    public ArrayList<ExperienciaDTO> getExperiencias() {
+    public List<ExperienciaDTO> getExperiencias() {
         return experiencias;
     }
 
@@ -130,13 +130,17 @@ public class ViajesDTO {
     public void addExperiencia(ExperienciaDTO exp) {
         this.experiencias.add(exp);
     }
-    
+
+    public void setExperiencias(List<ExperienciaDTO> exp){
+        this.experiencias=exp;
+    }
+
     /**
      * Convierte el objeto a una cadena
      * @return Cadena de caracteres con informacion de un viaje
      */
     @Override
     public String toString() {
-    	return "{ id : " + getId() + ", name : \"" + getName() + "\" }" ;  
+    	return "{ id : " + getId() + ", name : \"" + getName() + "\" }" ;
     }
 }

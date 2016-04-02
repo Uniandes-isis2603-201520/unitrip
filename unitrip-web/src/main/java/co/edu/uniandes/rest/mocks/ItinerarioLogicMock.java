@@ -2,7 +2,10 @@ package co.edu.uniandes.rest.mocks;
 
 import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -16,10 +19,10 @@ import javax.inject.Named;
 @Named
 @ApplicationScoped
 public class ItinerarioLogicMock {
-	
+
 	// objeto para presentar logs de las operaciones
 	private final static Logger logger = Logger.getLogger(ItinerarioLogicMock.class.getName());
-	
+
 	// listado de Itinerarios
     private static List<ItinerarioDTO> itinerarios;
 
@@ -30,30 +33,38 @@ public class ItinerarioLogicMock {
 
     	if (itinerarios == null) {
             itinerarios = new ArrayList<>();
-            itinerarios.add(new ItinerarioDTO(1L, "Bogota","Muy bueno","2016-10-12","2016-10-12"));
-            itinerarios.add(new ItinerarioDTO(2L, "Cali","Muy bueno","2016-10-12","2016-10-12"));
-            itinerarios.add(new ItinerarioDTO(3L, "Medellin","Muy bueno","2016-10-12","2016-10-12"));
+             String fechaA = "2016-10-12";
+            DateFormat df2 = new SimpleDateFormat("yy-mm-dd");
+            Date fecha1 = null;
+            try{
+	    fecha1 = df2.parse(fechaA);}
+            catch(Exception e){
+
+            }
+            itinerarios.add(new ItinerarioDTO(1L, "Bogota","Muy bueno",fecha1,fecha1));
+            itinerarios.add(new ItinerarioDTO(2L, "Cali","Muy bueno",fecha1,fecha1));
+            itinerarios.add(new ItinerarioDTO(3L, "Medellin","Muy bueno",fecha1,fecha1));
         }
-        
+
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
-    	
-    	// muestra información 
+
+    	// muestra información
     	logger.info("Inicializa la lista de Itinerarios");
     	logger.info("Itinerarios" + itinerarios );
-    }    
-    
+    }
+
 	/**
-	 * Obtiene el listado de Itinerarios. 
+	 * Obtiene el listado de Itinerarios.
 	 * @return lista de Itinerarios
-	 * @throws LogicException cuando no existe la lista en memoria  
+	 * @throws LogicException cuando no existe la lista en memoria
 	 */
     public List<ItinerarioDTO> getItinerarios() throws LogicException {
     	if (itinerarios == null) {
     		logger.severe("Error interno: lista de Itinerarios no existe.");
-    		throw new LogicException("Error interno: lista de Itinerarios no existe.");    		
+    		throw new LogicException("Error interno: lista de Itinerarios no existe.");
     	}
-    	
+
     	logger.info("retornando todas los Itinerarios");
     	return itinerarios;
     }
@@ -66,7 +77,7 @@ public class ItinerarioLogicMock {
      */
     public ItinerarioDTO getItinerario(Long id) throws LogicException {
     	logger.info("recibiendo solicitud de Itinerario con id " + id);
-    	
+
     	// busca el Itinerario con el id suministrado
         for (ItinerarioDTO itinerario : itinerarios) {
             if (Objects.equals(itinerario.getId(), id)){
@@ -74,7 +85,7 @@ public class ItinerarioLogicMock {
                 return itinerario;
             }
         }
-        
+
         // si no encuentra el Itinerario
         logger.severe("No existe Itinerario con ese id");
         throw new LogicException("No existe Itinerario con ese id");
@@ -88,7 +99,7 @@ public class ItinerarioLogicMock {
      */
     public ItinerarioDTO createItinerario(ItinerarioDTO newItinerario) throws LogicException {
     	logger.info("recibiendo solicitud de agregar Itinerario " + newItinerario);
-    	
+
     	// el nuevo Itinerario tiene id ?
     	if ( newItinerario.getId() != null ) {
 	    	// busca la ciudad con el id suministrado
@@ -99,8 +110,8 @@ public class ItinerarioLogicMock {
 	                throw new LogicException("Ya existe un Itinerario con ese id");
 	            }
 	        }
-	        
-	    // el nuevo Itinerario no tiene id ? 
+
+	    // el nuevo Itinerario no tiene id ?
     	} else {
 
     		// genera un id para el Itinerario
@@ -113,7 +124,7 @@ public class ItinerarioLogicMock {
 	        }
 	        newItinerario.setId(newId);
     	}
-    	
+
         // agrega el Itinerario
     	logger.info("agregando Itinerario " + newItinerario);
         itinerarios.add(newItinerario);
@@ -124,26 +135,26 @@ public class ItinerarioLogicMock {
      * Actualiza los datos de un Itinerario
      * @param id identificador del Itinerario a modificar
      * @param updatedItinerario Itinerario a modificar
-     * @return datos del Itinerario modificada 
+     * @return datos del Itinerario modificada
      * @throws LogicException cuando no existe un Itinerario con el id suministrado
      */
     public ItinerarioDTO updateItinerario(Long id, ItinerarioDTO updatedItinerario) throws LogicException {
     	logger.info("recibiendo solictud de modificar Itinerario " + updatedItinerario);
-    	
+
     	// busca el Itinerario con el id suministrado
         for (ItinerarioDTO itinerario : itinerarios) {
             if (Objects.equals(itinerario.getId(), id)) {
-            	
+
             	// modifica el Itinerario
             	itinerario.setId(updatedItinerario.getId());
                 itinerario.setName(updatedItinerario.getName());
-                
+
                 // retorna el Itinerario modificada
             	logger.info("Modificando Itinerario " + itinerario);
                 return itinerario;
             }
         }
-        
+
         // no encontró el Itinerario con ese id ?
         logger.severe("No existe un Itinerario con ese id");
         throw new LogicException("No existe un Itinerario con ese id");
@@ -156,11 +167,11 @@ public class ItinerarioLogicMock {
      */
     public void deleteItinerario(Long id) throws LogicException {
     	logger.info("recibiendo solictud de eliminar un itinerario con id " + id);
-    	
+
     	// busca el itinerario con el id suministrado
         for (ItinerarioDTO itinerario : itinerarios) {
             if (Objects.equals(itinerario.getId(), id)) {
-            	
+
             	// elimina el itinerario
             	logger.info("eliminandoitinerario " + itinerario);
                 itinerarios.remove(itinerario);
@@ -172,5 +183,5 @@ public class ItinerarioLogicMock {
         logger.severe("No existe un itinerario con ese id");
         throw new LogicException("No existe un itinerario con ese id");
     }
-  
+
 }

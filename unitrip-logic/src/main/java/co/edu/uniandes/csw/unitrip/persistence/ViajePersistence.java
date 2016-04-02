@@ -19,7 +19,7 @@ import javax.persistence.Query;
 @Stateless
 public class ViajePersistence {
 
-    @PersistenceContext(unitName = "ViajeStorePU")
+    @PersistenceContext(unitName = "UnitripPU")
     protected EntityManager em;
 
     public ViajeEntity find(Long id) {
@@ -28,7 +28,7 @@ public class ViajePersistence {
 
     public List<ViajeEntity> findAll() {
         Query q;
-        q = em.createQuery("select u from BookEntity u");
+        q = em.createQuery("select u from ViajeEntity u");
         return q.getResultList();
     }
 

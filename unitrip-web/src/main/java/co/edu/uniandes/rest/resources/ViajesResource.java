@@ -2,6 +2,10 @@ package co.edu.uniandes.rest.resources;
 
 
 
+import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
+import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
+import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
+import co.edu.uniandes.rest.converters.ViajesConverter;
 import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.dtos.ViajesDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
@@ -9,6 +13,7 @@ import co.edu.uniandes.rest.mocks.ViajesLogicMock;
 import java.util.ArrayList;
 
 import java.util.List;
+import javax.inject.Inject;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,6 +22,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 
 
@@ -24,9 +31,9 @@ import javax.ws.rs.Produces;
 @Produces("application/json")
 public class ViajesResource {
 
-    //@Inject
-    //private IViajesLogic viajeLogic;
-    private ViajesLogicMock viajeLogic;
+    @Inject
+    private IViajesLogic viajeLogic;
+
     /**
      * Obtiene la lista de los registros de Viajes.
      *
@@ -37,8 +44,8 @@ public class ViajesResource {
      */
     @GET
     public List<ViajesDTO> getViajes() throws LogicException {
-        //return ViajesConverter.listEntity2DTO(viajeLogic.getViajes());
-        return viajeLogic.getViajes();
+        return ViajesConverter.listEntity2DTO(viajeLogic.getViajes());
+
     }
 
     /**
@@ -53,8 +60,13 @@ public class ViajesResource {
     @GET
     @Path("{id: \\d+}")
     public ViajesDTO getViaje(@PathParam("id") Long id) throws LogicException {
-        //return ViajesConverter.fullEntity2DTO(viajeLogic.getViaje(id));
-        return viajeLogic.getViaje(id);
+          try
+        {
+            return ViajesConverter.fullEntity2DTO(viajeLogic.getViaje(id));
+        }
+        catch(BusinesLogicException ex){
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        }
     }
 
     /**
@@ -67,9 +79,9 @@ public class ViajesResource {
      */
     @POST
     public ViajesDTO createViaje(ViajesDTO dto) throws LogicException {
-        //ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
-        //return ViajesConverter.fullEntity2DTO(viajeLogic.createViaje(entity));
-        return viajeLogic.createViaje(dto);
+        ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
+        return ViajesConverter.fullEntity2DTO(viajeLogic.createViaje(entity));
+
     }
 
     /**
@@ -84,10 +96,16 @@ public class ViajesResource {
     @PUT
     @Path("{id: \\d+}")
     public ViajesDTO updateViaje(@PathParam("id") Long id, ViajesDTO dto) throws LogicException {
-        //ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
-        //entity.setId(id);
-        //return ViajesConverter.fullEntity2DTO(viajeLogic.updateViaje(entity));
-        return viajeLogic.updateViaje(id, dto);
+               ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
+               entity.setId(id);
+        try
+        {
+            ViajeEntity oldEntity = viajeLogic.getViaje(id);
+
+        } catch (BusinesLogicException ex) {
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        }
+        return ViajesConverter.fullEntity2DTO(viajeLogic.updateViaje(entity));
     }
 
     /**
@@ -176,6 +194,6 @@ public class ViajesResource {
     @Path("{viajeId: \\d+}/itinerarios/{itinerarioId: \\d+}")
     public void removeItinerario(@PathParam("viajeId") Long viajeId, @PathParam("itinerarioId") Long itinerarioId) {
         //viajeLogic.removeItinerario(viajeId, itinerarioId);
-        
+
     }
 }

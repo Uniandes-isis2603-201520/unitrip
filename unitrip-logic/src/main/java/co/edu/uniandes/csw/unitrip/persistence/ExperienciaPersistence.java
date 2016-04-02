@@ -14,7 +14,7 @@ import javax.persistence.Query;
 @Stateless
 public class ExperienciaPersistence {
 
-     @PersistenceContext(unitName = "ExperienciaStorePU")
+     @PersistenceContext(unitName = "UnitripPU")
     protected EntityManager em;
 
     /**
@@ -32,7 +32,7 @@ public class ExperienciaPersistence {
      */
     public List<ExperienciaEntity> findAll() {
         Query q;
-        q = em.createQuery("select u from BookEntity u");
+        q = em.createQuery("select u from ExperienciaEntity u");
         return q.getResultList();
     }
 
@@ -49,5 +49,5 @@ public class ExperienciaPersistence {
         ExperienciaEntity entity = em.find(ExperienciaEntity.class, id);
         em.remove(entity);
     }
-    
+
 }

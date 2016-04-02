@@ -5,9 +5,12 @@
  */
 package co.edu.uniandes.rest.resources;
 
+import co.edu.uniandes.csw.unitrip.api.IExperienciaLogic;
+import co.edu.uniandes.csw.unitrip.entities.ExperienciaEntity;
+import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
+import co.edu.uniandes.rest.converters.ExperienciaConverter;
 import co.edu.uniandes.rest.dtos.ExperienciaDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
-import co.edu.uniandes.rest.mocks.ExperienciaLogicMock;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,22 +22,24 @@ import javax.ws.rs.PUT;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 /**
  *
  * @author ANDRES
  */
-@Path("experiencia")
+@Path("experiencias")
 @Produces("application/json")
 public class ExperienciaResource {
 
 
 /**
- * Clase que implementa el recurso REST correspondiente a "evento".
+ * Clase que implementa el recurso REST correspondiente a "experiencia".
  *
  * Note que la aplicación (definida en RestConfig.java) define la ruta
- * "/api" y este recurso tiene la ruta "evento".
+ * "/api" y este recurso tiene la ruta "experiencias".
  * Al ejecutar la aplicación, el recurse será accesibe a través de la
- * ruta "/api/evento"
+ * ruta "/api/experiencia"
  *
  * @author Asistente
  */
@@ -42,7 +47,7 @@ public class ExperienciaResource {
 
 
 	@Inject
-	ExperienciaLogicMock eventoLogic;
+	private IExperienciaLogic experienciaLogic;
 
 	/**
 	 * Obtiene el listado de experiencia.
@@ -51,7 +56,7 @@ public class ExperienciaResource {
 	 */
     @GET
     public List<ExperienciaDTO> getExperiencias() throws LogicException {
-        return eventoLogic.getExperiencias();
+        return ExperienciaConverter.listEntity2DTO(experienciaLogic.getExperiencias());
     }
 
     /**
@@ -63,7 +68,13 @@ public class ExperienciaResource {
     @GET
     @Path("{id: \\d+}")
     public ExperienciaDTO getExperiencia(@PathParam("id") Long id) throws LogicException {
-        return eventoLogic.getExperiencia(id);
+        try
+        {
+            return ExperienciaConverter.fullEntity2DTO(experienciaLogic.getExperiencia(id));
+        }
+        catch(BusinesLogicException ex){
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        }
     }
 
     /**
@@ -74,7 +85,8 @@ public class ExperienciaResource {
      */
     @POST
     public ExperienciaDTO createEvent(ExperienciaDTO event) throws LogicException {
-        return eventoLogic.createExperiencia(event);
+           ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(event);
+        return ExperienciaConverter.fullEntity2DTO(experienciaLogic.createExperiencia(entity));
     }
 
     /**
@@ -87,8 +99,18 @@ public class ExperienciaResource {
     @PUT
     @Path("{id: \\d+}")
     public ExperienciaDTO updateEvent(@PathParam("id") Long id, ExperienciaDTO event) throws LogicException {
-        return eventoLogic.updateExperiencia(id, event);
+           ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(event);
+        entity.setId(id);
+        try
+        {
+            ExperienciaEntity oldEntity = experienciaLogic.getExperiencia(id);
+
+        } catch (BusinesLogicException ex) {
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        }
+        return ExperienciaConverter.fullEntity2DTO(experienciaLogic.updateExperiencia(entity));
     }
+
 
     /**
      * Elimina los datos de un evento
@@ -97,8 +119,8 @@ public class ExperienciaResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteEvent(@PathParam("id") Long id) throws LogicException {
-    	eventoLogic.deleteExperiencia(id);
+    public void deleteExperiencia(@PathParam("id") Long id) throws LogicException {
+    	experienciaLogic.deleteExperiencia(id);
     }
 }
 

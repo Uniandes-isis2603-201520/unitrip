@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.dtos;
 
+import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,8 +18,8 @@ public class ItinerarioDTO {
     private Long id;
     private String name;
     private String descripcion;
-    private String fechaI;
-    private String fechaF;
+    private Date fechaI;
+    private Date fechaF;
     private ViajesDTO viaje;
     private List<ParadaDTO> paradas;
 
@@ -33,17 +34,17 @@ public class ItinerarioDTO {
      * @param id identificador del Itinerario
      * @param name nombre del Itinerario
      * @param descripcion descripcion del Itinerario
-     * @param fechaI fecha inicial del Itinerario  
-     * @param fechaF fecha final del Itinerario 
+     * @param fechaI fecha inicial del Itinerario
+     * @param fechaF fecha final del Itinerario
      */
     public ItinerarioDTO(Long id, String name, String descripcion,
-            String fechaI, String fechaF) {
+            Date fechaI, Date fechaF) {
 		super();
 		this.id = id;
 		this.name = name;
                 this.descripcion = descripcion;
                 this.fechaI = fechaI;
-                this.fechaF = fechaF;                
+                this.fechaF = fechaF;
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class ItinerarioDTO {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     /**
      * @return la descripcion del itinerario
      */
@@ -87,35 +88,35 @@ public class ItinerarioDTO {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     /**
      * @return Fecha de Inicio
      */
-    public String getFechaI() {
+    public Date getFechaI() {
         return fechaI;
     }
 
     /**
      * @param fechaI fecha de inicion a asignar
      */
-    public void setFechaI(String fechaI) {
+    public void setFechaI(Date fechaI) {
         this.fechaI = fechaI;
     }
-    
+
     /**
      * @return la fecha final
      */
-    public String getFechaF() {
+    public Date getFechaF() {
         return fechaF;
     }
 
     /**
      * @param fechaF fecha final del itinerario a asignar
      */
-    public void setFechaF(String fechaF) {
+    public void setFechaF(Date fechaF) {
         this.fechaF = fechaF;
     }
-    
+
     /**
      * @return el viaje al que corresponde
      */
@@ -129,7 +130,7 @@ public class ItinerarioDTO {
     public void setViaje(ViajesDTO viaje) {
         this.viaje = viaje;
     }
-    
+
     /**
      * @return las paradas
      */
@@ -143,13 +144,17 @@ public class ItinerarioDTO {
     public void addParadas(ParadaDTO parada) {
         paradas.add(parada);
     }
-    
+
+    public void setParadas(List<ParadaDTO> paradas){
+        this.paradas=paradas;
+    }
+
     /**
      * Convierte el objeto a una cadena
      * @return Cadena de caracteres con informacion de un Itinerario
      */
     @Override
     public String toString() {
-    	return "{ id : " + getId() + ", name : \"" + getName() + ", descripcion: \""+ getDescripcion()+", fecha Inicio: \""+getFechaI()+ ", fecha Final: \""+getFechaF()+ "\" }" ;  
+    	return "{ id : " + getId() + ", name : \"" + getName() + ", descripcion: \""+ getDescripcion()+", fecha Inicio: \""+getFechaI()+ ", fecha Final: \""+getFechaF()+ "\" }" ;
     }
 }

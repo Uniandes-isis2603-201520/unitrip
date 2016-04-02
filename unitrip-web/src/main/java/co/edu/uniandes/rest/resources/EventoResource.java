@@ -10,9 +10,12 @@ package co.edu.uniandes.rest.resources;
  * @author l.castro12
  */
 
+import co.edu.uniandes.csw.unitrip.api.IEventoLogic;
+import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.rest.dtos.EventoDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
-import co.edu.uniandes.rest.mocks.EventoLogicMock;
+import co.edu.uniandes.rest.converters.EventoConverter;
+import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -24,6 +27,8 @@ import javax.ws.rs.PUT;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 /**
  * Clase que implementa el recurso REST correspondiente a "evento".
@@ -35,12 +40,12 @@ import javax.ws.rs.Produces;
  *
  * @author Asistente
  */
-@Path("evento")
+@Path("eventos")
 @Produces("application/json")
 public class EventoResource {
 
 	@Inject
-	EventoLogicMock eventoLogic;
+	private IEventoLogic eventoLogic;
 
 	/**
 	 * Obtiene el listado de eventos.
@@ -49,7 +54,7 @@ public class EventoResource {
 	 */
     @GET
     public List<EventoDTO> getEventos() throws LogicException {
-        return eventoLogic.getEventos();
+        return EventoConverter.listEntity2DTO(eventoLogic.getEventos());
     }
 
     /**
@@ -61,7 +66,13 @@ public class EventoResource {
     @GET
     @Path("{id: \\d+}")
     public EventoDTO getEvento(@PathParam("id") Long id) throws LogicException {
-        return eventoLogic.getEvento(id);
+        try
+        {
+            return EventoConverter.fullEntity2DTO(eventoLogic.getEvento(id));
+        }
+        catch(BusinesLogicException ex){
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        }
     }
 
     /**
@@ -72,7 +83,8 @@ public class EventoResource {
      */
     @POST
     public EventoDTO createEvent(EventoDTO event) throws LogicException {
-        return eventoLogic.createEvento(event);
+        EventoEntity entity = EventoConverter.fullDTO2Entity(event);
+        return EventoConverter.fullEntity2DTO(eventoLogic.createEvento(entity));
     }
 
     /**
@@ -85,7 +97,16 @@ public class EventoResource {
     @PUT
     @Path("{id: \\d+}")
     public EventoDTO updateEvent(@PathParam("id") Long id, EventoDTO event) throws LogicException {
-        return eventoLogic.updateEvento(id, event);
+         EventoEntity entity = EventoConverter.fullDTO2Entity(event);
+        entity.setId(id);
+        try
+        {
+            EventoEntity oldEntity = eventoLogic.getEvento(id);
+
+        } catch (BusinesLogicException ex) {
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        }
+        return EventoConverter.fullEntity2DTO(eventoLogic.updateEvento(entity));
     }
 
     /**

@@ -41,7 +41,7 @@ public abstract class ViajesConverter {
             dto.setName(entity.getName());
             dto.setDescripcion(entity.getDescripcion());
             dto.setImg(entity.getImage());
-            
+
 
             return dto;
         } else {
@@ -90,7 +90,7 @@ public abstract class ViajesConverter {
             return null;
         }
     }
-    
+
 
     /**
      * Convierte una instancia de ViajeDTO a ViajeEntity Se invoca cuando se
@@ -114,7 +114,7 @@ public abstract class ViajesConverter {
             return null;
         }
     }
-  
+
 
     /**
      * Convierte instancias de ViajeEntity a ViajeDTO incluyendo sus relaciones
@@ -128,6 +128,7 @@ public abstract class ViajesConverter {
         if (entity != null) {
             ViajesDTO dto = basicEntity2DTO(entity);
             dto.setItinerarios(ItinerarioConverter.listEntity2DTO(entity.getItinerarios()));
+            dto.setExperiencias(ExperienciaConverter.listEntity2DTO(entity.getExperiencias()));
             return dto;
         } else {
             return null;
@@ -146,7 +147,8 @@ public abstract class ViajesConverter {
         if (dto != null) {
             ViajeEntity entity = basicDTO2Entity(dto);
             entity.setItinerarios(ItinerarioConverter.listDTO2Entity(dto.getItinerarios()));
-           
+            entity.setExperiencias(ExperienciaConverter.listDTO2Entity(dto.getExperiencias()));
+
             return entity;
         } else {
             return null;

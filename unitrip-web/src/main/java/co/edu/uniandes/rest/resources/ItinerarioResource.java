@@ -7,11 +7,14 @@
 package co.edu.uniandes.rest.resources;
 
 
+import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
+import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
+import co.edu.uniandes.rest.converters.ItinerarioConverter;
 import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.dtos.ParadaDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
-import co.edu.uniandes.rest.mocks.ItinerarioLogicMock;
+
 
 import java.util.List;
 
@@ -23,6 +26,8 @@ import javax.ws.rs.PUT;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 /**
  * Clase que implementa el recurso REST correspondiente a "itinerarios".
@@ -38,8 +43,8 @@ import javax.ws.rs.Produces;
 @Produces("application/json")
 public class ItinerarioResource {
 
-	
-	private ItinerarioLogicMock itinerarioLogic;
+
+	private IItinerarioLogic itinerarioLogic;
 
 	/**
 	 * Obtiene el listado de itinerarioes.
@@ -48,8 +53,8 @@ public class ItinerarioResource {
 	 */
     @GET
     public List<ItinerarioDTO> getItinerarios() throws LogicException {
-        //return ItinerarioConverter.listEntity2DTO(itinerarioLogic.getItinerarios());
-        return itinerarioLogic.getItinerarios();
+        return ItinerarioConverter.listEntity2DTO(itinerarioLogic.getItinerarios());
+
     }
 
     /**
@@ -61,21 +66,26 @@ public class ItinerarioResource {
     @GET
     @Path("{id: \\d+}")
     public ItinerarioDTO getItinerario(@PathParam("id") Long id) throws LogicException {
-        //return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.getItinerario(id));
-        return itinerarioLogic.getItinerario(id);
+        try{
+        return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.getItinerario(id));
+        }
+        catch(BusinesLogicException ex){
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        }
+
     }
 
     /**
      * Agrega un itinerario
      * @param dto itinerario a agregar
      * @return datos de el itinerario a agregar
-     * @throws LogicException cuando ya existe un itinerario con el id suministrado 
+     * @throws LogicException cuando ya existe un itinerario con el id suministrado
      */
     @POST
     public ItinerarioDTO createItinerario(ItinerarioDTO dto) throws LogicException {
-        //ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(dto);
-        //return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.createItinerario(entity));
-        return itinerarioLogic.createItinerario(dto);
+        ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(dto);
+        return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.createItinerario(entity));
+
     }
 
     /**
@@ -83,28 +93,33 @@ public class ItinerarioResource {
      * @param id identificador de el itinerario a modificar
      * @param itinerario itinerario a modificar
      * @return datos de el itinerario modificada
-     * @throws ItinerarioLogicException cuando no existe un itinerario con el id suministrado
+     * @throws LogicException cuando no existe un itinerario con el id suministrado
      */
     @PUT
     @Path("{id: \\d+}")
     public ItinerarioDTO updateItinerario(@PathParam("id") Long id, ItinerarioDTO itinerario) throws LogicException {
-        //ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(itinerario);
-        //entity.setId(id);
-        //return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.updateItinerario(entity));
-        return itinerarioLogic.updateItinerario(id,itinerario);
+        ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(itinerario);
+        entity.setId(id);
+        try{
+            ItinerarioEntity oldEntity = itinerarioLogic.getItinerario(id);
+        }catch(BusinesLogicException ex){
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        }
+        return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.updateItinerario(entity));
+
     }
 
     /**
      * Elimina los datos de un itinerario
      * @param id identificador de el itinerario a eliminar
-     * @throws ItinerarioLogicException cuando no existe un itinerario con el id suministrado
+     * @throws LogicException cuando no existe un itinerario con el id suministrado
      */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteItinrario(@PathParam("id") Long id) throws LogicException {
     	itinerarioLogic.deleteItinerario(id);
     }
-    
+
     /**
      * Obtiene una colección de instancias de paradaDTO asociadas a una
      * instancia de Itinerario
@@ -120,6 +135,6 @@ public class ItinerarioResource {
     public List<ParadaDTO> listParadas(@PathParam("itinerarioId") Long itinerarioId) throws BusinesLogicException {
         return null;
     }
-    
+
 
 }
