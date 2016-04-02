@@ -41,7 +41,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItinerarioEntity> itinerarios = new ArrayList<>();
 
-    @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExperienciaEntity> experiencias = new ArrayList<>();
 
     /**
