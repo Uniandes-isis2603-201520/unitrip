@@ -5,58 +5,23 @@ import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
+import co.edu.uniandes.csw.unitrip.persistence.ItinerarioPersistence;
+import co.edu.uniandes.csw.unitrip.persistence.ParadaPersistence;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 @Stateless
 public class ItinerarioLogic implements IItinerarioLogic {
 
-    public List<ItinerarioEntity> getItinerarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    public ItinerarioEntity getItinerario(Long id) throws BusinesLogicException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ItinerarioEntity createItinerario(ItinerarioEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ItinerarioEntity updateItinerario(ItinerarioEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void deleteItinerario(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public List<ParadaEntity> getParadas(Long itinerarioId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ParadaEntity getParada(Long itinerarioId, Long paradaId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ParadaEntity addParada(Long paradaId, Long itinerarioId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void removeParada(Long paradaId, Long itinerarioId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    /**
     @Inject
     private ItinerarioPersistence persistence;
 
     @Inject
-    private ParadaPersistence authorPersistence;
+    private ParadaPersistence paradaPersistence;
 
     @Override
     public List<ItinerarioEntity> getItinerarios() {
@@ -64,7 +29,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
     }
 
     @Override
-    public ItinerarioEntity getItinerario(Long id) throws BusinessLogicException {
+    public ItinerarioEntity getItinerario(Long id) throws BusinesLogicException {
         ItinerarioEntity itinerario = persistence.find(id);
         if (itinerario == null) {
             throw new BusinesLogicException("There's no itinerario with requested id");
@@ -95,11 +60,11 @@ public class ItinerarioLogic implements IItinerarioLogic {
     }
 
     @Override
-    public ParadaEntity getParada(Long itinerarioId, Long authorId) {
+    public ParadaEntity getParada(Long itinerarioId, Long paradaId) {
         List<ParadaEntity> paradas = persistence.find(itinerarioId).getParadas();
-        ParadaEntity authorEntity = new ParadaEntity();
-        authorEntity.setId(authorId);
-        int index = paradas.indexOf(authorEntity);
+        ParadaEntity paradaEntity = new ParadaEntity();
+        paradaEntity.setId(paradaId);
+        int index = paradas.indexOf(paradaEntity);
         if (index >= 0) {
             return paradas.get(index);
         }
@@ -107,27 +72,26 @@ public class ItinerarioLogic implements IItinerarioLogic {
     }
 
     @Override
-    public ParadaEntity addParada(Long authorId, Long itinerarioId) {
+    public ParadaEntity addParada(Long paradaId, Long itinerarioId) {
         ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
-        ParadaEntity authorEntity = authorPersistence.find(authorId);
-        itinerarioEntity.getParadas().add(authorEntity);
-        return authorEntity;
+        ParadaEntity paradaEntity = paradaPersistence.find(paradaId);
+        itinerarioEntity.getParadas().add(paradaEntity);
+        return paradaEntity;
     }
 
     @Override
     public void removeParada(Long Id, Long itinerarioId) {
         ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
-        ParadaEntity authorEntity = new ParadaEntity();
-        ItinerarioEntity.setId(itinerarioId);
-        itinerarioEntity.getParadas().remove(authorEntity);
+        ParadaEntity paradaEntity = new ParadaEntity();
+        itinerarioEntity.setId(itinerarioId);
+        itinerarioEntity.getParadas().remove(paradaEntity);
     }
 
     @Override
     public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId) {
         ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
-        List<ParadaEntity> authorList = authorPersistence.findAll();
+        List<ParadaEntity> paradaList = paradaPersistence.findAll();
         itinerarioEntity.setParadas(paradas);
         return itinerarioEntity.getParadas();
     }
-    */
 }
