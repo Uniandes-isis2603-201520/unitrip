@@ -130,22 +130,22 @@ public class ItinerarioLogicTest {
             data.add(entity);
         }
     }
-
-     @Test
-    public void createItinerarioTest() {
-        try {
-            ItinerarioEntity entity = factory.manufacturePojo(ItinerarioEntity.class);
-            entity.setDescripcion(getRandomDescripcion ());
-            ItinerarioEntity created = ItinerarioLogic.createItinerario(entity);
-
-            ItinerarioEntity result = em.find(ItinerarioEntity.class, created.getId());
-
-
-
-        } catch (BusinesLogicException ex) {
-            Assert.fail(ex.getLocalizedMessage());
-        }
-    }
+//
+//     @Test
+//    public void createItinerarioTest() {
+//        try {
+//            ItinerarioEntity entity = factory.manufacturePojo(ItinerarioEntity.class);
+//            entity.setDescripcion(getRandomDescripcion ());
+//            ItinerarioEntity created = ItinerarioLogic.createItinerario(entity);
+//
+//            ItinerarioEntity result = em.find(ItinerarioEntity.class, created.getId());
+//
+//
+//
+//        } catch (BusinesLogicException ex) {
+//            Assert.fail(ex.getLocalizedMessage());
+//        }
+//    }
 
 
 
