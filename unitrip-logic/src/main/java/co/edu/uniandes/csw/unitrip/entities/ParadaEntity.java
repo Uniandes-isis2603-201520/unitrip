@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -32,11 +33,10 @@ public class ParadaEntity extends BaseEntity implements Serializable{
     private Date fechaF;
 
 
-    //@ManyToMany
-    //private List<AuthorEntity> authors = new ArrayList<>();
+    @ManyToOne
+    private ItinerarioEntity itinerario;
 
-    //@ManyToOne
-    //private EditorialEntity editorial;
+
      @OneToMany(mappedBy = "parada", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EventoEntity> eventos = new ArrayList<>();
 
@@ -96,6 +96,14 @@ public class ParadaEntity extends BaseEntity implements Serializable{
 
     public void setFechaF(Date fechaF) {
         this.fechaF = fechaF;
+    }
+
+    public ItinerarioEntity getItinerario() {
+        return itinerario;
+    }
+
+    public void setItinerario(ItinerarioEntity itinerario) {
+        this.itinerario = itinerario;
     }
 }
 
