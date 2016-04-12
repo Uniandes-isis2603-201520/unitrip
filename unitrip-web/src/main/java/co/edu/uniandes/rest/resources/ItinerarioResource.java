@@ -9,8 +9,10 @@ package co.edu.uniandes.rest.resources;
 
 import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
+import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.rest.converters.ItinerarioConverter;
+import co.edu.uniandes.rest.converters.ParadaConverter;
 import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.dtos.ParadaDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
@@ -46,6 +48,7 @@ public class ItinerarioResource {
 
         @Inject
 	private IItinerarioLogic itinerarioLogic;
+
 
 	/**
 	 * Obtiene el listado de itinerarioes.
@@ -117,7 +120,7 @@ public class ItinerarioResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteItinrario(@PathParam("id") Long id) throws LogicException {
+    public void deleteItinerario(@PathParam("id") Long id) throws LogicException {
     	itinerarioLogic.deleteItinerario(id);
     }
 
@@ -134,7 +137,10 @@ public class ItinerarioResource {
     @GET
     @Path("{itinerarioId: \\d+}/paradas")
     public List<ParadaDTO> listParadas(@PathParam("itinerarioId") Long itinerarioId) throws BusinesLogicException {
-        return null;
+        // falta este metodo
+        List<ParadaEntity> paradas = itinerarioLogic.getParadas(itinerarioId);
+        return ParadaConverter.listEntity2DTO(paradas);
+
     }
 
 
