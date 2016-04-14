@@ -28,7 +28,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author dm.delgado10
  */
-@RunWith(Arquillian.class)
+//@RunWith(Arquillian.class)
 public class ItinerarioPersistanceTest {
 
     /**
@@ -84,7 +84,7 @@ public class ItinerarioPersistanceTest {
         }
     }
 
-    
+
     @Test
     public void createItinerarioTest() {
         ItinerarioEntity newEntity = factory.manufacturePojo(ItinerarioEntity.class);
