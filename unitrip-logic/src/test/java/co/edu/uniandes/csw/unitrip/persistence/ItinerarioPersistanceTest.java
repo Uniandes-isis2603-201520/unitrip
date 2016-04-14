@@ -31,7 +31,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ItinerarioPersistanceTest {
 
-
+    /**
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -84,7 +84,7 @@ public class ItinerarioPersistanceTest {
         }
     }
 
-    /**
+    
     @Test
     public void createItinerarioTest() {
         ItinerarioEntity newEntity = factory.manufacturePojo(ItinerarioEntity.class);
