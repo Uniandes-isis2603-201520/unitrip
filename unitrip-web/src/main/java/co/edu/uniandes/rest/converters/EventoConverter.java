@@ -21,8 +21,8 @@ public abstract class EventoConverter {
      * entidad tiene una referencia a EventoEntity. Entrega únicamente los
      * atributos propios de la entidad.
      *
-     * @param entity instancia de ViajesEntity a convertir
-     * @return instancia de ViajesDTO con los datos recibidos por parámetro
+     * @param entity instancia de EventoEntity a convertir
+     * @return instancia de EventoDTO con los datos recibidos por parámetro
      * @generated
      */
     public static EventoDTO refEntity2DTO(EventoEntity entity) {
@@ -42,12 +42,12 @@ public abstract class EventoConverter {
     }
 
     /**
-     * Realiza la conversión de ViajeDTO a ViajeEntity Se invoca cuando otro DTO
-     * tiene una referencia a ViajeDTO Convierte únicamente el ID ya que es el
+     * Realiza la conversión de EventoDTO a EventoEntity Se invoca cuando otro DTO
+     * tiene una referencia a EventoDTO Convierte únicamente el ID ya que es el
      * único atributo necesario para guardar la relación en la base de datos
      *
-     * @param dto instancia de ViajeDTO a convertir
-     * @return instancia de ViajeEntity con los datos recibidos por parámetro
+     * @param dto instancia de EventoDTO a convertir
+     * @return instancia de EventoEntity con los datos recibidos por parámetro
      * @generated
      */
     public static EventoEntity refDTO2Entity(EventoDTO dto) {
@@ -62,11 +62,11 @@ public abstract class EventoConverter {
     }
 
     /**
-     * Convierte una instancia de ViajeEntity a ViajeDTO Se invoca cuando se desea
+     * Convierte una instancia de EventoEntity a EventoDTO Se invoca cuando se desea
      * consultar la entidad y sus relaciones muchos a uno o uno a uno
      *
-     * @param entity instancia de ViajeEntity a convertir
-     * @return Instancia de BookDTO con los datos recibidos por parámetro
+     * @param entity instancia de EventoEntity a convertir
+     * @return Instancia de EventoDTO con los datos recibidos por parámetro
      * @generated
      */
     private static EventoDTO basicEntity2DTO(EventoEntity entity) {
