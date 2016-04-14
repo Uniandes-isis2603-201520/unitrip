@@ -31,8 +31,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author ANDRES
  */
-public class ParadaPersistenceTest {
 
+public class ParadaPersistenceTest {
+/*
     @Inject
     private ParadaPersistence paradaPersistence;
     @PersistenceContext
@@ -91,7 +92,7 @@ public class ParadaPersistenceTest {
 
     /**
      * Test of find method, of class ParadaPersistence.
-     */
+     *
     @Test
     public void testFind() throws Exception {
         System.out.println("find");
@@ -108,7 +109,7 @@ public class ParadaPersistenceTest {
 
     /**
      * Test of findAll method, of class ParadaPersistence.
-     */
+     *
     @Test
     public void testFindAll() throws Exception {
         System.out.println("findAll");
@@ -124,7 +125,7 @@ public class ParadaPersistenceTest {
 
     /**
      * Test of create method, of class ParadaPersistence.
-     */
+     *
     @Test
     public void testCreate() throws Exception {
         System.out.println("create");
@@ -141,7 +142,7 @@ public class ParadaPersistenceTest {
 
     /**
      * Test of update method, of class ParadaPersistence.
-     */
+     *
     @Test
     public void testUpdate() throws Exception {
         System.out.println("update");
@@ -158,7 +159,7 @@ public class ParadaPersistenceTest {
 
     /**
      * Test of delete method, of class ParadaPersistence.
-     */
+     *
     @Test
     public void testDelete() throws Exception {
         System.out.println("delete");
@@ -173,5 +174,5 @@ public class ParadaPersistenceTest {
     @org.junit.Test
     public void testSomeMethod() {
     }
-
+    */
 }

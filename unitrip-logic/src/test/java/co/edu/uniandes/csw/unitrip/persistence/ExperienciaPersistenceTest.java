@@ -24,10 +24,11 @@ import org.junit.runner.RunWith;
 /**
  *
  * @author n.vasquez10
- */
+ *
 @RunWith(Arquillian.class)
+*/
 public class ExperienciaPersistenceTest {
-
+/*
     public ExperienciaPersistenceTest() {
     }
 
@@ -66,7 +67,7 @@ public class ExperienciaPersistenceTest {
     }
     /**
      * Test of find method, of class ExperienciaPersistence.
-     */
+     *
     @Test
     public void testFind() throws Exception {
         System.out.println("find");
@@ -83,7 +84,7 @@ public class ExperienciaPersistenceTest {
 
     /**
      * Test of findAll method, of class ExperienciaPersistence.
-     */
+     *
     @Test
     public void testFindAll() throws Exception {
         System.out.println("findAll");
@@ -99,7 +100,7 @@ public class ExperienciaPersistenceTest {
 
     /**
      * Test of create method, of class ExperienciaPersistence.
-     */
+     *
     @Test
     public void testCreate() throws Exception {
         System.out.println("create");
@@ -116,7 +117,7 @@ public class ExperienciaPersistenceTest {
 
     /**
      * Test of update method, of class ExperienciaPersistence.
-     */
+     *
     @Test
     public void testUpdate() throws Exception {
         System.out.println("update");
@@ -133,7 +134,7 @@ public class ExperienciaPersistenceTest {
 
     /**
      * Test of delete method, of class ExperienciaPersistence.
-     */
+     *
     @Test
     public void testDelete() throws Exception {
         System.out.println("delete");
@@ -145,5 +146,6 @@ public class ExperienciaPersistenceTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
 
 }

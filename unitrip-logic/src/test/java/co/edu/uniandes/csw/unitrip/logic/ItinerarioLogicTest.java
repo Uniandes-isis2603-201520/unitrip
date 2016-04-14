@@ -45,11 +45,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 /**
  *
  * @author dm.delgado10
- */
+ *
 
 @RunWith(Arquillian.class)
+*/
 public class ItinerarioLogicTest {
-
+/*
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -153,5 +154,5 @@ public class ItinerarioLogicTest {
     public String getRandomDescripcion (){
         return " random descripcion";
     }
-
+*/
 }

@@ -34,14 +34,6 @@ public class ExperienciaEntity extends BaseEntity implements Serializable{
     private String image;
 
 
-
-    //@ManyToMany
-    //private List<AuthorEntity> authors = new ArrayList<>();
-
-    //@ManyToOne
-    //private EditorialEntity editorial;
-
-
     /**
      * @return the description
      */

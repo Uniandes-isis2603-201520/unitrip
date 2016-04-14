@@ -32,11 +32,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
 
 
 
-    //@ManyToMany
-    //private List<AuthorEntity> authors = new ArrayList<>();
 
-    //@ManyToOne
-    //private EditorialEntity editorial;
 
     @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItinerarioEntity> itinerarios = new ArrayList<>();
