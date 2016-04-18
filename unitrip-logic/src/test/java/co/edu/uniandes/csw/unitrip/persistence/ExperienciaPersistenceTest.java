@@ -6,8 +6,14 @@
 package co.edu.uniandes.csw.unitrip.persistence;
 
 import co.edu.uniandes.csw.unitrip.entities.ExperienciaEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+import junit.framework.Assert;
 import static org.glassfish.pfl.basic.tools.argparser.ElementParser.factory;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -20,6 +26,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
@@ -32,6 +40,17 @@ public class ExperienciaPersistenceTest {
     public ExperienciaPersistenceTest() {
     }
 
+    @Inject
+    private ExperienciaPersistence experienciaPersistence;
+
+    @PersistenceContext
+    private EntityManager em;
+
+    private final PodamFactory factory = new PodamFactoryImpl();
+    @Inject
+    UserTransaction utx;
+    private List<ExperienciaEntity> data = new ArrayList<ExperienciaEntity>();
+
     @Deployment
     public static JavaArchive createDeployment()
     {
@@ -42,6 +61,30 @@ public class ExperienciaPersistenceTest {
                 .addAsManifestResource("META=INF/beans.xml", "beans.xml");
     }
 
+    @Before
+    public void configTest()
+    {
+        try
+        {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            try
+            {
+                utx.rollback();
+
+            }
+            catch(Exception e1)
+                    {
+                        e.printStackTrace();
+                    }
+        }
+    }
     @BeforeClass
     public static void setUpClass() {
     }
@@ -50,20 +93,33 @@ public class ExperienciaPersistenceTest {
     public static void tearDownClass() {
     }
 
-    @Before
-    public void setUp() {
-    }
-
     @After
     public void tearDown() {
+    }
+
+
+    public void clearData()
+    {
+        em.createQuery("delete from experienciaentity").executeUpdate();
+    }
+
+
+    private void insertData()
+    {
+        for(int i =0; i<3; i++)
+        {
+            ExperienciaEntity entid = factory.manufacturePojo(ExperienciaEntity.class);
+            em.persist(entid);
+            data.add(entid);
+        }
+
     }
 
 
     @Test
     public void createExperienceText()
     {
-      //  ExperienciaEntity entidadExp = factory.manufacturePojo(ExperienciaEntity.class);
-
+        ExperienciaEntity entidadExp = factory.manufacturePojo(ExperienciaEntity.class);
     }
     /**
      * Test of find method, of class ExperienciaPersistence.
@@ -146,6 +202,25 @@ public class ExperienciaPersistenceTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    */
 
+    @Test
+    public void getExperiencesTest()
+    {
+    List<ExperienciaEntity> list = experienciaPersistence.findAll();
+    Assert.assertEquals(data.size(), list.size());
+    for(ExperienciaEntity ent :list  )
+    {
+        boolean encontro=false;
+        for(ExperienciaEntity entid : data)
+        {
+            if(ent.getId().equals(entid.getId()))
+            {
+                encontro=true;
+            }
+            Assert.assertTrue(encontro);
+        }
+    }
+    }
+
+*/
 }
