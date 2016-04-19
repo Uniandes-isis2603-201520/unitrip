@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.unitrip.entities;
 
 //import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
+import co.edu.uniandes.csw.crud.api.podam.strategy.DateStrategy;
 import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,22 +15,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 @Entity
 public class ItinerarioEntity extends BaseEntity implements Serializable {
 
 
     private String descripcion;
+    @PodamStrategyValue(DateStrategy.class)
     @Temporal(TemporalType.DATE)
     private Date fechaI;
+    @PodamStrategyValue(DateStrategy.class)
     @Temporal(TemporalType.DATE)
     private Date fechaF;
 
 
     @ManyToOne
+    @PodamExclude
     private ViajeEntity viaje;
 
-    @OneToMany //(mappedBy = "parada", cascade = CascadeType.ALL, orphanRemoval = true)
+    @PodamExclude
+    @OneToMany (mappedBy = "itinerario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ParadaEntity> paradas = new ArrayList<>();
 
 

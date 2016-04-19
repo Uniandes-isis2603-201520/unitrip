@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -34,6 +35,7 @@ public class ParadaEntity extends BaseEntity implements Serializable{
 
 
     @ManyToOne
+    @PodamExclude
     private ItinerarioEntity itinerario;
 
 

@@ -28,10 +28,10 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author dm.delgado10
  */
-//@RunWith(Arquillian.class)
+@RunWith(Arquillian.class)
 public class ItinerarioPersistanceTest {
 
-    /**
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -71,7 +71,7 @@ public class ItinerarioPersistanceTest {
     }
 
     private void clearData() {
-        em.createQuery("delete from AuthorEntity").executeUpdate();
+        em.createQuery("delete from ItinerarioEntity").executeUpdate();
     }
 
     private List<ItinerarioEntity> data = new ArrayList<>();
@@ -95,8 +95,9 @@ public class ItinerarioPersistanceTest {
         ItinerarioEntity entity = em.find(ItinerarioEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
+       //falta reevisar otras condiciones del itinerario
     }
-
+    /**
     @Test
     public void getItinerariossTest() {
         List<ItinerarioEntity> list = itinerarioPersistence.findAll();
