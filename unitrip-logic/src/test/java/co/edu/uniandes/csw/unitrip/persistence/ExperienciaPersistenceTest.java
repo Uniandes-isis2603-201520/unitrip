@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import junit.framework.Assert;
+import org.junit.Assert;
 import static org.glassfish.pfl.basic.tools.argparser.ElementParser.factory;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -32,11 +32,11 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 /**
  *
  * @author n.vasquez10
- *
+ */
 @RunWith(Arquillian.class)
-*/
+
 public class ExperienciaPersistenceTest {
-/*
+
     public ExperienciaPersistenceTest() {
     }
 
@@ -49,7 +49,7 @@ public class ExperienciaPersistenceTest {
     private final PodamFactory factory = new PodamFactoryImpl();
     @Inject
     UserTransaction utx;
-    private List<ExperienciaEntity> data = new ArrayList<ExperienciaEntity>();
+    private List<ExperienciaEntity> data = new ArrayList<>();
 
     @Deployment
     public static JavaArchive createDeployment()
@@ -57,8 +57,8 @@ public class ExperienciaPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ExperienciaEntity.class.getPackage())
                 .addPackage(ExperienciaPersistence.class.getPackage())
-                .addAsManifestResource("META=INF/persistence.xml", "persistence.xml")
-                .addAsManifestResource("META=INF/beans.xml", "beans.xml");
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
     @Before
@@ -85,24 +85,11 @@ public class ExperienciaPersistenceTest {
                     }
         }
     }
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
 
     public void clearData()
     {
         em.createQuery("delete from experienciaentity").executeUpdate();
     }
-
 
     private void insertData()
     {
@@ -115,95 +102,19 @@ public class ExperienciaPersistenceTest {
 
     }
 
-
     @Test
     public void createExperienceText()
     {
         ExperienciaEntity entidadExp = factory.manufacturePojo(ExperienciaEntity.class);
-    }
-    /**
-     * Test of find method, of class ExperienciaPersistence.
-     *
-    @Test
-    public void testFind() throws Exception {
-        System.out.println("find");
-        Long id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ExperienciaPersistence instance = (ExperienciaPersistence)container.getContext().lookup("java:global/classes/ExperienciaPersistence");
-        ExperienciaEntity expResult = null;
-        ExperienciaEntity result = instance.find(id);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        ExperienciaEntity resultado = experienciaPersistence.create(entidadExp);
 
-    /**
-     * Test of findAll method, of class ExperienciaPersistence.
-     *
-    @Test
-    public void testFindAll() throws Exception {
-        System.out.println("findAll");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ExperienciaPersistence instance = (ExperienciaPersistence)container.getContext().lookup("java:global/classes/ExperienciaPersistence");
-        List<ExperienciaEntity> expResult = null;
-        List<ExperienciaEntity> result = instance.findAll();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        Assert.assertNotNull(resultado);
+        ExperienciaEntity entidad = em.find(ExperienciaEntity.class, resultado.getId());
+        Assert.assertEquals(entidadExp.getName(), entidad.getName());
+        Assert.assertEquals(entidadExp.getDescripcion(), entidad.getDescripcion());
+   }
 
-    /**
-     * Test of create method, of class ExperienciaPersistence.
-     *
-    @Test
-    public void testCreate() throws Exception {
-        System.out.println("create");
-        ExperienciaEntity entity = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ExperienciaPersistence instance = (ExperienciaPersistence)container.getContext().lookup("java:global/classes/ExperienciaPersistence");
-        ExperienciaEntity expResult = null;
-        ExperienciaEntity result = instance.create(entity);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of update method, of class ExperienciaPersistence.
-     *
-    @Test
-    public void testUpdate() throws Exception {
-        System.out.println("update");
-        ExperienciaEntity entity = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ExperienciaPersistence instance = (ExperienciaPersistence)container.getContext().lookup("java:global/classes/ExperienciaPersistence");
-        ExperienciaEntity expResult = null;
-        ExperienciaEntity result = instance.update(entity);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of delete method, of class ExperienciaPersistence.
-     *
-    @Test
-    public void testDelete() throws Exception {
-        System.out.println("delete");
-        Long id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ExperienciaPersistence instance = (ExperienciaPersistence)container.getContext().lookup("java:global/classes/ExperienciaPersistence");
-        instance.delete(id);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    @Test
+    //@Test
     public void getExperiencesTest()
     {
     List<ExperienciaEntity> list = experienciaPersistence.findAll();
@@ -222,5 +133,5 @@ public class ExperienciaPersistenceTest {
     }
     }
 
-*/
+
 }
