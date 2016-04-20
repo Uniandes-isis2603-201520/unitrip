@@ -27,7 +27,9 @@ public class ViajePersistence {
 
     public List<ViajeEntity> findAll() {
         Query q;
+        logger.info("obteniendo viajes");
         q = em.createQuery("select u from ViajeEntity u");
+        logger.info(q.getResultList().toString());
         return q.getResultList();
     }
 

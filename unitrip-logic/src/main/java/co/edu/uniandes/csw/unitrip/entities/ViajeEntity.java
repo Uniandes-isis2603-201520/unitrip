@@ -23,10 +23,6 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     private String description;
     private String image;
 
-
-
-
-
     @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItinerarioEntity> itinerarios = new ArrayList<>();
 

@@ -96,10 +96,9 @@ public class ViajePersistenceTest {
         ViajeEntity entity = em.find(ViajeEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-       //falta reevisar otras condiciones del itinerario
     }
 
-    //@Test
+    @Test
     public void getViajesTest() {
         List<ViajeEntity> list = viajePersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
@@ -112,6 +111,36 @@ public class ViajePersistenceTest {
             }
             Assert.assertTrue(found);
         }
+    }
+
+    @Test
+    public void getViajeTest() {
+        ViajeEntity entity = data.get(0);
+        ViajeEntity newEntity = viajePersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+
+    @Test
+    public void deleteViajeTest() {
+        ViajeEntity entity = data.get(0);
+        viajePersistence.delete(entity.getId());
+        ViajeEntity deleted = em.find(ViajeEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+
+     @Test
+    public void updateItinerarioTest() {
+        ViajeEntity entity = data.get(0);
+        ViajeEntity newEntity = factory.manufacturePojo(ViajeEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        viajePersistence.update(newEntity);
+
+        ViajeEntity resp = em.find(ViajeEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getName(), resp.getName());
     }
 
 /*
