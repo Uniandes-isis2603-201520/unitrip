@@ -27,10 +27,11 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author l.castro12
  *
-@RunWith(Arquillian.class)
+
 * */
+@RunWith(Arquillian.class)
 public class EventoPersistenceTest {
-    /*
+
    @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -139,5 +140,5 @@ public class EventoPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
-    */
+    
 }
