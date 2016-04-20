@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 @Entity
@@ -33,7 +34,8 @@ public class EventoEntity extends BaseEntity implements Serializable {
     private Long latitud;
     private Long longitud;
 
-     //@ManyToOne
+     @ManyToOne
+     @PodamExclude
     private ParadaEntity parada;
 
     /**
