@@ -16,7 +16,7 @@ import javax.inject.Inject;
 @Stateless
 public class ItinerarioLogic implements IItinerarioLogic {
 
-
+    private static final Logger logger = Logger.getLogger(ItinerarioLogic.class.getName());
     @Inject
     private ItinerarioPersistence persistence;
 
@@ -45,6 +45,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
 
     @Override
     public ItinerarioEntity updateItinerario(ItinerarioEntity entity) {
+        logger.log(Level.INFO, "Inicia proceso de actualizar itinerario con id={0}", entity.getId());
         ItinerarioEntity newEntity = entity;
         return persistence.update(newEntity);
     }
@@ -90,7 +91,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
     @Override
     public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId) {
         ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
-        List<ParadaEntity> paradaList = paradaPersistence.findAll();
+        List<ParadaEntity> paradaList = paradaPersistence.findAll(); // esto como que no es necesario
         itinerarioEntity.setParadas(paradas);
         return itinerarioEntity.getParadas();
     }
