@@ -19,6 +19,8 @@ import co.edu.uniandes.rest.exceptions.LogicException;
 
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 
 import javax.ws.rs.DELETE;
@@ -45,6 +47,8 @@ import javax.ws.rs.core.Response;
 @Path("itinerarios")
 @Produces("application/json")
 public class ItinerarioResource {
+
+    private static final Logger logger = Logger.getLogger(ItinerarioResource.class.getName());
 
         @Inject
 	private IItinerarioLogic itinerarioLogic;
@@ -102,14 +106,17 @@ public class ItinerarioResource {
     @PUT
     @Path("{id: \\d+}")
     public ItinerarioDTO updateItinerario(@PathParam("id") Long id, ItinerarioDTO itinerario) throws LogicException {
+        logger.log(Level.INFO, "Se ejecuta método updateItinerario con id={0}", id);
         ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(itinerario);
         entity.setId(id);
         try{
             ItinerarioEntity oldEntity = itinerarioLogic.getItinerario(id);
+            //entity.setParadas(oldEntity.getParadas()); Esto no, porque que tal si le cambiamos las paradas? obviamente las perderia, creo
+            ItinerarioEntity savedItinerario = itinerarioLogic.updateItinerario(entity);
+            return ItinerarioConverter.fullEntity2DTO(savedItinerario);
         }catch(BusinesLogicException ex){
             throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
         }
-        return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.updateItinerario(entity));
 
     }
 
