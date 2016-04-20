@@ -135,4 +135,35 @@ public class ExperienciaPersistenceTest {
     }
 
 
+    @Test
+    public void getExperienciaTest() {
+        ExperienciaEntity entid = data.get(0);
+        ExperienciaEntity nuevaEn = experienciaPersistence.find(entid.getId());
+        Assert.assertNotNull(nuevaEn);
+        Assert.assertEquals(entid.getName(), nuevaEn.getName());
+    }
+
+
+    @Test
+    public void deleteExperienciaTest() {
+        ExperienciaEntity entity = data.get(0);
+        experienciaPersistence.delete(entity.getId());
+        ExperienciaEntity elim = em.find(ExperienciaEntity.class, entity.getId());
+        Assert.assertNull(elim);
+    }
+
+    @Test
+    public void updateExperienciaTest() {
+        ExperienciaEntity entity = data.get(0);
+        ExperienciaEntity nueva = factory.manufacturePojo(ExperienciaEntity.class);
+
+        nueva.setId(entity.getId());
+
+        experienciaPersistence.update(nueva);
+
+        ExperienciaEntity resp = em.find(ExperienciaEntity.class, entity.getId());
+
+        Assert.assertEquals(nueva.getName(), resp.getName());
+    }
+
 }
