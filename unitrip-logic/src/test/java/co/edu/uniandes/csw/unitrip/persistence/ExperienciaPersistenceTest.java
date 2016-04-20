@@ -114,7 +114,7 @@ public class ExperienciaPersistenceTest {
         Assert.assertEquals(entidadExp.getDescripcion(), entidad.getDescripcion());
    }
 
-    //@Test
+    @Test
     public void getExperiencesTest()
     {
     List<ExperienciaEntity> list = experienciaPersistence.findAll();
@@ -128,8 +128,9 @@ public class ExperienciaPersistenceTest {
             {
                 encontro=true;
             }
-            Assert.assertTrue(encontro);
+
         }
+        Assert.assertTrue(encontro);
     }
     }
 
