@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.unitrip.persistence;
 
+import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -31,9 +33,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author ANDRES
  */
-
+@RunWith(Arquillian.class)
 public class ParadaPersistenceTest {
-/*
+
     @Inject
     private ParadaPersistence paradaPersistence;
     @PersistenceContext
@@ -51,8 +53,8 @@ public class ParadaPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ParadaEntity.class.getPackage())
                 .addPackage(ParadaPersistence.class.getPackage())
-                .addAsManifestResource("META=INF/persistence.xml", "persistence.xml")
-                .addAsManifestResource("META=INF/beans.xml", "beans.xml");
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
 
@@ -89,10 +91,27 @@ public class ParadaPersistenceTest {
         }
     }
 
+    @Test
+    public void createItinerarioTest() {
+        ParadaEntity newEntity = factory.manufacturePojo(ParadaEntity.class);
+        ParadaEntity result = paradaPersistence.create(newEntity);
+
+        Assert.assertNotNull(result);
+
+        ParadaEntity entity = em.find(ParadaEntity.class, result.getId());
+
+        Assert.assertEquals(newEntity.getName(), entity.getName());
+       //falta reevisar otras condiciones del itinerario
+    }
+
+
+
+
+
 
     /**
-     * Test of find method, of class ParadaPersistence.
-     *
+
+
     @Test
     public void testFind() throws Exception {
         System.out.println("find");
@@ -107,9 +126,8 @@ public class ParadaPersistenceTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of findAll method, of class ParadaPersistence.
-     *
+
+
     @Test
     public void testFindAll() throws Exception {
         System.out.println("findAll");
@@ -123,9 +141,7 @@ public class ParadaPersistenceTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of create method, of class ParadaPersistence.
-     *
+
     @Test
     public void testCreate() throws Exception {
         System.out.println("create");
@@ -140,9 +156,7 @@ public class ParadaPersistenceTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of update method, of class ParadaPersistence.
-     *
+
     @Test
     public void testUpdate() throws Exception {
         System.out.println("update");
@@ -157,9 +171,7 @@ public class ParadaPersistenceTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of delete method, of class ParadaPersistence.
-     *
+
     @Test
     public void testDelete() throws Exception {
         System.out.println("delete");
@@ -174,5 +186,6 @@ public class ParadaPersistenceTest {
     @org.junit.Test
     public void testSomeMethod() {
     }
-    */
+
+    **/
 }
