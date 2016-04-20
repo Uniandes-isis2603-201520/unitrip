@@ -7,17 +7,16 @@ package co.edu.uniandes.csw.unitrip.persistence;
 
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author ANDRES
- */
 @Stateless
 public class ViajePersistence {
+    private static final Logger logger = Logger.getLogger(ViajePersistence.class.getName());
 
     @PersistenceContext(unitName = "UnitripPU")
     protected EntityManager em;
@@ -33,7 +32,9 @@ public class ViajePersistence {
     }
 
     public ViajeEntity create(ViajeEntity entity) {
+        logger.info("Creando un viaje nuevo");
         em.persist(entity);
+        logger.info("Viaje creado");
         return entity;
     }
 

@@ -7,20 +7,14 @@ package co.edu.uniandes.csw.unitrip.entities;
 
 
 import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
-import java.io.Serializable;
 
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -33,6 +27,17 @@ public class ExperienciaEntity extends BaseEntity implements Serializable{
     private String description;
     private String image;
 
+    @ManyToOne
+    @PodamExclude
+    private ViajeEntity viaje;
+
+    public ViajeEntity getViaje() {
+        return viaje;
+    }
+
+    public void setViaje(ViajeEntity viaje) {
+        this.viaje = viaje;
+    }
 
     /**
      * @return the description

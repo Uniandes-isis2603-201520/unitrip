@@ -12,17 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/**
- *
- * @author ANDRES
- */
+
 @Entity
 public class ViajeEntity extends BaseEntity implements Serializable {
 
@@ -37,7 +30,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItinerarioEntity> itinerarios = new ArrayList<>();
 
-    //@OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExperienciaEntity> experiencias = new ArrayList<>();
 
     /**
@@ -76,7 +69,7 @@ public class ViajeEntity extends BaseEntity implements Serializable {
         this.itinerarios = iti;
     }
 
-    public List<ExperienciaEntity> getExperiencias() {
+   public List<ExperienciaEntity> getExperiencias() {
         return experiencias;
     }
 

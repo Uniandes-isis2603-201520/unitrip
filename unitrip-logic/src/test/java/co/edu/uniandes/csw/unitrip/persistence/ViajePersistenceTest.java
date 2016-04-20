@@ -5,26 +5,21 @@
  */
 package co.edu.uniandes.csw.unitrip.persistence;
 
-import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import static org.glassfish.pfl.basic.tools.argparser.ElementParser.factory;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -33,11 +28,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author je.molano1498
  *
-@RunWith(Arquillian.class)
+
 */
+@RunWith(Arquillian.class)
 public class ViajePersistenceTest {
-/*
-     @Deployment
+
+    @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ViajeEntity.class.getPackage())
@@ -75,6 +71,10 @@ public class ViajePersistenceTest {
         }
     }
 
+    private void clearData() {
+        em.createQuery("delete from ViajeEntity").executeUpdate();
+    }
+
     private List<ViajeEntity> data = new ArrayList<>();
 
     private void insertData() {
@@ -85,43 +85,36 @@ public class ViajePersistenceTest {
         }
     }
 
-    private void clearData() {
-        em.createQuery("delete from ViajeEntity").executeUpdate();
-    }
-
-
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
 
     @Test
-    public void createViajeTest()
-    {
+    public void createViajeTest() {
+        ViajeEntity newEntity = factory.manufacturePojo(ViajeEntity.class);
+        ViajeEntity result = viajePersistence.create(newEntity);
 
+        Assert.assertNotNull(result);
+
+        ViajeEntity entity = em.find(ViajeEntity.class, result.getId());
+
+        Assert.assertEquals(newEntity.getName(), entity.getName());
+       //falta reevisar otras condiciones del itinerario
     }
 
-    /**
-     * Test of create method, of class ViajePersistence.
-     *
-    @Test
-    public void testCreate() throws Exception {
-        System.out.println("create");
-        ViajeEntity entity = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ViajePersistence instance = (ViajePersistence)container.getContext().lookup("java:global/classes/ViajePersistence");
-        ViajeEntity expResult = null;
-        ViajeEntity result = instance.create(entity);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    //@Test
+    public void getViajesTest() {
+        List<ViajeEntity> list = viajePersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (ViajeEntity ent : list) {
+            boolean found = false;
+            for (ViajeEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
+
+/*
 
     /**
      * Test of update method, of class ViajePersistence.

@@ -88,7 +88,7 @@ public class ExperienciaPersistenceTest {
 
     public void clearData()
     {
-        em.createQuery("delete from experienciaentity").executeUpdate();
+        em.createQuery("delete from ExperienciaEntity").executeUpdate();
     }
 
     private void insertData()
