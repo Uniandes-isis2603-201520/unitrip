@@ -1,4 +1,5 @@
 package co.edu.uniandes.rest.converters;
+
 import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import co.edu.uniandes.rest.dtos.EventoDTO;
@@ -30,6 +31,7 @@ public abstract class EventoConverter {
             EventoDTO dto = new EventoDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
+            dto.setDescription(entity.getDescription());
             dto.setLatitud(entity.getLatitud());
             dto.setLongitud(entity.getLongitud());
             dto.setFechaInicio(entity.getFechaInicio());
@@ -42,9 +44,9 @@ public abstract class EventoConverter {
     }
 
     /**
-     * Realiza la conversión de EventoDTO a EventoEntity Se invoca cuando otro DTO
-     * tiene una referencia a EventoDTO Convierte únicamente el ID ya que es el
-     * único atributo necesario para guardar la relación en la base de datos
+     * Realiza la conversión de EventoDTO a EventoEntity Se invoca cuando otro
+     * DTO tiene una referencia a EventoDTO Convierte únicamente el ID ya que es
+     * el único atributo necesario para guardar la relación en la base de datos
      *
      * @param dto instancia de EventoDTO a convertir
      * @return instancia de EventoEntity con los datos recibidos por parámetro
@@ -62,8 +64,8 @@ public abstract class EventoConverter {
     }
 
     /**
-     * Convierte una instancia de EventoEntity a EventoDTO Se invoca cuando se desea
-     * consultar la entidad y sus relaciones muchos a uno o uno a uno
+     * Convierte una instancia de EventoEntity a EventoDTO Se invoca cuando se
+     * desea consultar la entidad y sus relaciones muchos a uno o uno a uno
      *
      * @param entity instancia de EventoEntity a convertir
      * @return Instancia de EventoDTO con los datos recibidos por parámetro
@@ -74,18 +76,17 @@ public abstract class EventoConverter {
             EventoDTO dto = new EventoDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
+            dto.setDescription(entity.getDescription());
             dto.setLatitud(entity.getLatitud());
             dto.setLongitud(entity.getLongitud());
             dto.setFechaInicio(entity.getFechaInicio());
             dto.setFechaFin(entity.getFechaFin());
-
 
             return dto;
         } else {
             return null;
         }
     }
-
 
     /**
      * Convierte una instancia de ViajeDTO a ViajeEntity Se invoca cuando se
@@ -101,6 +102,7 @@ public abstract class EventoConverter {
             EventoEntity entity = new EventoEntity();
             entity.setId(dto.getId());
             entity.setName(dto.getName());
+            entity.setDescription(dto.getDescription());
             entity.setLatitud(dto.getLatitud());
             entity.setLongitud(dto.getLongitud());
             entity.setFechaInicio(dto.getFechaInicio());
@@ -111,7 +113,6 @@ public abstract class EventoConverter {
             return null;
         }
     }
-
 
     /**
      * Convierte instancias de EventoEntity a EvenoDTO incluyendo sus relaciones
@@ -148,9 +149,9 @@ public abstract class EventoConverter {
     }
 
     /**
-     * Convierte una colección de instancias de ViajeEntity a ViajeDTO. Para cada
-     * instancia de ViajeEntity en la lista, invoca basicEntity2DTO y añade el
-     * nuevo ViajeDTO a una nueva lista
+     * Convierte una colección de instancias de ViajeEntity a ViajeDTO. Para
+     * cada instancia de ViajeEntity en la lista, invoca basicEntity2DTO y añade
+     * el nuevo ViajeDTO a una nueva lista
      *
      * @param entities Colección de entidades a convertir
      * @return Collección de instancias de ViajeDTO
@@ -183,17 +184,20 @@ public abstract class EventoConverter {
 //        }
 //        return entities;
 //    }
-
-   /**
-     * Convierte una instancia de EventoDTO a EventoEntity asignando un valor
-     * al atributo org.eclipse.uml2.uml.internal.impl.PropertyImpl@394af115 (name: book, visibility: <unset>) (isLeaf: false) (isStatic: false) (isOrdered: false, isUnique: true, isReadOnly: false) (aggregation: none, isDerived: false, isDerivedUnion: false, isID: false) de ReviewEntity. Se usa cuando se necesita convertir
-     * un EventoDTO asignando el libro asociado
+    /**
+     * Convierte una instancia de EventoDTO a EventoEntity asignando un valor al
+     * atributo org.eclipse.uml2.uml.internal.impl.PropertyImpl@394af115 (name:
+     * book, visibility: <unset>) (isLeaf: false) (isStatic: false) (isOrdered:
+     * false, isUnique: true, isReadOnly: false) (aggregation: none, isDerived:
+     * false, isDerivedUnion: false, isID: false) de ReviewEntity. Se usa cuando
+     * se necesita convertir un EventoDTO asignando el libro asociado
+     *
      * @param dto Instancia de EventoDTO
      * @param parent Instancia de ParadaEntity
      * @return Instancia de EventoEntity con ParadaEntity asociado
      * @generated
      */
-    public static EventoEntity childDTO2Entity(EventoDTO dto, ParadaEntity parent){
+    public static EventoEntity childDTO2Entity(EventoDTO dto, ParadaEntity parent) {
         EventoEntity entity = basicDTO2Entity(dto);
         entity.setParada(parent);
         return entity;
@@ -202,10 +206,19 @@ public abstract class EventoConverter {
     /**
      * Convierte una colección de instancias de ventoDTO a EventoEntity
      * asignando el mismo padre para todos. Se usa cuando se necesita crear o
-     * actualizar varios EventoEntity con el mismo org.eclipse.uml2.uml.internal.impl.PropertyImpl@394af115 (name: parada, visibility: <unset>) (isLeaf: false) (isStatic: false) (isOrdered: false, isUnique: true, isReadOnly: false) (aggregation: none, isDerived: false, isDerivedUnion: false, isID: false)
+     * actualizar varios EventoEntity con el mismo
+     * org.eclipse.uml2.uml.internal.impl.PropertyImpl@394af115 (name: parada,
+     * visibility: <unset>) (isLeaf: false) (isStatic: false) (isOrdered: false,
+     * isUnique: true, isReadOnly: false) (aggregation: none, isDerived: false,
+     * isDerivedUnion: false, isID: false)
+     *
      * @param dtos Colección de instancias de EventoDTO
      * @param parent Instancia de ParadaEntity
-     * @return Colección de EventoEntity con el atributo org.eclipse.uml2.uml.internal.impl.PropertyImpl@394af115 (name: parada, visibility: <unset>) (isLeaf: false) (isStatic: false) (isOrdered: false, isUnique: true, isReadOnly: false) (aggregation: none, isDerived: false, isDerivedUnion: false, isID: false) asignado
+     * @return Colección de EventoEntity con el atributo
+     * org.eclipse.uml2.uml.internal.impl.PropertyImpl@394af115 (name: parada,
+     * visibility: <unset>) (isLeaf: false) (isStatic: false) (isOrdered: false,
+     * isUnique: true, isReadOnly: false) (aggregation: none, isDerived: false,
+     * isDerivedUnion: false, isID: false) asignado
      * @generated
      */
     public static List<EventoEntity> childListDTO2Entity(List<EventoDTO> dtos, ParadaEntity parent) {
@@ -218,4 +231,3 @@ public abstract class EventoConverter {
         return entities;
     }
 }
-

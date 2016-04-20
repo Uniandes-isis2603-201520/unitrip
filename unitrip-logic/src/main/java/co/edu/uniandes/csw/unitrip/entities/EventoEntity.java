@@ -9,6 +9,7 @@ package co.edu.uniandes.csw.unitrip.entities;
  *
  * @author l.castro12
  */
+import co.edu.uniandes.csw.crud.api.podam.strategy.DateStrategy;
 import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
 import java.io.Serializable;
 import java.util.Date;
@@ -16,20 +17,23 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 @Entity
 public class EventoEntity extends BaseEntity implements Serializable {
 
 
+   @PodamStrategyValue(DateStrategy.class)
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
+    @PodamStrategyValue(DateStrategy.class)
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     private String descripcion;
     private Long latitud;
     private Long longitud;
 
-     @ManyToOne
+     //@ManyToOne
     private ParadaEntity parada;
 
     /**
