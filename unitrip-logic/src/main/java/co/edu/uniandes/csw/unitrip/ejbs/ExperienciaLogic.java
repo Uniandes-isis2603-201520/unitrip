@@ -43,11 +43,5 @@ public class ExperienciaLogic implements IExperienciaLogic{
         persistence.delete(id);
     }
 
-    public ExperienciaEntity createBook(ExperienciaEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ExperienciaEntity updateBook(ExperienciaEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
