@@ -130,7 +130,7 @@ public class ViajePersistenceTest {
     }
 
      @Test
-    public void updateItinerarioTest() {
+    public void updateViajeTest() {
         ViajeEntity entity = data.get(0);
         ViajeEntity newEntity = factory.manufacturePojo(ViajeEntity.class);
 
@@ -142,41 +142,6 @@ public class ViajePersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
-
-/*
-
-    /**
-     * Test of update method, of class ViajePersistence.
-     *
-    @Test
-    public void testUpdate() throws Exception {
-        System.out.println("update");
-        ViajeEntity entity = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ViajePersistence instance = (ViajePersistence)container.getContext().lookup("java:global/classes/ViajePersistence");
-        ViajeEntity expResult = null;
-        ViajeEntity result = instance.update(entity);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of delete method, of class ViajePersistence.
-     *
-    @Test
-    public void testDelete() throws Exception {
-        System.out.println("delete");
-        Long id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ViajePersistence instance = (ViajePersistence)container.getContext().lookup("java:global/classes/ViajePersistence");
-        instance.delete(id);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-*/
 
 
 }

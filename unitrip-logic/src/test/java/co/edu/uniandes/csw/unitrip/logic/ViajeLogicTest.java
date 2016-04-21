@@ -5,23 +5,21 @@
  */
 package co.edu.uniandes.csw.unitrip.logic;
 
+import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
 import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
 import co.edu.uniandes.csw.unitrip.ejbs.ViajeLogic;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
+import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.csw.unitrip.persistence.ViajePersistence;
-import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -44,6 +42,9 @@ public class ViajeLogicTest {
 
     @Inject
     private IViajesLogic viajesLogic;
+
+    @Inject
+    private IItinerarioLogic itinerarioLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -100,7 +101,7 @@ public class ViajeLogicTest {
             ItinerarioEntity itinerarios = factory.manufacturePojo(ItinerarioEntity.class);
             em.persist(itinerarios);
             itinerariosData.add(itinerarios);
-            data.get(0).getItinerarios().add(itinerarios);
+            data.get(1).getItinerarios().add(itinerarios);
         }
     }
 
@@ -118,6 +119,98 @@ public class ViajeLogicTest {
         Assert.assertEquals(expected.getId(), result.getId());
         Assert.assertEquals(expected.getName(), result.getName());
         Assert.assertEquals(expected.getImage(), result.getImage());
+    }
+
+    @Test
+    public void getViajesTest() {
+        List<ViajeEntity> list = viajesLogic.getViajes();
+        Assert.assertEquals(data.size(), list.size());
+        for (ViajeEntity ent : list) {
+            boolean found = false;
+            for (ViajeEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    @Test
+    public void getViajeTest() {
+        ViajeEntity expected = factory.manufacturePojo(ViajeEntity.class);
+        ViajeEntity created = viajesLogic.createViaje(expected);
+        try
+        {
+            ViajeEntity created2 =viajesLogic.getViaje(created.getId());
+            Assert.assertNotNull(created2);
+            Assert.assertEquals(expected.getId(), created2.getId());
+        }
+        catch (Exception e)
+        {
+            fail("no deberia generar excepcion");
+
+        }
+        try
+        {
+            ViajeEntity expected2 = factory.manufacturePojo(ViajeEntity.class);
+            viajesLogic.getViaje(expected2.getId());
+            fail("deberia generar excepcion");
+        }
+        catch (Exception e)
+        {
+            //debe pasar por aqui
+        }
+    }
+
+    @Test
+    public void updateViajeTest() {
+        try {
+            ViajeEntity entity = data.get(0);
+            ViajeEntity newEntity = factory.manufacturePojo(ViajeEntity.class);
+
+            newEntity.setId(entity.getId());
+
+            viajesLogic.updateViaje(newEntity);
+
+            ViajeEntity resp = viajesLogic.getViaje(entity.getId());
+
+            Assert.assertEquals(newEntity.getName(), resp.getName());
+        } catch (BusinesLogicException ex)
+        {
+            fail("no deberia generar excepcion");
+        }
+    }
+    @Test
+    public void deleteViajeTest() {
+        ViajeEntity entity = data.get(0);
+        viajesLogic.deleteViaje(entity.getId());;
+        try
+        {
+            viajesLogic.getViaje(entity.getId());
+            fail("deberia generar excepcion");
+        }
+        catch (Exception e)
+        {
+            //debe pasar por aqui
+        }
+    }
+
+    //@Test
+    public void addItinerarioTest() {
+        try {
+                ItinerarioEntity itinerarios = factory.manufacturePojo(ItinerarioEntity.class);
+                itinerarioLogic.createItinerario(itinerarios);
+                viajesLogic.addItinerario(itinerarios.getId(),data.get(0).getId());
+                ViajeEntity resp =viajesLogic.getViaje(data.get(0).getId());
+                Assert.assertNotNull(resp.getItinerarios());
+            } catch (BusinesLogicException ex) {
+            }
+    }
+
+    //@Test
+    public void getItinerariosTest() {
+        List<ItinerarioEntity> list = viajesLogic.getViajes().get(0).getItinerarios();
+        Assert.assertEquals(itinerariosData.size(), list.size());
     }
 
 }

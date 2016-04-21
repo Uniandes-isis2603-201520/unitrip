@@ -3,8 +3,10 @@ package co.edu.uniandes.rest.resources;
 
 
 import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
+import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
+import co.edu.uniandes.rest.converters.ItinerarioConverter;
 import co.edu.uniandes.rest.converters.ViajesConverter;
 import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.dtos.ViajesDTO;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 import javax.inject.Inject;
-
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,11 +25,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
 
 @Path("viajes")
+@Consumes(MediaType.APPLICATION_JSON)
 @Produces("application/json")
 public class ViajesResource {
 
@@ -133,8 +137,8 @@ public class ViajesResource {
     @GET
     @Path("{viajeId: \\d+}/itinerarios")
     public List<ItinerarioDTO> listItinerarios(@PathParam("viajeId") Long viajeId) {
-        //return ItinerarioConverter.listEntity2DTO(viajeLogic.getItinerarios(viajeId));
-        return null;
+        List<ItinerarioEntity> list= viajeLogic.getItinerarios(viajeId);
+        return ItinerarioConverter.listEntity2DTO(list);
     }
 
     /**
@@ -148,8 +152,7 @@ public class ViajesResource {
     @GET
     @Path("{viajeId: \\d+}/itinerarios/{itinerarioId: \\d+}")
     public ItinerarioDTO getItinerario(@PathParam("viajeId") Long viajeId, @PathParam("itinerarioId") Long itinerarioId) {
-        //return ItinerarioConverter.fullEntity2DTO(viajeLogic.getItinerario(viajeId, itinerarioId));
-        return null;
+        return ItinerarioConverter.fullEntity2DTO(viajeLogic.getItinerario(viajeId, itinerarioId));
     }
 
     /**
@@ -163,8 +166,7 @@ public class ViajesResource {
     @POST
     @Path("{viajeId: \\d+}/itinerarios/{itinerarioId: \\d+}")
     public ItinerarioDTO addItinerario(@PathParam("viajeId") Long viajeId, @PathParam("itinerarioId") Long itinerarioId) {
-        //return ItinerarioConverter.fullEntity2DTO(viajeLogic.getItinerario(viajeId, itinerarioId));
-        return null;
+        return ItinerarioConverter.fullEntity2DTO(viajeLogic.addItinerario(viajeId, itinerarioId));
     }
 
     /**
@@ -179,8 +181,7 @@ public class ViajesResource {
     @PUT
     @Path("{viajeId: \\d+}/itinerarios")
     public List<ItinerarioDTO> replaceAuthors(@PathParam("viajeId") Long viajeId, ArrayList<ItinerarioDTO> itinerarios) {
-        //return ItinerarioConverter.listEntity2DTO(viajeLogic.replaceItinerarios(ItinerarioConverter.listDTO2Entity(itinerarios), viajeId));
-        return null;
+        return ItinerarioConverter.listEntity2DTO(viajeLogic.replaceItinerarios(ItinerarioConverter.listDTO2Entity(itinerarios), viajeId));
     }
 
     /**
@@ -193,7 +194,7 @@ public class ViajesResource {
     @DELETE
     @Path("{viajeId: \\d+}/itinerarios/{itinerarioId: \\d+}")
     public void removeItinerario(@PathParam("viajeId") Long viajeId, @PathParam("itinerarioId") Long itinerarioId) {
-        //viajeLogic.removeItinerario(viajeId, itinerarioId);
+        viajeLogic.removeItinerario(viajeId, itinerarioId);
 
     }
 }
