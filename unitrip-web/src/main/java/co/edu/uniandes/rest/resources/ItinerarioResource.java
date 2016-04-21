@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -30,8 +31,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -42,10 +45,11 @@ import javax.ws.rs.core.Response;
  * Al ejecutar el aplicación, el recurse será accesible a través de el
  * ruta "/api/itinerarios"
  *
- * @author Asistente
+ *
  */
 @Path("itinerarios")
-@Produces("application/json")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ItinerarioResource {
 
     private static final Logger logger = Logger.getLogger(ItinerarioResource.class.getName());
@@ -57,11 +61,12 @@ public class ItinerarioResource {
 	/**
 	 * Obtiene el listado de itinerarioes.
 	 * @return lista de itinerarios
-	 * @throws LogicException excepción retornada por el lógica
 	 */
     @GET
-    public List<ItinerarioDTO> getItinerarios() throws LogicException {
-        return ItinerarioConverter.listEntity2DTO(itinerarioLogic.getItinerarios());
+    public List<ItinerarioDTO> getItinerarios() {
+       logger.info("Se ejecuta método getItinerarios");
+        List<ItinerarioEntity> itinerarios = itinerarioLogic.getItinerarios();
+        return ItinerarioConverter.listEntity2DTO(itinerarios);
 
     }
 
@@ -69,7 +74,6 @@ public class ItinerarioResource {
      * Obtiene un itinerario
      * @param id identificador de el itinerario
      * @return itinerario encontrada
-     * @throws LogicException cuando el itinerario no existe
      */
     @GET
     @Path("{id: \\d+}")
@@ -84,10 +88,10 @@ public class ItinerarioResource {
      * Agrega un itinerario
      * @param dto itinerario a agregar
      * @return datos de el itinerario a agregar
-     * @throws LogicException cuando ya existe un itinerario con el id suministrado
      */
     @POST
-    public ItinerarioDTO createItinerario(ItinerarioDTO dto) throws LogicException {
+    public ItinerarioDTO createItinerario(ItinerarioDTO dto) {
+        logger.info("Se ejecuta método createItinerario");
         ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(dto);
         ItinerarioEntity newEntity;
         try {
@@ -106,21 +110,21 @@ public class ItinerarioResource {
      * @param id identificador de el itinerario a modificar
      * @param itinerario itinerario a modificar
      * @return datos de el itinerario modificada
-     * @throws LogicException cuando no existe un itinerario con el id suministrado
      */
     @PUT
     @Path("{id: \\d+}")
-    public ItinerarioDTO updateItinerario(@PathParam("id") Long id, ItinerarioDTO itinerario) throws LogicException {
+    public ItinerarioDTO updateItinerario(@PathParam("id") Long id, ItinerarioDTO itinerarioDTO) {
         logger.log(Level.INFO, "Se ejecuta método updateItinerario con id={0}", id);
-        ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(itinerario);
+        ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(itinerarioDTO);
         entity.setId(id);
-        try{
-            ItinerarioEntity oldEntity = itinerarioLogic.getItinerario(id);
-            //entity.setParadas(oldEntity.getParadas()); Esto no, porque que tal si le cambiamos las paradas? obviamente las perderia, creo
+        ItinerarioEntity oldEntity = itinerarioLogic.getItinerario(id);
+        entity.setParadas(oldEntity.getParadas());
+        try {
             ItinerarioEntity savedItinerario = itinerarioLogic.updateItinerario(entity);
             return ItinerarioConverter.fullEntity2DTO(savedItinerario);
-        }catch(BusinesLogicException ex){
-            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
         }
 
     }
@@ -128,12 +132,12 @@ public class ItinerarioResource {
     /**
      * Elimina los datos de un itinerario
      * @param id identificador de el itinerario a eliminar
-     * @throws LogicException cuando no existe un itinerario con el id suministrado
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteItinerario(@PathParam("id") Long id) throws LogicException {
-    	itinerarioLogic.deleteItinerario(id);
+    public void deleteItinerario(@PathParam("id") Long id) {
+    	logger.log(Level.INFO, "Se ejecuta método deleteItinerario con id={0}", id);
+        itinerarioLogic.deleteItinerario(id);
     }
 
     /**
@@ -143,16 +147,84 @@ public class ItinerarioResource {
      * @param itinerarioId Identificador de la instancia de Itinerario
      * @return Colección de instancias de ItinerarioDTO asociadas a la instancia de
      * Viaje
-     * @throws BusinesLogicException en caso que no existan paradas
      * @generated
      */
     @GET
     @Path("{itinerarioId: \\d+}/paradas")
-    public List<ParadaDTO> listParadas(@PathParam("itinerarioId") Long itinerarioId) throws BusinesLogicException {
+    public List<ParadaDTO> listParadas(@PathParam("itinerarioId") Long itinerarioId){
         // falta este metodo
-        List<ParadaEntity> paradas = itinerarioLogic.getParadas(itinerarioId);
+       List<ParadaEntity> paradas = itinerarioLogic.getParadas(itinerarioId);
         return ParadaConverter.listEntity2DTO(paradas);
 
+    }
+
+     /**
+     * Obtiene un objeto de Parada asociada a un objeto de Itinerario
+     *
+     * @param itinerarioId Identificador del objeto de Itinerario
+     * @param paradaId Identificador del objeto de Parada
+     * @generated
+     */
+    @GET
+    @Path("{itinerarioId: \\d+}/paradas/{paradaId: \\d+}")
+    public ParadaDTO getParadas(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
+        ParadaEntity parada = itinerarioLogic.getParada(itinerarioId, paradaId);
+        return ParadaConverter.fullEntity2DTO(parada);
+    }
+
+    /**
+     * Asocia un Parada existente a un Itinerario
+     *
+     * @param itinerarioId Identificador del objeto de Itinerario
+     * @param paradaId Identificador del objeto de Parada
+     * @return Objeto de ParadaDTO en representación full que fue asociado a Itinerario
+     * @generated
+     */
+    @POST
+    @Path("{itinerarioId: \\d+}/paradas/{paradaId: \\d+}")
+    public ParadaDTO addParadas(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
+        try {
+            ParadaEntity parada = itinerarioLogic.addParada(itinerarioId, paradaId);
+            return ParadaConverter.fullEntity2DTO(parada);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Remplaza los objetos de Parada asociados a un objeto de Itinerario
+     *
+     * @param itinerarioId Identificador del objeto de Itinerario
+     * @param paradas Colección de objetos de ParadaDTO en representación minimum a asociar a objeto
+     * de Itinerario
+     * @return Nueva colección de ParadaDTO en representación Basic
+     * @generated
+     */
+    @PUT
+    @Path("{itinerarioId: \\d+}/paradas")
+    public List<ParadaDTO> replaceParadas(@PathParam("itinerarioId") Long itinerarioId, List<ParadaDTO> paradas) {
+        try {
+            List<ParadaEntity> paradaList = ParadaConverter.listDTO2Entity(paradas);
+            List<ParadaEntity> newParadas = itinerarioLogic.replaceParadas(paradaList, itinerarioId);
+            return ParadaConverter.listEntity2DTO(newParadas);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Desasocia un Parada existente de un Itinerario existente
+     *
+     * @param itinerarioId Identificador del objeto de Itinerario
+     * @param paradaId Identificador del objeto de Parada
+     * @generated
+     */
+    @DELETE
+    @Path("{itinerarioId: \\d+}/paradas/{paradaId: \\d+}")
+    public void removeParadas(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
+        itinerarioLogic.removeParada(itinerarioId, paradaId);
     }
 
 
