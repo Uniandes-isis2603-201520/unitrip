@@ -7,9 +7,9 @@
                      name: '' /*Tipo String*/,
                      latitude: ''/*Tipo Long*/,
                      longitude: ''/*Tipo Long*/,
-                     description: '' /*Tipo String*/,
-                     fechaLlegeda:  '' /*Tipo Date*/,
-                     fechaSalida:  '' /*Tipo Date*/,
+                     descripcion: '' /*Tipo String*/,
+                     fechaI:  '' /*Tipo Date*/,
+                     fechaF:  '' /*Tipo Date*/,
                      eventos: [] /*Colección de registros de Eventos*/
             };
             $scope.records = [];
@@ -102,6 +102,14 @@
             };
 
             this.fetchRecords();
+
+            function updateEventos(event, args) {
+                $scope.currentRecord.eventos = args;
+            }
+            ;
+
+            $scope.$on('updateEventos', updateEventos);
+
         }]);
 
 })(window.angular);
