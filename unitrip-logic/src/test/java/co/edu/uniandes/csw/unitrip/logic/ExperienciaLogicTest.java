@@ -5,32 +5,119 @@
  */
 package co.edu.uniandes.csw.unitrip.logic;
 
+import co.edu.uniandes.csw.unitrip.api.IExperienciaLogic;
+import co.edu.uniandes.csw.unitrip.ejbs.ExperienciaLogic;
 import co.edu.uniandes.csw.unitrip.entities.ExperienciaEntity;
+import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
+import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
+import co.edu.uniandes.csw.unitrip.persistence.ExperienciaPersistence;
+import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
  * @author n.vasquez10
  */
-//@RunWith(Arquillian.class)
+@RunWith(Arquillian.class)
 public class ExperienciaLogicTest {
+
+
 
     public ExperienciaLogicTest() {
     }
 
 
-    @Before
-    public void setUp() {
+    private PodamFactory factory = new PodamFactoryImpl();
+
+    @Inject
+    private IExperienciaLogic experienciaLogic;
+
+    @PersistenceContext
+    private EntityManager em;
+
+    @Inject
+    private UserTransaction utx;
+
+
+    private List<ExperienciaEntity> data = new ArrayList<ExperienciaEntity>();
+    private List<ViajeEntity> viajeData = new ArrayList<>();
+
+    @Deployment
+    public static JavaArchive createDeployment() {
+        return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(ExperienciaEntity.class.getPackage())
+                .addPackage(ExperienciaLogic.class.getPackage())
+                .addPackage(IExperienciaLogic.class.getPackage())
+                .addPackage(ExperienciaPersistence.class.getPackage())
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
+
+
+    @Before
+    public void setUp() {
+         try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+
+    private void clearData() {
+        em.createQuery("delete from ExperienciaEntity").executeUpdate();
+        em.createQuery("delete from ViajeEntity").executeUpdate(); // no se si este se deberia hacer
+    }
+
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            ViajeEntity viaje = factory.manufacturePojo(ViajeEntity.class);
+            System.out.println(viaje.getDescripcion());
+            em.persist(viaje);
+            viajeData.add(viaje);
+        }
+
+            for (int i = 0; i < 3; i++) {
+            ExperienciaEntity entity = factory.manufacturePojo(ExperienciaEntity.class);
+            entity.setDescription(randomDescripcion());
+
+            entity.setViaje(viajeData.get(0));
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+
+    public String randomDescripcion()
+    {
+        return "Descripcion de experiencia";
+    }
 
     /**
      * Test of getExperiencias method, of class ExperienciaLogic.
@@ -51,9 +138,17 @@ public class ExperienciaLogicTest {
     /**
      * Test of createExperiencia method, of class ExperienciaLogic.
      */
-    //@Test
+    @Test
     public void testCreateExperiencia() throws Exception {
 
+        ExperienciaEntity entity = factory.manufacturePojo(ExperienciaEntity.class);
+        entity.setDescription(randomDescripcion ());
+        ExperienciaEntity created = experienciaLogic.createExperiencia(entity);
+        ExperienciaEntity result = em.find(ExperienciaEntity.class, created.getId());
+        Assert.assertNotNull(result);
+        Assert.assertEquals(entity.getId(), result.getId());
+        Assert.assertEquals(entity.getName(), result.getName());
+        Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
     }
 
     /**
