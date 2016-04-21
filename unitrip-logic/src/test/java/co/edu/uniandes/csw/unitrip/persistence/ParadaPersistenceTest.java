@@ -92,7 +92,7 @@ public class ParadaPersistenceTest {
     }
 
     @Test
-    public void createItinerarioTest() {
+    public void createParadaTest() {
         ParadaEntity newEntity = factory.manufacturePojo(ParadaEntity.class);
         ParadaEntity result = paradaPersistence.create(newEntity);
 
@@ -101,9 +101,52 @@ public class ParadaPersistenceTest {
         ParadaEntity entity = em.find(ParadaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-       //falta reevisar otras condiciones del itinerario
     }
 
+    @Test
+    public void getParadasTest() {
+        List<ParadaEntity> list = paradaPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (ParadaEntity ent : list) {
+            boolean found = false;
+            for (ParadaEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+
+    @Test
+    public void getParadaTest() {
+        ParadaEntity entity = data.get(0);
+        ParadaEntity newEntity = paradaPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+
+    @Test
+    public void deleteParadaTest() {
+        ParadaEntity entity = data.get(0);
+        paradaPersistence.delete(entity.getId());
+        ParadaEntity deleted = em.find(ParadaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+
+    @Test
+    public void updateParadaTest() {
+        ParadaEntity entity = data.get(0);
+        ParadaEntity newEntity = factory.manufacturePojo(ParadaEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        paradaPersistence.update(newEntity);
+
+        ParadaEntity resp = em.find(ParadaEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getName(), resp.getName());
+    }
 
 
 

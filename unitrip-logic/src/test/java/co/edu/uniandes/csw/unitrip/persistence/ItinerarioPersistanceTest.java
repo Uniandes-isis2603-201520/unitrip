@@ -95,11 +95,10 @@ public class ItinerarioPersistanceTest {
         ItinerarioEntity entity = em.find(ItinerarioEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-       //falta reevisar otras condiciones del itinerario
     }
 
     @Test
-    public void getItinerariossTest() {
+    public void getItinerariosTest() {
         List<ItinerarioEntity> list = itinerarioPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
         for (ItinerarioEntity ent : list) {
@@ -142,7 +141,7 @@ public class ItinerarioPersistanceTest {
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
-    
+
 
 
 }
