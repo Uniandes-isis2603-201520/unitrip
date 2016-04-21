@@ -2,16 +2,11 @@
 
     var mod = ng.module("mainApp", [
         "ui.router",
-        "itinerarioModule",
         "viajeModule",
+        "itinerarioModule",
         "eventoModule",
         "paradaModule",
         "experienciaModule",
-      //"itinerarioMock",
-      //"viajeMock",
-      //"eventoMock",
-      //"paradaMock",
-      //"experienciaMock",
         "ngMessages"
     ]);
 
@@ -20,19 +15,20 @@
         }]);
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("/itinerario");
+            $urlRouterProvider.otherwise("/viaje");
             $stateProvider
-                    .state('itinerario', {
-                        url: '/itinerario',
-                        controller: "itinerarioCtrl",
-                        controllerAs: "ctrl",
-                        templateUrl: "src/modules/itinerario/itinerario.tpl.html"
-                    })
+
                     .state('viaje', {
                         url: '/viaje',
                         controller: "viajeCtrl",
                         controllerAs: "ctrl",
                         templateUrl: "src/modules/viaje/viaje.tpl.html"
+                    })
+                    .state('itinerario', {
+                        url: '/itinerario',
+                        controller: "itinerarioCtrl",
+                        controllerAs: "ctrl",
+                        templateUrl: "src/modules/itinerario/itinerario.tpl.html"
                     })
                     .state('evento', {
                         url: '/evento',

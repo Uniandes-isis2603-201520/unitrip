@@ -7,9 +7,9 @@
                 name: '' /*Tipo String*/,
                 latitude: '' /*Tipo Long*/,
                 longitude: '' /*Tipo Long*/,
-                description: '' /*Tipo String*/,
-                fechaInicio:  '' /*Tipo Date*/,
-                fechaFin:  '' /*Tipo Date*/
+                descripcion: '' /*Tipo String*/,
+                fechaI:  '' /*Tipo Date*/,
+                fechaF:  '' /*Tipo Date*/
             };
             $scope.records = [];
             $scope.alerts = [];

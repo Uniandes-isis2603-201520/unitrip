@@ -2,16 +2,14 @@
 
     var mod = ng.module("viajeModule");
 
-    mod.controller("viajeCtrl", ["$scope", "viajeService", function ($scope, svc) {
-            
-            
+    mod.controller("viajeCtrl", ["$scope", "viajeService", function ($scope, svc, $location) {
+
+
 
             $scope.alerts = [];
-            $scope.currentRecord = { 
+            $scope.currentRecord = {
                 id: '' /*Tipo Long*/,
                 name: '' /*Tipo String*/,
-                description: '' /*Tipo String*/,
-                image: '' /*Tipo String*/,
                 itinerarios: [] /*Colección de registros de Itinerarios*/,
                 experiencias: [] /*Colección de registros de Experiencias*/
             };
@@ -30,6 +28,10 @@
                 $event.stopPropagation();
 
                 $scope.opened = true;
+            };
+
+            $scope.goItinerarios = function() {
+                $location.path(src/modules/itinerario/itinerario.tpl.html);
             };
 
             //Alertas
@@ -61,7 +63,7 @@
             //Variables para el controlador
             this.readOnly = false;
             this.editMode = false;
-            
+
 
             this.changeTab = function (tab) {
                 $scope.tab = tab;
@@ -72,11 +74,11 @@
 
 
             /*
-             * Funcion createRecord emite un evento a los $scope hijos del controlador por medio de la 
-             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos 
+             * Funcion createRecord emite un evento a los $scope hijos del controlador por medio de la
+             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos
              * al actual modulo.
              * Habilita el modo de edicion. El template de la lista cambia por el formulario.
-             * 
+             *
              */
 
             this.createRecord = function () {
@@ -87,11 +89,11 @@
             };
 
             /*
-             * Funcion editRecord emite el evento ("pre-edit") a los $Scope hijos del controlador por medio de la 
-             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos 
+             * Funcion editRecord emite el evento ("pre-edit") a los $Scope hijos del controlador por medio de la
+             * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos
              * al actual modulo.
              * Habilita el modo de edicion.  Carga el template de formulario con los datos del record a editar.
-             * 
+             *
              */
 
             this.editRecord = function (record) {
@@ -105,7 +107,7 @@
             };
 
             /*
-             * Funcion fetchRecords consulta el servicio svc.fetchRecords con el fin de consultar 
+             * Funcion fetchRecords consulta el servicio svc.fetchRecords con el fin de consultar
              * todos los registros del modulo viaje.
              * Guarda los registros en la variable $scope.records
              * Muestra el template de la lista de records.
@@ -142,6 +144,8 @@
                 }, responseError);
             };
 
+
+
             /*
              * Funcion fetchRecords consulta todos los registros del módulo viaje en base de datos
              * para desplegarlo en el template de la lista.
@@ -149,7 +153,7 @@
             this.fetchRecords();
 
 
-
+            
 
 
 

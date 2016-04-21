@@ -52,6 +52,43 @@
          */
         this.deleteRecord = function (id) {
             return $http.delete(context + "/" + id);
-        };      
+        };
+
+        /**
+             * Hace una petición GET a /paradas/:id/eventos para obtener la colección
+             * de evento asociados a una parada
+             * @param {number} id Identificador de la instancia de parada
+             * @returns {promise} promise para leer la respuesta del servidor
+             * Devuelve un array de objetos de authors.
+             */
+            this.getEventos = function (id) {
+                return $http.get(context + "/" + id + "/eventos");
+            };
+
+            /**
+             * Hace una petición PUT a /paradas/:id/eventos para reemplazar los
+             * evento asociados a una parada
+             * @param {number} paradaId Identificador de la instancia de parada
+             * @param {array} eventos Colección de eventos nueva
+             * @returns {promise} promise para leer la respuesta del servidor
+             * Devuelve un array de objetos de authors con los nuevos autores
+             */
+            this.replaceEventos = function (paradaId, eventos) {
+                return $http.put(context + "/" + paradaId + "/eventos", eventos);
+            };
+
+            /**
+             * Hace una petición DELETE a /paradas/:id/eventos/:id para remover
+             * un evento de una parada
+             * @param {number} paradaId Identificador de la instancia de parada
+             * @param {number} eventoId Identificador de la instancia de evento
+             * @returns {promise} promise para leer la respuesta del servidor
+             * No devuelve datos.
+             */
+            this.removeEvento = function (paradaId, eventoId) {
+                return $http.delete(context + "/" + paradaId + "/eventos/" + eventoId);
+            };
+
+
     }]);
 })(window.angular);

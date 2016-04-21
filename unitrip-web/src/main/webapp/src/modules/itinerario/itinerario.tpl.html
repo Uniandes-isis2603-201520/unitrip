@@ -23,9 +23,6 @@
     </nav>
 </div>
 
-<div class="jumbotronItinerario">
-</div>
-
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="color:#ffffff;background-color:#9dc1e0">{{alert.msg}} </alert>
 <div ng-hide="ctrl.editMode" style="text-align:center">
     <div class="col-sm-12">
@@ -43,18 +40,12 @@
                     <p><strong>Fecha Final:</strong> <span id="{{$index}}-fechaF">{{record.fechaF| date}}</span></p>
                 </div>
                 <p class="text-center">
+
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-minus"></span> Remove</button>
-                    <button ui-sref="paradas" class="btn btn-default btn-sm" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-list"></span> Paradas </button>
+                    <button ui-sref="parada" class="btn btn-default btn-sm" style = "color:#ffffff;background-color:#001586"><span class="glyphicon glyphicon-plus"></span> Mis Paradas </button>
                 </p>
-
-                <div class="row">
-                <div class="span">
-                    <div class="well" ui-view></div>
-                </div>
             </div>
-            </div>
-
         </div>
 
     </div>
@@ -107,4 +98,18 @@
             </div>
         </fieldset>
     </form>
+</div>
+<div id="childs" ng-show="ctrl.editMode" class="col-md-6">
+        <ul class="nav nav-tabs">
+
+            <li role="presentation" ng-class="{active: tab === 'paradas'}">
+                <a href ng-click="ctrl.changeTab('paradas')">Paradas</a>
+            </li>
+
+        </ul>
+        <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente-->
+        <div ng-show="tab === 'paradas'">
+            <div ng-controller="paradaCtrl as ctrl" ng-include="'src/modules/parada/parada.tpl.html'"></div>
+        </div>
+
 </div>
