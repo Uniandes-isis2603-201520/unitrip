@@ -36,7 +36,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author n.vasquez10
  */
-//@RunWith(Arquillian.class)
+@RunWith(Arquillian.class)
 public class ExperienciaLogicTest {
 
 
@@ -122,7 +122,7 @@ public class ExperienciaLogicTest {
     /**
      * Test of getExperiencias method, of class ExperienciaLogic.
      */
-    //@Test
+    @Test
     public void testGetExperiencias() throws Exception {
           List<ExperienciaEntity> resultList = experienciaLogic.getExperiencias();
         List<ExperienciaEntity> expectedList = em.createQuery("SELECT u from ExperienciaEntity u").getResultList();
@@ -141,7 +141,7 @@ public class ExperienciaLogicTest {
     /**
      * Test of getExperiencia method, of class ExperienciaLogic.
      */
-    //@Test
+    @Test
     public void testGetExperiencia() throws Exception {
          ExperienciaEntity result = experienciaLogic.getExperiencia(data.get(0).getId());
         ExperienciaEntity expected = em.find(ExperienciaEntity.class, data.get(0).getId());
@@ -156,7 +156,7 @@ public class ExperienciaLogicTest {
     /**
      * Test of createExperiencia method, of class ExperienciaLogic.
      */
-    //@Test
+    @Test
     public void testCreateExperiencia() throws Exception {
 
         ExperienciaEntity entity = factory.manufacturePojo(ExperienciaEntity.class);
@@ -172,7 +172,7 @@ public class ExperienciaLogicTest {
     /**
      * Test of updateExperiencia method, of class ExperienciaLogic.
      */
-    //@Test
+    @Test
     public void testUpdateExperiencia() throws Exception {
         ExperienciaEntity entity = data.get(0);
             ExperienciaEntity pojoEntity = factory.manufacturePojo(ExperienciaEntity.class);
@@ -193,7 +193,7 @@ public class ExperienciaLogicTest {
     /**
      * Test of deleteExperiencia method, of class ExperienciaLogic.
      */
-    //@Test
+    @Test
     public void testDeleteExperiencia() throws Exception {
         ExperienciaEntity entity = data.get(1);
         experienciaLogic.deleteExperiencia(data.get(1).getId());
