@@ -37,16 +37,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- * Clase que implementa el recurso REST correspondiente a "itinerarios".
- *
- * Note que el aplicación (definida en RestConfig.java) define el ruta
- * "/api" y este recurso tiene el ruta "itinerarios".
- * Al ejecutar el aplicación, el recurse será accesible a través de el
- * ruta "/api/itinerarios"
- *
- *
- */
+
 @Path("itinerarios")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

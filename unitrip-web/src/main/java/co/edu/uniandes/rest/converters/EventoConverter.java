@@ -175,15 +175,16 @@ public abstract class EventoConverter {
      * @return Collección de instancias de ViajeEntity
      * @generated
      */
-//    public static List<ViajeEntity> listDTO2Entity(List<ViajesDTO> dtos) {
-//        List<ViajeEntity> entities = new ArrayList<ViajeEntity>();
-//        if (dtos != null) {
-//            for (ViajesDTO dto : dtos) {
-//                entities.add(basicDTO2Entity(dto));
-//            }
-//        }
-//        return entities;
-//    }
+    public static List<EventoEntity> listDTO2Entity(List<EventoDTO> dtos) {
+        List<EventoEntity> entities = new ArrayList<EventoEntity>();
+        if (dtos != null) {
+            for (EventoDTO dto : dtos) {
+                entities.add(basicDTO2Entity(dto));
+            }
+        }
+        return entities;
+    }
+
     /**
      * Convierte una instancia de EventoDTO a EventoEntity asignando un valor al
      * atributo org.eclipse.uml2.uml.internal.impl.PropertyImpl@394af115 (name:

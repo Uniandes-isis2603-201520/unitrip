@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.unitrip.api;
 
+import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import java.util.List;
@@ -17,11 +18,21 @@ public interface IParadaLogic {
 
      public List<ParadaEntity> getParadas();
 
-    public ParadaEntity getParada(Long id) throws BusinesLogicException;
+    public ParadaEntity getParada(Long id);
 
-    public ParadaEntity createParada(ParadaEntity entity);
+    public ParadaEntity createParada(ParadaEntity entity) throws BusinesLogicException;
 
-    public ParadaEntity updateParada(ParadaEntity entity);
+    public ParadaEntity updateParada(ParadaEntity entity) throws BusinesLogicException;
+
+    public EventoEntity addEvento(Long eventoId, Long paradaId) throws BusinesLogicException;
+
+    public void removeEvento(Long eventoId, Long paradaId);
+
+    public List<EventoEntity> getEventos(Long paradaId);
+
+    public EventoEntity getEvento(Long paradaId, Long eventoId);
+
+    public List<EventoEntity> replaceEventos(List<EventoEntity> eventos, Long paradaId) throws BusinesLogicException;
 
     public void deleteParada(Long id);
 
