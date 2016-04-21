@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
  *
  * @author ANDRES
  */
-@Path("{idViajero: \\d+}/experiencias")
+@Path("viajeros/{idViajero: \\d+}/experiencias")
 @Produces("application/json")
 public class ExperienciaResource {
 
@@ -55,7 +55,7 @@ public class ExperienciaResource {
 	 * @throws LogicException excepción retornada por la lógica
 	 */
     @GET
-    public List<ExperienciaDTO> getExperiencias() throws LogicException {
+    public List<ExperienciaDTO> getExperiencias(@PathParam("{viajeroId: \\d+}") Long idViajero) throws LogicException {
         return ExperienciaConverter.listEntity2DTO(experienciaLogic.getExperiencias());
     }
 
