@@ -46,15 +46,15 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author dm.delgado10
  *
+*/
 
 @RunWith(Arquillian.class)
-*/
 public class ItinerarioLogicTest {
-/*
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private IItinerarioLogic bookLogic;
+    private IItinerarioLogic itinerarioLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -131,22 +131,29 @@ public class ItinerarioLogicTest {
             data.add(entity);
         }
     }
-//
-//     @Test
-//    public void createItinerarioTest() {
-//        try {
-//            ItinerarioEntity entity = factory.manufacturePojo(ItinerarioEntity.class);
-//            entity.setDescripcion(getRandomDescripcion ());
-//            ItinerarioEntity created = ItinerarioLogic.createItinerario(entity);
-//
-//            ItinerarioEntity result = em.find(ItinerarioEntity.class, created.getId());
-//
-//
-//
-//        } catch (BusinesLogicException ex) {
-//            Assert.fail(ex.getLocalizedMessage());
-//        }
-//    }
+
+    @Test
+    public void createItinerarioTest() {
+        try {
+            ItinerarioEntity entity = factory.manufacturePojo(ItinerarioEntity.class);
+            entity.setDescripcion(getRandomDescripcion ());
+            ItinerarioEntity created = itinerarioLogic.createItinerario(entity);
+
+            ItinerarioEntity result = em.find(ItinerarioEntity.class, created.getId());
+
+            Assert.assertNotNull(result);
+            Assert.assertEquals(entity.getId(), result.getId());
+            Assert.assertEquals(entity.getName(), result.getName());
+            Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
+            Assert.assertEquals(entity.getFechaI(), result.getFechaI());
+            Assert.assertEquals(entity.getFechaF(), result.getFechaF());
+
+        } catch (BusinesLogicException ex) {
+            Assert.fail(ex.getLocalizedMessage());
+        }
+    }
+
+    
 
 
 
@@ -154,5 +161,5 @@ public class ItinerarioLogicTest {
     public String getRandomDescripcion (){
         return " random descripcion";
     }
-*/
+
 }

@@ -38,13 +38,13 @@ public class ItinerarioLogic implements IItinerarioLogic {
     }
 
     @Override
-    public ItinerarioEntity createItinerario(ItinerarioEntity entity) {
+    public ItinerarioEntity createItinerario(ItinerarioEntity entity) throws BusinesLogicException {
         persistence.create(entity);
         return entity;
     }
 
     @Override
-    public ItinerarioEntity updateItinerario(ItinerarioEntity entity) {
+    public ItinerarioEntity updateItinerario(ItinerarioEntity entity) throws BusinesLogicException {
         logger.log(Level.INFO, "Inicia proceso de actualizar itinerario con id={0}", entity.getId());
         ItinerarioEntity newEntity = entity;
         return persistence.update(newEntity);
@@ -73,7 +73,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
     }
 
     @Override
-    public ParadaEntity addParada(Long paradaId, Long itinerarioId) {
+    public ParadaEntity addParada(Long paradaId, Long itinerarioId) throws BusinesLogicException {
         ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
         ParadaEntity paradaEntity = paradaPersistence.find(paradaId);
         itinerarioEntity.getParadas().add(paradaEntity);
@@ -89,7 +89,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
     }
 
     @Override
-    public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId) {
+    public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId) throws BusinesLogicException {
         ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
         List<ParadaEntity> paradaList = paradaPersistence.findAll(); // esto como que no es necesario
         itinerarioEntity.setParadas(paradas);

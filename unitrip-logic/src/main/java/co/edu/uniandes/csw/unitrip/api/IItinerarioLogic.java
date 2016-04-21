@@ -11,9 +11,9 @@ public interface IItinerarioLogic {
 
     public ItinerarioEntity getItinerario(Long id) throws BusinesLogicException;
 
-    public ItinerarioEntity createItinerario(ItinerarioEntity entity);
+    public ItinerarioEntity createItinerario(ItinerarioEntity entity) throws BusinesLogicException;
 
-    public ItinerarioEntity updateItinerario(ItinerarioEntity entity);
+    public ItinerarioEntity updateItinerario(ItinerarioEntity entity) throws BusinesLogicException;
 
     public void deleteItinerario(Long id);
 
@@ -21,10 +21,10 @@ public interface IItinerarioLogic {
 
     public ParadaEntity getParada(Long itinerarioId, Long paradaId);
 
-    public ParadaEntity addParada(Long paradaId, Long itinerarioId);
+    public ParadaEntity addParada(Long paradaId, Long itinerarioId) throws BusinesLogicException;
 
     public void removeParada(Long paradaId, Long itinerarioId);
 
-    public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId);
+    public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId)throws BusinesLogicException;
 
 }

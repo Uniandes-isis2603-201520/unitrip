@@ -92,7 +92,15 @@ public class ItinerarioResource {
     @POST
     public ItinerarioDTO createItinerario(ItinerarioDTO dto) throws LogicException {
         ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(dto);
-        return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.createItinerario(entity));
+        ItinerarioEntity newEntity;
+        try {
+            newEntity = itinerarioLogic.createItinerario(entity);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
+        return ItinerarioConverter.fullEntity2DTO(newEntity);
+
 
     }
 
