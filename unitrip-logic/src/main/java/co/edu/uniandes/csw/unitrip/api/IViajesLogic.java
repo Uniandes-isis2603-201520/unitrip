@@ -9,13 +9,12 @@ import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import java.util.List;
-
 /**
  *
- * @author ANDRES
+ * @author je.molano1498
  */
 public interface IViajesLogic {
-    
+
     public List<ViajeEntity> getViajes();
 
     public ViajeEntity getViaje(Long id) throws BusinesLogicException;
@@ -35,5 +34,5 @@ public interface IViajesLogic {
     public void removeItinerario(Long itinerarioId, Long viajeId);
 
     public List<ItinerarioEntity> replaceItinerarios(List<ItinerarioEntity> itinerarios, Long viajeId);
-    
+
 }

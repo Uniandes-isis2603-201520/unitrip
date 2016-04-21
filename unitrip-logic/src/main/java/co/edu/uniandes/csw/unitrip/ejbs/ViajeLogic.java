@@ -16,14 +16,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-
 /**
  *
- * @author ANDRES
+ * @author je.molano1498
  */
 @Stateless
 public class ViajeLogic implements IViajesLogic {
-    
+
     @Inject
     private ViajePersistence persistence;
 
@@ -115,13 +114,5 @@ public class ViajeLogic implements IViajesLogic {
         return viajeEntity.getItinerarios();
     }
 
-    public ViajeEntity createBook(ViajeEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public ViajeEntity updateBook(ViajeEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-   
 }
 

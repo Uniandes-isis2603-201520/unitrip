@@ -14,7 +14,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-
+/**
+ *
+ * @author je.molano1498
+ */
 @Entity
 public class ViajeEntity extends BaseEntity implements Serializable {
 
