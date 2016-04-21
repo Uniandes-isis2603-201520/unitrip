@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
  *
  * @author ANDRES
  */
-@Path("experiencias")
+@Path("{idViajero: \\d+}/experiencias")
 @Produces("application/json")
 public class ExperienciaResource {
 
@@ -66,11 +66,11 @@ public class ExperienciaResource {
      * @throws LogicException cuando el evento no existe
      */
     @GET
-    @Path("{id: \\d+}")
-    public ExperienciaDTO getExperiencia(@PathParam("id") Long id) throws LogicException {
+    @Path("{viajeroId: \\d+}/experiencias/{experienciaId: \\d+}")
+    public ExperienciaDTO getExperiencia(@PathParam("viajeroId") Long viajeroId, @PathParam("experienciaId") Long expId) throws LogicException {
         try
         {
-            return ExperienciaConverter.fullEntity2DTO(experienciaLogic.getExperiencia(id));
+            return ExperienciaConverter.fullEntity2DTO(experienciaLogic.getExperiencia(expId));
         }
         catch(BusinesLogicException ex){
             throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
@@ -84,8 +84,9 @@ public class ExperienciaResource {
      * @throws LogicException cuando ya existe un evento con el id suministrado
      */
     @POST
-    public ExperienciaDTO createEvent(ExperienciaDTO event) throws LogicException {
-           ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(event);
+    @Path("{viajeroId: \\d+}/experiencias/")
+    public ExperienciaDTO createExperiencia(@PathParam("viajeroId") Long viajeroId,ExperienciaDTO exp) throws LogicException {
+           ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(exp);
         return ExperienciaConverter.fullEntity2DTO(experienciaLogic.createExperiencia(entity));
     }
 
@@ -97,13 +98,13 @@ public class ExperienciaResource {
      * @throws LogicException cuando no existe un evento con el id suministrado
      */
     @PUT
-    @Path("{id: \\d+}")
-    public ExperienciaDTO updateEvent(@PathParam("id") Long id, ExperienciaDTO event) throws LogicException {
-           ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(event);
-        entity.setId(id);
+    @Path("{viajeroId: \\d+}/experiencias")
+    public ExperienciaDTO updateExperiencias(@PathParam("viajeroId") Long viajeroId, ExperienciaDTO exp) throws LogicException {
+           ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(exp);
+        entity.setId(viajeroId);
         try
         {
-            ExperienciaEntity oldEntity = experienciaLogic.getExperiencia(id);
+            ExperienciaEntity oldEntity = experienciaLogic.getExperiencia(viajeroId);
 
         } catch (BusinesLogicException ex) {
             throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
@@ -118,8 +119,8 @@ public class ExperienciaResource {
      * @throwsLogicException cuando no existe un evento con el id suministrado
      */
     @DELETE
-    @Path("{id: \\d+}")
-    public void deleteExperiencia(@PathParam("id") Long id) throws LogicException {
+    @Path("{viajeroId: \\d+}/experiencias/{experienciaId: \\d+}")
+    public void deleteExperiencia(@PathParam("viajeroId") Long id, @PathParam("experienciaId") Long expId) throws LogicException {
     	experienciaLogic.deleteExperiencia(id);
     }
 }
