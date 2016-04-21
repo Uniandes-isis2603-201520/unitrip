@@ -143,7 +143,14 @@ public class ExperienciaLogicTest {
      */
     //@Test
     public void testGetExperiencia() throws Exception {
+         ExperienciaEntity result = experienciaLogic.getExperiencia(data.get(0).getId());
+        ExperienciaEntity expected = em.find(ExperienciaEntity.class, data.get(0).getId());
 
+        Assert.assertNotNull(expected);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(expected.getId(), result.getId());
+        Assert.assertEquals(expected.getName(), result.getName());
+        Assert.assertEquals(expected.getDescripcion(), result.getDescripcion());
     }
 
     /**
@@ -167,15 +174,31 @@ public class ExperienciaLogicTest {
      */
     //@Test
     public void testUpdateExperiencia() throws Exception {
+        ExperienciaEntity entity = data.get(0);
+            ExperienciaEntity pojoEntity = factory.manufacturePojo(ExperienciaEntity.class);
+            pojoEntity.setDescription(randomDescripcion());
+
+            pojoEntity.setId(entity.getId());
+
+            experienciaLogic.updateExperiencia(pojoEntity);
+
+            ExperienciaEntity resp = em.find(ExperienciaEntity.class, entity.getId());
+
+            Assert.assertEquals(pojoEntity.getId(), resp.getId());
+            Assert.assertEquals(pojoEntity.getName(), resp.getName());
 
     }
+
 
     /**
      * Test of deleteExperiencia method, of class ExperienciaLogic.
      */
     //@Test
     public void testDeleteExperiencia() throws Exception {
-
+        ExperienciaEntity entity = data.get(1);
+        experienciaLogic.deleteExperiencia(data.get(1).getId());
+        ExperienciaEntity deleted = em.find(ExperienciaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 
 
