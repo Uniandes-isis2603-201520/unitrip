@@ -73,13 +73,10 @@ public class ItinerarioResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public ItinerarioDTO getItinerario(@PathParam("id") Long id) throws LogicException {
-        try{
-        return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.getItinerario(id));
-        }
-        catch(BusinesLogicException ex){
-            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
-        }
+    public ItinerarioDTO getItinerario(@PathParam("id") Long id) {
+        logger.log(Level.INFO, "Se ejecuta método getItinerario con id={0}", id);
+        ItinerarioEntity itinerario = itinerarioLogic.getItinerario(id);
+        return ItinerarioConverter.fullEntity2DTO(itinerario);
 
     }
 

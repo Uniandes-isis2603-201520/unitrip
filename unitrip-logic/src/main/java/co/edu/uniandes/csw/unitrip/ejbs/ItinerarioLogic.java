@@ -29,11 +29,14 @@ public class ItinerarioLogic implements IItinerarioLogic {
     }
 
     @Override
-    public ItinerarioEntity getItinerario(Long id) throws BusinesLogicException {
+    public ItinerarioEntity getItinerario(Long id) {
+        logger.log(Level.INFO, "Inicia proceso de consultar itinerario con id={0}", id);
         ItinerarioEntity itinerario = persistence.find(id);
         if (itinerario == null) {
-            throw new BusinesLogicException("There's no itinerario with requested id");
+            logger.log(Level.SEVERE, "El itinerario con el id {0} no existe", id);
+            throw new IllegalArgumentException("El itinerario solicitado no existe");
         }
+        logger.log(Level.INFO, "Termina proceso de consultar itinerario con id={0}", id);
         return itinerario;
     }
 
