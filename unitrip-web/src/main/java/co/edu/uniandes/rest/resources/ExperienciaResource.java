@@ -66,7 +66,7 @@ public class ExperienciaResource {
      * @throws LogicException cuando el evento no existe
      */
     @GET
-    @Path("{viajeroId: \\d+}/experiencias/{experienciaId: \\d+}")
+    @Path("/{experienciaId: \\d+}")
     public ExperienciaDTO getExperiencia(@PathParam("viajeroId") Long viajeroId, @PathParam("experienciaId") Long expId) throws LogicException {
         try
         {
@@ -84,7 +84,7 @@ public class ExperienciaResource {
      * @throws LogicException cuando ya existe un evento con el id suministrado
      */
     @POST
-    @Path("{viajeroId: \\d+}/experiencias/")
+    @Path("/experiencia")
     public ExperienciaDTO createExperiencia(@PathParam("viajeroId") Long viajeroId,ExperienciaDTO exp) throws LogicException {
            ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(exp);
         return ExperienciaConverter.fullEntity2DTO(experienciaLogic.createExperiencia(entity));
@@ -98,7 +98,7 @@ public class ExperienciaResource {
      * @throws LogicException cuando no existe un evento con el id suministrado
      */
     @PUT
-    @Path("{viajeroId: \\d+}/experiencias")
+    @Path("/experiencia")
     public ExperienciaDTO updateExperiencias(@PathParam("viajeroId") Long viajeroId, ExperienciaDTO exp) throws LogicException {
            ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(exp);
         entity.setId(viajeroId);
@@ -119,7 +119,7 @@ public class ExperienciaResource {
      * @throwsLogicException cuando no existe un evento con el id suministrado
      */
     @DELETE
-    @Path("{viajeroId: \\d+}/experiencias/{experienciaId: \\d+}")
+    @Path("/{experienciaId: \\d+}")
     public void deleteExperiencia(@PathParam("viajeroId") Long id, @PathParam("experienciaId") Long expId) throws LogicException {
     	experienciaLogic.deleteExperiencia(id);
     }
