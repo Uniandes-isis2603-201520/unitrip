@@ -101,7 +101,7 @@ public class ViajeLogicTest {
             ItinerarioEntity itinerarios = factory.manufacturePojo(ItinerarioEntity.class);
             em.persist(itinerarios);
             itinerariosData.add(itinerarios);
-            data.get(1).getItinerarios().add(itinerarios);
+            data.get(0).getItinerarios().add(itinerarios);
         }
     }
 
@@ -209,8 +209,14 @@ public class ViajeLogicTest {
 
     //@Test
     public void getItinerariosTest() {
-        List<ItinerarioEntity> list = viajesLogic.getViajes().get(0).getItinerarios();
-        Assert.assertEquals(itinerariosData.size(), list.size());
+        try {
+            ViajeEntity resp = viajesLogic.getViaje(data.get(0).getId());
+            Assert.assertNotNull(resp.getItinerarios());
+            List<ItinerarioEntity> list = resp.getItinerarios();
+            Assert.assertEquals(itinerariosData.size(), list.size());
+        } catch (BusinesLogicException ex) {
+            fail();
+        }
     }
 
 }

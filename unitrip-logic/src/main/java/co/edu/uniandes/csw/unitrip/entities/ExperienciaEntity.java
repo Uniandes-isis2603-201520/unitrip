@@ -29,14 +29,14 @@ public class ExperienciaEntity extends BaseEntity implements Serializable{
 
     @ManyToOne
     @PodamExclude
-    private ViajeEntity viaje;
+    private ViajeroEntity viajero;
 
-    public ViajeEntity getViaje() {
-        return viaje;
+    public ViajeroEntity getViajero() {
+        return viajero;
     }
 
-    public void setViaje(ViajeEntity viaje) {
-        this.viaje = viaje;
+    public void setViajero(ViajeroEntity viajero) {
+        this.viajero = viajero;
     }
 
     /**

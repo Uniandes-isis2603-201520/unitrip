@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -28,8 +30,17 @@ public class ViajeEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItinerarioEntity> itinerarios = new ArrayList<>();
 
-    @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ExperienciaEntity> experiencias = new ArrayList<>();
+    @ManyToOne
+    @PodamExclude
+    private ViajeroEntity viajero;
+
+    public ViajeroEntity getViajero() {
+        return viajero;
+    }
+
+    public void setViajero(ViajeroEntity viajero) {
+        this.viajero = viajero;
+    }
 
     /**
      * @return the description
@@ -67,11 +78,4 @@ public class ViajeEntity extends BaseEntity implements Serializable {
         this.itinerarios = iti;
     }
 
-   public List<ExperienciaEntity> getExperiencias() {
-        return experiencias;
-    }
-
-    public void setExperiencias(List<ExperienciaEntity> experiencias) {
-        this.experiencias = experiencias;
-    }
 }

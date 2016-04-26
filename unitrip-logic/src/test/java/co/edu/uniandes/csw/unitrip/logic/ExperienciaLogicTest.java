@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.unitrip.api.IExperienciaLogic;
 import co.edu.uniandes.csw.unitrip.ejbs.ExperienciaLogic;
 import co.edu.uniandes.csw.unitrip.entities.ExperienciaEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
+import co.edu.uniandes.csw.unitrip.entities.ViajeroEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.csw.unitrip.persistence.ExperienciaPersistence;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class ExperienciaLogicTest {
 
 
     private List<ExperienciaEntity> data = new ArrayList<ExperienciaEntity>();
-    private List<ViajeEntity> viajeData = new ArrayList<>();
+    private List<ViajeroEntity> viajeroData = new ArrayList<>();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -98,17 +99,17 @@ public class ExperienciaLogicTest {
 
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            ViajeEntity viaje = factory.manufacturePojo(ViajeEntity.class);
-            System.out.println(viaje.getDescripcion());
-            em.persist(viaje);
-            viajeData.add(viaje);
+            ViajeroEntity viajero = factory.manufacturePojo(ViajeroEntity.class);
+            //System.out.println(viajero.getDescripcion());
+            em.persist(viajero);
+            viajeroData.add(viajero);
         }
 
             for (int i = 0; i < 3; i++) {
             ExperienciaEntity entity = factory.manufacturePojo(ExperienciaEntity.class);
             entity.setDescription(randomDescripcion());
 
-            entity.setViaje(viajeData.get(0));
+            entity.setViajero(viajeroData.get(0));
             em.persist(entity);
             data.add(entity);
         }
