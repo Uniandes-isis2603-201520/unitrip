@@ -10,10 +10,7 @@ import co.edu.uniandes.rest.dtos.ViajesDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author ANDRES
- */
+
 public abstract class ViajesConverter {
 
     /**
@@ -128,7 +125,7 @@ public abstract class ViajesConverter {
         if (entity != null) {
             ViajesDTO dto = basicEntity2DTO(entity);
             dto.setItinerarios(ItinerarioConverter.listEntity2DTO(entity.getItinerarios()));
-            dto.setExperiencias(ExperienciaConverter.listEntity2DTO(entity.getExperiencias()));
+            //dto.setExperiencias(ExperienciaConverter.listEntity2DTO(entity.getExperiencias()));
             return dto;
         } else {
             return null;
@@ -147,7 +144,7 @@ public abstract class ViajesConverter {
         if (dto != null) {
             ViajeEntity entity = basicDTO2Entity(dto);
             entity.setItinerarios(ItinerarioConverter.listDTO2Entity(dto.getItinerarios()));
-            entity.setExperiencias(ExperienciaConverter.listDTO2Entity(dto.getExperiencias()));
+            //entity.setExperiencias(ExperienciaConverter.listDTO2Entity(dto.getExperiencias()));
 
             return entity;
         } else {
