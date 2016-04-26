@@ -30,7 +30,7 @@ import javax.ws.rs.core.Response;
 
 
 
-@Path("viajes")
+@Path("viajero/{idViajero: \\d+}/viajes")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces("application/json")
 public class ViajesResource {
@@ -82,6 +82,7 @@ public class ViajesResource {
      * @generated
      */
     @POST
+    @Path("{id: \\d+}")
     public ViajesDTO createViaje(ViajesDTO dto) throws LogicException {
         ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
         return ViajesConverter.fullEntity2DTO(viajeLogic.createViaje(entity));
@@ -180,7 +181,7 @@ public class ViajesResource {
      */
     @PUT
     @Path("{viajeId: \\d+}/itinerarios")
-    public List<ItinerarioDTO> replaceAuthors(@PathParam("viajeId") Long viajeId, ArrayList<ItinerarioDTO> itinerarios) {
+    public List<ItinerarioDTO> replaceItinerarios(@PathParam("viajeId") Long viajeId, ArrayList<ItinerarioDTO> itinerarios) {
         return ItinerarioConverter.listEntity2DTO(viajeLogic.replaceItinerarios(ItinerarioConverter.listDTO2Entity(itinerarios), viajeId));
     }
 
