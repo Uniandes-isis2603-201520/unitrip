@@ -30,13 +30,13 @@ public interface IViajeroLogic {
 
     public ViajeEntity getViaje(Long viajeroId, Long viajeId);
 
-    //public ViajeEntity addViaje(Long viajeId, Long viajeroId);
+    public ViajeEntity addViaje(Long viajeId, Long viajeroId);
 
     public void removeViaje(Long viajeId, Long viajeroId);
 
     public List<ViajeEntity> replaceViajes(List<ViajeEntity> viajes, Long viajeroId);
-    
+
     public ViajeroEntity createViaje(ViajeEntity entity);
-    
+
     public ViajeroEntity updateViaje(ViajeEntity entity);
 }
