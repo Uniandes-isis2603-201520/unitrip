@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IParadaLogic {
 
-     public List<ParadaEntity> getParadas();
+    public List<ParadaEntity> getParadas();
 
     public ParadaEntity getParada(Long id);
 

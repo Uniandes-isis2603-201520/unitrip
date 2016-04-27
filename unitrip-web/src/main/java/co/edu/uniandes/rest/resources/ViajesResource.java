@@ -1,7 +1,5 @@
 package co.edu.uniandes.rest.resources;
 
-
-
 import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
@@ -27,8 +25,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-
 
 @Path("viajero/{idViajero: \\d+}/viajes")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -64,11 +60,9 @@ public class ViajesResource {
     @GET
     @Path("{id: \\d+}")
     public ViajesDTO getViaje(@PathParam("id") Long id) throws LogicException {
-          try
-        {
+        try {
             return ViajesConverter.fullEntity2DTO(viajeLogic.getViaje(id));
-        }
-        catch(BusinesLogicException ex){
+        } catch (BusinesLogicException ex) {
             throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
         }
     }
@@ -101,10 +95,9 @@ public class ViajesResource {
     @PUT
     @Path("{id: \\d+}")
     public ViajesDTO updateViaje(@PathParam("id") Long id, ViajesDTO dto) throws LogicException {
-               ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
-               entity.setId(id);
-        try
-        {
+        ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
+        entity.setId(id);
+        try {
             ViajeEntity oldEntity = viajeLogic.getViaje(id);
 
         } catch (BusinesLogicException ex) {
@@ -131,14 +124,14 @@ public class ViajesResource {
      * instancia de Viaje
      *
      * @param viajeId Identificador de la instancia de Viaje
-     * @return Colección de instancias de ItinerarioDTO asociadas a la instancia de
-     * Viaje
+     * @return Colección de instancias de ItinerarioDTO asociadas a la instancia
+     * de Viaje
      * @generated
      */
     @GET
     @Path("{viajeId: \\d+}/itinerarios")
     public List<ItinerarioDTO> listItinerarios(@PathParam("viajeId") Long viajeId) {
-        List<ItinerarioEntity> list= viajeLogic.getItinerarios(viajeId);
+        List<ItinerarioEntity> list = viajeLogic.getItinerarios(viajeId);
         return ItinerarioConverter.listEntity2DTO(list);
     }
 
@@ -174,8 +167,8 @@ public class ViajesResource {
      * Remplaza las instancias de Itinerario asociadas a una instancia de Viaje
      *
      * @param viajeId Identificador de la instancia de Viaje
-     * @param itinerarios Colección de instancias de ItinerarioDTO a asociar a instancia
-     * de Viaje
+     * @param itinerarios Colección de instancias de ItinerarioDTO a asociar a
+     * instancia de Viaje
      * @return Nueva colección de ItinerarioDTO asociada a la instancia de Viaje
      * @generated
      */

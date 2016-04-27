@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
 /**
  *
  * @author je.molano1498
@@ -115,4 +116,3 @@ public class ViajeLogic implements IViajesLogic {
     }
 
 }
-

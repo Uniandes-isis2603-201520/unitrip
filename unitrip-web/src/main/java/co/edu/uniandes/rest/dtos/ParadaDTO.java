@@ -25,10 +25,11 @@ public class ParadaDTO {
      * Constructor por defecto
      */
     public ParadaDTO() {
-	}
+    }
 
     /**
      * Constructor con parámetros.
+     *
      * @param id identificador de la parada
      * @param name nombre de la parada
      * @param latitud latitud terrestre de la parada
@@ -40,18 +41,18 @@ public class ParadaDTO {
     public ParadaDTO(Long id, String name, Long latitud,
             Long longitude, String descripcion,
             Date fechaI, Date fechaF) {
-		super();
-		this.id = id;
-		this.name = name;
-                this.descripcion=descripcion;
-                this.latitud = latitud;
-                this.fechaF = fechaF;
-                this.fechaI = fechaI;
-                this.longitud = longitude;
+        super();
+        this.id = id;
+        this.name = name;
+        this.descripcion = descripcion;
+        this.latitud = latitud;
+        this.fechaF = fechaF;
+        this.fechaI = fechaI;
+        this.longitud = longitude;
 
-	}
+    }
 
-	/**
+    /**
      * @return the id
      */
     public Long getId() {
@@ -75,14 +76,14 @@ public class ParadaDTO {
     /**
      * @return the latitud
      */
-    public Long getLatitud(){
+    public Long getLatitud() {
         return latitud;
     }
 
     /**
      * @return the longitude
      */
-    public Long getLongitud(){
+    public Long getLongitud() {
         return longitud;
     }
 
@@ -96,14 +97,14 @@ public class ParadaDTO {
     /**
      * @return Fecha de Inicio
      */
-    public Date getFechaI(){
+    public Date getFechaI() {
         return fechaI;
     }
 
     /**
      * @return Fecha de Final
      */
-    public Date getFechaF(){
+    public Date getFechaF() {
         return fechaF;
     }
 
@@ -118,7 +119,7 @@ public class ParadaDTO {
      * @param lat latitud a introducir
      *
      */
-    public void setLatitud( Long lat){
+    public void setLatitud(Long lat) {
         this.latitud = lat;
     }
 
@@ -126,7 +127,7 @@ public class ParadaDTO {
      * @param longi longitude a introducir
      *
      */
-    public void setLongitud( Long longi){
+    public void setLongitud(Long longi) {
         this.longitud = longi;
     }
 
@@ -134,27 +135,27 @@ public class ParadaDTO {
      * @param descripcion descripcion a introducir
      */
     public void setDescripcion(String descripcion) {
-        this.descripcion=descripcion;
+        this.descripcion = descripcion;
     }
 
     /**
      * @param fechaI fecha de inicio de la parada
      */
-    public void setFechaI(Date fechaI){
+    public void setFechaI(Date fechaI) {
         this.fechaI = fechaI;
     }
 
     /**
      * @param fechaF fecha final de la parada
      */
-    public void setFechaF(Date fechaF){
+    public void setFechaF(Date fechaF) {
         this.fechaF = fechaF;
     }
 
-     /**
+    /**
      * @return eventos Lista de eventos asociados a una parada
      */
-    public List<EventoDTO> getEventos(){
+    public List<EventoDTO> getEventos() {
         return eventos;
     }
 
@@ -168,23 +169,24 @@ public class ParadaDTO {
     /**
      * @param eventos eventos a ingresar en la nueva lista
      */
-    public void setEventos(List<EventoDTO> eventos){
-        this.eventos=eventos;
+    public void setEventos(List<EventoDTO> eventos) {
+        this.eventos = eventos;
     }
 
     /**
      * @param evento evento a desasociar de la parada
      */
-    public void removeEvento(EventoDTO evento){
+    public void removeEvento(EventoDTO evento) {
         eventos.remove(evento);
     }
 
     /**
      * Convierte el objeto a una cadena
+     *
      * @return cadena de caracteres que suministran informacion de la parada
      */
     @Override
     public String toString() {
-    	return "{ id : " + getId() + ", name : \"" + getName() + "\" }" ;
+        return "{ id : " + getId() + ", name : \"" + getName() + "\" }";
     }
 }

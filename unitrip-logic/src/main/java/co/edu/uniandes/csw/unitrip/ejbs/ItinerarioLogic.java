@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.unitrip.ejbs;
 
-
 import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
@@ -25,7 +24,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
 
     @Override
     public List<ItinerarioEntity> getItinerarios() {
-         logger.info("Inicia proceso de consultar todos los Itinerarios");
+        logger.info("Inicia proceso de consultar todos los Itinerarios");
         List<ItinerarioEntity> itinerarios = persistence.findAll();
         logger.info("Termina proceso de consultar todos los Itinerarios");
         return itinerarios;
@@ -45,7 +44,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
 
     @Override
     public ItinerarioEntity createItinerario(ItinerarioEntity entity) throws BusinesLogicException {
-         logger.info("Inicia proceso de creación de itinerario");
+        logger.info("Inicia proceso de creación de itinerario");
         if (!validateDescripcion(entity.getDescripcion())) {
             throw new BusinesLogicException("la descripcion es inválida");
         }
@@ -67,7 +66,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
 
     @Override
     public void deleteItinerario(Long id) {
-       logger.log(Level.INFO, "Inicia proceso de borrar itinerario con id={0}", id);
+        logger.log(Level.INFO, "Inicia proceso de borrar itinerario con id={0}", id);
         persistence.delete(id);
         logger.log(Level.INFO, "Termina proceso de borrar itinerario con id={0}", id);
     }
@@ -99,7 +98,6 @@ public class ItinerarioLogic implements IItinerarioLogic {
         itinerarioEntity.getParadas().add(paradaEntity);
         return paradaEntity;
 
-
     }
 
     @Override
@@ -124,6 +122,5 @@ public class ItinerarioLogic implements IItinerarioLogic {
         }
         return true;
     }
-
 
 }

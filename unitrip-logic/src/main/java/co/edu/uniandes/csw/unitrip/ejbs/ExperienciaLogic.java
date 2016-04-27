@@ -8,10 +8,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-
 @Stateless
-public class ExperienciaLogic implements IExperienciaLogic{
-@Inject
+public class ExperienciaLogic implements IExperienciaLogic {
+
+    @Inject
     private ExperienciaPersistence persistence;
 
     @Override
@@ -43,5 +43,4 @@ public class ExperienciaLogic implements IExperienciaLogic{
         persistence.delete(id);
     }
 
-    
 }

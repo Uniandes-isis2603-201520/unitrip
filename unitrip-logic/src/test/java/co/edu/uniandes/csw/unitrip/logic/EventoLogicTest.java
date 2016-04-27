@@ -76,6 +76,7 @@ public class EventoLogicTest {
             }
         }
     }
+
     private void clearData() {
         em.createQuery("delete from EventoEntity").executeUpdate();
     }
@@ -89,6 +90,7 @@ public class EventoLogicTest {
             data.add(entity);
         }
     }
+
     @Test
     public void createEventoTest() {
         EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
@@ -105,6 +107,7 @@ public class EventoLogicTest {
         Assert.assertEquals(entity.getFechaInicio(), resp.getFechaInicio());
         Assert.assertEquals(entity.getFechaFin(), resp.getFechaFin());
     }
+
     @Test
     public void getEventosTest() {
         List<EventoEntity> resultList = eventoLogic.getEventos();
@@ -120,35 +123,37 @@ public class EventoLogicTest {
             Assert.assertTrue(found);
         }
     }
-     @Test
+
+    @Test
     public void getEventoTest() {
         EventoEntity result;
         try {
             result = eventoLogic.getEvento(data.get(0).getId());
             EventoEntity expected = em.find(EventoEntity.class, data.get(0).getId());
 
-        Assert.assertNotNull(result);
-        Assert.assertNotNull(expected);
-        Assert.assertEquals(expected.getId(), result.getId());
-        Assert.assertEquals(expected.getName(), result.getName());
-        Assert.assertEquals(expected.getLatitud(), result.getLatitud());
-        Assert.assertEquals(expected.getLongitud(), result.getLongitud());
-        Assert.assertEquals(expected.getDescription(), result.getDescription());
-        Assert.assertEquals(expected.getFechaInicio(), result.getFechaInicio());
-        Assert.assertEquals(expected.getFechaFin(), result.getFechaFin());
+            Assert.assertNotNull(result);
+            Assert.assertNotNull(expected);
+            Assert.assertEquals(expected.getId(), result.getId());
+            Assert.assertEquals(expected.getName(), result.getName());
+            Assert.assertEquals(expected.getLatitud(), result.getLatitud());
+            Assert.assertEquals(expected.getLongitud(), result.getLongitud());
+            Assert.assertEquals(expected.getDescription(), result.getDescription());
+            Assert.assertEquals(expected.getFechaInicio(), result.getFechaInicio());
+            Assert.assertEquals(expected.getFechaFin(), result.getFechaFin());
         } catch (BusinesLogicException ex) {
             Logger.getLogger(EventoLogicTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
     }
-     @Test
+
+    @Test
     public void deleteEventoTest() {
         EventoEntity entity = data.get(1);
         eventoLogic.deleteEvento(entity.getId());
         EventoEntity deleted = em.find(EventoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+
     @Test
     public void updateEventoTest() {
         EventoEntity entity = data.get(0);

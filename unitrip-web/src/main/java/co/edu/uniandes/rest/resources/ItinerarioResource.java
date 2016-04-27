@@ -3,9 +3,7 @@
  * Clase que representa el recurso "/itinerarios"
  * Implementa varios métodos para manipular los itinerarios
  */
-
 package co.edu.uniandes.rest.resources;
-
 
 import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
@@ -16,7 +14,6 @@ import co.edu.uniandes.rest.converters.ParadaConverter;
 import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.dtos.ParadaDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
-
 
 import java.util.List;
 import java.util.logging.Level;
@@ -37,7 +34,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
 @Path("itinerarios")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -45,17 +41,17 @@ public class ItinerarioResource {
 
     private static final Logger logger = Logger.getLogger(ItinerarioResource.class.getName());
 
-        @Inject
-	private IItinerarioLogic itinerarioLogic;
+    @Inject
+    private IItinerarioLogic itinerarioLogic;
 
-
-	/**
-	 * Obtiene el listado de itinerarioes.
-	 * @return lista de itinerarios
-	 */
+    /**
+     * Obtiene el listado de itinerarioes.
+     *
+     * @return lista de itinerarios
+     */
     @GET
     public List<ItinerarioDTO> getItinerarios() {
-       logger.info("Se ejecuta método getItinerarios");
+        logger.info("Se ejecuta método getItinerarios");
         List<ItinerarioEntity> itinerarios = itinerarioLogic.getItinerarios();
         return ItinerarioConverter.listEntity2DTO(itinerarios);
 
@@ -63,6 +59,7 @@ public class ItinerarioResource {
 
     /**
      * Obtiene un itinerario
+     *
      * @param id identificador de el itinerario
      * @return itinerario encontrada
      */
@@ -77,6 +74,7 @@ public class ItinerarioResource {
 
     /**
      * Agrega un itinerario
+     *
      * @param dto itinerario a agregar
      * @return datos de el itinerario a agregar
      */
@@ -93,11 +91,11 @@ public class ItinerarioResource {
         }
         return ItinerarioConverter.fullEntity2DTO(newEntity);
 
-
     }
 
     /**
      * Actualiza los datos de un itinerario
+     *
      * @param id identificador de el itinerario a modificar
      * @param itinerario itinerario a modificar
      * @return datos de el itinerario modificada
@@ -122,12 +120,13 @@ public class ItinerarioResource {
 
     /**
      * Elimina los datos de un itinerario
+     *
      * @param id identificador de el itinerario a eliminar
      */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteItinerario(@PathParam("id") Long id) {
-    	logger.log(Level.INFO, "Se ejecuta método deleteItinerario con id={0}", id);
+        logger.log(Level.INFO, "Se ejecuta método deleteItinerario con id={0}", id);
         itinerarioLogic.deleteItinerario(id);
     }
 
@@ -136,20 +135,20 @@ public class ItinerarioResource {
      * instancia de Itinerario
      *
      * @param itinerarioId Identificador de la instancia de Itinerario
-     * @return Colección de instancias de ItinerarioDTO asociadas a la instancia de
-     * Viaje
+     * @return Colección de instancias de ItinerarioDTO asociadas a la instancia
+     * de Viaje
      * @generated
      */
     @GET
     @Path("{itinerarioId: \\d+}/paradas")
-    public List<ParadaDTO> listParadas(@PathParam("itinerarioId") Long itinerarioId){
+    public List<ParadaDTO> listParadas(@PathParam("itinerarioId") Long itinerarioId) {
         // falta este metodo
-       List<ParadaEntity> paradas = itinerarioLogic.getParadas(itinerarioId);
+        List<ParadaEntity> paradas = itinerarioLogic.getParadas(itinerarioId);
         return ParadaConverter.listEntity2DTO(paradas);
 
     }
 
-     /**
+    /**
      * Obtiene un objeto de Parada asociada a un objeto de Itinerario
      *
      * @param itinerarioId Identificador del objeto de Itinerario
@@ -168,7 +167,8 @@ public class ItinerarioResource {
      *
      * @param itinerarioId Identificador del objeto de Itinerario
      * @param paradaId Identificador del objeto de Parada
-     * @return Objeto de ParadaDTO en representación full que fue asociado a Itinerario
+     * @return Objeto de ParadaDTO en representación full que fue asociado a
+     * Itinerario
      * @generated
      */
     @POST
@@ -187,8 +187,8 @@ public class ItinerarioResource {
      * Remplaza los objetos de Parada asociados a un objeto de Itinerario
      *
      * @param itinerarioId Identificador del objeto de Itinerario
-     * @param paradas Colección de objetos de ParadaDTO en representación minimum a asociar a objeto
-     * de Itinerario
+     * @param paradas Colección de objetos de ParadaDTO en representación
+     * minimum a asociar a objeto de Itinerario
      * @return Nueva colección de ParadaDTO en representación Basic
      * @generated
      */
@@ -217,6 +217,5 @@ public class ItinerarioResource {
     public void removeParadas(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
         itinerarioLogic.removeParada(itinerarioId, paradaId);
     }
-
 
 }

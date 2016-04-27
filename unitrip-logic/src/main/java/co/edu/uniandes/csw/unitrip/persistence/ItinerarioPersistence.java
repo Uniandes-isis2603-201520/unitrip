@@ -14,7 +14,6 @@ public class ItinerarioPersistence {
 
     private static final Logger logger = Logger.getLogger(ItinerarioPersistence.class.getName());
 
-
     @PersistenceContext(unitName = "UnitripPU")
     protected EntityManager em;
 

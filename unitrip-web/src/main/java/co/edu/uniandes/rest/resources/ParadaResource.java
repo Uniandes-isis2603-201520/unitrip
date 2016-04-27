@@ -1,6 +1,5 @@
 package co.edu.uniandes.rest.resources;
 
-
 import co.edu.uniandes.csw.unitrip.api.IParadaLogic;
 import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
@@ -27,7 +26,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
 @Path("paradas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -38,10 +36,11 @@ public class ParadaResource {
     @Inject
     private IParadaLogic paradaLogic;
 
-     /**
+    /**
      * Obtiene la lista de los registros de Parada.
      *
-     * @return Colección de objetos de ParadaDTO cada uno con sus respectivos Review
+     * @return Colección de objetos de ParadaDTO cada uno con sus respectivos
+     * Review
      * @generated
      */
     @GET
@@ -55,7 +54,8 @@ public class ParadaResource {
      * Obtiene los datos de un objeto de Parada a partir de su ID.
      *
      * @param id Identificador del objeto a consultar
-     * @return Instancia de ParadaDTO con los datos del Parada consultado y sus Review
+     * @return Instancia de ParadaDTO con los datos del Parada consultado y sus
+     * Review
      * @generated
      */
     @GET
@@ -127,7 +127,8 @@ public class ParadaResource {
     }
 
     /**
-     * Obtiene una colección de objetos de EventoDTO asociados a un objeto de Parada
+     * Obtiene una colección de objetos de EventoDTO asociados a un objeto de
+     * Parada
      *
      * @param paradaId Identificador del objeto de Parada
      * @return Colección de objetos de EventoDTO en representación basic
@@ -159,7 +160,8 @@ public class ParadaResource {
      *
      * @param paradaId Identificador del objeto de Parada
      * @param eventoId Identificador del objeto de Evento
-     * @return Objeto de EventoDTO en representación full que fue asociado a Parada
+     * @return Objeto de EventoDTO en representación full que fue asociado a
+     * Parada
      * @generated
      */
     @POST
@@ -178,8 +180,8 @@ public class ParadaResource {
      * Remplaza los objetos de Evento asociados a un objeto de Parada
      *
      * @param paradaId Identificador del objeto de Parada
-     * @param eventos Colección de objetos de EventoDTO en representación minimum a asociar a objeto
-     * de Parada
+     * @param eventos Colección de objetos de EventoDTO en representación
+     * minimum a asociar a objeto de Parada
      * @return Nueva colección de EventoDTO en representación Basic
      * @generated
      */
@@ -209,56 +211,44 @@ public class ParadaResource {
         paradaLogic.removeEvento(paradaId, eventoId);
     }
 
-
-
     /**
-    @GET
-    public List<ParadaDTO> getParadas() {
-        return ParadaConverter.listEntity2DTO(paradaLogic.getParadas());
-
-    }
-
-
-    @GET
-    @Path("{id: \\d+}")
-    public ParadaDTO getParada(@PathParam("id") Long id) throws LogicException {
-        try{
-        return ParadaConverter.fullEntity2DTO(paradaLogic.getParada(id));
-        }
-        catch(BusinesLogicException ex){
-            throw new WebApplicationException(ex.getLocalizedMessage(),ex,Response.Status.NOT_FOUND);
-        }
-
-    }
-
-
-    @POST
-    public ParadaDTO createParada(ParadaDTO dto) throws LogicException {
-        ParadaEntity entity = ParadaConverter.fullDTO2Entity(dto);
-        return ParadaConverter.fullEntity2DTO(paradaLogic.createParada(entity));
-
-    }
-
-
-    @PUT
-    @Path("{id: \\d+}")
-    public ParadaDTO updateParada(@PathParam("id") Long id,ParadaDTO dto) throws LogicException {
-        ParadaEntity entity = ParadaConverter.fullDTO2Entity(dto);
-        entity.setId(id);
-        try{
-        ParadaEntity oldEntity = paradaLogic.getParada(id);
-        }
-        catch(BusinesLogicException ex){
-            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
-        }
-        return ParadaConverter.fullEntity2DTO(paradaLogic.updateParada(entity));
-    }
-
-
-    @DELETE
-    @Path("{id: \\d+}")
-    public void deleteParada(@PathParam("id") Long id) throws LogicException {
-        paradaLogic.deleteParada(id);
-    }
-    **/
+     * @GET public List<ParadaDTO> getParadas() { return
+     * ParadaConverter.listEntity2DTO(paradaLogic.getParadas());
+     *
+     * }
+     *
+     *
+     * @GET
+     * @Path("{id: \\d+}") public ParadaDTO getParada(@PathParam("id") Long id)
+     * throws LogicException { try{ return
+     * ParadaConverter.fullEntity2DTO(paradaLogic.getParada(id)); }
+     * catch(BusinesLogicException ex){ throw new
+     * WebApplicationException(ex.getLocalizedMessage(),ex,Response.Status.NOT_FOUND);
+     * }
+     *
+     * }
+     *
+     *
+     * @POST public ParadaDTO createParada(ParadaDTO dto) throws LogicException
+     * { ParadaEntity entity = ParadaConverter.fullDTO2Entity(dto); return
+     * ParadaConverter.fullEntity2DTO(paradaLogic.createParada(entity));
+     *
+     * }
+     *
+     *
+     * @PUT
+     * @Path("{id: \\d+}") public ParadaDTO updateParada(@PathParam("id") Long
+     * id,ParadaDTO dto) throws LogicException { ParadaEntity entity =
+     * ParadaConverter.fullDTO2Entity(dto); entity.setId(id); try{ ParadaEntity
+     * oldEntity = paradaLogic.getParada(id); } catch(BusinesLogicException ex){
+     * throw new WebApplicationException(ex.getLocalizedMessage(), ex,
+     * Response.Status.NOT_FOUND); } return
+     * ParadaConverter.fullEntity2DTO(paradaLogic.updateParada(entity)); }
+     *
+     *
+     * @DELETE
+     * @Path("{id: \\d+}") public void deleteParada(@PathParam("id") Long id)
+     * throws LogicException { paradaLogic.deleteParada(id); }
+     *
+     */
 }

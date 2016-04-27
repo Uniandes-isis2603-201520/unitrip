@@ -25,6 +25,4 @@ public interface IEventoLogic {
 
     public void deleteEvento(Long id);
 
-
 }
-

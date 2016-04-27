@@ -52,9 +52,9 @@ public class ParadaConverter {
     }
 
     /**
-     * Realiza la conversión de ParaaDTO a ParadaEntity Se invoca cuando otro DTO
-     * tiene una referencia a ParadaDTO Convierte únicamente el ID ya que es el
-     * único atributo necesario para guardar la relación en la base de datos
+     * Realiza la conversión de ParaaDTO a ParadaEntity Se invoca cuando otro
+     * DTO tiene una referencia a ParadaDTO Convierte únicamente el ID ya que es
+     * el único atributo necesario para guardar la relación en la base de datos
      *
      * @param dto instancia de ParadaDTO a convertir
      * @return instancia de ParadaEntity con los datos recibidos por parámetro
@@ -72,8 +72,8 @@ public class ParadaConverter {
     }
 
     /**
-     * Convierte una instancia de ParadaEntity a ParadaDTO Se invoca cuando se desea
-     * consultar la entidad y sus relaciones muchos a uno o uno a uno
+     * Convierte una instancia de ParadaEntity a ParadaDTO Se invoca cuando se
+     * desea consultar la entidad y sus relaciones muchos a uno o uno a uno
      *
      * @param entity instancia de ParadaEntity a convertir
      * @return Instancia de ParadaDTO con los datos recibidos por parámetro
@@ -90,7 +90,6 @@ public class ParadaConverter {
             dto.setFechaI(entity.getFechaI());
             dto.setFechaF(entity.getFechaF());
 
-
             return dto;
         } else {
             return null;
@@ -99,8 +98,8 @@ public class ParadaConverter {
 
     /**
      * Convierte una instancia de ParadaDTO a ParadaEntity Se invoca cuando se
-     * necesita convertir una instancia de ParadaDTO con los atributos propios de
-     * la entidad y con las relaciones uno a uno o muchos a uno
+     * necesita convertir una instancia de ParadaDTO con los atributos propios
+     * de la entidad y con las relaciones uno a uno o muchos a uno
      *
      * @param dto instancia de ParadaDTO a convertir
      * @return Instancia de ParadaEntity creada a partir de los datos de dto
@@ -123,8 +122,8 @@ public class ParadaConverter {
     }
 
     /**
-     * Convierte instancias de ParadaEntity a ParadaDTO incluyendo sus relaciones
-     * Uno a muchos y Muchos a muchos
+     * Convierte instancias de ParadaEntity a ParadaDTO incluyendo sus
+     * relaciones Uno a muchos y Muchos a muchos
      *
      * @param entity Instancia de ParadaEntity a convertir
      * @return Instancia de ParadaDTO con los datos recibidos por parámetro
@@ -159,9 +158,9 @@ public class ParadaConverter {
     }
 
     /**
-     * Convierte una colección de instancias de ParadaEntity a ParadaDTO. Para cada
-     * instancia de ParadaEntity en la lista, invoca basicEntity2DTO y añade el
-     * nuevo ParadaDTO a una nueva lista
+     * Convierte una colección de instancias de ParadaEntity a ParadaDTO. Para
+     * cada instancia de ParadaEntity en la lista, invoca basicEntity2DTO y
+     * añade el nuevo ParadaDTO a una nueva lista
      *
      * @param entities Colección de entidades a convertir
      * @return Collección de instancias de ParadaDTO
@@ -195,6 +194,3 @@ public class ParadaConverter {
         return entities;
     }
 }
-
-
-

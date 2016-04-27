@@ -48,16 +48,13 @@ public class ParadaPersistenceTest {
     }
 
     @Deployment
-    public static JavaArchive createDeployment()
-    {
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ParadaEntity.class.getPackage())
                 .addPackage(ParadaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-
-
 
     @Before
     public void configTest() {
@@ -77,14 +74,14 @@ public class ParadaPersistenceTest {
 
     }
 
-    private void clearData(){
+    private void clearData() {
         em.createQuery("delete from ParadaEntity").executeUpdate();
     }
 
     private List<ParadaEntity> data = new ArrayList<>();
 
-    private void insertData(){
-        for(int i =0 ; i<3 ; i++){
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
             ParadaEntity entity = factory.manufacturePojo(ParadaEntity.class);
             em.persist(entity);
             data.add(entity);
@@ -148,87 +145,64 @@ public class ParadaPersistenceTest {
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
 
-
-
-
-
     /**
-
-
-    @Test
-    public void testFind() throws Exception {
-        System.out.println("find");
-        Long id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ParadaPersistence instance = (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
-        ParadaEntity expResult = null;
-        ParadaEntity result = instance.find(id);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-
-
-    @Test
-    public void testFindAll() throws Exception {
-        System.out.println("findAll");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ParadaPersistence instance = (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
-        List<ParadaEntity> expResult = null;
-        List<ParadaEntity> result = instance.findAll();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-
-    @Test
-    public void testCreate() throws Exception {
-        System.out.println("create");
-        ParadaEntity entity = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ParadaPersistence instance = (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
-        ParadaEntity expResult = null;
-        ParadaEntity result = instance.create(entity);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-
-    @Test
-    public void testUpdate() throws Exception {
-        System.out.println("update");
-        ParadaEntity entity = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ParadaPersistence instance = (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
-        ParadaEntity expResult = null;
-        ParadaEntity result = instance.update(entity);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-
-    @Test
-    public void testDelete() throws Exception {
-        System.out.println("delete");
-        Long id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ParadaPersistence instance = (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
-        instance.delete(id);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    @org.junit.Test
-    public void testSomeMethod() {
-    }
-
-    **/
+     *
+     *
+     * @Test public void testFind() throws Exception {
+     * System.out.println("find"); Long id = null; EJBContainer container =
+     * javax.ejb.embeddable.EJBContainer.createEJBContainer(); ParadaPersistence
+     * instance =
+     * (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
+     * ParadaEntity expResult = null; ParadaEntity result = instance.find(id);
+     * assertEquals(expResult, result); container.close(); // TODO review the
+     * generated test code and remove the default call to fail. fail("The test
+     * case is a prototype."); }
+     *
+     *
+     *
+     * @Test public void testFindAll() throws Exception {
+     * System.out.println("findAll"); EJBContainer container =
+     * javax.ejb.embeddable.EJBContainer.createEJBContainer(); ParadaPersistence
+     * instance =
+     * (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
+     * List<ParadaEntity> expResult = null; List<ParadaEntity> result =
+     * instance.findAll(); assertEquals(expResult, result); container.close();
+     * // TODO review the generated test code and remove the default call to
+     * fail. fail("The test case is a prototype."); }
+     *
+     *
+     * @Test public void testCreate() throws Exception {
+     * System.out.println("create"); ParadaEntity entity = null; EJBContainer
+     * container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+     * ParadaPersistence instance =
+     * (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
+     * ParadaEntity expResult = null; ParadaEntity result =
+     * instance.create(entity); assertEquals(expResult, result);
+     * container.close(); // TODO review the generated test code and remove the
+     * default call to fail. fail("The test case is a prototype."); }
+     *
+     *
+     * @Test public void testUpdate() throws Exception {
+     * System.out.println("update"); ParadaEntity entity = null; EJBContainer
+     * container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+     * ParadaPersistence instance =
+     * (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
+     * ParadaEntity expResult = null; ParadaEntity result =
+     * instance.update(entity); assertEquals(expResult, result);
+     * container.close(); // TODO review the generated test code and remove the
+     * default call to fail. fail("The test case is a prototype."); }
+     *
+     *
+     * @Test public void testDelete() throws Exception {
+     * System.out.println("delete"); Long id = null; EJBContainer container =
+     * javax.ejb.embeddable.EJBContainer.createEJBContainer(); ParadaPersistence
+     * instance =
+     * (ParadaPersistence)container.getContext().lookup("java:global/classes/ParadaPersistence");
+     * instance.delete(id); container.close(); // TODO review the generated test
+     * code and remove the default call to fail. fail("The test case is a
+     * prototype."); }
+     * @org.junit.Test public void testSomeMethod() { }
+     *
+     *
+     */
 }

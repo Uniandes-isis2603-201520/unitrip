@@ -31,6 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+
 /**
  *
  * @author je.molano1498
@@ -55,7 +56,6 @@ public class ViajeLogicTest {
     private List<ViajeEntity> data = new ArrayList<ViajeEntity>();
 
     private List<ItinerarioEntity> itinerariosData = new ArrayList<>();
-
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -135,29 +135,24 @@ public class ViajeLogicTest {
             Assert.assertTrue(found);
         }
     }
+
     @Test
     public void getViajeTest() {
         ViajeEntity expected = factory.manufacturePojo(ViajeEntity.class);
         ViajeEntity created = viajesLogic.createViaje(expected);
-        try
-        {
-            ViajeEntity created2 =viajesLogic.getViaje(created.getId());
+        try {
+            ViajeEntity created2 = viajesLogic.getViaje(created.getId());
             Assert.assertNotNull(created2);
             Assert.assertEquals(expected.getId(), created2.getId());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             fail("no deberia generar excepcion");
 
         }
-        try
-        {
+        try {
             ViajeEntity expected2 = factory.manufacturePojo(ViajeEntity.class);
             viajesLogic.getViaje(expected2.getId());
             fail("deberia generar excepcion");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             //debe pasar por aqui
         }
     }
@@ -175,22 +170,19 @@ public class ViajeLogicTest {
             ViajeEntity resp = viajesLogic.getViaje(entity.getId());
 
             Assert.assertEquals(newEntity.getName(), resp.getName());
-        } catch (BusinesLogicException ex)
-        {
+        } catch (BusinesLogicException ex) {
             fail("no deberia generar excepcion");
         }
     }
+
     @Test
     public void deleteViajeTest() {
         ViajeEntity entity = data.get(0);
         viajesLogic.deleteViaje(entity.getId());;
-        try
-        {
+        try {
             viajesLogic.getViaje(entity.getId());
             fail("deberia generar excepcion");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             //debe pasar por aqui
         }
     }
@@ -198,13 +190,13 @@ public class ViajeLogicTest {
     //@Test
     public void addItinerarioTest() {
         try {
-                ItinerarioEntity itinerarios = factory.manufacturePojo(ItinerarioEntity.class);
-                itinerarioLogic.createItinerario(itinerarios);
-                viajesLogic.addItinerario(itinerarios.getId(),data.get(0).getId());
-                ViajeEntity resp =viajesLogic.getViaje(data.get(0).getId());
-                Assert.assertNotNull(resp.getItinerarios());
-            } catch (BusinesLogicException ex) {
-            }
+            ItinerarioEntity itinerarios = factory.manufacturePojo(ItinerarioEntity.class);
+            itinerarioLogic.createItinerario(itinerarios);
+            viajesLogic.addItinerario(itinerarios.getId(), data.get(0).getId());
+            ViajeEntity resp = viajesLogic.getViaje(data.get(0).getId());
+            Assert.assertNotNull(resp.getItinerarios());
+        } catch (BusinesLogicException ex) {
+        }
     }
 
     //@Test

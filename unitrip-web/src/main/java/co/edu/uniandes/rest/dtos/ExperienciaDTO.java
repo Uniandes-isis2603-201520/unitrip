@@ -10,7 +10,8 @@ package co.edu.uniandes.rest.dtos;
  * @author ANDRES
  */
 public class ExperienciaDTO {
-     private Long id;
+
+    private Long id;
     private String name;
     private String descripcion;
     private String rutaImagen;
@@ -19,26 +20,25 @@ public class ExperienciaDTO {
      * Constructor por defecto
      */
     public ExperienciaDTO() {
-	}
+    }
 
     /**
      * Constructor con parámetros.
+     *
      * @param id identificador del Experiencia
      * @param name nombre del Experiencia
      * @param descripcion descripcion del Experiencia
-     * @param rutaI rutaImagen de la Experiencia  
-     
+     * @param rutaI rutaImagen de la Experiencia *
      */
-    public ExperienciaDTO(Long id, String name, String descripcion
-    , String rutaI) {
-		super();
-		this.id = id;
-		this.name = name;
-                this.descripcion = descripcion;
-                this.rutaImagen = rutaI;                
-	}
+    public ExperienciaDTO(Long id, String name, String descripcion, String rutaI) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.descripcion = descripcion;
+        this.rutaImagen = rutaI;
+    }
 
-	/**
+    /**
      * @return the id
      */
     public Long getId() {
@@ -65,7 +65,7 @@ public class ExperienciaDTO {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     /**
      * @return la descripcion del Experiencia
      */
@@ -79,7 +79,7 @@ public class ExperienciaDTO {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     /**
      * @return Ruta de la imagen
      */
@@ -93,13 +93,12 @@ public class ExperienciaDTO {
     public void setRutaI(String rutaI) {
         this.rutaImagen = rutaI;
     }
-    
-    
+
     /**
      * Convierte el objeto a una cadena
      */
     @Override
     public String toString() {
-    	return "{ id : " + getId() + ", name : \"" + getName() + ", descripcion: \""+ getDescripcion()+", ruta imagen: \""+getRutaI()+ "\" }" ;  
-    }   
+        return "{ id : " + getId() + ", name : \"" + getName() + ", descripcion: \"" + getDescripcion() + ", ruta imagen: \"" + getRutaI() + "\" }";
+    }
 }

@@ -28,10 +28,11 @@ public class EventoDTO {
      * Constructor por defecto
      */
     public EventoDTO() {
-	}
+    }
 
     /**
      * Constructor con parámetros.
+     *
      * @param id identificador del evento
      * @param name nombre del evento
      * @param latitud coordenada de latitud del evento
@@ -49,9 +50,9 @@ public class EventoDTO {
         this.description = description;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-	}
+    }
 
-	/**
+    /**
      * @return the id
      */
     public Long getId() {
@@ -92,6 +93,7 @@ public class EventoDTO {
     public void setLatitud(Long latitud) {
         this.latitud = latitud;
     }
+
     /**
      * @return the longitud
      */
@@ -105,6 +107,7 @@ public class EventoDTO {
     public void setLongitud(Long longitud) {
         this.longitud = longitud;
     }
+
     /**
      * @return the description
      */
@@ -118,6 +121,7 @@ public class EventoDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
     /**
      * @return the fechaInicio
      */
@@ -131,6 +135,7 @@ public class EventoDTO {
     public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
+
     /**
      * @return the fechaFin
      */
@@ -145,11 +150,12 @@ public class EventoDTO {
         this.fechaFin = fechaFin;
     }
 
-    public ParadaDTO getParada(){
+    public ParadaDTO getParada() {
         return parada;
     }
-    public void setParada(ParadaDTO parada){
-        this.parada=parada;
+
+    public void setParada(ParadaDTO parada) {
+        this.parada = parada;
     }
 
     /**
@@ -157,7 +163,7 @@ public class EventoDTO {
      */
     @Override
     public String toString() {
-    	return "{ id : " + getId() + ", name : \"" + getName() + "\"  }" ;
+        return "{ id : " + getId() + ", name : \"" + getName() + "\"  }";
     }
 
 }

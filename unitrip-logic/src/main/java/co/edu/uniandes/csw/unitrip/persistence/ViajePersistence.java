@@ -16,6 +16,7 @@ import javax.persistence.Query;
 
 @Stateless
 public class ViajePersistence {
+
     private static final Logger logger = Logger.getLogger(ViajePersistence.class.getName());
 
     @PersistenceContext(unitName = "UnitripPU")

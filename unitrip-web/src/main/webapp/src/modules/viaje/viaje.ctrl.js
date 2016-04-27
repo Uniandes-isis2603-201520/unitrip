@@ -30,8 +30,8 @@
                 $scope.opened = true;
             };
 
-            $scope.goItinerarios = function() {
-                $location.path(src/modules/itinerario/itinerario.tpl.html);
+            $scope.goItinerarios = function () {
+                $location.path(src / modules / itinerario / itinerario.tpl.html);
             };
 
             //Alertas
@@ -153,7 +153,7 @@
             this.fetchRecords();
 
 
-            
+
 
 
 

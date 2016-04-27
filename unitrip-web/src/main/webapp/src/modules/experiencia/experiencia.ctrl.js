@@ -16,7 +16,7 @@
                 id: '' /*Tipo Long*/,
                 name: '' /*Tipo String*/,
                 descripcion: '' /*Tipo String*/,
-                fechaPublicacion:  '' /*Tipo Date*/
+                fechaPublicacion: '' /*Tipo Date*/
             };
             $scope.records = [];
 

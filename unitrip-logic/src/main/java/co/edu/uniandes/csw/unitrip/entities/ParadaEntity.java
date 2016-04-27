@@ -23,7 +23,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author ANDRES
  */
 @Entity
-public class ParadaEntity extends BaseEntity implements Serializable{
+public class ParadaEntity extends BaseEntity implements Serializable {
 
     private Long latitud;
     private Long longitud;
@@ -33,13 +33,11 @@ public class ParadaEntity extends BaseEntity implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date fechaF;
 
-
     @ManyToOne
     @PodamExclude
     private ItinerarioEntity itinerario;
 
-
-     @OneToMany(mappedBy = "parada", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "parada", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EventoEntity> eventos = new ArrayList<>();
 
     /**
@@ -67,7 +65,7 @@ public class ParadaEntity extends BaseEntity implements Serializable{
      * @param lat the latitud to set
      */
     public void setLatitud(Long lat) {
-        this.latitud =lat;
+        this.latitud = lat;
     }
 
     public List<EventoEntity> getEventos() {
@@ -85,6 +83,7 @@ public class ParadaEntity extends BaseEntity implements Serializable{
     public void setLongitud(Long longi) {
         this.longitud = longi;
     }
+
     public Date getFechaI() {
         return fechaI;
     }
@@ -92,6 +91,7 @@ public class ParadaEntity extends BaseEntity implements Serializable{
     public void setFechaI(Date fechaI) {
         this.fechaI = fechaI;
     }
+
     public Date getFechaF() {
         return fechaF;
     }
@@ -108,5 +108,3 @@ public class ParadaEntity extends BaseEntity implements Serializable{
         this.itinerario = itinerario;
     }
 }
-
-

@@ -40,11 +40,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ExperienciaLogicTest {
 
-
-
     public ExperienciaLogicTest() {
     }
-
 
     private PodamFactory factory = new PodamFactoryImpl();
 
@@ -56,7 +53,6 @@ public class ExperienciaLogicTest {
 
     @Inject
     private UserTransaction utx;
-
 
     private List<ExperienciaEntity> data = new ArrayList<ExperienciaEntity>();
     private List<ViajeroEntity> viajeroData = new ArrayList<>();
@@ -72,11 +68,9 @@ public class ExperienciaLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
-
-
     @Before
     public void setUp() {
-         try {
+        try {
             utx.begin();
             clearData();
             insertData();
@@ -91,7 +85,6 @@ public class ExperienciaLogicTest {
         }
     }
 
-
     private void clearData() {
         em.createQuery("delete from ExperienciaEntity").executeUpdate();
         em.createQuery("delete from ViajeEntity").executeUpdate(); // no se si este se deberia hacer
@@ -105,7 +98,7 @@ public class ExperienciaLogicTest {
             viajeroData.add(viajero);
         }
 
-            for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             ExperienciaEntity entity = factory.manufacturePojo(ExperienciaEntity.class);
             entity.setDescription(randomDescripcion());
 
@@ -115,8 +108,7 @@ public class ExperienciaLogicTest {
         }
     }
 
-    public String randomDescripcion()
-    {
+    public String randomDescripcion() {
         return "Descripcion de experiencia";
     }
 
@@ -125,7 +117,7 @@ public class ExperienciaLogicTest {
      */
     @Test
     public void testGetExperiencias() throws Exception {
-          List<ExperienciaEntity> resultList = experienciaLogic.getExperiencias();
+        List<ExperienciaEntity> resultList = experienciaLogic.getExperiencias();
         List<ExperienciaEntity> expectedList = em.createQuery("SELECT u from ExperienciaEntity u").getResultList();
         Assert.assertEquals(expectedList.size(), resultList.size());
         for (ExperienciaEntity expected : expectedList) {
@@ -144,7 +136,7 @@ public class ExperienciaLogicTest {
      */
     @Test
     public void testGetExperiencia() throws Exception {
-         ExperienciaEntity result = experienciaLogic.getExperiencia(data.get(0).getId());
+        ExperienciaEntity result = experienciaLogic.getExperiencia(data.get(0).getId());
         ExperienciaEntity expected = em.find(ExperienciaEntity.class, data.get(0).getId());
 
         Assert.assertNotNull(expected);
@@ -161,7 +153,7 @@ public class ExperienciaLogicTest {
     public void testCreateExperiencia() throws Exception {
 
         ExperienciaEntity entity = factory.manufacturePojo(ExperienciaEntity.class);
-        entity.setDescription(randomDescripcion ());
+        entity.setDescription(randomDescripcion());
         ExperienciaEntity created = experienciaLogic.createExperiencia(entity);
         ExperienciaEntity result = em.find(ExperienciaEntity.class, created.getId());
         Assert.assertNotNull(result);
@@ -176,20 +168,19 @@ public class ExperienciaLogicTest {
     @Test
     public void testUpdateExperiencia() throws Exception {
         ExperienciaEntity entity = data.get(0);
-            ExperienciaEntity pojoEntity = factory.manufacturePojo(ExperienciaEntity.class);
-            pojoEntity.setDescription(randomDescripcion());
+        ExperienciaEntity pojoEntity = factory.manufacturePojo(ExperienciaEntity.class);
+        pojoEntity.setDescription(randomDescripcion());
 
-            pojoEntity.setId(entity.getId());
+        pojoEntity.setId(entity.getId());
 
-            experienciaLogic.updateExperiencia(pojoEntity);
+        experienciaLogic.updateExperiencia(pojoEntity);
 
-            ExperienciaEntity resp = em.find(ExperienciaEntity.class, entity.getId());
+        ExperienciaEntity resp = em.find(ExperienciaEntity.class, entity.getId());
 
-            Assert.assertEquals(pojoEntity.getId(), resp.getId());
-            Assert.assertEquals(pojoEntity.getName(), resp.getName());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getName(), resp.getName());
 
     }
-
 
     /**
      * Test of deleteExperiencia method, of class ExperienciaLogic.
@@ -201,7 +192,5 @@ public class ExperienciaLogicTest {
         ExperienciaEntity deleted = em.find(ExperienciaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-
-
 
 }

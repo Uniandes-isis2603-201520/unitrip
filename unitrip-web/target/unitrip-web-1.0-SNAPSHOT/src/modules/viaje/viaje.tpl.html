@@ -24,11 +24,13 @@
 </div>
 
 <div class="jumbotronViaje"></div>
-            
 
-<center>
-    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="color:#ffffff;background-color:#cf71af">{{alert.msg}} </alert>
-    
+
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="color:#ffffff;background-color:#cf71af">{{alert.msg}} </alert>
+
+<div ng-hide="ctrl.editMode">
+
+    <!--joda
     <div ng-hide="ctrl.editMode" class="col-md-6" style="text-align:center">
         <table class="table table-striped table-bordered" style="color:#ffffff;background-color:#6e1352">
             <thead>
@@ -43,27 +45,80 @@
                     <td>
                         <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                         <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                        <button id="{{$index}}-itinerarios-btn" class="btn btn-default btn-sm" ng-click="ctrl.goItinerarios()"><span class="glyphicon glyphicon-minus"></span> Mis Itinerarios</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div ng-show="ctrl.editMode" class="col-md-6 well" style="color:#ffffff;background-color:#6e1352">
-        <form novalidate name="form" id="viaje-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()" style="color:#ffffff;background-color:#6e1352">
-            <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required" >
-                <div ng-message="required" >
-                    Please, Fill the required field!
-                </div>
-            </alert>
-            <fieldset>
-                <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id" />
-                <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}">
-                    <label for="name" class="col-md-2 control-label">Name</label>
-                    <div class="col-md-10">
-                        <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+    -->
+
+    <div ng-repeat="record in records">
+        <div class="col-md-4 col-sm-6 col-lg-3 well">
+
+            <div class="caption" >
+                <p><strong>Name:</strong> <span id="{{$index}}-name">{{record.name}}</span></p>
+            </div>
+            <p class="text-center">
+                <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                <button ui-sref="itinerario" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Mis Itinerarios</button>
+            </p>
+        </div>
     </div>
-</center>
+
+
+</div>
+
+<div ng-show="ctrl.editMode" class="col-md-6 well" style="color:#ffffff;background-color:#6e1352">
+    <form novalidate name="form" id="viaje-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()" style="color:#ffffff;background-color:#6e1352">
+        <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required" >
+            <div ng-message="required" >
+                Please, Fill the required field!
+            </div>
+        </alert>
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id" />
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}">
+                <label for="name" class="col-md-2 control-label">Name AA</label>
+                <div class="col-md-10">
+                    <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<!--
+<div ng-show="ctrl.editMode" class="col-md-6 well">
+    <form novalidate name="form" id="viaje-form" role="form" ng-submit="ctrl.saveRecord()">
+        <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required">
+            <div ng-message="required">
+                Please, Fill the required fields!
+            </div>
+        </alert>
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="name" class="col-md-2 control-label">Name</label>
+                <div class="col-md-10">
+                    <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+-->
+<div id="childs" ng-show="ctrl.editMode" class="col-md-6">
+    <ul class="nav nav-tabs">
+
+        <li role="presentation" ng-class="{active: tab === 'itinerarios'}">
+            <a href ng-click="ctrl.changeTab('itinerarios')">Itinerarios</a>
+        </li>
+
+    </ul>
+    <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente-->
+    <div ng-show="tab === 'itinerarios'">
+        <div ng-controller="itinerarioCtrl as ctrl" ng-include="'src/modules/itinerario/itinerario.tpl.html'"></div>
+    </div>
+
+</div>

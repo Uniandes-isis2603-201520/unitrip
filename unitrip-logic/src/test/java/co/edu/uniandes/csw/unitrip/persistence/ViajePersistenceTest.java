@@ -28,8 +28,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author je.molano1498
  *
-
-*/
+ *
+ */
 @RunWith(Arquillian.class)
 public class ViajePersistenceTest {
 
@@ -85,7 +85,6 @@ public class ViajePersistenceTest {
         }
     }
 
-
     @Test
     public void createViajeTest() {
         ViajeEntity newEntity = factory.manufacturePojo(ViajeEntity.class);
@@ -129,7 +128,7 @@ public class ViajePersistenceTest {
         Assert.assertNull(deleted);
     }
 
-     @Test
+    @Test
     public void updateViajeTest() {
         ViajeEntity entity = data.get(0);
         ViajeEntity newEntity = factory.manufacturePojo(ViajeEntity.class);
@@ -142,6 +141,5 @@ public class ViajePersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
-
 
 }

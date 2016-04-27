@@ -52,8 +52,7 @@ public class ExperienciaPersistenceTest {
     private List<ExperienciaEntity> data = new ArrayList<>();
 
     @Deployment
-    public static JavaArchive createDeployment()
-    {
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ExperienciaEntity.class.getPackage())
                 .addPackage(ExperienciaPersistence.class.getPackage())
@@ -62,39 +61,29 @@ public class ExperienciaPersistenceTest {
     }
 
     @Before
-    public void configTest()
-    {
-        try
-        {
+    public void configTest() {
+        try {
             utx.begin();
             clearData();
             insertData();
             utx.commit();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            try
-            {
+            try {
                 utx.rollback();
 
+            } catch (Exception e1) {
+                e.printStackTrace();
             }
-            catch(Exception e1)
-                    {
-                        e.printStackTrace();
-                    }
         }
     }
 
-    public void clearData()
-    {
+    public void clearData() {
         em.createQuery("delete from ExperienciaEntity").executeUpdate();
     }
 
-    private void insertData()
-    {
-        for(int i =0; i<3; i++)
-        {
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
             ExperienciaEntity entid = factory.manufacturePojo(ExperienciaEntity.class);
             em.persist(entid);
             data.add(entid);
@@ -103,8 +92,7 @@ public class ExperienciaPersistenceTest {
     }
 
     @Test
-    public void createExperienceText()
-    {
+    public void createExperienceText() {
         ExperienciaEntity entidadExp = factory.manufacturePojo(ExperienciaEntity.class);
         ExperienciaEntity resultado = experienciaPersistence.create(entidadExp);
 
@@ -112,28 +100,23 @@ public class ExperienciaPersistenceTest {
         ExperienciaEntity entidad = em.find(ExperienciaEntity.class, resultado.getId());
         Assert.assertEquals(entidadExp.getName(), entidad.getName());
         Assert.assertEquals(entidadExp.getDescripcion(), entidad.getDescripcion());
-   }
+    }
 
     @Test
-    public void getExperiencesTest()
-    {
-    List<ExperienciaEntity> list = experienciaPersistence.findAll();
-    Assert.assertEquals(data.size(), list.size());
-    for(ExperienciaEntity ent :list  )
-    {
-        boolean encontro=false;
-        for(ExperienciaEntity entid : data)
-        {
-            if(ent.getId().equals(entid.getId()))
-            {
-                encontro=true;
+    public void getExperiencesTest() {
+        List<ExperienciaEntity> list = experienciaPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (ExperienciaEntity ent : list) {
+            boolean encontro = false;
+            for (ExperienciaEntity entid : data) {
+                if (ent.getId().equals(entid.getId())) {
+                    encontro = true;
+                }
+
             }
-
+            Assert.assertTrue(encontro);
         }
-        Assert.assertTrue(encontro);
     }
-    }
-
 
     @Test
     public void getExperienciaTest() {
@@ -142,7 +125,6 @@ public class ExperienciaPersistenceTest {
         Assert.assertNotNull(nuevaEn);
         Assert.assertEquals(entid.getName(), nuevaEn.getName());
     }
-
 
     @Test
     public void deleteExperienciaTest() {

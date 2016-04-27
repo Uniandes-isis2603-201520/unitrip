@@ -24,7 +24,7 @@ import javax.inject.Inject;
 @Stateless
 public class ParadaLogic implements IParadaLogic {
 
-     private static final Logger logger = Logger.getLogger(ParadaLogic.class.getName());
+    private static final Logger logger = Logger.getLogger(ParadaLogic.class.getName());
     @Inject
     private ParadaPersistence persistence;
 
@@ -152,22 +152,13 @@ public class ParadaLogic implements IParadaLogic {
     }
 
     /**
-    @Override
-    public ParadaEntity createParada(ParadaEntity entity) {
-        persistence.create(entity);
-        return entity;
-    }
-
-    @Override
-    public ParadaEntity updateParada(ParadaEntity entity) {
-        ParadaEntity newEntity = entity;
-        return persistence.update(newEntity);
-    }
-
-    @Override
-    public void deleteParada(Long id) {
-        persistence.delete(id);
-    }
-    **/
+     * @Override public ParadaEntity createParada(ParadaEntity entity) {
+     * persistence.create(entity); return entity; }
+     *
+     * @Override public ParadaEntity updateParada(ParadaEntity entity) {
+     * ParadaEntity newEntity = entity; return persistence.update(newEntity); }
+     *
+     * @Override public void deleteParada(Long id) { persistence.delete(id); }
+     *
+     */
 }
-

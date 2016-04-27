@@ -8,8 +8,8 @@
                 latitude: '' /*Tipo Long*/,
                 longitude: '' /*Tipo Long*/,
                 descripcion: '' /*Tipo String*/,
-                fechaI:  '' /*Tipo Date*/,
-                fechaF:  '' /*Tipo Date*/
+                fechaI: '' /*Tipo Date*/,
+                fechaF: '' /*Tipo Date*/
             };
             $scope.records = [];
             $scope.alerts = [];

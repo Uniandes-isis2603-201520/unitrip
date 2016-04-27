@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import java.util.List;
+
 /**
  *
  * @author je.molano1498

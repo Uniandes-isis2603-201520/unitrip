@@ -20,7 +20,7 @@ import javax.persistence.Query;
 @Stateless
 public class ParadaPersistence {
 
-      @PersistenceContext(unitName = "UnitripPU")
+    @PersistenceContext(unitName = "UnitripPU")
     protected EntityManager em;
 
     public ParadaEntity find(Long id) {
@@ -46,5 +46,3 @@ public class ParadaPersistence {
         em.remove(entity);
     }
 }
-
-

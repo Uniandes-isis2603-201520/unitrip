@@ -42,8 +42,8 @@
             <tr ng-repeat="record in records" style="color:#ffffff;background-color:#F5BCA9">
                 <td>{{record.name}}</td>
                 <td>{{record.descripcion}}</td>
-                <td>{{record.fechaI | date}}</td>
-                <td>{{record.fechaF | date}}</td>
+                <td>{{record.fechaI| date}}</td>
+                <td>{{record.fechaF| date}}</td>
                 <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)" style="color:#ffffff;background-color:#241A49"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style="color:#ffffff;background-color:#241A49"><span class="glyphicon glyphicon-minus"></span> Remove</button>
@@ -55,10 +55,10 @@
 <div ng-show="ctrl.editMode" class="col-md-6 well" style="color:#ffffff;background-color:#F5BCA9">
     <form novalidate name="form" id="evento-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()">
         <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required">
-                <div ng-message="required">
-                    Please, Fill the required fields!
-                </div>
-            </alert>
+            <div ng-message="required">
+                Please, Fill the required fields!
+            </div>
+        </alert>
         <fieldset>
             <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >

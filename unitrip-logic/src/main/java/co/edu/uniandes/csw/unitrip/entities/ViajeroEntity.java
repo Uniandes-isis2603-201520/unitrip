@@ -13,7 +13,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class ViajeroEntity extends BaseEntity implements Serializable {
 
@@ -21,7 +20,7 @@ public class ViajeroEntity extends BaseEntity implements Serializable {
     private int edad;
     private String password;
     private String mail;
-     @OneToMany(mappedBy = "viajero", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "viajero", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ViajeEntity> viajes = new ArrayList<>();
 
     @OneToMany(mappedBy = "viajero", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -74,7 +73,5 @@ public class ViajeroEntity extends BaseEntity implements Serializable {
     public void setExperiencias(List<ExperienciaEntity> experiencias) {
         this.experiencias = experiencias;
     }
-
-
 
 }

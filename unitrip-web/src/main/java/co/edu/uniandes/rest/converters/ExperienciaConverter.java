@@ -1,4 +1,5 @@
 package co.edu.uniandes.rest.converters;
+
 import co.edu.uniandes.csw.unitrip.entities.ExperienciaEntity;
 import co.edu.uniandes.rest.dtos.ExperienciaDTO;
 import java.util.ArrayList;
@@ -16,9 +17,9 @@ public abstract class ExperienciaConverter {
     }
 
     /**
-     * Realiza la conversión de ExperienciaEntity a ExperienciaDTO. Se invoca cuando otra
-     * entidad tiene una referencia a ExperiencaEntity. Entrega únicamente los
-     * atributos propios de la entidad.
+     * Realiza la conversión de ExperienciaEntity a ExperienciaDTO. Se invoca
+     * cuando otra entidad tiene una referencia a ExperiencaEntity. Entrega
+     * únicamente los atributos propios de la entidad.
      *
      * @param entity instancia de ExperienciasEntity a convertir
      * @return instancia de ExperienciaDTO con los datos recibidos por parámetro
@@ -31,8 +32,6 @@ public abstract class ExperienciaConverter {
             dto.setName(entity.getName());
             dto.setDescripcion(entity.getDescripcion());
             dto.setRutaI(entity.getImage());
-
-
 
             return dto;
         } else {
@@ -61,8 +60,8 @@ public abstract class ExperienciaConverter {
     }
 
     /**
-     * Convierte una instancia de ViajeEntity a ViajeDTO Se invoca cuando se desea
-     * consultar la entidad y sus relaciones muchos a uno o uno a uno
+     * Convierte una instancia de ViajeEntity a ViajeDTO Se invoca cuando se
+     * desea consultar la entidad y sus relaciones muchos a uno o uno a uno
      *
      * @param entity instancia de ViajeEntity a convertir
      * @return Instancia de BookDTO con los datos recibidos por parámetro
@@ -76,14 +75,11 @@ public abstract class ExperienciaConverter {
             dto.setDescripcion(entity.getDescripcion());
             dto.setRutaI(entity.getImage());
 
-
-
             return dto;
         } else {
             return null;
         }
     }
-
 
     /**
      * Convierte una instancia de ViajeDTO a ViajeEntity Se invoca cuando se
@@ -102,13 +98,11 @@ public abstract class ExperienciaConverter {
             entity.setDescription(dto.getDescripcion());
             entity.setImage(dto.getRutaI());
 
-
             return entity;
         } else {
             return null;
         }
     }
-
 
     /**
      * Convierte instancias de EventoEntity a EvenoDTO incluyendo sus relaciones
@@ -145,9 +139,9 @@ public abstract class ExperienciaConverter {
     }
 
     /**
-     * Convierte una colección de instancias de ViajeEntity a ViajeDTO. Para cada
-     * instancia de ViajeEntity en la lista, invoca basicEntity2DTO y añade el
-     * nuevo ViajeDTO a una nueva lista
+     * Convierte una colección de instancias de ViajeEntity a ViajeDTO. Para
+     * cada instancia de ViajeEntity en la lista, invoca basicEntity2DTO y añade
+     * el nuevo ViajeDTO a una nueva lista
      *
      * @param entities Colección de entidades a convertir
      * @return Collección de instancias de ViajeDTO

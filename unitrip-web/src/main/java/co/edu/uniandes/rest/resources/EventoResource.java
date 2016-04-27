@@ -9,7 +9,6 @@ package co.edu.uniandes.rest.resources;
  *
  * @author l.castro12
  */
-
 import co.edu.uniandes.csw.unitrip.api.IEventoLogic;
 import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.rest.dtos.EventoDTO;
@@ -33,10 +32,9 @@ import javax.ws.rs.core.Response;
 /**
  * Clase que implementa el recurso REST correspondiente a "evento".
  *
- * Note que la aplicación (definida en RestConfig.java) define la ruta
- * "/api" y este recurso tiene la ruta "evento".
- * Al ejecutar la aplicación, el recurse será accesibe a través de la
- * ruta "/api/evento"
+ * Note que la aplicación (definida en RestConfig.java) define la ruta "/api" y
+ * este recurso tiene la ruta "evento". Al ejecutar la aplicación, el recurse
+ * será accesibe a través de la ruta "/api/evento"
  *
  * @author Asistente
  */
@@ -44,14 +42,15 @@ import javax.ws.rs.core.Response;
 @Produces("application/json")
 public class EventoResource {
 
-	@Inject
-	private IEventoLogic eventoLogic;
+    @Inject
+    private IEventoLogic eventoLogic;
 
-	/**
-	 * Obtiene el listado de eventos.
-	 * @return lista de eventos
-	 * @throws LogicException excepción retornada por la lógica
-	 */
+    /**
+     * Obtiene el listado de eventos.
+     *
+     * @return lista de eventos
+     * @throws LogicException excepción retornada por la lógica
+     */
     @GET
     public List<EventoDTO> getEventos() throws LogicException {
         return EventoConverter.listEntity2DTO(eventoLogic.getEventos());
@@ -59,6 +58,7 @@ public class EventoResource {
 
     /**
      * Obtiene un evento
+     *
      * @param id identificador del evento
      * @return evento encontrado
      * @throws LogicException cuando el evento no existe
@@ -66,17 +66,16 @@ public class EventoResource {
     @GET
     @Path("{id: \\d+}")
     public EventoDTO getEvento(@PathParam("id") Long id) throws LogicException {
-        try
-        {
+        try {
             return EventoConverter.fullEntity2DTO(eventoLogic.getEvento(id));
-        }
-        catch(BusinesLogicException ex){
+        } catch (BusinesLogicException ex) {
             throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
         }
     }
 
     /**
      * Agrega un evento
+     *
      * @param event evento a agregar
      * @return datos del evento a agregar
      * @throws LogicException cuando ya existe un evento con el id suministrado
@@ -89,6 +88,7 @@ public class EventoResource {
 
     /**
      * Actualiza los datos de un evento
+     *
      * @param id identificador del evento a modificar
      * @param event evento a modificar
      * @return datos del evento modificado
@@ -97,10 +97,9 @@ public class EventoResource {
     @PUT
     @Path("{id: \\d+}")
     public EventoDTO updateEvent(@PathParam("id") Long id, EventoDTO event) throws LogicException {
-         EventoEntity entity = EventoConverter.fullDTO2Entity(event);
+        EventoEntity entity = EventoConverter.fullDTO2Entity(event);
         entity.setId(id);
-        try
-        {
+        try {
             EventoEntity oldEntity = eventoLogic.getEvento(id);
 
         } catch (BusinesLogicException ex) {
@@ -111,13 +110,14 @@ public class EventoResource {
 
     /**
      * Elimina los datos de un evento
+     *
      * @param id identificador del evento a eliminar
      * @throws LogicException cuando no existe un evento con el id suministrado
      */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteEvent(@PathParam("id") Long id) throws LogicException {
-    	eventoLogic.deleteEvento(id);
+        eventoLogic.deleteEvento(id);
     }
 
 }

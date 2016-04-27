@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.unitrip.api;
 
-
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeroEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
@@ -16,6 +15,7 @@ import java.util.List;
  * @author ANDRES
  */
 public interface IViajeroLogic {
+
     public List<ViajeroEntity> getViajeros();
 
     public ViajeroEntity getViajero(Long id) throws BusinesLogicException;

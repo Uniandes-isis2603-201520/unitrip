@@ -17,16 +17,18 @@ import java.util.List;
 public abstract class ItinerarioConverter {
 
     /**
-     * Constructor privado para evitar la creación del constructor implícito de Java
+     * Constructor privado para evitar la creación del constructor implícito de
+     * Java
+     *
      * @generated
      */
     private ItinerarioConverter() {
     }
 
     /**
-     * Realiza la conversión de ItinerarioEntity a ItinerarioDTO.
-     * Se invoca cuando otra entidad tiene una referencia a ItinerarioEntity.
-     * Entrega únicamente los atributos proprios de la entidad.
+     * Realiza la conversión de ItinerarioEntity a ItinerarioDTO. Se invoca
+     * cuando otra entidad tiene una referencia a ItinerarioEntity. Entrega
+     * únicamente los atributos proprios de la entidad.
      *
      * @param entity instancia de ItinerarioEntity a convertir
      * @return instancia de ItinerarioDTO con los datos recibidos por parámetro
@@ -48,12 +50,14 @@ public abstract class ItinerarioConverter {
     }
 
     /**
-     * Realiza la conversión de ItinerarioDTO a ItinerarioEntity Se invoca cuando otro DTO
-     * tiene una referencia a ItinerarioDTO Convierte únicamente el ID ya que es el
-     * único atributo necesario para guardar la relación en la base de datos
+     * Realiza la conversión de ItinerarioDTO a ItinerarioEntity Se invoca
+     * cuando otro DTO tiene una referencia a ItinerarioDTO Convierte únicamente
+     * el ID ya que es el único atributo necesario para guardar la relación en
+     * la base de datos
      *
      * @param dto instancia de ItinerarioDTO a convertir
-     * @return instancia de ItinerarioEntity con los datos recibidos por parámetro
+     * @return instancia de ItinerarioEntity con los datos recibidos por
+     * parámetro
      * @generated
      */
     public static ItinerarioEntity refDTO2Entity(ItinerarioDTO dto) {
@@ -68,8 +72,9 @@ public abstract class ItinerarioConverter {
     }
 
     /**
-     * Convierte una instancia de ItinerarioEntity a ItinerarioDTO Se invoca cuando se desea
-     * consultar la entidad y sus relaciones muchos a uno o uno a uno
+     * Convierte una instancia de ItinerarioEntity a ItinerarioDTO Se invoca
+     * cuando se desea consultar la entidad y sus relaciones muchos a uno o uno
+     * a uno
      *
      * @param entity instancia de ItinerarioEntity a convertir
      * @return Instancia de ItinerarioDTO con los datos recibidos por parámetro
@@ -91,9 +96,10 @@ public abstract class ItinerarioConverter {
     }
 
     /**
-     * Convierte una instancia de ItinerarioDTO a ItinerarioEntity Se invoca cuando se
-     * necesita convertir una instancia de ItinerarioDTO con los atributos propios de
-     * la entidad y con las relaciones uno a uno o muchos a uno
+     * Convierte una instancia de ItinerarioDTO a ItinerarioEntity Se invoca
+     * cuando se necesita convertir una instancia de ItinerarioDTO con los
+     * atributos propios de la entidad y con las relaciones uno a uno o muchos a
+     * uno
      *
      * @param dto instancia de ItinerarioDTO a convertir
      * @return Instancia de ItinerarioEntity creada a partir de los datos de dto
@@ -116,8 +122,8 @@ public abstract class ItinerarioConverter {
 
     // TERMINAR... CICLO 3
     /**
-     * Convierte instancias de ItinerarioEntity a ItinerarioDTO incluyendo sus relaciones
-     * Uno a muchos y Muchos a muchos
+     * Convierte instancias de ItinerarioEntity a ItinerarioDTO incluyendo sus
+     * relaciones Uno a muchos y Muchos a muchos
      *
      * @param entity Instancia de ItinerarioEntity a convertir
      * @return Instancia de ItinerarioDTO con los datos recibidos por parámetro
@@ -133,13 +139,13 @@ public abstract class ItinerarioConverter {
         }
     }
 
-
     /**
-     * Convierte una instancia de ItinerarioDTO a ItinerarioEntity.
-     * Incluye todos los atributos de ItinerarioEntity.
+     * Convierte una instancia de ItinerarioDTO a ItinerarioEntity. Incluye
+     * todos los atributos de ItinerarioEntity.
      *
      * @param dto Instancia de ItinerarioDTO a convertir
-     * @return Instancia de ItinerarioEntity con los datos recibidos por parámetro
+     * @return Instancia de ItinerarioEntity con los datos recibidos por
+     * parámetro
      * @generated
      */
     public static ItinerarioEntity fullDTO2Entity(ItinerarioDTO dto) {
@@ -152,11 +158,10 @@ public abstract class ItinerarioConverter {
         }
     }
 
-
     /**
-     * Convierte una colección de instancias de ItinerarioEntity a ItinerarioDTO. Para cada
-     * instancia de ItinerarioEntity en la lista, invoca basicEntity2DTO y añade el
-     * nuevo ItinerarioDTO a una nueva lista
+     * Convierte una colección de instancias de ItinerarioEntity a
+     * ItinerarioDTO. Para cada instancia de ItinerarioEntity en la lista,
+     * invoca basicEntity2DTO y añade el nuevo ItinerarioDTO a una nueva lista
      *
      * @param entities Colección de entidades a convertir
      * @return Collección de instancias de ItinerarioDTO

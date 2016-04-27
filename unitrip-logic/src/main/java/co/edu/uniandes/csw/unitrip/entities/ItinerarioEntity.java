@@ -21,7 +21,6 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class ItinerarioEntity extends BaseEntity implements Serializable {
 
-
     private String descripcion;
     @PodamStrategyValue(DateStrategy.class)
     @Temporal(TemporalType.DATE)
@@ -30,16 +29,13 @@ public class ItinerarioEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaF;
 
-
     @ManyToOne
     @PodamExclude
     private ViajeEntity viaje;
 
     @PodamExclude
-    @OneToMany (mappedBy = "itinerario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "itinerario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ParadaEntity> paradas = new ArrayList<>();
-
-
 
     /**
      * @return the description
@@ -57,6 +53,7 @@ public class ItinerarioEntity extends BaseEntity implements Serializable {
 
     /**
      * Retorna el listado de los registros de parada
+     *
      * @return paradas paradas del itinerario
      */
     public List<ParadaEntity> getParadas() {
@@ -75,7 +72,7 @@ public class ItinerarioEntity extends BaseEntity implements Serializable {
      *
      * @param parada
      */
-    public void addParada(ParadaEntity parada){
+    public void addParada(ParadaEntity parada) {
         paradas.add(parada);
     }
 
@@ -86,7 +83,6 @@ public class ItinerarioEntity extends BaseEntity implements Serializable {
     public void setViaje(ViajeEntity viaje) {
         this.viaje = viaje;
     }
-
 
     /**
      * @return fechaI fecha de inicio
@@ -102,7 +98,7 @@ public class ItinerarioEntity extends BaseEntity implements Serializable {
         this.fechaI = fechaI;
     }
 
-         /**
+    /**
      * @return fechaI fecha de inicio
      */
     public Date getFechaF() {

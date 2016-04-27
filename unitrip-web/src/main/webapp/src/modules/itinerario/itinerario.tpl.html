@@ -100,16 +100,16 @@
     </form>
 </div>
 <div id="childs" ng-show="ctrl.editMode" class="col-md-6">
-        <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs">
 
-            <li role="presentation" ng-class="{active: tab === 'paradas'}">
-                <a href ng-click="ctrl.changeTab('paradas')">Paradas</a>
-            </li>
+        <li role="presentation" ng-class="{active: tab === 'paradas'}">
+            <a href ng-click="ctrl.changeTab('paradas')">Paradas</a>
+        </li>
 
-        </ul>
-        <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente-->
-        <div ng-show="tab === 'paradas'">
-            <div ng-controller="paradaCtrl as ctrl" ng-include="'src/modules/parada/parada.tpl.html'"></div>
-        </div>
+    </ul>
+    <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente-->
+    <div ng-show="tab === 'paradas'">
+        <div ng-controller="paradaCtrl as ctrl" ng-include="'src/modules/parada/parada.tpl.html'"></div>
+    </div>
 
 </div>

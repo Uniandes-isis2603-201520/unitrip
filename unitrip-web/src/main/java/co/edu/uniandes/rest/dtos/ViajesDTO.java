@@ -10,9 +10,11 @@ import java.util.List;
 
 /**
  * Objeto de transferencia de datos de itinerarios.
+ *
  * @author Asistente
  */
 public class ViajesDTO {
+
     private Long id;
     private String name;
     private String descripcion;
@@ -24,24 +26,25 @@ public class ViajesDTO {
      * Constructor por defecto
      */
     public ViajesDTO() {
-	}
+    }
 
     /**
      * Constructor con parámetros.
-     * @param id identificador del  viaje
+     *
+     * @param id identificador del viaje
      * @param name nombre del viaje
      * @param desc descripcion del viaje
      * @param imagen Imagen descriptiva del viaje
      */
     public ViajesDTO(Long id, String name, String desc, String imagen) {
-		super();
-		this.id = id;
-		this.name = name;
-                this.descripcion=desc;
-                this.image = imagen;
-                this.experiencias = new ArrayList<>();
-                this.itinerarios = new ArrayList<>();
-	}
+        super();
+        this.id = id;
+        this.name = name;
+        this.descripcion = desc;
+        this.image = imagen;
+        this.experiencias = new ArrayList<>();
+        this.itinerarios = new ArrayList<>();
+    }
 
     /**
      * @return the id
@@ -113,8 +116,8 @@ public class ViajesDTO {
         this.itinerarios.add(iti);
     }
 
-    public void setItinerarios(List<ItinerarioDTO> iti){
-        this.itinerarios=(ArrayList<ItinerarioDTO>) iti;
+    public void setItinerarios(List<ItinerarioDTO> iti) {
+        this.itinerarios = (ArrayList<ItinerarioDTO>) iti;
     }
 
     /**
@@ -131,16 +134,17 @@ public class ViajesDTO {
         this.experiencias.add(exp);
     }
 
-    public void setExperiencias(List<ExperienciaDTO> exp){
-        this.experiencias=exp;
+    public void setExperiencias(List<ExperienciaDTO> exp) {
+        this.experiencias = exp;
     }
 
     /**
      * Convierte el objeto a una cadena
+     *
      * @return Cadena de caracteres con informacion de un viaje
      */
     @Override
     public String toString() {
-    	return "{ id : " + getId() + ", name : \"" + getName() + "\" }" ;
+        return "{ id : " + getId() + ", name : \"" + getName() + "\" }";
     }
 }

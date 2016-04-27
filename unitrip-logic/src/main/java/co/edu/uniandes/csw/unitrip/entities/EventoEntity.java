@@ -19,15 +19,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 
-
 import uk.co.jemos.podam.common.PodamStrategyValue;
-
 
 @Entity
 public class EventoEntity extends BaseEntity implements Serializable {
 
-
-   @PodamStrategyValue(DateStrategy.class)
+    @PodamStrategyValue(DateStrategy.class)
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     @PodamStrategyValue(DateStrategy.class)
@@ -37,10 +34,8 @@ public class EventoEntity extends BaseEntity implements Serializable {
     private Long latitud;
     private Long longitud;
 
-
-
-     @ManyToOne
-     @PodamExclude
+    @ManyToOne
+    @PodamExclude
     private ParadaEntity parada;
 
     /**
@@ -71,7 +66,6 @@ public class EventoEntity extends BaseEntity implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-
     public ParadaEntity getParada() {
         return parada;
     }
@@ -87,6 +81,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
     public void setDescription(String descripcion) {
         this.descripcion = descripcion;
     }
+
     public Long getLatitud() {
         return latitud;
     }
@@ -94,6 +89,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
     public void setLatitud(Long latitud) {
         this.latitud = latitud;
     }
+
     public Long getLongitud() {
         return longitud;
     }

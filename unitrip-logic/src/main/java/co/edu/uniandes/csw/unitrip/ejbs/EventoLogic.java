@@ -23,7 +23,6 @@ public class EventoLogic implements IEventoLogic {
     @Inject
     private EventoPersistence persistence;
 
-
     @Override
     public List<EventoEntity> getEventos() {
         return persistence.findAll();
@@ -54,7 +53,5 @@ public class EventoLogic implements IEventoLogic {
     public void deleteEvento(Long id) {
         persistence.delete(id);
     }
-
-
 
 }

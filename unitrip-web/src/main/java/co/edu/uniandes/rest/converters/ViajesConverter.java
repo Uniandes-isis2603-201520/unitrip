@@ -10,7 +10,6 @@ import co.edu.uniandes.rest.dtos.ViajesDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public abstract class ViajesConverter {
 
     /**
@@ -39,7 +38,6 @@ public abstract class ViajesConverter {
             dto.setDescripcion(entity.getDescripcion());
             dto.setImg(entity.getImage());
 
-
             return dto;
         } else {
             return null;
@@ -67,8 +65,8 @@ public abstract class ViajesConverter {
     }
 
     /**
-     * Convierte una instancia de ViajeEntity a ViajeDTO Se invoca cuando se desea
-     * consultar la entidad y sus relaciones muchos a uno o uno a uno
+     * Convierte una instancia de ViajeEntity a ViajeDTO Se invoca cuando se
+     * desea consultar la entidad y sus relaciones muchos a uno o uno a uno
      *
      * @param entity instancia de ViajeEntity a convertir
      * @return Instancia de BookDTO con los datos recibidos por parámetro
@@ -87,7 +85,6 @@ public abstract class ViajesConverter {
             return null;
         }
     }
-
 
     /**
      * Convierte una instancia de ViajeDTO a ViajeEntity Se invoca cuando se
@@ -111,7 +108,6 @@ public abstract class ViajesConverter {
             return null;
         }
     }
-
 
     /**
      * Convierte instancias de ViajeEntity a ViajeDTO incluyendo sus relaciones
@@ -153,9 +149,9 @@ public abstract class ViajesConverter {
     }
 
     /**
-     * Convierte una colección de instancias de ViajeEntity a ViajeDTO. Para cada
-     * instancia de ViajeEntity en la lista, invoca basicEntity2DTO y añade el
-     * nuevo ViajeDTO a una nueva lista
+     * Convierte una colección de instancias de ViajeEntity a ViajeDTO. Para
+     * cada instancia de ViajeEntity en la lista, invoca basicEntity2DTO y añade
+     * el nuevo ViajeDTO a una nueva lista
      *
      * @param entities Colección de entidades a convertir
      * @return Collección de instancias de ViajeDTO

@@ -44,6 +44,7 @@ public class ViajeroPersistence {
         logger.info("viajero creado");
         return entity;
     }
+
     public ViajeroEntity update(ViajeroEntity entity) {
         return em.merge(entity);
     }

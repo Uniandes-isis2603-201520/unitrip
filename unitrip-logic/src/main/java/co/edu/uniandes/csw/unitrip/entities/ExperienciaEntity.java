@@ -5,10 +5,7 @@
  */
 package co.edu.uniandes.csw.unitrip.entities;
 
-
 import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
-
-
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -21,8 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author ANDRES
  */
 @Entity
-public class ExperienciaEntity extends BaseEntity implements Serializable{
-
+public class ExperienciaEntity extends BaseEntity implements Serializable {
 
     private String description;
     private String image;

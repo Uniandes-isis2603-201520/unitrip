@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.unitrip.entities;
 
-
 import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class ViajeEntity extends BaseEntity implements Serializable {
-
 
     private String description;
     private String image;

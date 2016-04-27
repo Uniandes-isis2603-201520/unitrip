@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.unitrip.logic;
 
-
 import co.edu.uniandes.csw.unitrip.api.IParadaLogic;
 import co.edu.uniandes.csw.unitrip.ejbs.ParadaLogic;
 import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
@@ -39,11 +38,10 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author af.munoz1477
  */
-
 @RunWith(Arquillian.class)
 public class ParadaLogicTest {
 
-private PodamFactory factory = new PodamFactoryImpl();
+    private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private IParadaLogic paradaLogic;
@@ -88,7 +86,7 @@ private PodamFactory factory = new PodamFactoryImpl();
         }
     }
 
-     private void clearData() {
+    private void clearData() {
         em.createQuery("delete from ParadaEntity").executeUpdate();
         em.createQuery("delete from EventoEntity").executeUpdate();
         em.createQuery("delete from ItinerarioEntity").executeUpdate();
@@ -128,7 +126,7 @@ private PodamFactory factory = new PodamFactoryImpl();
 
             ParadaEntity result = em.find(ParadaEntity.class, created.getId());
 
-             Assert.assertNotNull(result);
+            Assert.assertNotNull(result);
             Assert.assertEquals(entity.getId(), result.getId());
             Assert.assertEquals(entity.getName(), result.getName());
             Assert.assertEquals(entity.getDescripcion(), result.getDescripcion());
@@ -194,8 +192,7 @@ private PodamFactory factory = new PodamFactoryImpl();
         }
     }
 
-
-     public String getRandomDescripcion() {
+    public String getRandomDescripcion() {
         return " random descripcion";
     }
 

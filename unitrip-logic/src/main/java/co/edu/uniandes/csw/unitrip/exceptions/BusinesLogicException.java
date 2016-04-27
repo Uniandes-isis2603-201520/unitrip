@@ -9,10 +9,9 @@ package co.edu.uniandes.csw.unitrip.exceptions;
  *
  * @author ANDRES
  */
-
 public class BusinesLogicException extends Exception {
 
-     public BusinesLogicException() {
+    public BusinesLogicException() {
     }
 
     /**

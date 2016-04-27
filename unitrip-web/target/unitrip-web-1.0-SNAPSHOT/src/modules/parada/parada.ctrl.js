@@ -3,14 +3,14 @@
 
     mod.controller("paradaCtrl", ["$scope", "paradaService", function ($scope, svc) {
             $scope.currentRecord = {
-                     id: 0 /*Tipo Long*/,
-                     name: '' /*Tipo String*/,
-                     latitude: ''/*Tipo Long*/,
-                     longitude: ''/*Tipo Long*/,
-                     descripcion: '' /*Tipo String*/,
-                     fechaI:  '' /*Tipo Date*/,
-                     fechaF:  '' /*Tipo Date*/,
-                     eventos: [] /*Colección de registros de Eventos*/
+                id: 0 /*Tipo Long*/,
+                name: '' /*Tipo String*/,
+                latitude: ''/*Tipo Long*/,
+                longitude: ''/*Tipo Long*/,
+                descripcion: '' /*Tipo String*/,
+                fechaI: '' /*Tipo Date*/,
+                fechaF: '' /*Tipo Date*/,
+                eventos: [] /*Colección de registros de Eventos*/
             };
             $scope.records = [];
             $scope.alerts = [];

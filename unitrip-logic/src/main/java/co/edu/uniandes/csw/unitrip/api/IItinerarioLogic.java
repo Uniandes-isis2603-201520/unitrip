@@ -25,6 +25,6 @@ public interface IItinerarioLogic {
 
     public void removeParada(Long paradaId, Long itinerarioId);
 
-    public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId)throws BusinesLogicException;
+    public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId) throws BusinesLogicException;
 
 }

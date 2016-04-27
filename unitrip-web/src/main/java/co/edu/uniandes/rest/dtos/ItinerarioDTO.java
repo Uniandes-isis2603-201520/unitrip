@@ -11,10 +11,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Objeto de transferencia de datos de itinerarios.
+ *
  * @author Asistente
  */
 @XmlRootElement
 public class ItinerarioDTO {
+
     private Long id;
     private String name;
     private String descripcion;
@@ -27,10 +29,11 @@ public class ItinerarioDTO {
      * Constructor por defecto
      */
     public ItinerarioDTO() {
-	}
+    }
 
     /**
      * Constructor con parámetros.
+     *
      * @param id identificador del Itinerario
      * @param name nombre del Itinerario
      * @param descripcion descripcion del Itinerario
@@ -39,15 +42,15 @@ public class ItinerarioDTO {
      */
     public ItinerarioDTO(Long id, String name, String descripcion,
             Date fechaI, Date fechaF) {
-		super();
-		this.id = id;
-		this.name = name;
-                this.descripcion = descripcion;
-                this.fechaI = fechaI;
-                this.fechaF = fechaF;
-	}
+        super();
+        this.id = id;
+        this.name = name;
+        this.descripcion = descripcion;
+        this.fechaI = fechaI;
+        this.fechaF = fechaF;
+    }
 
-	/**
+    /**
      * @return the id
      */
     public Long getId() {
@@ -145,16 +148,17 @@ public class ItinerarioDTO {
         paradas.add(parada);
     }
 
-    public void setParadas(List<ParadaDTO> paradas){
-        this.paradas=paradas;
+    public void setParadas(List<ParadaDTO> paradas) {
+        this.paradas = paradas;
     }
 
     /**
      * Convierte el objeto a una cadena
+     *
      * @return Cadena de caracteres con informacion de un Itinerario
      */
     @Override
     public String toString() {
-    	return "{ id : " + getId() + ", name : \"" + getName() + ", descripcion: \""+ getDescripcion()+", fecha Inicio: \""+getFechaI()+ ", fecha Final: \""+getFechaF()+ "\" }" ;
+        return "{ id : " + getId() + ", name : \"" + getName() + ", descripcion: \"" + getDescripcion() + ", fecha Inicio: \"" + getFechaI() + ", fecha Final: \"" + getFechaF() + "\" }";
     }
 }
