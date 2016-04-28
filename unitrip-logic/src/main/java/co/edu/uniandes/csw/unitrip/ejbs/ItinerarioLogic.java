@@ -15,7 +15,7 @@ import javax.inject.Inject;
 @Stateless
 public class ItinerarioLogic implements IItinerarioLogic {
 
-    private static final Logger logger = Logger.getLogger(ItinerarioLogic.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ItinerarioLogic.class.getName());
     @Inject
     private ItinerarioPersistence persistence;
 
@@ -24,51 +24,51 @@ public class ItinerarioLogic implements IItinerarioLogic {
 
     @Override
     public List<ItinerarioEntity> getItinerarios() {
-        logger.info("Inicia proceso de consultar todos los Itinerarios");
+        LOGGER.info("Inicia proceso de consultar todos los Itinerarios");
         List<ItinerarioEntity> itinerarios = persistence.findAll();
-        logger.info("Termina proceso de consultar todos los Itinerarios");
+        LOGGER.info("Termina proceso de consultar todos los Itinerarios");
         return itinerarios;
     }
 
     @Override
     public ItinerarioEntity getItinerario(Long id) {
-        logger.log(Level.INFO, "Inicia proceso de consultar itinerario con id={0}", id);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar itinerario con id={0}", id);
         ItinerarioEntity itinerario = persistence.find(id);
         if (itinerario == null) {
-            logger.log(Level.SEVERE, "El itinerario con el id {0} no existe", id);
+            LOGGER.log(Level.SEVERE, "El itinerario con el id {0} no existe", id);
             throw new IllegalArgumentException("El itinerario solicitado no existe");
         }
-        logger.log(Level.INFO, "Termina proceso de consultar itinerario con id={0}", id);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar itinerario con id={0}", id);
         return itinerario;
     }
 
     @Override
     public ItinerarioEntity createItinerario(ItinerarioEntity entity) throws BusinesLogicException {
-        logger.info("Inicia proceso de creación de itinerario");
+        LOGGER.info("Inicia proceso de creación de itinerario");
         if (!validateDescripcion(entity.getDescripcion())) {
             throw new BusinesLogicException("la descripcion es inválida");
         }
         persistence.create(entity);
-        logger.info("Termina proceso de creación de itinerario");
+        LOGGER.info("Termina proceso de creación de itinerario");
         return entity;
     }
 
     @Override
     public ItinerarioEntity updateItinerario(ItinerarioEntity entity) throws BusinesLogicException {
-        logger.log(Level.INFO, "Inicia proceso de actualizar libro con id={0}", entity.getId());
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar libro con id={0}", entity.getId());
         if (!validateDescripcion(entity.getDescripcion())) {
             throw new BusinesLogicException("la descripcion no es valido");
         }
         ItinerarioEntity newEntity = persistence.update(entity);
-        logger.log(Level.INFO, "Termina proceso de actualizar itinerario con id={0}", entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar itinerario con id={0}", entity.getId());
         return newEntity;
     }
 
     @Override
     public void deleteItinerario(Long id) {
-        logger.log(Level.INFO, "Inicia proceso de borrar itinerario con id={0}", id);
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar itinerario con id={0}", id);
         persistence.delete(id);
-        logger.log(Level.INFO, "Termina proceso de borrar itinerario con id={0}", id);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar itinerario con id={0}", id);
     }
 
     @Override
@@ -102,8 +102,9 @@ public class ItinerarioLogic implements IItinerarioLogic {
 
     @Override
     public void removeParada(Long Id, Long itinerarioId) {
-        ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
-        ParadaEntity paradaEntity = new ParadaEntity();
+        ItinerarioEntity itinerarioEntity= persistence.find(itinerarioId);
+        ParadaEntity paradaEntity;
+        paradaEntity = paradaPersistence.find(Id);
         itinerarioEntity.setId(itinerarioId);
         itinerarioEntity.getParadas().remove(paradaEntity);
     }
@@ -111,16 +112,12 @@ public class ItinerarioLogic implements IItinerarioLogic {
     @Override
     public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId) throws BusinesLogicException {
         ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
-        List<ParadaEntity> paradaList = paradaPersistence.findAll(); // esto como que no es necesario
         itinerarioEntity.setParadas(paradas);
         return itinerarioEntity.getParadas();
     }
 
     private boolean validateDescripcion(String desc) {
-        if (desc == null || desc.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !(desc == null || desc.isEmpty());
     }
 
 }

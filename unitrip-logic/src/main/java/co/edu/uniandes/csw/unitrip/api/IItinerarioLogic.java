@@ -9,7 +9,7 @@ public interface IItinerarioLogic {
 
     public List<ItinerarioEntity> getItinerarios();
 
-    public ItinerarioEntity getItinerario(Long id);// throws BusinesLogicException;
+    public ItinerarioEntity getItinerario(Long id);
 
     public ItinerarioEntity createItinerario(ItinerarioEntity entity) throws BusinesLogicException;
 

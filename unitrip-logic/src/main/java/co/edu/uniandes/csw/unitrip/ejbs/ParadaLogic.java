@@ -24,60 +24,60 @@ import javax.inject.Inject;
 @Stateless
 public class ParadaLogic implements IParadaLogic {
 
-    private static final Logger logger = Logger.getLogger(ParadaLogic.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ParadaLogic.class.getName());
     @Inject
     private ParadaPersistence persistence;
-
+    private static final String EVENTO_NO_EXISTE = "El evento no existe";
     @Inject
     private EventoPersistence eventoPersistence;
 
     @Override
     public List<ParadaEntity> getParadas() {
-        logger.info("Inicia proceso de consultar todos las paradas ");
+        LOGGER.info("Inicia proceso de consultar todos las paradas ");
         List<ParadaEntity> paradas = persistence.findAll();
-        logger.info("Termina proceso de consultar todos las paradas");
+        LOGGER.info("Termina proceso de consultar todos las paradas");
         return paradas;
     }
 
     @Override
     public ParadaEntity getParada(Long id) {
-        logger.log(Level.INFO, "Inicia proceso de consultar parada con id={0}", id);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar parada con id={0}", id);
         ParadaEntity parada = persistence.find(id);
         if (parada == null) {
-            logger.log(Level.SEVERE, "La parada con el id {0} no existe", id);
+            LOGGER.log(Level.SEVERE, "La parada con el id {0} no existe", id);
             throw new IllegalArgumentException("La parada solicitado no existe");
         }
-        logger.log(Level.INFO, "Termina proceso de consultar parada con id={0}", id);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar parada con id={0}", id);
         return parada;
     }
 
     @Override
     public ParadaEntity createParada(ParadaEntity entity) throws BusinesLogicException {
-        logger.info("Inicia proceso de creación de parada");
+        LOGGER.info("Inicia proceso de creación de parada");
         if (!validateDescripcion(entity.getDescripcion())) {
             throw new BusinesLogicException("La descripcion es inválida");
         }
         persistence.create(entity);
-        logger.info("Termina proceso de creación de parada");
+        LOGGER.info("Termina proceso de creación de parada");
         return entity;
     }
 
     @Override
     public ParadaEntity updateParada(ParadaEntity entity) throws BusinesLogicException {
-        logger.log(Level.INFO, "Inicia proceso de actualizar parada con id={0}", entity.getId());
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar parada con id={0}", entity.getId());
         if (!validateDescripcion(entity.getDescripcion())) {
             throw new BusinesLogicException("La descripcion es inválido");
         }
         ParadaEntity newEntity = persistence.update(entity);
-        logger.log(Level.INFO, "Termina proceso de actualizar parada con id={0}", entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar parada con id={0}", entity.getId());
         return newEntity;
     }
 
     @Override
     public void deleteParada(Long id) {
-        logger.log(Level.INFO, "Inicia proceso de borrar parada con id={0}", id);
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar parada con id={0}", id);
         persistence.delete(id);
-        logger.log(Level.INFO, "Termina proceso de borrar parada con id={0}", id);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar parada con id={0}", id);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ParadaLogic implements IParadaLogic {
         List<EventoEntity> eventos = getParada(paradaId).getEventos();
         EventoEntity eventoEntity = eventoPersistence.find(eventoId);
         if (eventoEntity == null) {
-            throw new IllegalArgumentException("El evento no existe");
+            throw new IllegalArgumentException(EVENTO_NO_EXISTE);
         }
         int index = eventos.indexOf(eventoEntity);
         if (index >= 0) {
@@ -104,7 +104,7 @@ public class ParadaLogic implements IParadaLogic {
         ParadaEntity paradaEntity = getParada(paradaId);
         EventoEntity eventoEntity = eventoPersistence.find(eventoId);
         if (eventoEntity == null) {
-            throw new IllegalArgumentException("El evento no existe");
+            throw new IllegalArgumentException(EVENTO_NO_EXISTE);
         }
         if (!eventoDentroRango(eventoEntity.getFechaInicio(), paradaEntity.getFechaI())) {
             throw new BusinesLogicException(" el evento no puede comenzar antes de la parada");
@@ -118,7 +118,8 @@ public class ParadaLogic implements IParadaLogic {
         ParadaEntity paradaEntity = getParada(paradaId);
         EventoEntity eventoEntity = eventoPersistence.find(eventoId);
         if (eventoEntity == null) {
-            throw new IllegalArgumentException("El evento no existe");
+
+            throw new IllegalArgumentException(EVENTO_NO_EXISTE);
         }
         paradaEntity.getEventos().remove(eventoEntity);
     }
@@ -136,19 +137,21 @@ public class ParadaLogic implements IParadaLogic {
     }
 
     private boolean validateDescripcion(String desc) {
-        if (desc == null || desc.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !(desc == null || desc.isEmpty());
     }
 
     private boolean eventoDentroRango(Date fechaInicioEvento, Date fechaInicioParada) {
         if (fechaInicioEvento != null && fechaInicioParada != null) {
-            if (fechaInicioParada.before(fechaInicioEvento)) {
+            if (inicioParadaBeforeInicioEvento(fechaInicioEvento, fechaInicioParada)) {
                 return true;
+            } else {
             }
         }
         return false;
+    }
+
+    private boolean inicioParadaBeforeInicioEvento (Date fechaInicioEvento, Date fechaInicioParada){
+        return fechaInicioParada.before(fechaInicioEvento);
     }
 
     /**

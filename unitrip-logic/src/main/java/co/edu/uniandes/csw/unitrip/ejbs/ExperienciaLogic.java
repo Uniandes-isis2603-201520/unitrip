@@ -28,11 +28,13 @@ public class ExperienciaLogic implements IExperienciaLogic {
         return experiencia;
     }
 
+    @Override
     public ExperienciaEntity createExperiencia(ExperienciaEntity entity) {
         persistence.create(entity);
         return entity;
     }
 
+    @Override
     public ExperienciaEntity updateExperiencia(ExperienciaEntity entity) {
         ExperienciaEntity newEntity = entity;
         return persistence.update(newEntity);
