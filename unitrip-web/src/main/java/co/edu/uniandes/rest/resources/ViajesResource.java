@@ -9,7 +9,6 @@ import co.edu.uniandes.rest.converters.ViajesConverter;
 import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.dtos.ViajesDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
-import co.edu.uniandes.rest.mocks.ViajesLogicMock;
 import java.util.ArrayList;
 
 import java.util.List;
