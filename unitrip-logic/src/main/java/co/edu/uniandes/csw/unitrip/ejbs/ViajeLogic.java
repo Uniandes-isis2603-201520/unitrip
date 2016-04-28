@@ -12,8 +12,7 @@ import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.csw.unitrip.persistence.ItinerarioPersistence;
 import co.edu.uniandes.csw.unitrip.persistence.ViajePersistence;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -49,6 +48,7 @@ public class ViajeLogic implements IViajesLogic {
      * @param entity
      * @return
      */
+    @Override
     public ViajeEntity createViaje(ViajeEntity entity) {
         persistence.create(entity);
         return entity;
@@ -59,6 +59,7 @@ public class ViajeLogic implements IViajesLogic {
      * @param entity
      * @return
      */
+    @Override
     public ViajeEntity updateViaje(ViajeEntity entity) {
         ViajeEntity newEntity = entity;
         return persistence.update(newEntity);
@@ -92,6 +93,7 @@ public class ViajeLogic implements IViajesLogic {
      * @param viajeId
      * @return
      */
+    @Override
     public ItinerarioEntity addItinerario(Long itiId, Long viajeId) {
         ViajeEntity viajeEntity = persistence.find(viajeId);
         ItinerarioEntity itiEntity = itinerarioPersistence.find(itiId);
@@ -110,7 +112,6 @@ public class ViajeLogic implements IViajesLogic {
     @Override
     public List<ItinerarioEntity> replaceItinerarios(List<ItinerarioEntity> itinerarios, Long viajeId) {
         ViajeEntity viajeEntity = persistence.find(viajeId);
-        List<ItinerarioEntity> itinerarioList = itinerarioPersistence.findAll();
         viajeEntity.setItinerarios(itinerarios);
         return viajeEntity.getItinerarios();
     }
