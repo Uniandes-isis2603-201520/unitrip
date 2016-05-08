@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,12 +13,14 @@ import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.csw.unitrip.persistence.ViajePersistence;
 import co.edu.uniandes.csw.unitrip.persistence.ViajeroPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author je.molano1498
  */
+@Stateless
 public class ViajeroLogic implements IViajeroLogic {
 
     @Inject

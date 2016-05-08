@@ -15,8 +15,15 @@
         }]);
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("/viaje");
+            $urlRouterProvider.otherwise("/viajero");
             $stateProvider
+
+                    .state('viajero', {
+                        url: '/viajero',
+                        controller: "viajeroCtrl",
+                        controllerAs: "ctrl",
+                        templateUrl: "src/modules/viajero/viajero.tpl.html"
+                    })
 
                     .state('viaje', {
                         url: '/viaje',
