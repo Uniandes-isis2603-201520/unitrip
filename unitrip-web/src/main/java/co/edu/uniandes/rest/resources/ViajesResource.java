@@ -4,6 +4,8 @@ import co.edu.uniandes.csw.unitrip.api.IViajeroLogic;
 import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
+import co.edu.uniandes.csw.unitrip.entities.ViajeroEntity;
+
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.rest.converters.ItinerarioConverter;
 import co.edu.uniandes.rest.converters.ViajesConverter;
@@ -97,11 +99,14 @@ public class ViajesResource {
      */
     //@PUT
     //@Path("{idViaje: \\d+}")
-    public ViajesDTO updateViaje(@PathParam("idViaje") Long id, ViajesDTO dto) throws LogicException {
+    public ViajesDTO updateViaje(@PathParam("idViaje") Long id, ViajesDTO dto, Long idViajero) throws LogicException {
         ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
         entity.setId(id);
         try {
+            ViajeroEntity viajeroEntity = viajeroLogic.getViajero(idViajero);
+            entity.setViajero(viajeroEntity);
             ViajeEntity oldEntity = viajeLogic.getViaje(id);
+            entity.setItinerarios(oldEntity.getItinerarios());
 
         } catch (BusinesLogicException ex) {
             throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
@@ -207,7 +212,7 @@ public class ViajesResource {
     @PUT
     @Path("{viajeId: \\d+}")
     public void updateViajeDeViajero(@PathParam("viajeroId") Long viajeroId, @PathParam("viajeId") Long viajeId, ViajesDTO viajeDTO) throws LogicException {
-        updateViaje(viajeId, viajeDTO);
+        updateViaje(viajeId, viajeDTO, viajeroId);
     }
 
 
