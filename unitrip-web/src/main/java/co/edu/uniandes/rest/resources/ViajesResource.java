@@ -1,5 +1,6 @@
 package co.edu.uniandes.rest.resources;
 
+import co.edu.uniandes.csw.unitrip.api.IViajeroLogic;
 import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
@@ -25,10 +26,14 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("viajes")
+@Path("viajeros/{viajeroId: \\d+}/viajes")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces("application/json")
 public class ViajesResource {
+
+    // injection para poder hacer uso del padre
+    @Inject
+    private IViajeroLogic viajeroLogic;
 
     @Inject
     private IViajesLogic viajeLogic;
@@ -41,7 +46,7 @@ public class ViajesResource {
      * @throws LogicException Lanza excepcion cuando no hay viajes
      * @generated
      */
-    @GET
+    //@GET
     public List<ViajesDTO> getViajes() throws LogicException {
         return ViajesConverter.listEntity2DTO(viajeLogic.getViajes());
 
@@ -56,9 +61,9 @@ public class ViajesResource {
      * @throws LogicException en caso tal que no exista el viaje
      * @generated
      */
-    @GET
-    @Path("{id: \\d+}")
-    public ViajesDTO getViaje(@PathParam("id") Long id) throws LogicException {
+    //@GET
+    //@Path("{idViaje: \\d+}")
+    public ViajesDTO getViaje(@PathParam("idViaje") Long id) throws LogicException {
         try {
             return ViajesConverter.fullEntity2DTO(viajeLogic.getViaje(id));
         } catch (BusinesLogicException ex) {
@@ -74,7 +79,7 @@ public class ViajesResource {
      * @throws LogicException en caso que ya exista el viaje
      * @generated
      */
-    @POST
+    //@POST
     public ViajesDTO createViaje(ViajesDTO dto) throws LogicException {
         ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
         return ViajesConverter.fullEntity2DTO(viajeLogic.createViaje(entity));
@@ -90,9 +95,9 @@ public class ViajesResource {
      * @throws LogicException en caso que no exista el viaje
      * @generated
      */
-    @PUT
-    @Path("{id: \\d+}")
-    public ViajesDTO updateViaje(@PathParam("id") Long id, ViajesDTO dto) throws LogicException {
+    //@PUT
+    //@Path("{idViaje: \\d+}")
+    public ViajesDTO updateViaje(@PathParam("idViaje") Long id, ViajesDTO dto) throws LogicException {
         ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
         entity.setId(id);
         try {
@@ -111,9 +116,9 @@ public class ViajesResource {
      * @throws LogicException en caso que no exista el viaje
      * @generated
      */
-    @DELETE
-    @Path("{id: \\d+}")
-    public void deleteViaje(@PathParam("id") Long id) throws LogicException {
+    //@DELETE
+    //@Path("{idViaje: \\d+}")
+    public void deleteViaje(@PathParam("idViaje") Long id) throws LogicException {
         viajeLogic.deleteViaje(id);
     }
 
@@ -126,6 +131,77 @@ public class ViajesResource {
      * de Viaje
      * @generated
      */
+
+
+    // parte de viajero, con el fin de conservar el orden en las URIS
+
+    @GET
+    public List<ViajesDTO> listViajesDeViajero(@PathParam("viajeroId") Long viajeroId) {
+        List<ViajeEntity> list= viajeroLogic.getViajes(viajeroId);
+        return ViajesConverter.listEntity2DTO(list);
+    }
+
+    /**
+     * Obtiene una instancia de Viaje asociada a una instancia de Viajero
+     *
+     * @param viajeroId Identificador de la instancia de Viaje
+     * @param viajeId Identificador de la instancia de Viaje
+     * @return ItinerarioDTO una instancia de itinerario
+     * @generated
+     */
+    @GET
+    @Path("{viajeId: \\d+}")
+    public ViajesDTO getViajeDeViajero(@PathParam("viajeroId") Long viajeroId,
+            @PathParam("viajeId") Long viajeId) {
+        return ViajesConverter.fullEntity2DTO(viajeroLogic.getViaje(viajeroId, viajeId));
+    }
+
+    /**
+     * Asocia un Viaje existente a un Viajero
+     *
+     * @param viajeroId Identificador de la instancia de Viajero
+     * @param viajeId Identificador de la instancia de Viaje
+     * @return Instancia de ViajeDTO que fue asociada a Viajero
+     * @generated
+     */
+    @POST
+    public ViajesDTO addViaje(ViajesDTO dto, @PathParam("viajeroId") Long viajeroId) {
+        ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
+        ViajeEntity actual = viajeLogic.createViaje(entity);
+        return ViajesConverter.fullEntity2DTO(viajeroLogic.addViaje(viajeroId, actual.getId()));
+    }
+
+    /**
+     * Remplaza las instancias de Viaje asociadas a una instancia de Viajero
+     *
+     * @param viajeroId Identificador de la instancia de Viaje
+     * @param viajes Colección de instancias de ViajeDTO a asociar a instancia
+     * de Viajero
+     * @return Nueva colección de ViajeDTO asociada a la instancia de Viajero
+     * @generated
+     */
+    @PUT
+    public List<ViajesDTO> replaceViajes(@PathParam("viajeroId") Long viajeroId, ArrayList<ViajesDTO> viajes) {
+        return ViajesConverter.listEntity2DTO(viajeroLogic.replaceViajes(ViajesConverter.listDTO2Entity(viajes), viajeroId));
+    }
+
+    /**
+     * Desasocia un Vaije existente de un Viajero existente
+     *
+     * @param viajeroId Identificador de la instancia de Viajero
+     * @param viajeId Identificador de la instancia de viaje
+     * @generated
+     */
+    @DELETE
+    @Path("{viajeId: \\d+}")
+    public void removeViaje(@PathParam("viajeroId") Long viajeroId, @PathParam("viajeId") Long viajeId) {
+        viajeroLogic.removeViaje(viajeroId, viajeId);
+
+    }
+
+
+
+    // parte para pasar a itinerario luego
     @GET
     @Path("{viajeId: \\d+}/itinerarios")
     public List<ItinerarioDTO> listItinerarios(@PathParam("viajeId") Long viajeId) {

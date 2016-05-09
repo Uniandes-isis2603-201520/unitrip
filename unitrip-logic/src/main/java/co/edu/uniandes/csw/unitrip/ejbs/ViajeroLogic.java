@@ -86,10 +86,13 @@ public class ViajeroLogic implements IViajeroLogic {
 
     @Override
     public void removeViaje(Long viajeId, Long viajeroId) {
-        ViajeroEntity viajeroEntity = persistence.find(viajeroId);
-        ViajeEntity viajeEntity = new ViajeEntity();
-        viajeEntity.setId(viajeId);
+        ViajeroEntity viajeroEntity = persistence.find(viajeroId); //encuentra el viajero
+        ViajeEntity  viajeEntity = viajePersistence.find(viajeId);
+        if(viajeEntity == null)
+            throw new IllegalArgumentException("El viaje no existe");
+
         viajeroEntity.getViajes().remove(viajeEntity);
+        viajePersistence.delete(viajeId);
     }
 
     @Override
@@ -112,10 +115,10 @@ public class ViajeroLogic implements IViajeroLogic {
 
     @Override
     public ViajeEntity addViaje( Long viajeroId,Long viajeId) {
-        ViajeroEntity viajeroEntity = persistence.find(viajeroId);
-        ViajeEntity viajeEntity = viajePersistence.find(viajeId);
-        viajeEntity.setViajero(viajeroEntity);
-        viajeroEntity.getViajes().add(viajeEntity);
+        ViajeroEntity viajeroEntity = persistence.find(viajeroId); // encuentra el viajero y lo crea como entity
+        ViajeEntity viajeEntity = viajePersistence.find(viajeId);   // encuentra el viaje y lo crea como entity
+        viajeEntity.setViajero(viajeroEntity); // al viaje le pone el viajero
+        viajeroEntity.getViajes().add(viajeEntity); // a la lista de de viajes del viajero le agrega el viaje
         return viajeEntity;
     }
 
