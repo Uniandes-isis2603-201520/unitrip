@@ -165,7 +165,7 @@ public class ViajesResource {
      * @generated
      */
     @POST
-    public ViajesDTO addViaje(ViajesDTO dto, @PathParam("viajeroId") Long viajeroId) {
+    public ViajesDTO addViajeAViajero(ViajesDTO dto, @PathParam("viajeroId") Long viajeroId) {
         ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
         ViajeEntity actual = viajeLogic.createViaje(entity);
         return ViajesConverter.fullEntity2DTO(viajeroLogic.addViaje(viajeroId, actual.getId()));
@@ -185,6 +185,18 @@ public class ViajesResource {
         return ViajesConverter.listEntity2DTO(viajeroLogic.replaceViajes(ViajesConverter.listDTO2Entity(viajes), viajeroId));
     }
 
+
+    /**
+     * Actualiza un viaje especifico de un viajero especifico
+     */
+    @PUT
+    @Path("{viajeId: \\d+}")
+    public ViajesDTO updateViajeDeViajero(@PathParam("viajeroId") Long viajeroId,
+            @PathParam("viajeId") Long viajeId, ViajesDTO viajeDTO) throws LogicException{
+        updateViaje(viajeId, viajeDTO);
+        
+    }
+
     /**
      * Desasocia un Vaije existente de un Viajero existente
      *
@@ -194,7 +206,7 @@ public class ViajesResource {
      */
     @DELETE
     @Path("{viajeId: \\d+}")
-    public void removeViaje(@PathParam("viajeroId") Long viajeroId, @PathParam("viajeId") Long viajeId) {
+    public void removeViajeDeViajero(@PathParam("viajeroId") Long viajeroId, @PathParam("viajeId") Long viajeId) {
         viajeroLogic.removeViaje(viajeroId, viajeId);
 
     }
