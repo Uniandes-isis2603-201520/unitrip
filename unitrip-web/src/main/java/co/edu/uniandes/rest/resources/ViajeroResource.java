@@ -43,6 +43,9 @@ public class ViajeroResource {
     @Inject
     private IViajeroLogic viajeroLogic;
 
+    @Inject
+    private IViajesLogic viajeLogic;
+
     /**
      * Obtiene la lista de los registros de Viajeros.
      *
@@ -155,7 +158,7 @@ public class ViajeroResource {
      * @generated
      */
     @GET
-    @Path("{viajeroId: \\d+}/vaijes/{viajeId: \\d+}")
+    @Path("{viajeroId: \\d+}/viajes/{viajeId: \\d+}")
     public ViajesDTO getViajes(@PathParam("viajeroId") Long viajeroId,
             @PathParam("viajeId") Long viajeId) {
         return ViajesConverter.fullEntity2DTO(viajeroLogic.getViaje(viajeroId, viajeId));
@@ -170,9 +173,11 @@ public class ViajeroResource {
      * @generated
      */
     @POST
-    @Path("{viajeroId: \\d+}/viajes/{viajeId: \\d+}")
-    public ViajesDTO addViaje(@PathParam("viajeroId") Long viajeroId, @PathParam("vaijeId") Long viajeId) {
-        return ViajesConverter.fullEntity2DTO(viajeroLogic.addViaje(viajeroId, viajeId));
+    @Path("{viajeroId: \\d+}/viajes")
+    public ViajesDTO addViaje(ViajesDTO dto, @PathParam("viajeroId") Long viajeroId) {
+        ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
+        ViajeEntity actual = viajeLogic.createViaje(entity);
+        return ViajesConverter.fullEntity2DTO(viajeroLogic.addViaje(viajeroId, actual.getId()));
     }
 
     /**

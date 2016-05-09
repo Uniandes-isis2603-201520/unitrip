@@ -111,9 +111,10 @@ public class ViajeroLogic implements IViajeroLogic {
     }
 
     @Override
-    public ViajeEntity addViaje(Long viajeId, Long viajeroId) {
+    public ViajeEntity addViaje( Long viajeroId,Long viajeId) {
         ViajeroEntity viajeroEntity = persistence.find(viajeroId);
         ViajeEntity viajeEntity = viajePersistence.find(viajeId);
+        viajeEntity.setViajero(viajeroEntity);
         viajeroEntity.getViajes().add(viajeEntity);
         return viajeEntity;
     }

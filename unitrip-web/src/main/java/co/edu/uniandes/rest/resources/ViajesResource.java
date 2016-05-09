@@ -75,7 +75,6 @@ public class ViajesResource {
      * @generated
      */
     @POST
-    @Path("{id: \\d+}")
     public ViajesDTO createViaje(ViajesDTO dto) throws LogicException {
         ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
         return ViajesConverter.fullEntity2DTO(viajeLogic.createViaje(entity));
