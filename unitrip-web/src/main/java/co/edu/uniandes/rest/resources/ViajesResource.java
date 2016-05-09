@@ -194,7 +194,7 @@ public class ViajesResource {
      */
     @DELETE
     @Path("{viajeId: \\d+}")
-    public void removeViajedeViajero(@PathParam("viajeroId") Long viajeroId, @PathParam("viajeId") Long viajeId) {
+    public void removeViajedeViajero(@PathParam("viajeroId") Long viajeroId, @PathParam("viajeId") Long viajeId) throws BusinesLogicException {
         viajeroLogic.removeViaje(viajeroId, viajeId);
 
     }

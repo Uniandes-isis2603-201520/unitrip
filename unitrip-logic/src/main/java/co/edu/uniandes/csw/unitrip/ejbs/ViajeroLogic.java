@@ -85,11 +85,15 @@ public class ViajeroLogic implements IViajeroLogic {
     }
 
     @Override
-    public void removeViaje( Long viajeroId, Long viajeId) {
+    public void removeViaje( Long viajeroId, Long viajeId) throws BusinesLogicException{
         ViajeroEntity viajeroEntity = persistence.find(viajeroId); //encuentra el viajero
         ViajeEntity  viajeEntity = viajePersistence.find(viajeId);
         if(viajeEntity == null)
             throw new IllegalArgumentException("El viaje no existe");
+
+        if (viajeEntity.getViajero().getId()!= viajeroId)
+            throw new BusinesLogicException("El viaje no pertenece al viajero");
+
 
         viajeroEntity.getViajes().remove(viajeEntity);
         viajePersistence.delete(viajeId);
