@@ -13,6 +13,8 @@ import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.csw.unitrip.persistence.ViajePersistence;
 import co.edu.uniandes.csw.unitrip.persistence.ViajeroPersistence;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -60,8 +62,14 @@ public class ViajeroLogic implements IViajeroLogic {
     }
 
     @Override
-    public List<ViajeEntity> getViajes(Long viajeId) {
-        return persistence.find(viajeId).getViajes();
+    public List<ViajeEntity> getViajes(Long viajeroId) {
+        List<ViajeEntity> viajes =null;
+        try {
+            viajes= getViajero(viajeroId).getViajes();
+        } catch (BusinesLogicException ex) {
+            Logger.getLogger(ViajeroLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return viajes;
     }
 
     @Override

@@ -25,7 +25,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("viajero/{idViajero: \\d+}/viajes")
+@Path("viajes")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces("application/json")
 public class ViajesResource {
