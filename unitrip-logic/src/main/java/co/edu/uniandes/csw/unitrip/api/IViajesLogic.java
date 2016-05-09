@@ -32,7 +32,7 @@ public interface IViajesLogic {
 
     public ItinerarioEntity addItinerario(Long itinerarioId, Long viajeId);
 
-    public void removeItinerario(Long itinerarioId, Long viajeId);
+    public void removeItinerario(Long itinerarioId, Long viajeId) throws BusinesLogicException;
 
     public List<ItinerarioEntity> replaceItinerarios(List<ItinerarioEntity> itinerarios, Long viajeId);
 

@@ -89,24 +89,32 @@ public class ViajeLogic implements IViajesLogic {
 
     /**
      *
-     * @param itiId
+     * @param itinerarioId
      * @param viajeId
      * @return
      */
     @Override
-    public ItinerarioEntity addItinerario(Long itiId, Long viajeId) {
+    public ItinerarioEntity addItinerario(Long itinerarioId, Long viajeId) {
         ViajeEntity viajeEntity = persistence.find(viajeId);
-        ItinerarioEntity itiEntity = itinerarioPersistence.find(itiId);
-        viajeEntity.getItinerarios().add(itiEntity);
-        return itiEntity;
+        ItinerarioEntity itinerarioEntity = itinerarioPersistence.find(itinerarioId);
+        itinerarioEntity.setViaje(viajeEntity);
+        viajeEntity.getItinerarios().add(itinerarioEntity);
+        return itinerarioEntity;
     }
 
     @Override
-    public void removeItinerario(Long itinerarioId, Long viajeId) {
+    public void removeItinerario(Long viajeId, Long itinerarioId) throws BusinesLogicException  {
         ViajeEntity viajeEntity = persistence.find(viajeId);
-        ItinerarioEntity itinerarioEntity = new ItinerarioEntity();
-        itinerarioEntity.setId(itinerarioId);
+        ItinerarioEntity itinerarioEntity = itinerarioPersistence.find(itinerarioId);
+
+        if(itinerarioEntity == null)
+            throw new IllegalArgumentException("El itinerario no existe");
+
+        if(itinerarioEntity.getViaje().getId() != viajeId)
+            throw new BusinesLogicException(" El itinerario no pertenece al viajero");
+
         viajeEntity.getItinerarios().remove(itinerarioEntity);
+        itinerarioPersistence.delete(itinerarioId);
     }
 
     @Override

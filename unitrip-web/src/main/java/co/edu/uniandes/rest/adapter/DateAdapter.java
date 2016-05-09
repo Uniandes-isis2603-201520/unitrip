@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.rest.itinerarios.adapter;
+package co.edu.uniandes.rest.adapter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
