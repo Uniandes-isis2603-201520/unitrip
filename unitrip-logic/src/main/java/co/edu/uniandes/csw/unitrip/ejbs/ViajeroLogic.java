@@ -85,7 +85,7 @@ public class ViajeroLogic implements IViajeroLogic {
     }
 
     @Override
-    public void removeViaje(Long viajeId, Long viajeroId) {
+    public void removeViaje( Long viajeroId, Long viajeId) {
         ViajeroEntity viajeroEntity = persistence.find(viajeroId); //encuentra el viajero
         ViajeEntity  viajeEntity = viajePersistence.find(viajeId);
         if(viajeEntity == null)
