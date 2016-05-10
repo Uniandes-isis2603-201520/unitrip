@@ -102,14 +102,8 @@ public class ViajeroLogic implements IViajeroLogic {
     @Override
     public List<ViajeEntity> replaceViajes(List<ViajeEntity> viajes, Long viajeroId) {
         ViajeroEntity viajeroEntity = persistence.find(viajeroId);
-        List<ViajeEntity> viajeList = viajePersistence.findAll();
         viajeroEntity.setViajes(viajes);
         return viajeroEntity.getViajes();
-    }
-
-    @Override
-    public ViajeroEntity createViaje(ViajeEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
