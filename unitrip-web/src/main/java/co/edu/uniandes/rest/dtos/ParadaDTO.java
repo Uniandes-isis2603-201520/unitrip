@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement
 public class ParadaDTO {
 
+    
     private Long id;
     private String name;
     private Long latitud;
