@@ -5,8 +5,11 @@
  */
 package co.edu.uniandes.rest.dtos;
 
+import co.edu.uniandes.rest.adapter.DateAdapter;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
@@ -101,6 +104,8 @@ public class ExperienciaDTO {
         this.rutaImagen = rutaI;
     }
 
+    @XmlElement(name = "fechaP")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Date getFechaP() {
         return fechaP;
     }

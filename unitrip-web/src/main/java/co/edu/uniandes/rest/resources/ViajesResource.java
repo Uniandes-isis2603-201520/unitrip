@@ -93,6 +93,7 @@ public class ViajesResource {
      *
      * @param id Identificador de la instancia de Viaje a modificar
      * @param dto Instancia de ViajeDTO con los nuevos datos.
+     * @param idViajero
      * @return Instancia de ViajeDTO con los datos actualizados.
      * @throws LogicException en caso que no exista el viaje
      * @generated

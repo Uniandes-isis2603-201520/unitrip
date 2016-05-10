@@ -24,7 +24,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class ExperienciaEntity extends BaseEntity implements Serializable {
 
     private String description;
-    private String image;
 
     @Temporal(TemporalType.DATE)
     private Date fechaP;
@@ -57,20 +56,6 @@ public class ExperienciaEntity extends BaseEntity implements Serializable {
         this.description = descr;
     }
 
-    /**
-     * @return the image
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
-    
     
     public Date getFechaP() {
         return fechaP;
