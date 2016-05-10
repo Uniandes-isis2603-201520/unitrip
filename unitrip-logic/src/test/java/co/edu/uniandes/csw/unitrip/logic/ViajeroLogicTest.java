@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.unitrip.logic;
-
 import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
 import co.edu.uniandes.csw.unitrip.api.IViajeroLogic;
 import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
@@ -33,32 +32,21 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
-
 /**
  *
  * @author je.molano1498
  */
 @RunWith(Arquillian.class)
 public class ViajeroLogicTest {
-
     private PodamFactory factory = new PodamFactoryImpl();
-
     @Inject
     private IViajeroLogic viajeroLogic;
-
-    @Inject
-    private IViajesLogic viajeLogic;
-
     @PersistenceContext
     private EntityManager em;
-
     @Inject
     private UserTransaction utx;
-
     private List<ViajeroEntity> data = new ArrayList<ViajeroEntity>();
-
     private List<ViajeEntity> dataViajes = new ArrayList<ViajeEntity>();
-
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -66,13 +54,12 @@ public class ViajeroLogicTest {
                 .addPackage(ViajeroLogic.class.getPackage())
                 .addPackage(IViajeroLogic.class.getPackage())
                 .addPackage(ViajeroPersistence.class.getPackage())
-                .addPackage(ViajeEntity.class.getPackage())
-                .addPackage(ViajeLogic.class.getPackage())
-                .addPackage(ViajePersistence.class.getPackage())
+//                .addPackage(ViajeEntity.class.getPackage())
+//                .addPackage(ViajeLogic.class.getPackage())
+//                .addPackage(ViajePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-
     @Before
     public void configTest() {
         try {
@@ -89,42 +76,35 @@ public class ViajeroLogicTest {
             }
         }
     }
-
     private void clearData() {
-        em.createQuery("delete from ViajeroEntity").executeUpdate();
-        em.createQuery("delete from ViajeEntity").executeUpdate();
-    }
 
+        em.createQuery("delete from ViajeEntity").executeUpdate();
+        em.createQuery("delete from ViajeroEntity").executeUpdate();
+    }
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            ViajeroEntity viajeros = factory.manufacturePojo(ViajeroEntity.class);
-            em.persist(viajeros);
-            data.add(viajeros);
+            ViajeroEntity viajero = factory.manufacturePojo(ViajeroEntity.class);
+            em.persist(viajero);
+            data.add(viajero);
+            ViajeEntity viaje = factory.manufacturePojo(ViajeEntity.class);
+            em.persist(viaje);
+            dataViajes.add(viaje);
+            viajero.getViajes().add(viaje);
+            viaje.setViajero(viajero);
         }
-
-        for (int i = 0; i < 3; i++) {
-            ViajeEntity viajes = factory.manufacturePojo(ViajeEntity.class);
-            em.persist(viajes);
-            dataViajes.add(viajes);
-            data.get(0).getViajes().add(viajes);
-        }
+        ViajeroEntity viajero = factory.manufacturePojo(ViajeroEntity.class);
+        em.persist(viajero);
+        data.add(viajero);
     }
-
-    public ViajeroLogicTest() {
-    }
-
     @Test
     public void createViajeroTest() {
         ViajeroEntity expected = factory.manufacturePojo(ViajeroEntity.class);
         ViajeroEntity created = viajeroLogic.createViajero(expected);
-
         ViajeroEntity result = em.find(ViajeroEntity.class, created.getId());
-
         Assert.assertNotNull(result);
         Assert.assertEquals(expected.getId(), result.getId());
         Assert.assertEquals(expected.getName(), result.getName());
     }
-
     @Test
     public void getViajerosTest() {
         List<ViajeroEntity> list = viajeroLogic.getViajeros();
@@ -139,7 +119,6 @@ public class ViajeroLogicTest {
             Assert.assertTrue(found);
         }
     }
-
     @Test
     public void getViajeroTest() {
         ViajeroEntity expected = factory.manufacturePojo(ViajeroEntity.class);
@@ -150,7 +129,6 @@ public class ViajeroLogicTest {
             Assert.assertEquals(expected.getId(), created2.getId());
         } catch (Exception e) {
             fail("no deberia generar excepcion");
-
         }
         try {
             ViajeroEntity expected2 = factory.manufacturePojo(ViajeroEntity.class);
@@ -160,25 +138,19 @@ public class ViajeroLogicTest {
             //debe pasar por aqui
         }
     }
-
     @Test
     public void updateViajeTest() {
         try {
             ViajeroEntity entity = data.get(0);
             ViajeroEntity newEntity = factory.manufacturePojo(ViajeroEntity.class);
-
             newEntity.setId(entity.getId());
-
             viajeroLogic.updateViajero(newEntity);
-
             ViajeroEntity resp = viajeroLogic.getViajero(entity.getId());
-
             Assert.assertEquals(newEntity.getName(), resp.getName());
         } catch (BusinesLogicException ex) {
             fail("no deberia generar excepcion");
         }
     }
-
     @Test
     public void deleteViajeTest() {
         ViajeroEntity entity = data.get(0);
@@ -191,4 +163,14 @@ public class ViajeroLogicTest {
         }
     }
 
+    @Test
+    public void getViajeTest (){
+        ViajeroEntity entity = data.get(0);
+        ViajeEntity viajeEntity = dataViajes.get(0);
+        ViajeEntity response = viajeroLogic.getViaje(entity.getId(), viajeEntity.getId());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(entity.getId(), response.getViajero().getId());
+        response = viajeroLogic.getViaje(data.get(data.size()-1).getId(), viajeEntity.getId());
+        Assert.assertNull(response);
+    }
 }
