@@ -37,4 +37,5 @@ public interface IViajeroLogic {
     public List<ViajeEntity> replaceViajes(List<ViajeEntity> viajes, Long viajeroId);
 
     public ViajeroEntity updateViaje(ViajeEntity entity);
+    
 }

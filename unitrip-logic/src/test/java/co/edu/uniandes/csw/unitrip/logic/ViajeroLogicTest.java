@@ -173,6 +173,7 @@ public class ViajeroLogicTest {
         Assert.assertNull(response);
     }
 
+
     @Test
     public void addViajeTest (){
         ViajeroEntity entity = data.get(0);
