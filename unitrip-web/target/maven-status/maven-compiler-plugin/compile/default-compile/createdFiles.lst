@@ -2,12 +2,15 @@ co\edu\uniandes\rest\converters\ItinerarioConverter.class
 co\edu\uniandes\rest\dtos\ParadaDTO.class
 co\edu\uniandes\rest\dtos\ViajeroDTO.class
 co\edu\uniandes\rest\dtos\ViajesDTO.class
+co\edu\uniandes\rest\mappers\EJBExceptionMapper.class
 co\edu\uniandes\rest\resources\RestConfig.class
 co\edu\uniandes\rest\resources\ExperienciaResource.class
+co\edu\uniandes\rest\providers\StatusCreated.class
 co\edu\uniandes\rest\converters\ViajesConverter.class
 co\edu\uniandes\rest\resources\ItinerarioResource.class
 co\edu\uniandes\rest\dtos\ExperienciaDTO.class
 co\edu\uniandes\rest\mappers\LogicExceptionMapper.class
+co\edu\uniandes\rest\providers\CreatedFilter.class
 co\edu\uniandes\rest\adapter\DateAdapter.class
 co\edu\uniandes\rest\resources\ViajesResource.class
 co\edu\uniandes\rest\exceptions\LogicException.class
