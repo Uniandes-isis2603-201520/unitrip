@@ -8,8 +8,11 @@ package co.edu.uniandes.csw.unitrip.entities;
 import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -23,6 +26,11 @@ public class ExperienciaEntity extends BaseEntity implements Serializable {
     private String description;
     private String image;
 
+    @Temporal(TemporalType.DATE)
+    private Date fechaP;
+    
+    
+    
     @ManyToOne
     @PodamExclude
     private ViajeroEntity viajero;
@@ -62,4 +70,15 @@ public class ExperienciaEntity extends BaseEntity implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
+    
+    
+    public Date getFechaP() {
+        return fechaP;
+    }
+
+    public void setFechaP(Date fechaP) {
+        this.fechaP = fechaP;
+    }
+
+
 }

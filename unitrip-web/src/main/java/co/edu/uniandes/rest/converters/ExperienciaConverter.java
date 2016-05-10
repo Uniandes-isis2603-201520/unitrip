@@ -32,6 +32,7 @@ public abstract class ExperienciaConverter {
             dto.setName(entity.getName());
             dto.setDescripcion(entity.getDescripcion());
             dto.setRutaI(entity.getImage());
+            dto.setFechaP(entity.getFechaP());
 
             return dto;
         } else {
@@ -74,6 +75,7 @@ public abstract class ExperienciaConverter {
             dto.setName(entity.getName());
             dto.setDescripcion(entity.getDescripcion());
             dto.setRutaI(entity.getImage());
+            dto.setFechaP(entity.getFechaP());
 
             return dto;
         } else {
@@ -97,6 +99,7 @@ public abstract class ExperienciaConverter {
             entity.setName(dto.getName());
             entity.setDescription(dto.getDescripcion());
             entity.setImage(dto.getRutaI());
+            entity.setFechaP(dto.getFechaP());
 
             return entity;
         } else {

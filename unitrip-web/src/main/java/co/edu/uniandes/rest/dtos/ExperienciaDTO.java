@@ -5,9 +5,11 @@
  */
 package co.edu.uniandes.rest.dtos;
 
+import java.util.Date;
+
 /**
  *
- * @author ANDRES
+ * @author 
  */
 public class ExperienciaDTO {
 
@@ -15,6 +17,9 @@ public class ExperienciaDTO {
     private String name;
     private String descripcion;
     private String rutaImagen;
+    
+    private Date fechaP;
+    
 
     /**
      * Constructor por defecto
@@ -28,14 +33,17 @@ public class ExperienciaDTO {
      * @param id identificador del Experiencia
      * @param name nombre del Experiencia
      * @param descripcion descripcion del Experiencia
-     * @param rutaI rutaImagen de la Experiencia *
+     * @param rutaI rutaImagen de la Experiencia 
+     * @param fechaP fecha de Publicación de la Experiencia 
      */
-    public ExperienciaDTO(Long id, String name, String descripcion, String rutaI) {
+    public ExperienciaDTO(Long id, String name, String descripcion, String rutaI, Date fechaP) {
         super();
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
         this.rutaImagen = rutaI;
+        this.fechaP = fechaP;
+     
     }
 
     /**
@@ -94,6 +102,15 @@ public class ExperienciaDTO {
         this.rutaImagen = rutaI;
     }
 
+    public Date getFechaP() {
+        return fechaP;
+    }
+
+    public void setFechaP(Date fechaP) {
+        this.fechaP = fechaP;
+    }
+ 
+    
     /**
      * Convierte el objeto a una cadena
      */

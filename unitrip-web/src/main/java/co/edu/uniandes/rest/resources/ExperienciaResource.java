@@ -26,10 +26,10 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 /**
- *
+ *viajeros/{idViajero: \\d+}
  * @author ANDRES
  */
-@Path("viajeros/{idViajero: \\d+}/experiencias")
+@Path("experiencias")
 @Produces("application/json")
 public class ExperienciaResource {
 
@@ -82,7 +82,6 @@ public class ExperienciaResource {
      * @throws LogicException cuando ya existe un evento con el id suministrado
      */
     @POST
-    @Path("/experiencia")
     public ExperienciaDTO createExperiencia(@PathParam("viajeroId") Long viajeroId, ExperienciaDTO exp) throws LogicException {
         ExperienciaEntity entity = ExperienciaConverter.fullDTO2Entity(exp);
         return ExperienciaConverter.fullEntity2DTO(experienciaLogic.createExperiencia(entity));
