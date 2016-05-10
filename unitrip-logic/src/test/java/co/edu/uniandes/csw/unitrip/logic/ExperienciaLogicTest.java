@@ -135,15 +135,26 @@ public class ExperienciaLogicTest {
      * Test of getExperiencia method, of class ExperienciaLogic.
      */
     @Test
-    public void testGetExperiencia() throws Exception {
+    public void testGetExperiencia()  {
+         try{
         ExperienciaEntity result = experienciaLogic.getExperiencia(data.get(0).getId());
         ExperienciaEntity expected = em.find(ExperienciaEntity.class, data.get(0).getId());
-
         Assert.assertNotNull(expected);
         Assert.assertNotNull(result);
         Assert.assertEquals(expected.getId(), result.getId());
         Assert.assertEquals(expected.getName(), result.getName());
-        Assert.assertEquals(expected.getDescripcion(), result.getDescripcion());
+        Assert.assertEquals(expected.getDescripcion(), result.getDescripcion());}
+         catch(Exception e){
+             fail("No debería lanzar excepción");
+         }
+         try{
+            ExperienciaEntity result = factory.manufacturePojo(ExperienciaEntity.class);
+            experienciaLogic.getExperiencia(result.getId());
+             fail("deberia generar excepcion");
+         }
+         catch(Exception e){
+
+         }
     }
 
     /**
