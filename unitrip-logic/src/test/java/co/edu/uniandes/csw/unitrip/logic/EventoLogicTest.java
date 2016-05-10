@@ -141,7 +141,15 @@ public class EventoLogicTest {
             Assert.assertEquals(expected.getFechaInicio(), result.getFechaInicio());
             Assert.assertEquals(expected.getFechaFin(), result.getFechaFin());
         } catch (BusinesLogicException ex) {
-            Logger.getLogger(EventoLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail("No debería generar excepción");
+        }
+        try{
+            result=factory.manufacturePojo(EventoEntity.class);
+            eventoLogic.getEvento(result.getId());
+             fail("deberia generar excepcion");
+        }
+        catch(Exception ex){
+
         }
 
     }
