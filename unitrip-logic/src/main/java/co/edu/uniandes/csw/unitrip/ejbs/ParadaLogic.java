@@ -144,7 +144,6 @@ public class ParadaLogic implements IParadaLogic {
         if (fechaInicioEvento != null && fechaInicioParada != null) {
             if (inicioParadaBeforeInicioEvento(fechaInicioEvento, fechaInicioParada)) {
                 return true;
-            } else {
             }
         }
         return false;

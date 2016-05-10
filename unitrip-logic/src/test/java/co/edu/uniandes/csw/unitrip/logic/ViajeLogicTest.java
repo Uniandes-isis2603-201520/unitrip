@@ -86,23 +86,25 @@ public class ViajeLogicTest {
     }
 
     private void clearData() {
-        em.createQuery("delete from ViajeEntity").executeUpdate();
         em.createQuery("delete from ItinerarioEntity").executeUpdate();
+        em.createQuery("delete from ViajeEntity").executeUpdate();
+
     }
 
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            ViajeEntity viajes = factory.manufacturePojo(ViajeEntity.class);
-            em.persist(viajes);
-            data.add(viajes);
+            ViajeEntity viaje = factory.manufacturePojo(ViajeEntity.class);
+            em.persist(viaje);
+            data.add(viaje);
+            ItinerarioEntity itinerario = factory.manufacturePojo(ItinerarioEntity.class);
+            em.persist(viaje);
+            itinerariosData.add(itinerario);
+            viaje.getItinerarios().add(itinerario);
+            itinerario.setViaje(viaje);
         }
-
-        for (int i = 0; i < 3; i++) {
-            ItinerarioEntity itinerarios = factory.manufacturePojo(ItinerarioEntity.class);
-            em.persist(itinerarios);
-            itinerariosData.add(itinerarios);
-            data.get(0).getItinerarios().add(itinerarios);
-        }
+        ViajeEntity viaje = factory.manufacturePojo(ViajeEntity.class);
+        em.persist(viaje);
+        data.add(viaje);
     }
 
     public ViajeLogicTest() {
@@ -187,27 +189,54 @@ public class ViajeLogicTest {
         }
     }
 
-    //@Test
-    public void addItinerarioTest() {
-        try {
-            ItinerarioEntity itinerarios = factory.manufacturePojo(ItinerarioEntity.class);
-            itinerarioLogic.createItinerario(itinerarios);
-            viajesLogic.addItinerario(itinerarios.getId(), data.get(0).getId());
-            ViajeEntity resp = viajesLogic.getViaje(data.get(0).getId());
-            Assert.assertNotNull(resp.getItinerarios());
-        } catch (BusinesLogicException ex) {
-        }
+    @Test
+    public void getItinerarioTest (){
+        ViajeEntity entity = data.get(0);
+        ItinerarioEntity itinerarioEntity = itinerariosData.get(0);
+        ItinerarioEntity response = viajesLogic.getItinerario(entity.getId(), itinerarioEntity.getId());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(entity.getId(), response.getViaje().getId());
+        response = viajesLogic.getItinerario(data.get(data.size()-1).getId(), itinerarioEntity.getId());
+        Assert.assertNull(response);
     }
 
-    //@Test
-    public void getItinerariosTest() {
+
+    @Test
+    public void addItinerarioTest (){
+        ViajeEntity entity = data.get(0);
+        ItinerarioEntity itinerarioEntity = itinerariosData.get(1);
+
+        ItinerarioEntity response = viajesLogic.addItinerario(itinerarioEntity.getId(),entity.getId());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(entity.getId(), response.getViaje().getId());
+    }
+
+    @Test
+    public void removeItinerarioTest (){
+
+        ViajeEntity entity = data.get(0);
+        ItinerarioEntity itinerarioEntity = itinerariosData.get(0);
+        Long actual = itinerarioEntity.getId();
         try {
-            ViajeEntity resp = viajesLogic.getViaje(data.get(0).getId());
-            Assert.assertNotNull(resp.getItinerarios());
-            List<ItinerarioEntity> list = resp.getItinerarios();
-            Assert.assertEquals(itinerariosData.size(), list.size());
+            viajesLogic.removeItinerario(entity.getId(), itinerarioEntity.getId());
+            for (ItinerarioEntity a : viajesLogic.getViaje(entity.getId()).getItinerarios())
+            {
+                if(a.getId()==actual)
+                {
+                    Assert.fail();
+                }
+            }
         } catch (BusinesLogicException ex) {
-            fail();
+            Assert.fail("no debería generar excepción");
+        }
+
+
+       entity = data.get(1);
+       itinerarioEntity = itinerariosData.get(2);
+       try {
+            viajesLogic.removeItinerario(entity.getId(), itinerarioEntity.getId());
+        } catch (Exception ex) {
+            //debería generar excepcion
         }
     }
 

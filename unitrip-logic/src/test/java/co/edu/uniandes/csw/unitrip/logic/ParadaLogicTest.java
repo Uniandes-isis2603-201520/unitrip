@@ -154,6 +154,7 @@ public class ParadaLogicTest {
 
     @Test
     public void getParadaTest() {
+        try{
         ParadaEntity result = paradaLogic.getParada(data.get(0).getId());
         ParadaEntity expected = em.find(ParadaEntity.class, data.get(0).getId());
 
@@ -162,6 +163,19 @@ public class ParadaLogicTest {
         Assert.assertEquals(expected.getId(), result.getId());
         Assert.assertEquals(expected.getName(), result.getName());
         Assert.assertEquals(expected.getDescripcion(), result.getDescripcion());
+        }
+        catch(Exception e){
+            Assert.fail("No debería entrar en excepción");
+        }
+        try{
+            ParadaEntity result = factory.manufacturePojo(ParadaEntity.class);
+            paradaLogic.getParada(result.getId());
+            Assert.fail("Debería generar excepcíon");
+        }
+        catch(Exception e){
+
+        }
+
     }
 
     @Test
