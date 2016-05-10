@@ -7,12 +7,14 @@ package co.edu.uniandes.rest.dtos;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Objeto de transferencia de datos de itinerarios.
  *
  * @author Asistente
  */
+@XmlRootElement
 public class ViajesDTO {
 
     private Long id;
@@ -36,6 +38,8 @@ public class ViajesDTO {
      * @param desc descripcion del viaje
      * @param imagen Imagen descriptiva del viaje
      */
+
+    /**
     public ViajesDTO(Long id, String name, String desc, String imagen) {
         super();
         this.id = id;
@@ -45,6 +49,8 @@ public class ViajesDTO {
         this.experiencias = new ArrayList<>();
         this.itinerarios = new ArrayList<>();
     }
+    **/
+
 
     /**
      * @return the id
@@ -138,13 +144,5 @@ public class ViajesDTO {
         this.experiencias = exp;
     }
 
-    /**
-     * Convierte el objeto a una cadena
-     *
-     * @return Cadena de caracteres con informacion de un viaje
-     */
-    @Override
-    public String toString() {
-        return "{ id : " + getId() + ", name : \"" + getName() + "\" }";
-    }
+
 }

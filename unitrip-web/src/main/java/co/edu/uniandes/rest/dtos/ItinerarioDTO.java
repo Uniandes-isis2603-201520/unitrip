@@ -5,14 +5,17 @@
  */
 package co.edu.uniandes.rest.dtos;
 
+import co.edu.uniandes.rest.adapter.DateAdapter;
 import java.util.Date;
 import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Objeto de transferencia de datos de itinerarios.
  *
- * @author Asistente
+ * @author dm.delgado10
  */
 @XmlRootElement
 public class ItinerarioDTO {
@@ -26,12 +29,6 @@ public class ItinerarioDTO {
     private List<ParadaDTO> paradas;
 
     /**
-     * Constructor por defecto
-     */
-    public ItinerarioDTO() {
-    }
-
-    /**
      * Constructor con parámetros.
      *
      * @param id identificador del Itinerario
@@ -40,6 +37,8 @@ public class ItinerarioDTO {
      * @param fechaI fecha inicial del Itinerario
      * @param fechaF fecha final del Itinerario
      */
+
+    /**
     public ItinerarioDTO(Long id, String name, String descripcion,
             Date fechaI, Date fechaF) {
         super();
@@ -49,6 +48,7 @@ public class ItinerarioDTO {
         this.fechaI = fechaI;
         this.fechaF = fechaF;
     }
+    **/
 
     /**
      * @return the id
@@ -95,6 +95,8 @@ public class ItinerarioDTO {
     /**
      * @return Fecha de Inicio
      */
+    @XmlElement(name = "fechaI")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Date getFechaI() {
         return fechaI;
     }
@@ -109,6 +111,8 @@ public class ItinerarioDTO {
     /**
      * @return la fecha final
      */
+    @XmlElement(name = "fechaF")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Date getFechaF() {
         return fechaF;
     }
@@ -152,13 +156,4 @@ public class ItinerarioDTO {
         this.paradas = paradas;
     }
 
-    /**
-     * Convierte el objeto a una cadena
-     *
-     * @return Cadena de caracteres con informacion de un Itinerario
-     */
-    @Override
-    public String toString() {
-        return "{ id : " + getId() + ", name : \"" + getName() + ", descripcion: \"" + getDescripcion() + ", fecha Inicio: \"" + getFechaI() + ", fecha Final: \"" + getFechaF() + "\" }";
-    }
 }

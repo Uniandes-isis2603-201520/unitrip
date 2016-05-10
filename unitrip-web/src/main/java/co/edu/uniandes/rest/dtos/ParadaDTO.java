@@ -5,9 +5,12 @@
  */
 package co.edu.uniandes.rest.dtos;
 
+import co.edu.uniandes.rest.adapter.DateAdapter;
 import java.util.Date;
 import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 public class ParadaDTO {
@@ -38,6 +41,8 @@ public class ParadaDTO {
      * @param fechaI fecha de inicio de la parada
      * @param fechaF fecha final de la parada
      */
+
+    /**
     public ParadaDTO(Long id, String name, Long latitud,
             Long longitude, String descripcion,
             Date fechaI, Date fechaF) {
@@ -51,6 +56,7 @@ public class ParadaDTO {
         this.longitud = longitude;
 
     }
+    **/
 
     /**
      * @return the id
@@ -97,6 +103,8 @@ public class ParadaDTO {
     /**
      * @return Fecha de Inicio
      */
+    @XmlElement(name = "fechaI")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Date getFechaI() {
         return fechaI;
     }
@@ -104,6 +112,8 @@ public class ParadaDTO {
     /**
      * @return Fecha de Final
      */
+    @XmlElement(name = "fechaF")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Date getFechaF() {
         return fechaF;
     }
@@ -180,13 +190,4 @@ public class ParadaDTO {
         eventos.remove(evento);
     }
 
-    /**
-     * Convierte el objeto a una cadena
-     *
-     * @return cadena de caracteres que suministran informacion de la parada
-     */
-    @Override
-    public String toString() {
-        return "{ id : " + getId() + ", name : \"" + getName() + "\" }";
-    }
 }

@@ -5,8 +5,11 @@
  */
 package co.edu.uniandes.rest.dtos;
 
+import co.edu.uniandes.rest.adapter.DateAdapter;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
@@ -24,11 +27,6 @@ public class EventoDTO {
     private Date fechaFin;
     private ParadaDTO parada;
 
-    /**
-     * Constructor por defecto
-     */
-    public EventoDTO() {
-    }
 
     /**
      * Constructor con parámetros.
@@ -41,6 +39,8 @@ public class EventoDTO {
      * @param fechaInicio fecha de inicio del evento
      * @param fechaFin fecha donde el evento finaliza
      */
+
+    /**
     public EventoDTO(Long id, String name, Long latitud, long longitud, String description, Date fechaInicio, Date fechaFin) {
         super();
         this.id = id;
@@ -51,6 +51,7 @@ public class EventoDTO {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }
+    **/
 
     /**
      * @return the id
@@ -125,6 +126,8 @@ public class EventoDTO {
     /**
      * @return the fechaInicio
      */
+    @XmlElement(name = "fechaInicio")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Date getFechaInicio() {
         return fechaInicio;
     }
@@ -139,6 +142,8 @@ public class EventoDTO {
     /**
      * @return the fechaFin
      */
+    @XmlElement(name = "fechaFin")
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public Date getFechaFin() {
         return fechaFin;
     }
@@ -156,14 +161,6 @@ public class EventoDTO {
 
     public void setParada(ParadaDTO parada) {
         this.parada = parada;
-    }
-
-    /**
-     * Convierte el objeto a una cadena
-     */
-    @Override
-    public String toString() {
-        return "{ id : " + getId() + ", name : \"" + getName() + "\"  }";
     }
 
 }

@@ -6,26 +6,22 @@
 package co.edu.uniandes.rest.dtos;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 
+ * @author
  */
+@XmlRootElement
 public class ExperienciaDTO {
 
     private Long id;
     private String name;
     private String descripcion;
     private String rutaImagen;
-    
-    private Date fechaP;
-    
 
-    /**
-     * Constructor por defecto
-     */
-    public ExperienciaDTO() {
-    }
+    private Date fechaP;
+
 
     /**
      * Constructor con parámetros.
@@ -33,9 +29,11 @@ public class ExperienciaDTO {
      * @param id identificador del Experiencia
      * @param name nombre del Experiencia
      * @param descripcion descripcion del Experiencia
-     * @param rutaI rutaImagen de la Experiencia 
-     * @param fechaP fecha de Publicación de la Experiencia 
+     * @param rutaI rutaImagen de la Experiencia
+     * @param fechaP fecha de Publicación de la Experiencia
      */
+
+    /**
     public ExperienciaDTO(Long id, String name, String descripcion, String rutaI, Date fechaP) {
         super();
         this.id = id;
@@ -43,8 +41,9 @@ public class ExperienciaDTO {
         this.descripcion = descripcion;
         this.rutaImagen = rutaI;
         this.fechaP = fechaP;
-     
+
     }
+    **/
 
     /**
      * @return the id
@@ -109,13 +108,5 @@ public class ExperienciaDTO {
     public void setFechaP(Date fechaP) {
         this.fechaP = fechaP;
     }
- 
-    
-    /**
-     * Convierte el objeto a una cadena
-     */
-    @Override
-    public String toString() {
-        return "{ id : " + getId() + ", name : \"" + getName() + ", descripcion: \"" + getDescripcion() + ", ruta imagen: \"" + getRutaI() + "\" }";
-    }
+
 }
