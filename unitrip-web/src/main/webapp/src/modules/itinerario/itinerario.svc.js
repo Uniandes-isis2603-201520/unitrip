@@ -7,7 +7,7 @@
 
     var mod = ng.module("itinerarioModule");
 
-    mod.service("itinerarioService", ["$http", "itinerarioContext", function ($http, context) {
+    mod.service("itinerarioService", ["$http", "itinerarioContext", function ($http, context, $rootScope, $log) {
             /**
              * Obtener la lista de itinerarios.
              * Hace una petición GET con $http a /itinerarios para obtener la lista
@@ -16,7 +16,8 @@
              * Devuelve una lista de objetos de itinerarios con sus atributos y reviews
              */
             this.fetchRecords = function () {
-                return $http.get(context);
+                $log.debug("GET TODOS:"+"viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context);
+                return $http.get("viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context);
             };
 
             /**
@@ -28,7 +29,8 @@
              * Devuelve un objeto de itinerarios con sus atributos y reviews
              */
             this.fetchRecord = function (id) {
-                return $http.get(context + "/" + id);
+                $log.debug("GET:"+"viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+"/"+ id);
+                return $http.get("viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+"/"+ id);
             };
 
             /**
@@ -43,7 +45,8 @@
              */
             this.saveRecord = function (currentRecord) {
                 if (currentRecord.id) {
-                    return $http.put(context + "/" + currentRecord.id, currentRecord);
+                    $log.debug("PUT:"+"viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+ "/" + currentRecord.id);
+                    return $http.put("viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+ "/" + currentRecord.id, currentRecord);
                 } else {
                     return $http.post(context, currentRecord);
                 }
@@ -56,7 +59,8 @@
              * No devuelve datos.
              */
             this.deleteRecord = function (id) {
-                return $http.delete(context + "/" + id);
+                $log.debug("DELETE:"+"viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+ "/" + id);
+                return $http.delete("viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+ "/" + id);
             };
         }]);
 

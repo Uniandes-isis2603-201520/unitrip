@@ -60,5 +60,18 @@
             this.deleteRecord = function (id) {
                 return $http.delete(context + "/" + id);
             };
+
+            this.getViajes = function (id) {
+                return $http.get(context + "/" + id + "/viajes");
+            };
+
+            this.replaceViaje = function (viajeroId, viajes) {
+                return $http.put(context + "/" + viajeroId + "/viajes", viajes);
+            };
+
+            this.removeViaje = function (viajeroId, viajeId) {
+                return $http.delete(context + "/" + viajeroId + "/viajes/" + viajeId);
+            };
+
         }]);
 })(window.angular);

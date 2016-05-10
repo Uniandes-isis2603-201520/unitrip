@@ -2,7 +2,7 @@
 
     var mod = ng.module("viajeModule");
 
-    mod.controller("viajeCtrl", ["$scope", "viajeService", function ($scope, svc, $location) {
+    mod.controller("viajeCtrl", ["$scope", "viajeService", function ($scope, svc , $location, $rootScope) {
 
 
 
@@ -14,7 +14,7 @@
                 experiencias: [] /*Colección de registros de Experiencias*/
             };
             $scope.records = [];
-
+            $rootScope.viajeActual = '';
             $scope.today = function () {
                 $scope.value = new Date();
             };
@@ -108,7 +108,7 @@
 
             /*
              * Funcion fetchRecords consulta el servicio svc.fetchRecords con el fin de consultar
-             * todos los registros del modulo viaje.
+             * todos los registros del modulo viajero.
              * Guarda los registros en la variable $scope.records
              * Muestra el template de la lista de records.
              */

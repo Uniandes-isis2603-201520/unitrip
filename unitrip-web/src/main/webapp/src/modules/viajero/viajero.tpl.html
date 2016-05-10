@@ -1,9 +1,9 @@
-<div id="viaje-header">
+<div id="viajero-header">
     <nav class="navbar navbar-default" role="navigation" style="background-color:#6e1352">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#viaje-navbar">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#viajero-navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -13,18 +13,15 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="viaje-navbar">
-                <button id="create-viaje" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.createRecord()" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-plus"></span> Create</button>
-                <button id="refresh-viaje" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.fetchRecords()" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
-                <button id="save-viaje" type="submit" form="viaje-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-save"></span> Save</button>
-                <button id="cancel-viaje" type="button" form="viaje-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" ng-click="form.$setPristine(); ctrl.fetchRecords();" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            <div class="collapse navbar-collapse" id="viajero-navbar">
+                <button id="create-viajero" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.createRecord()" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-plus"></span> Create</button>
+                <button id="refresh-viajero" class="btn btn-default navbar-btn" ng-hide="ctrl.editMode" ng-click="ctrl.fetchRecords()" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                <button id="save-viajero" type="submit" form="viajero-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-save"></span> Save</button>
+                <button id="cancel-viajero" type="button" form="viajero-form" class="btn btn-default navbar-btn" ng-show="ctrl.editMode" ng-click="form.$setPristine(); ctrl.fetchRecords();" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
             </div>
         </div>
     </nav>
 </div>
-
-<div class="jumbotronViaje"></div>
-
 
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="color:#ffffff;background-color:#cf71af">{{alert.msg}} </alert>
 
@@ -58,11 +55,15 @@
 
             <div class="caption" >
                 <p><strong>Name:</strong> <span id="{{$index}}-name">{{record.name}}</span></p>
+                <p><strong>Usuario:</strong> <span id="{{$index}}-usuario">{{record.usuario}}</span></p>
+                <p><strong>PassWord:</strong> <span id="{{$index}}-password">{{record.password}}</span></p>
+                <p><strong>Edad:</strong> <span id="{{$index}}-edad">{{record.edad}}</span></p>
+                <p><strong>E-Mail:</strong> <span id="{{$index}}-mail">{{record.mail}}</span></p>
             </div>
             <p class="text-center">
                 <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                 <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
-                <button ui-sref="itinerario" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Mis Itinerarios</button>
+                <button ui-sref="viaje" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Ingresar</button>
             </p>
         </div>
     </div>
@@ -71,20 +72,45 @@
 </div>
 
 <div ng-show="ctrl.editMode" class="col-md-6 well" style="color:#ffffff;background-color:#6e1352">
-    <form novalidate name="form" id="viaje-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()" style="color:#ffffff;background-color:#6e1352">
+    <form novalidate name="form" id="viajero-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()" style="color:#ffffff;background-color:#6e1352">
         <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required" >
             <div ng-message="required" >
                 Please, Fill the required field!
             </div>
         </alert>
         <fieldset>
-            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id" />
-            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}">
-                <label for="name" class="col-md-2 control-label">Name AA</label>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="name" class="col-md-2 control-label">Name</label>
                 <div class="col-md-10">
                     <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
                 </div>
             </div>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.usuario.$valid && form.usuario.$dirty, 'has-error': form.usuario.$invalid && (form.usuario.$dirty || form.$submitted)}" >
+                <label for="usuario" class="col-md-2 control-label">Usuario:</label>
+                <div class="col-md-10">
+                    <input id="usuario" name="usuario" class="form-control" type="text" ng-model="currentRecord.usuario" required />
+                </div>
+            </div>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.password.$valid && form.password.$dirty, 'has-error': form.password.$invalid && (form.password.$dirty || form.$submitted)}" >
+                <label for="password" class="col-md-2 control-label">PassWord:</label>
+                <div class="col-md-10">
+                    <input id="password" name="password" class="form-control" type="text" ng-model="currentRecord.password" required />
+                </div>
+            </div>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.edad.$valid && form.edad.$dirty, 'has-error': form.edad.$invalid && (form.edad.$dirty || form.$submitted)}" >
+                <label for="edad" class="col-md-2 control-label">Edad:</label>
+                <div class="col-md-10">
+                    <input id="edad" name="edad" class="form-control" type="text" ng-model="currentRecord.edad" required />
+                </div>
+            </div>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.mail.$valid && form.mail.$dirty, 'has-error': form.mail.$invalid && (form.mail.$dirty || form.$submitted)}" >
+                <label for="mail" class="col-md-2 control-label">E-Mail:</label>
+                <div class="col-md-10">
+                    <input id="mail" name="mail" class="form-control" type="text" ng-model="currentRecord.mail" required />
+                </div>
+            </div>
+
         </fieldset>
     </form>
 </div>
@@ -108,17 +134,3 @@
     </form>
 </div>
 -->
-<div id="childs" ng-show="ctrl.editMode" class="col-md-6">
-    <ul class="nav nav-tabs">
-
-        <li role="presentation" ng-class="{active: tab === 'itinerarios'}">
-            <a href ng-click="ctrl.changeTab('itinerarios')">Itinerarios</a>
-        </li>
-
-    </ul>
-    <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente-->
-    <div ng-show="tab === 'itinerarios'">
-        <div ng-controller="itinerarioCtrl as ctrl" ng-include="'src/modules/itinerario/itinerario.tpl.html'"></div>
-    </div>
-
-</div>

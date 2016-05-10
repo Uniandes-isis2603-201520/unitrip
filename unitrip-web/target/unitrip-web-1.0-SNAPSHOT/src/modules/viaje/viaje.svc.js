@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,7 +9,7 @@
 
     var mod = ng.module("viajeModule");
 
-    mod.service("viajeService", ["$http", "viajeContext", function ($http, context) {
+    mod.service("viajeService", ["$http", "viajeContext", function ($http, context, $rootScope, $log) {
             /**
              * Obtener la lista de viajes.
              * Hace una petición GET con $http a /viajes para obtener la lista
@@ -18,7 +18,8 @@
              * Devuelve una lista de objetos de viajes con sus atributos y reviews
              */
             this.fetchRecords = function () {
-                return $http.get(context);
+                $log.debug("GET" + context +"/"+$rootScope.viajeroActual  + "/viajes");
+                return $http.get(context +"/"+$rootScope.viajeroActual +"/viajes");
             };
 
             /**
@@ -30,7 +31,8 @@
              * Devuelve un objeto de viajes con sus atributos y reviews
              */
             this.fetchRecord = function (id) {
-                return $http.get(context + "/" + id);
+                $log.debug("GET" + context +"/"+$rootScope.viajeroActual + "/viajes/" + id);
+                return $http.get(context +"/"+$rootScope.viajeroActual + "/viajes/" + id);
             };
 
             /**
@@ -45,9 +47,10 @@
              */
             this.saveRecord = function (currentRecord) {
                 if (currentRecord.id) {
-                    return $http.put(context + "/" + currentRecord.id, currentRecord);
+                    $log.debug("PUT"+context + "/" + $rootScope.viajeroActual+ "/viajes/" + currentRecord.id, currentRecord);
+                    return $http.put(context + "/" + $rootScope.viajeroActual+ "/viajes/" + currentRecord.id, currentRecord);
                 } else {
-                    return $http.post(context, currentRecord);
+                    return $http.post(context + "/" + $rootScope.viajeroActual+ "/viajes/" + currentRecord.id, currentRecord);
                 }
             };
 
@@ -58,7 +61,8 @@
              * No devuelve datos.
              */
             this.deleteRecord = function (id) {
-                return $http.delete(context + "/" + id);
+                $log.debug(context +"/"+$rootScope.viajeroActual+ "/viajes/" + id);
+                return $http.delete(context +"/"+$rootScope.viajeroActual+ "/viajes/" + id);
             };
         }]);
 })(window.angular);

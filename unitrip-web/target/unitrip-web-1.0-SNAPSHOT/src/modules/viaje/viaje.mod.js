@@ -8,7 +8,7 @@
 
     var mod = ng.module("viajeModule", ["ui.bootstrap"]);
 
-    mod.constant("viajeContext", "api/viajes");
+    mod.constant("viajeContext", "api/viajeros");
 
 })(window.angular);
 

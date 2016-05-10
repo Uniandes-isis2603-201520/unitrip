@@ -6,9 +6,9 @@
 
 (function (ng) {
 
-    var mod = ng.module("viajeModule", ["ui.bootstrap"]);
+    var mod = ng.module("viajeroModule", ["ui.bootstrap"]);
 
-    mod.constant("viajeContext", "api/viajes");
+    mod.constant("viajeroContext", "api/viajeros");
 
 })(window.angular);
 

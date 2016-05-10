@@ -8,7 +8,7 @@
 
     var mod = ng.module("itinerarioModule");
 
-    mod.controller("itinerarioCtrl", ["$scope", "itinerarioService", function ($scope, svc) {
+    mod.controller("itinerarioCtrl", ["$scope", "itinerarioService", function ($scope, svc, $rootScope) {
             //Se almacenan todas las alertas
             $scope.alerts = [];
             $scope.currentRecord = {
@@ -20,7 +20,7 @@
                 paradas: [] /*Colección de registros de Paradas*/
             };
             $scope.records = [];
-
+            $rootScope.viajeActual = $scope.currentRecord.id;
             $scope.today = function () {
                 $scope.value = new Date();
             };
