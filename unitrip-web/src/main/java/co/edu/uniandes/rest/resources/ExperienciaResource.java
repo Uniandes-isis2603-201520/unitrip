@@ -48,7 +48,7 @@ public class ExperienciaResource {
      */
     @Inject
     private IExperienciaLogic experienciaLogic;
-    
+
     // injection para poder hacer uso del padre
     @Inject
     private IViajeroLogic viajeroLogic;
@@ -96,7 +96,7 @@ public class ExperienciaResource {
 
     /**
      * Actualiza los datos de un evento
-     * 
+     *
      * @param viajeroId
      * @param exp
      * @return datos del evento modificado
@@ -128,8 +128,8 @@ public class ExperienciaResource {
     public void deleteExperiencia(@PathParam("viajeroId") Long id, @PathParam("experienciaId") Long expId) throws LogicException {
         experienciaLogic.deleteExperiencia(id);
     }
-    
-    
+
+
     // parte de viajero, con el fin de conservar el orden en las URIS
 
     @GET

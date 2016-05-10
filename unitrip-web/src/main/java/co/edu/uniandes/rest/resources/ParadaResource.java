@@ -222,17 +222,9 @@ public class ParadaResource {
     }
 
 
+    // metodos que relacionan evento con parada, son mas parecidos a author-book
 
-
-
-
-
-
-
-
-
-    // metodos para la siguiente entidad
-    /**
+     /**
      * Obtiene una colección de objetos de EventoDTO asociados a un objeto de
      * Parada
      *
@@ -242,7 +234,7 @@ public class ParadaResource {
      */
     @GET
     @Path("{paradaId: \\d+}/eventos")
-    public List<EventoDTO> listEventos(@PathParam("paradaId") Long paradaId) {
+    public List<EventoDTO> listEventosDeParada(@PathParam("paradaId") Long paradaId) {
         List<EventoEntity> eventos = paradaLogic.getEventos(paradaId);
         return EventoConverter.listEntity2DTO(eventos);
     }
@@ -256,7 +248,7 @@ public class ParadaResource {
      */
     @GET
     @Path("{paradaId: \\d+}/eventos/{eventoId: \\d+}")
-    public EventoDTO getEventos(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
+    public EventoDTO getEventoDeParada(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
         EventoEntity evento = paradaLogic.getEvento(paradaId, eventoId);
         return EventoConverter.fullEntity2DTO(evento);
     }
@@ -272,10 +264,11 @@ public class ParadaResource {
      */
     @POST
     @Path("{paradaId: \\d+}/eventos/{eventoId: \\d+}")
-    public EventoDTO addEventos(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
+    public EventoDTO addEventoAParada(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
         try {
-            EventoEntity evento = paradaLogic.addEvento(paradaId, eventoId);
+            EventoEntity evento = paradaLogic.addEvento(eventoId, paradaId);
             return EventoConverter.fullEntity2DTO(evento);
+
         } catch (BusinesLogicException ex) {
             logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
             throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
@@ -292,7 +285,7 @@ public class ParadaResource {
      * @generated
      */
     @PUT
-    @Path("{paradaId: \\d+}/eventos")
+    @Path("{itinerarioId: \\d+}/paradas/{paradaId: \\d+}/eventos")
     public List<EventoDTO> replaceEventos(@PathParam("paradaId") Long paradaId, List<EventoDTO> eventos) {
         try {
             List<EventoEntity> eventoList = EventoConverter.listDTO2Entity(eventos);
@@ -313,9 +306,18 @@ public class ParadaResource {
      */
     @DELETE
     @Path("{paradaId: \\d+}/eventos/{eventoId: \\d+}")
-    public void removeEventos(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
-        paradaLogic.removeEvento(paradaId, eventoId);
+    public void removeEventoDeParada(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
+        paradaLogic.removeEvento(eventoId, paradaId);
     }
+
+
+
+
+
+
+
+
+
 
     /**
      * @GET public List<ParadaDTO> getParadas() { return

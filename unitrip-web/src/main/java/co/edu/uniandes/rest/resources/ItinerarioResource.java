@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
 import co.edu.uniandes.csw.unitrip.ejbs.ViajeLogic;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
+import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.rest.converters.ItinerarioConverter;
 import co.edu.uniandes.rest.converters.ParadaConverter;
@@ -107,19 +108,24 @@ public class ItinerarioResource {
      */
     //@PUT
     //@Path("{id: \\d+}")
-    public ItinerarioDTO updateItinerario(@PathParam("id") Long id, ItinerarioDTO itinerarioDTO) {
+    public ItinerarioDTO updateItinerario(@PathParam("id") Long id, ItinerarioDTO itinerarioDTO, @PathParam("viajeId") Long viajeId ) {
         logger.log(Level.INFO, "Se ejecuta método updateItinerario con id={0}", id);
         ItinerarioEntity entity = ItinerarioConverter.fullDTO2Entity(itinerarioDTO);
         entity.setId(id);
-        ItinerarioEntity oldEntity = itinerarioLogic.getItinerario(id);
-        entity.setParadas(oldEntity.getParadas());
+
         try {
-            ItinerarioEntity savedItinerario = itinerarioLogic.updateItinerario(entity);
-            return ItinerarioConverter.fullEntity2DTO(savedItinerario);
-        } catch (BusinesLogicException ex) {
-            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+            ViajeEntity viajeEntity = viajeLogic.getViaje(viajeId);
+            entity.setViaje(viajeEntity);
+            ItinerarioEntity oldEntity = itinerarioLogic.getItinerario(id);
+            entity.setParadas(oldEntity.getParadas());
+            return ItinerarioConverter.fullEntity2DTO(itinerarioLogic.updateItinerario(entity));
+        }catch (BusinesLogicException ex) {
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.NOT_FOUND);
         }
+
+
+
+
 
     }
 
@@ -212,6 +218,14 @@ public class ItinerarioResource {
 
     }
 
+    @PUT
+    @Path("{itinerarioId: \\d+}")
+    public void updateItinerarioDeViaje(@PathParam("viajeId") Long viajeId,
+            @PathParam("itinerarioId") Long itinerarioId, ItinerarioDTO itinerarioDTO){
+
+        updateItinerario(itinerarioId, itinerarioDTO, viajeId);
+
+    }
 
 
 

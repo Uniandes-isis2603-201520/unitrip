@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,7 +38,7 @@ public class ParadaEntity extends BaseEntity implements Serializable {
     @PodamExclude
     private ItinerarioEntity itinerario;
 
-    @OneToMany(mappedBy = "parada", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany
     private List<EventoEntity> eventos = new ArrayList<>();
 
     /**

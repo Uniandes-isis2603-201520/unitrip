@@ -155,6 +155,7 @@ public class EventoDTO {
         this.fechaFin = fechaFin;
     }
 
+
     public ParadaDTO getParada() {
         return parada;
     }
@@ -162,5 +163,6 @@ public class EventoDTO {
     public void setParada(ParadaDTO parada) {
         this.parada = parada;
     }
+
 
 }

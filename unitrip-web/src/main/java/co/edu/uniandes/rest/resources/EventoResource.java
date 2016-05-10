@@ -10,12 +10,15 @@ package co.edu.uniandes.rest.resources;
  * @author l.castro12
  */
 import co.edu.uniandes.csw.unitrip.api.IEventoLogic;
+import co.edu.uniandes.csw.unitrip.api.IParadaLogic;
 import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.rest.dtos.EventoDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
 import co.edu.uniandes.rest.converters.EventoConverter;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
@@ -38,12 +41,18 @@ import javax.ws.rs.core.Response;
  *
  * @author Asistente
  */
-@Path("eventos")
+
 @Produces("application/json")
+@Path("eventos")
 public class EventoResource {
+
+    private static final Logger logger = Logger.getLogger(EventoResource.class.getName());
 
     @Inject
     private IEventoLogic eventoLogic;
+
+    @Inject
+    private IParadaLogic paradaLogic;
 
     /**
      * Obtiene el listado de eventos.
@@ -119,5 +128,9 @@ public class EventoResource {
     public void deleteEvent(@PathParam("id") Long id) throws LogicException {
         eventoLogic.deleteEvento(id);
     }
+
+
+
+
 
 }

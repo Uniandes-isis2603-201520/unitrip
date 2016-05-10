@@ -35,7 +35,7 @@ public class ParadaLogic implements IParadaLogic {
     public List<ParadaEntity> getParadas() {
         LOGGER.info("Inicia proceso de consultar todos las paradas ");
         List<ParadaEntity> paradas = persistence.findAll();
-        LOGGER.info("Termina proceso de consultar todos las paradas");
+        LOGGER.info("Termina proceso de consultar todas las paradas");
         return paradas;
     }
 
@@ -45,7 +45,7 @@ public class ParadaLogic implements IParadaLogic {
         ParadaEntity parada = persistence.find(id);
         if (parada == null) {
             LOGGER.log(Level.SEVERE, "La parada con el id {0} no existe", id);
-            throw new IllegalArgumentException("La parada solicitado no existe");
+            throw new IllegalArgumentException("La parada solicitada ( " + id+" ) no existe");
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar parada con id={0}", id);
         return parada;
@@ -103,6 +103,7 @@ public class ParadaLogic implements IParadaLogic {
     public EventoEntity addEvento(Long eventoId, Long paradaId) throws BusinesLogicException {
         ParadaEntity paradaEntity = getParada(paradaId);
         EventoEntity eventoEntity = eventoPersistence.find(eventoId);
+        //eventoEntity.setParada(paradaEntity);
         if (eventoEntity == null) {
             throw new IllegalArgumentException(EVENTO_NO_EXISTE);
         }
@@ -121,6 +122,7 @@ public class ParadaLogic implements IParadaLogic {
 
             throw new IllegalArgumentException(EVENTO_NO_EXISTE);
         }
+
         paradaEntity.getEventos().remove(eventoEntity);
     }
 

@@ -12,8 +12,11 @@ package co.edu.uniandes.csw.unitrip.entities;
 import co.edu.uniandes.csw.crud.api.podam.strategy.DateStrategy;
 import co.edu.uniandes.csw.crud.spi.entity.BaseEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,9 +37,12 @@ public class EventoEntity extends BaseEntity implements Serializable {
     private Long latitud;
     private Long longitud;
 
-    @ManyToOne
-    @PodamExclude
+
+    @ManyToMany
+    private List<ParadaEntity> paradas = new ArrayList<>();
+
     private ParadaEntity parada;
+
 
     /**
      * @return fechaInicio
@@ -66,6 +72,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
         this.fechaFin = fechaFin;
     }
 
+
     public ParadaEntity getParada() {
         return parada;
     }
@@ -73,6 +80,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
     public void setParada(ParadaEntity parada) {
         this.parada = parada;
     }
+
 
     public String getDescription() {
         return descripcion;

@@ -103,6 +103,7 @@ public class ViajesResource {
     public ViajesDTO updateViaje(@PathParam("idViaje") Long id, ViajesDTO dto, Long idViajero) throws LogicException {
         ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
         entity.setId(id);
+
         try {
             ViajeroEntity viajeroEntity = viajeroLogic.getViajero(idViajero);
             entity.setViajero(viajeroEntity);
