@@ -95,18 +95,25 @@ public class ItinerarioLogic implements IItinerarioLogic {
         if (paradaEntity == null) {
             throw new IllegalArgumentException("La parada no existe");
         }
+        paradaEntity.setItinerario(itinerarioEntity);
         itinerarioEntity.getParadas().add(paradaEntity);
         return paradaEntity;
 
     }
 
     @Override
-    public void removeParada(Long Id, Long itinerarioId) {
+    public void removeParada(Long IdParada, Long itinerarioId) {
         ItinerarioEntity itinerarioEntity= persistence.find(itinerarioId);
         ParadaEntity paradaEntity;
-        paradaEntity = paradaPersistence.find(Id);
-        itinerarioEntity.setId(itinerarioId);
+        paradaEntity = paradaPersistence.find(IdParada);
+        if(paradaEntity == null){
+            throw new IllegalArgumentException("La parada no existe");
+        }
+        if(paradaEntity.getItinerario().getId() != itinerarioId){
+            throw new IllegalArgumentException("La parada no pertnece al itinerario");
+        }
         itinerarioEntity.getParadas().remove(paradaEntity);
+        paradaPersistence.delete(IdParada);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package co.edu.uniandes.rest.resources;
 
+import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
 import co.edu.uniandes.csw.unitrip.api.IParadaLogic;
 import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
@@ -26,7 +27,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("paradas")
+@Path("viajeros/{viajeroId: \\d+}/viajes/{viajeId: \\d+}/itinerarios/{itinerarioId: \\d+}/paradas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ParadaResource {
@@ -36,6 +37,9 @@ public class ParadaResource {
     @Inject
     private IParadaLogic paradaLogic;
 
+    @Inject
+    private IItinerarioLogic itinerarioLogic;
+
     /**
      * Obtiene la lista de los registros de Parada.
      *
@@ -43,7 +47,7 @@ public class ParadaResource {
      * Review
      * @generated
      */
-    @GET
+    //@GET
     public List<ParadaDTO> getParadas() {
         logger.info("Se ejecuta método getParadas");
         List<ParadaEntity> paradas = paradaLogic.getParadas();
@@ -58,8 +62,8 @@ public class ParadaResource {
      * Review
      * @generated
      */
-    @GET
-    @Path("{id: \\d+}")
+    //@GET
+    //@Path("{id: \\d+}")
     public ParadaDTO getParada(@PathParam("id") Long id) {
         logger.log(Level.INFO, "Se ejecuta método getParada con id={0}", id);
         ParadaEntity parada = paradaLogic.getParada(id);
@@ -74,7 +78,7 @@ public class ParadaResource {
      * @generated
      */
     //@StatusCreated
-    @POST
+    //@POST
     public ParadaDTO createParada(ParadaDTO dto) {
         logger.info("Se ejecuta método createParada");
         ParadaEntity entity = ParadaConverter.fullDTO2Entity(dto);
@@ -96,8 +100,8 @@ public class ParadaResource {
      * @return Instancia de ParadaDTO con los datos actualizados.
      * @generated
      */
-    @PUT
-    @Path("{id: \\d+}")
+    //@PUT
+    //@Path("{id: \\d+}")
     public ParadaDTO updateParada(@PathParam("id") Long id, ParadaDTO dto) {
         logger.log(Level.INFO, "Se ejecuta método updateParada con id={0}", id);
         ParadaEntity entity = ParadaConverter.fullDTO2Entity(dto);
@@ -119,13 +123,115 @@ public class ParadaResource {
      * @param id Identificador del objeto a eliminar.
      * @generated
      */
-    @DELETE
-    @Path("{id: \\d+}")
+    //@DELETE
+    //@Path("{id: \\d+}")
     public void deleteParada(@PathParam("id") Long id) {
         logger.log(Level.INFO, "Se ejecuta método deleteParada con id={0}", id);
         paradaLogic.deleteParada(id);
     }
 
+    // metodos
+
+    /**
+     * Obtiene una colección de instancias de paradaDTO asociadas a una
+     * instancia de Itinerario
+     *
+     * @param itinerarioId Identificador de la instancia de Itinerario
+     * @return Colección de instancias de ItinerarioDTO asociadas a la instancia
+     * de Viaje
+     * @generated
+     */
+    @GET
+    public List<ParadaDTO> listParadasDeItinerario(@PathParam("itinerarioId") Long itinerarioId) {
+        // falta este metodo
+        List<ParadaEntity> paradas = itinerarioLogic.getParadas(itinerarioId);
+        return ParadaConverter.listEntity2DTO(paradas);
+
+    }
+
+
+
+    /**
+     * Obtiene un objeto de Parada asociada a un objeto de Itinerario
+     *
+     * @param itinerarioId Identificador del objeto de Itinerario
+     * @param paradaId Identificador del objeto de Parada
+     * @generated
+     */
+    @GET
+    @Path("{paradaId: \\d+}")
+    public ParadaDTO getParada(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
+        ParadaEntity parada = itinerarioLogic.getParada(itinerarioId, paradaId);
+        return ParadaConverter.fullEntity2DTO(parada);
+    }
+
+    /**
+     * Asocia un Parada existente a un Itinerario
+     *
+     * @param itinerarioId Identificador del objeto de Itinerario
+     * @param paradaId Identificador del objeto de Parada
+     * @return Objeto de ParadaDTO en representación full que fue asociado a
+     * Itinerario
+     * @generated
+     */
+    @POST
+    public ParadaDTO addParadaAItinerario(ParadaDTO paradaDTO, @PathParam("itinerarioId") Long itinerarioId) {
+        try {
+            ParadaEntity parada = ParadaConverter.fullDTO2Entity(paradaDTO);
+            ParadaEntity actual = paradaLogic.createParada(parada);
+            return ParadaConverter.fullEntity2DTO(itinerarioLogic.addParada(actual.getId(), itinerarioId));
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Remplaza los objetos de Parada asociados a un objeto de Itinerario
+     *
+     * @param itinerarioId Identificador del objeto de Itinerario
+     * @param paradas Colección de objetos de ParadaDTO en representación
+     * minimum a asociar a objeto de Itinerario
+     * @return Nueva colección de ParadaDTO en representación Basic
+     * @generated
+     */
+    @PUT
+    @Path("{itinerarioId: \\d+}/paradas")
+    public List<ParadaDTO> replaceParadas(@PathParam("itinerarioId") Long itinerarioId, List<ParadaDTO> paradas) {
+        try {
+            List<ParadaEntity> paradaList = ParadaConverter.listDTO2Entity(paradas);
+            List<ParadaEntity> newParadas = itinerarioLogic.replaceParadas(paradaList, itinerarioId);
+            return ParadaConverter.listEntity2DTO(newParadas);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Desasocia un Parada existente de un Itinerario existente
+     *
+     * @param itinerarioId Identificador del objeto de Itinerario
+     * @param paradaId Identificador del objeto de Parada
+     * @generated
+     */
+    @DELETE
+    @Path("{paradaId: \\d+}")
+    public void removeParadaDeItinerario(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
+        itinerarioLogic.removeParada( paradaId, itinerarioId);
+    }
+
+
+
+
+
+
+
+
+
+
+
+    // metodos para la siguiente entidad
     /**
      * Obtiene una colección de objetos de EventoDTO asociados a un objeto de
      * Parada
