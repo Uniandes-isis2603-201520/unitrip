@@ -17,6 +17,8 @@ import co.edu.uniandes.csw.unitrip.persistence.ViajePersistence;
 import co.edu.uniandes.csw.unitrip.persistence.ViajeroPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,9 +56,6 @@ public class ViajeroLogicTest {
                 .addPackage(ViajeroLogic.class.getPackage())
                 .addPackage(IViajeroLogic.class.getPackage())
                 .addPackage(ViajeroPersistence.class.getPackage())
-//                .addPackage(ViajeEntity.class.getPackage())
-//                .addPackage(ViajeLogic.class.getPackage())
-//                .addPackage(ViajePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -172,5 +171,44 @@ public class ViajeroLogicTest {
         Assert.assertEquals(entity.getId(), response.getViajero().getId());
         response = viajeroLogic.getViaje(data.get(data.size()-1).getId(), viajeEntity.getId());
         Assert.assertNull(response);
+    }
+
+    @Test
+    public void addViajeTest (){
+        ViajeroEntity entity = data.get(0);
+        ViajeEntity viajeEntity = dataViajes.get(1);
+
+        ViajeEntity response = viajeroLogic.addViaje(entity.getId(), viajeEntity.getId());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(entity.getId(), response.getViajero().getId());
+    }
+
+    @Test
+    public void removeViajeTest (){
+
+        ViajeroEntity entity = data.get(0);
+        ViajeEntity viajeEntity = dataViajes.get(0);
+        Long actual = viajeEntity.getId();
+        try {
+            viajeroLogic.removeViaje(entity.getId(), viajeEntity.getId());
+            for (ViajeEntity a : viajeroLogic.getViajero(entity.getId()).getViajes())
+            {
+                if(a.getId()==actual)
+                {
+                    Assert.fail();
+                }
+            }
+        } catch (BusinesLogicException ex) {
+            Assert.fail("no debería generar excepción");
+        }
+
+
+       entity = data.get(1);
+       viajeEntity = dataViajes.get(2);
+       try {
+            viajeroLogic.removeViaje(entity.getId(), viajeEntity.getId());
+        } catch (BusinesLogicException ex) {
+            //debería generar excepcion
+        }
     }
 }
