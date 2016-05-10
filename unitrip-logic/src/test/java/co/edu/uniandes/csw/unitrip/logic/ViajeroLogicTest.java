@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.unitrip.api.IViajeroLogic;
 import co.edu.uniandes.csw.unitrip.api.IViajesLogic;
 import co.edu.uniandes.csw.unitrip.ejbs.ViajeLogic;
 import co.edu.uniandes.csw.unitrip.ejbs.ViajeroLogic;
+import co.edu.uniandes.csw.unitrip.entities.ExperienciaEntity;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeroEntity;
@@ -49,6 +50,7 @@ public class ViajeroLogicTest {
     private UserTransaction utx;
     private List<ViajeroEntity> data = new ArrayList<ViajeroEntity>();
     private List<ViajeEntity> dataViajes = new ArrayList<ViajeEntity>();
+    private List<ExperienciaEntity> dataExperiencias = new ArrayList<ExperienciaEntity>();
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -77,6 +79,7 @@ public class ViajeroLogicTest {
     }
     private void clearData() {
 
+        em.createQuery("delete from ExperienciaEntity").executeUpdate();
         em.createQuery("delete from ViajeEntity").executeUpdate();
         em.createQuery("delete from ViajeroEntity").executeUpdate();
     }
@@ -90,6 +93,12 @@ public class ViajeroLogicTest {
             dataViajes.add(viaje);
             viajero.getViajes().add(viaje);
             viaje.setViajero(viajero);
+
+            ExperienciaEntity experiencia = factory.manufacturePojo(ExperienciaEntity.class);
+            em.persist(experiencia);
+            dataExperiencias.add(experiencia);
+            viajero.getExperiencias().add(experiencia);
+            experiencia.setViajero(viajero);
         }
         ViajeroEntity viajero = factory.manufacturePojo(ViajeroEntity.class);
         em.persist(viajero);
@@ -208,6 +217,57 @@ public class ViajeroLogicTest {
        viajeEntity = dataViajes.get(2);
        try {
             viajeroLogic.removeViaje(entity.getId(), viajeEntity.getId());
+        } catch (BusinesLogicException ex) {
+            //debería generar excepcion
+        }
+    }
+
+    @Test
+    public void getExperienciaTest (){
+        ViajeroEntity entity = data.get(0);
+        ExperienciaEntity experienciaEntity = dataExperiencias.get(0);
+        ExperienciaEntity response = viajeroLogic.getExperiencia(entity.getId(), experienciaEntity.getId());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(entity.getId(), response.getViajero().getId());
+        response = viajeroLogic.getExperiencia(data.get(data.size()-1).getId(), experienciaEntity.getId());
+        Assert.assertNull(response);
+    }
+
+
+    @Test
+    public void addExperienciaTest (){
+        ViajeroEntity entity = data.get(0);
+        ExperienciaEntity viajeEntity = dataExperiencias.get(1);
+
+        ExperienciaEntity response = viajeroLogic.addExperiencia(entity.getId(), viajeEntity.getId());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(entity.getId(), response.getViajero().getId());
+    }
+
+    @Test
+    public void removeExperienciaTest (){
+
+        ViajeroEntity entity = data.get(0);
+        ExperienciaEntity experienciaEntity = dataExperiencias.get(0);
+        Long actual = experienciaEntity.getId();
+        try {
+            viajeroLogic.removeExperiencia(entity.getId(), experienciaEntity.getId());
+            for (ExperienciaEntity a : viajeroLogic.getViajero(entity.getId()).getExperiencias())
+            {
+                if(a.getId()==actual)
+                {
+                    Assert.fail();
+                }
+            }
+        } catch (BusinesLogicException ex) {
+            Assert.fail("No debería generar excepción");
+        }
+
+
+       entity = data.get(1);
+       experienciaEntity = dataExperiencias.get(2);
+       try {
+            viajeroLogic.removeExperiencia(entity.getId(), experienciaEntity.getId());
         } catch (BusinesLogicException ex) {
             //debería generar excepcion
         }

@@ -100,6 +100,7 @@ public class ExperienciaPersistenceTest {
         ExperienciaEntity entidad = em.find(ExperienciaEntity.class, resultado.getId());
         Assert.assertEquals(entidadExp.getName(), entidad.getName());
         Assert.assertEquals(entidadExp.getDescripcion(), entidad.getDescripcion());
+
     }
 
     @Test
@@ -124,6 +125,8 @@ public class ExperienciaPersistenceTest {
         ExperienciaEntity nuevaEn = experienciaPersistence.find(entid.getId());
         Assert.assertNotNull(nuevaEn);
         Assert.assertEquals(entid.getName(), nuevaEn.getName());
+        Assert.assertEquals(entid.getDescripcion(), nuevaEn.getDescripcion());
+        
     }
 
     @Test
