@@ -12,12 +12,18 @@ import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.csw.unitrip.persistence.ItinerarioPersistence;
+import co.edu.uniandes.csw.unitrip.persistence.ParadaPersistence;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -53,6 +59,11 @@ public class ItinerarioLogicTest {
 
     @Inject
     private IItinerarioLogic itinerarioLogic;
+
+    @Inject
+    private ItinerarioPersistence itiPersiste;
+    @Inject
+    private ParadaPersistence paradaPersiste;
 
     @PersistenceContext
     private EntityManager em;
@@ -153,25 +164,23 @@ public class ItinerarioLogicTest {
 
     @Test
     public void getItinerarioTest() {
-        try{
-        ItinerarioEntity result = itinerarioLogic.getItinerario(data.get(0).getId());
-        ItinerarioEntity expected = em.find(ItinerarioEntity.class, data.get(0).getId());
+        try {
+            ItinerarioEntity result = itinerarioLogic.getItinerario(data.get(0).getId());
+            ItinerarioEntity expected = em.find(ItinerarioEntity.class, data.get(0).getId());
 
-        Assert.assertNotNull(expected);
-        Assert.assertNotNull(result);
-        Assert.assertEquals(expected.getId(), result.getId());
-        Assert.assertEquals(expected.getName(), result.getName());
-        Assert.assertEquals(expected.getDescripcion(), result.getDescripcion());
-        }
-        catch(Exception e){
+            Assert.assertNotNull(expected);
+            Assert.assertNotNull(result);
+            Assert.assertEquals(expected.getId(), result.getId());
+            Assert.assertEquals(expected.getName(), result.getName());
+            Assert.assertEquals(expected.getDescripcion(), result.getDescripcion());
+        } catch (Exception e) {
             Assert.fail("No debería mandar excepcíon");
         }
-        try{
+        try {
             ItinerarioEntity result = factory.manufacturePojo(ItinerarioEntity.class);
             itinerarioLogic.getItinerario(result.getId());
             Assert.fail("No");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -283,45 +292,65 @@ public class ItinerarioLogicTest {
 
         return (ParadaEntity) q.getSingleResult();
     }
+
     @Test
-    public void getParadaTest (){
+    public void getParadaTest() {
         ItinerarioEntity entity = data.get(0);
         ParadaEntity paradaEntity = paradasData.get(0);
         ParadaEntity response = itinerarioLogic.getParada(entity.getId(), paradaEntity.getId());
         Assert.assertNotNull(response);
         Assert.assertEquals(entity.getId(), response.getItinerario().getId());
-        response = itinerarioLogic.getParada(data.get(data.size()-1).getId(), paradaEntity.getId());
+        response = itinerarioLogic.getParada(data.get(data.size() - 1).getId(), paradaEntity.getId());
         Assert.assertNull(response);
     }
 
-
     @Test
-    public void addParadaTest (){
+    public void addParadaTest() {
         ItinerarioEntity entity = data.get(0);
         ParadaEntity paradaEntity = paradasData.get(1);
-        try{
-        ParadaEntity response = itinerarioLogic.addParada(paradaEntity.getId(),entity.getId());
-        Assert.assertNotNull(response);
-        Assert.assertEquals(entity.getId(), response.getItinerario().getId());
-        }
-        catch(Exception e){
-            Assert.fail("Se dañó todo");
+        String fechaItiI = "2016-02-12";
+        String fechaItiF = "2019-02-12";
+        String fechaPI = "2016-02-25";
+        String fechaPF = "2017-11-12";
+        DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaItinerarioI;
+        Date fechaItinerarioF;
+        Date fechaParaI;
+        Date fechaParaF;
+        try {
+            fechaItinerarioI = formato.parse(fechaItiI);
+            fechaItinerarioF = formato.parse(fechaItiF);
+            fechaParaI = formato.parse(fechaPI);
+            fechaParaF = formato.parse(fechaPF);
+            entity.setFechaI(fechaItinerarioI);
+            entity.setFechaF(fechaItinerarioF);
+            paradaEntity.setFechaI(fechaParaI);
+            paradaEntity.setFechaF(fechaParaF);
+            itiPersiste.update(entity);
+            paradaPersiste.update(paradaEntity);
+            try {
+                ParadaEntity response = itinerarioLogic.addParada(paradaEntity.getId(), entity.getId());
+                Assert.assertNotNull(response);
+                Assert.assertEquals(entity.getId(), response.getItinerario().getId());
+            } catch (Exception e) {
+                Assert.fail(e.getMessage());
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(ItinerarioLogicTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     @Test
-    public void removeParadaTest (){
+    public void removeParadaTest() {
 
         ItinerarioEntity entity = data.get(0);
         ParadaEntity paradaEntity = paradasData.get(0);
         Long actual = paradaEntity.getId();
         try {
-            itinerarioLogic.removeParada(paradaEntity.getId(),entity.getId());
-            for (ParadaEntity a : itinerarioLogic.getItinerario(entity.getId()).getParadas())
-            {
-                if(a.getId()==actual)
-                {
+            itinerarioLogic.removeParada(paradaEntity.getId(), entity.getId());
+            for (ParadaEntity a : itinerarioLogic.getItinerario(entity.getId()).getParadas()) {
+                if (a.getId() == actual) {
                     Assert.fail();
                 }
             }
@@ -329,11 +358,10 @@ public class ItinerarioLogicTest {
             Assert.fail("no debería generar excepción");
         }
 
-
-       entity = data.get(1);
-       paradaEntity = paradasData.get(2);
-       try {
-            itinerarioLogic.removeParada( paradaEntity.getId(),entity.getId());
+        entity = data.get(1);
+        paradaEntity = paradasData.get(2);
+        try {
+            itinerarioLogic.removeParada(paradaEntity.getId(), entity.getId());
         } catch (Exception ex) {
             //debería generar excepcion
         }

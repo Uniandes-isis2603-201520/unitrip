@@ -94,7 +94,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
         ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
         ParadaEntity paradaEntity = paradaPersistence.find(paradaId);
         if (paradaEntity == null) {
-            throw new IllegalArgumentException("La parada no existe");
+            throw new BusinesLogicException("La parada no existe");
         }
         Date fechaIParada = paradaEntity.getFechaI();
         Date fechaFParada = paradaEntity.getFechaF();
@@ -140,5 +140,5 @@ public class ItinerarioLogic implements IItinerarioLogic {
         return !(desc == null || desc.isEmpty());
     }
 
-    
+
 }
