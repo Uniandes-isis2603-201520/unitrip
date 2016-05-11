@@ -18,10 +18,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import uk.co.jemos.podam.common.PodamExclude;
 
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
@@ -39,11 +37,6 @@ public class EventoEntity extends BaseEntity implements Serializable {
     private Long latitud;
     private Long longitud;
 
-
-//    @ManyToMany(mappedBy="evento",cascade = CascadeType.ALL)
-//    private List<ParadaEntity> paradas = new ArrayList<>();
-
-    //private ParadaEntity parada;
 
 
     /**
@@ -99,7 +92,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
-    
+
     public Long getLatitud() {
         return latitud;
     }

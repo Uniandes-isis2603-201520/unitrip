@@ -54,4 +54,9 @@ public class EventoLogic implements IEventoLogic {
         persistence.delete(id);
     }
 
+    @Override
+    public List<EventoEntity> getEventosDeCiudad(String ciudad) {
+        return persistence.findPorCiudad(ciudad);
+    }
+
 }

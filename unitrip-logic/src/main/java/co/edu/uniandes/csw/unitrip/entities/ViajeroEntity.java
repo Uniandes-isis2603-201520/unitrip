@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class ViajeroEntity extends BaseEntity implements Serializable {
 
-    private String Usuario;
+    private String usuario;
     private int edad;
     private String password;
     private String mail;
@@ -27,11 +27,11 @@ public class ViajeroEntity extends BaseEntity implements Serializable {
     private List<ExperienciaEntity> experiencias = new ArrayList<>();
 
     public String getUsuario() {
-        return Usuario;
+        return usuario;
     }
 
-    public void setUsuario(String Usuario) {
-        this.Usuario = Usuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public int getEdad() {

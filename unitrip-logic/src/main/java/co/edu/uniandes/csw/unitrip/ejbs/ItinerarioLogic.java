@@ -46,9 +46,6 @@ public class ItinerarioLogic implements IItinerarioLogic {
     @Override
     public ItinerarioEntity createItinerario(ItinerarioEntity entity) throws BusinesLogicException {
         LOGGER.info("Inicia proceso de creación de itinerario");
-        if (!validateDescripcion(entity.getDescripcion())) {
-            throw new BusinesLogicException("la descripcion es inválida");
-        }
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de itinerario");
         return entity;
@@ -57,9 +54,6 @@ public class ItinerarioLogic implements IItinerarioLogic {
     @Override
     public ItinerarioEntity updateItinerario(ItinerarioEntity entity) throws BusinesLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar libro con id={0}", entity.getId());
-        if (!validateDescripcion(entity.getDescripcion())) {
-            throw new BusinesLogicException("la descripcion no es valido");
-        }
         ItinerarioEntity newEntity = persistence.update(entity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar itinerario con id={0}", entity.getId());
         return newEntity;
@@ -129,16 +123,9 @@ public class ItinerarioLogic implements IItinerarioLogic {
         paradaPersistence.delete(IdParada);
     }
 
-    @Override
-    public List<ParadaEntity> replaceParadas(List<ParadaEntity> paradas, Long itinerarioId) throws BusinesLogicException {
-        ItinerarioEntity itinerarioEntity = persistence.find(itinerarioId);
-        itinerarioEntity.setParadas(paradas);
-        return itinerarioEntity.getParadas();
-    }
 
-    private boolean validateDescripcion(String desc) {
-        return !(desc == null || desc.isEmpty());
-    }
+
+
 
 
 }

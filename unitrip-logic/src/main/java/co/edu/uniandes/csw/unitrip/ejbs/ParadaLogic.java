@@ -55,9 +55,6 @@ public class ParadaLogic implements IParadaLogic {
     public ParadaEntity createParada(ParadaEntity entity) throws BusinesLogicException {
 
         LOGGER.info("Inicia proceso de creación de parada");
-        if (!validateDescripcion(entity.getDescripcion())) {
-            throw new BusinesLogicException("La descripcion es inválida");
-        }
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de parada");
         return entity;
@@ -66,9 +63,6 @@ public class ParadaLogic implements IParadaLogic {
     @Override
     public ParadaEntity updateParada(ParadaEntity entity) throws BusinesLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar parada con id={0}", entity.getId());
-        if (!validateDescripcion(entity.getDescripcion())) {
-            throw new BusinesLogicException("La descripcion es inválido");
-        }
         ParadaEntity newEntity = persistence.update(entity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar parada con id={0}", entity.getId());
         return newEntity;
@@ -136,13 +130,7 @@ public class ParadaLogic implements IParadaLogic {
     }
 
 
-    private boolean validateDescripcion(String desc) {
-        return !(desc == null || desc.isEmpty());
-    }
 
-    private boolean inicioParadaBeforeInicioEvento (Date fechaInicioEvento, Date fechaInicioParada){
-        return fechaInicioParada.before(fechaInicioEvento);
-    }
 
     /**
      * @Override public ParadaEntity createParada(ParadaEntity entity) {

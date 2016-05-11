@@ -124,6 +124,7 @@ public class ParadaConverter {
             entity.setLongitud(dto.getLongitud());
             entity.setFechaI(dto.getFechaI());
             entity.setFechaF(dto.getFechaF());
+            entity.setCiudad(dto.getCiudad());
             return entity;
         } else {
             return null;

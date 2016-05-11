@@ -25,4 +25,6 @@ public interface IEventoLogic {
 
     public void deleteEvento(Long id);
 
+    public List<EventoEntity> getEventosDeCiudad(String ciudad);
+
 }

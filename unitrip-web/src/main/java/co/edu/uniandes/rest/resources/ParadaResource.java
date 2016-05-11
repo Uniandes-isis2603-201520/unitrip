@@ -193,28 +193,6 @@ public class ParadaResource {
     }
 
     /**
-     * Remplaza los objetos de Parada asociados a un objeto de Itinerario
-     *
-     * @param itinerarioId Identificador del objeto de Itinerario
-     * @param paradas Colección de objetos de ParadaDTO en representación
-     * minimum a asociar a objeto de Itinerario
-     * @return Nueva colección de ParadaDTO en representación Basic
-     * @generated
-     */
-    @PUT
-    @Path("{itinerarioId: \\d+}/paradas")
-    public List<ParadaDTO> replaceParadas(@PathParam("itinerarioId") Long itinerarioId, List<ParadaDTO> paradas) {
-        try {
-            List<ParadaEntity> paradaList = ParadaConverter.listDTO2Entity(paradas);
-            List<ParadaEntity> newParadas = itinerarioLogic.replaceParadas(paradaList, itinerarioId);
-            return ParadaConverter.listEntity2DTO(newParadas);
-        } catch (BusinesLogicException ex) {
-            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
-        }
-    }
-
-    /**
      * Desasocia un Parada existente de un Itinerario existente
      *
      * @param itinerarioId Identificador del objeto de Itinerario
