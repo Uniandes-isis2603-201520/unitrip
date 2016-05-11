@@ -108,9 +108,18 @@ public class ParadaLogic implements IParadaLogic {
         if (eventoEntity == null) {
             throw new IllegalArgumentException(EVENTO_NO_EXISTE);
         }
-        if (!eventoDentroRango(eventoEntity.getFechaInicio(), paradaEntity.getFechaI())) {
-            throw new BusinesLogicException(" el evento no puede comenzar antes de la parada");
+        Date paradaFechaI = paradaEntity.getFechaI();
+        Date paradaFechaF = paradaEntity.getFechaF();
+        Date eventoFechaI = eventoEntity.getFechaInicio();
+        Date eventoFechaF = eventoEntity.getFechaFin();
+
+        if(paradaFechaI.compareTo(eventoFechaI) > 0){
+            throw new BusinesLogicException("La fecha de inicio del evento debe ser igual o despues a la fecha de inicio de parada");
         }
+        if(paradaFechaF.compareTo(eventoFechaF) < 1){
+            throw new BusinesLogicException("la fecha final del evento debe ser igual o antes de la fecha final de la parada");
+        }
+        
         paradaEntity.getEventos().add(eventoEntity);
         return eventoEntity;
     }
