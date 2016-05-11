@@ -36,6 +36,7 @@ public abstract class EventoConverter {
             dto.setLongitud(entity.getLongitud());
             dto.setFechaInicio(entity.getFechaInicio());
             dto.setFechaFin(entity.getFechaFin());
+            dto.setCiudad(entity.getCiudad());
 
             return dto;
         } else {
@@ -81,6 +82,7 @@ public abstract class EventoConverter {
             dto.setLongitud(entity.getLongitud());
             dto.setFechaInicio(entity.getFechaInicio());
             dto.setFechaFin(entity.getFechaFin());
+            dto.setCiudad(entity.getCiudad());
 
             return dto;
         } else {
@@ -107,6 +109,8 @@ public abstract class EventoConverter {
             entity.setLongitud(dto.getLongitud());
             entity.setFechaInicio(dto.getFechaInicio());
             entity.setFechaFin(dto.getFechaFin());
+            entity.setCiudad(dto.getCiudad());
+
 
             return entity;
         } else {

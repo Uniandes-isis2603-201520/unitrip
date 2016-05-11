@@ -35,6 +35,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     private String descripcion;
+    private String ciudad;
     private Long latitud;
     private Long longitud;
 
@@ -91,6 +92,14 @@ public class EventoEntity extends BaseEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+    
     public Long getLatitud() {
         return latitud;
     }
