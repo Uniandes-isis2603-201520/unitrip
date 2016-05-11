@@ -72,6 +72,8 @@ public class EventoPersistenceTest {
     }
 
     private void clearData() {
+     //   em.createQuery("delete from EventoEntity_ParadaEntity").executeUpdate();
+      //  em.createQuery("delete from ParadaEntity_EventoEntity").executeUpdate();
         em.createQuery("delete from EventoEntity").executeUpdate();
     }
 
@@ -122,6 +124,7 @@ public class EventoPersistenceTest {
 
     @Test
     public void deleteEventoTest() {
+
         EventoEntity entity = data.get(0);
         eventoPersistence.delete(entity.getId());
         EventoEntity deleted = em.find(EventoEntity.class, entity.getId());

@@ -25,7 +25,7 @@ public class EventoDTO {
     private String description;
     private Date fechaInicio;
     private Date fechaFin;
-    private ParadaDTO parada;
+ //   private ParadaDTO parada;
 
 
     /**
@@ -155,7 +155,7 @@ public class EventoDTO {
         this.fechaFin = fechaFin;
     }
 
-
+/**
     public ParadaDTO getParada() {
         return parada;
     }
@@ -163,6 +163,6 @@ public class EventoDTO {
     public void setParada(ParadaDTO parada) {
         this.parada = parada;
     }
-
+**/
 
 }

@@ -200,7 +200,7 @@ public abstract class EventoConverter {
      */
     public static EventoEntity childDTO2Entity(EventoDTO dto, ParadaEntity parent) {
         EventoEntity entity = basicDTO2Entity(dto);
-        entity.setParada(parent);
+//        entity.setParada(parent);
         return entity;
     }
 

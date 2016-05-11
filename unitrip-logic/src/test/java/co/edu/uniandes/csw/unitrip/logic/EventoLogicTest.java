@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.unitrip.logic;
 import co.edu.uniandes.csw.unitrip.api.IEventoLogic;
 import co.edu.uniandes.csw.unitrip.ejbs.EventoLogic;
 import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
+import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.csw.unitrip.persistence.EventoPersistence;
 import java.util.ArrayList;
@@ -78,10 +79,12 @@ public class EventoLogicTest {
     }
 
     private void clearData() {
+        //em.createQuery("delete from ParadaEntity").executeUpdate();
         em.createQuery("delete from EventoEntity").executeUpdate();
     }
 
     private List<EventoEntity> data = new ArrayList<>();
+
 
     private void insertData() {
         for (int i = 0; i < 3; i++) {
@@ -89,23 +92,19 @@ public class EventoLogicTest {
             em.persist(entity);
             data.add(entity);
         }
+        EventoEntity evento = factory.manufacturePojo(EventoEntity.class);
+        em.persist(evento);
+        data.add(evento);
     }
 
     @Test
     public void createEventoTest() {
-        EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
-        EventoEntity result = eventoLogic.createEvento(entity);
-
-        EventoEntity resp = em.find(EventoEntity.class, entity.getId());
-
+        EventoEntity expected = factory.manufacturePojo(EventoEntity.class);
+        EventoEntity created = eventoLogic.createEvento(expected);
+        EventoEntity result = em.find(EventoEntity.class, created.getId());
         Assert.assertNotNull(result);
-        Assert.assertEquals(entity.getId(), resp.getId());
-        Assert.assertEquals(entity.getName(), resp.getName());
-        Assert.assertEquals(entity.getLatitud(), resp.getLatitud());
-        Assert.assertEquals(entity.getLongitud(), resp.getLongitud());
-        Assert.assertEquals(entity.getDescription(), resp.getDescription());
-        Assert.assertEquals(entity.getFechaInicio(), resp.getFechaInicio());
-        Assert.assertEquals(entity.getFechaFin(), resp.getFechaFin());
+        Assert.assertEquals(expected.getId(), result.getId());
+        Assert.assertEquals(expected.getName(), result.getName());
     }
 
     @Test
@@ -126,61 +125,52 @@ public class EventoLogicTest {
 
     @Test
     public void getEventoTest() {
-        EventoEntity result;
+       EventoEntity expected = factory.manufacturePojo(EventoEntity.class);
+        EventoEntity created = eventoLogic.createEvento(expected);
         try {
-            result = eventoLogic.getEvento(data.get(0).getId());
-            EventoEntity expected = em.find(EventoEntity.class, data.get(0).getId());
-
-            Assert.assertNotNull(result);
-            Assert.assertNotNull(expected);
-            Assert.assertEquals(expected.getId(), result.getId());
-            Assert.assertEquals(expected.getName(), result.getName());
-            Assert.assertEquals(expected.getLatitud(), result.getLatitud());
-            Assert.assertEquals(expected.getLongitud(), result.getLongitud());
-            Assert.assertEquals(expected.getDescription(), result.getDescription());
-            Assert.assertEquals(expected.getFechaInicio(), result.getFechaInicio());
-            Assert.assertEquals(expected.getFechaFin(), result.getFechaFin());
-        } catch (BusinesLogicException ex) {
-            fail("No debería generar excepción");
+            EventoEntity created2 = eventoLogic.getEvento(created.getId());
+            Assert.assertNotNull(created2);
+            Assert.assertEquals(expected.getId(), created2.getId());
+        } catch (Exception e) {
+            fail("no deberia generar excepcion");
         }
-        try{
-            result=factory.manufacturePojo(EventoEntity.class);
-            eventoLogic.getEvento(result.getId());
-             fail("deberia generar excepcion");
+        try {
+            EventoEntity expected2 = factory.manufacturePojo(EventoEntity.class);
+            eventoLogic.getEvento(expected2.getId());
+            fail("deberia generar excepcion");
+        } catch (Exception e) {
+            //debe pasar por aqui
         }
-        catch(Exception ex){
-
-        }
-
     }
 
     @Test
     public void deleteEventoTest() {
-        EventoEntity entity = data.get(1);
-        eventoLogic.deleteEvento(entity.getId());
-        EventoEntity deleted = em.find(EventoEntity.class, entity.getId());
-        Assert.assertNull(deleted);
+        EventoEntity entity = data.get(0);
+        eventoLogic.deleteEvento(entity.getId());;
+        try {
+            eventoLogic.getEvento(entity.getId());
+            fail("deberia generar excepcion");
+        } catch (Exception e) {
+            //debe pasar por aqui
+        }
     }
 
     @Test
     public void updateEventoTest() {
-        EventoEntity entity = data.get(0);
-        EventoEntity expected = factory.manufacturePojo(EventoEntity.class);
+        try {
+            EventoEntity entity = data.get(0);
+            EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
 
-        expected.setId(entity.getId());
+            newEntity.setId(entity.getId());
 
-        eventoLogic.updateEvento(expected);
+            eventoLogic.updateEvento(newEntity);
 
-        EventoEntity resp = em.find(EventoEntity.class, entity.getId());
+            EventoEntity resp = eventoLogic.getEvento(entity.getId());
 
-        Assert.assertNotNull(expected);
-        Assert.assertEquals(expected.getId(), resp.getId());
-        Assert.assertEquals(expected.getName(), resp.getName());
-        Assert.assertEquals(expected.getLatitud(), resp.getLatitud());
-        Assert.assertEquals(expected.getLongitud(), resp.getLongitud());
-        Assert.assertEquals(expected.getDescription(), resp.getDescription());
-        Assert.assertEquals(expected.getFechaInicio(), resp.getFechaInicio());
-        Assert.assertEquals(expected.getFechaFin(), resp.getFechaFin());
+            Assert.assertEquals(newEntity.getName(), resp.getName());
+        } catch (BusinesLogicException ex) {
+            fail("no deberia generar excepcion");
+        }
     }
 
 }

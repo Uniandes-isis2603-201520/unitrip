@@ -50,10 +50,10 @@ public class EventoResource {
 
     @Inject
     private IEventoLogic eventoLogic;
-
+/**
     @Inject
     private IParadaLogic paradaLogic;
-
+**/
     /**
      * Obtiene el listado de eventos.
      *

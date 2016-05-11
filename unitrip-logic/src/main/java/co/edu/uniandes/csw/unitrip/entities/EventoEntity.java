@@ -41,7 +41,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
     @ManyToMany
     private List<ParadaEntity> paradas = new ArrayList<>();
 
-    private ParadaEntity parada;
+    //private ParadaEntity parada;
 
 
     /**
@@ -72,7 +72,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-
+/**
     public ParadaEntity getParada() {
         return parada;
     }
@@ -80,7 +80,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
     public void setParada(ParadaEntity parada) {
         this.parada = parada;
     }
-
+**/
 
     public String getDescription() {
         return descripcion;
