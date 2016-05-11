@@ -171,6 +171,7 @@ public class ViajesResource {
      * @return Instancia de ViajeDTO que fue asociada a Viajero
      * @generated
      */
+    
     @POST
     public ViajesDTO addViajeAViajero(ViajesDTO dto, @PathParam("viajeroId") Long viajeroId) {
         ViajeEntity entity = ViajesConverter.fullDTO2Entity(dto);
