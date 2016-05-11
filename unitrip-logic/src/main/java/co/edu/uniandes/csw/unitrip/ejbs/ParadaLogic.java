@@ -97,14 +97,13 @@ public class ParadaLogic implements IParadaLogic {
         if (index >= 0) {
             return eventos.get(index);
         }
-        throw new IllegalArgumentException("El autor no está asociado al parada");
+        throw new IllegalArgumentException("El evento no está asociado al parada");
     }
 
     @Override
     public EventoEntity addEvento(Long eventoId, Long paradaId) throws BusinesLogicException {
         ParadaEntity paradaEntity = getParada(paradaId);
         EventoEntity eventoEntity = eventoPersistence.find(eventoId);
-        //eventoEntity.setParada(paradaEntity);
         if (eventoEntity == null) {
             throw new IllegalArgumentException(EVENTO_NO_EXISTE);
         }

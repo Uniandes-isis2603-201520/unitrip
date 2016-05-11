@@ -11,7 +11,10 @@ import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
+import co.edu.uniandes.csw.unitrip.persistence.EventoPersistence;
 import co.edu.uniandes.csw.unitrip.persistence.ParadaPersistence;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,6 +48,12 @@ public class ParadaLogicTest {
 
     @Inject
     private IParadaLogic paradaLogic;
+
+    @Inject
+    private ParadaPersistence paradaPersiste;
+
+    @Inject
+    private EventoPersistence eventoPersiste;
 
     @PersistenceContext
     private EntityManager em;
@@ -196,6 +205,55 @@ public class ParadaLogicTest {
             Assert.fail(ex.getLocalizedMessage());
         }
     }
+
+    @Test
+    public void addGetRemoveEventoTest(){
+         EventoEntity evento= eventosData.get(2);
+        ParadaEntity parada = data.get(0);
+         String fechaPI = "2016-02-12";
+        String fechaPF = "2019-02-12";
+        String fechaEI = "2016-02-25";
+        String fechaEF = "2017-11-12";
+        DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaParadaI;
+        Date fechaParadaF;
+        Date fechaEventoI;
+        Date fechaEventoF;
+        try {
+            fechaParadaI = formato.parse(fechaPI);
+            fechaParadaF = formato.parse(fechaPF);
+            fechaEventoI = formato.parse(fechaEI);
+            fechaEventoF = formato.parse(fechaEF);
+            parada.setFechaI(fechaParadaI);
+            parada.setFechaF(fechaParadaF);
+            evento.setFechaInicio(fechaEventoI);
+            evento.setFechaFin(fechaEventoF);
+            paradaPersiste.update(parada);
+            eventoPersiste.update(evento);
+        try{
+
+        EventoEntity eventoR = paradaLogic.addEvento(evento.getId(), parada.getId());
+        EventoEntity evento2 = paradaLogic.getEvento(parada.getId(), eventoR.getId());
+        Assert.assertNotNull(eventoR);
+        Assert.assertEquals(eventoR.getId(),evento.getId());
+        Assert.assertNotNull(evento2);
+        Assert.assertEquals(eventoR.getId(),evento2.getId());
+        paradaLogic.removeEvento(eventoR.getId(), parada.getId());
+        try{
+        eventoR = paradaLogic.getEvento(parada.getId(), eventoR.getId());
+        }
+        catch(Exception ex){
+        }
+        }
+        catch(Exception e){
+            Assert.fail(e.getMessage());
+        }
+        }
+        catch(Exception e){
+
+        }
+    }
+
 
     public String getRandomDescripcion() {
         return " random descripcion";
