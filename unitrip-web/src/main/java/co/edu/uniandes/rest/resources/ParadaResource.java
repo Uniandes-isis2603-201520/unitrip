@@ -160,7 +160,7 @@ public class ParadaResource {
      */
     @GET
     @Path("{paradaId: \\d+}")
-    public ParadaDTO getParada(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
+    public ParadaDTO getParadaDeItinerario(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
         ParadaEntity parada = itinerarioLogic.getParada(itinerarioId, paradaId);
         return ParadaConverter.fullEntity2DTO(parada);
     }

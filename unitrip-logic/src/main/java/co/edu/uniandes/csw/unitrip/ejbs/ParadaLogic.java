@@ -53,6 +53,7 @@ public class ParadaLogic implements IParadaLogic {
 
     @Override
     public ParadaEntity createParada(ParadaEntity entity) throws BusinesLogicException {
+
         LOGGER.info("Inicia proceso de creación de parada");
         if (!validateDescripcion(entity.getDescripcion())) {
             throw new BusinesLogicException("La descripcion es inválida");

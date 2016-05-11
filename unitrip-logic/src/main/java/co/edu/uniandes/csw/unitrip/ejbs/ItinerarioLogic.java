@@ -6,6 +6,7 @@ import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.csw.unitrip.persistence.ItinerarioPersistence;
 import co.edu.uniandes.csw.unitrip.persistence.ParadaPersistence;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,6 +96,18 @@ public class ItinerarioLogic implements IItinerarioLogic {
         if (paradaEntity == null) {
             throw new IllegalArgumentException("La parada no existe");
         }
+        Date fechaIParada = paradaEntity.getFechaI();
+        Date fechaFParada = paradaEntity.getFechaF();
+        Date fechaIItinerario = itinerarioEntity.getFechaI();
+        Date fechaFItinerario = itinerarioEntity.getFechaF();
+
+        if(fechaIItinerario.compareTo(fechaIParada) > 0){
+            throw new BusinesLogicException("La fecha de inicio del itinerario no es antes o igual de la de inicio de la parada");
+        }
+        if(fechaFItinerario.compareTo(fechaFParada) < 1){
+            throw new BusinesLogicException("La fecha de fin de itineraro no es despues o igual a la fecha fin de parada");
+        }
+        
         paradaEntity.setItinerario(itinerarioEntity);
         itinerarioEntity.getParadas().add(paradaEntity);
         return paradaEntity;
