@@ -66,9 +66,14 @@ public class ParadaResource {
     //@GET
     //@Path("{id: \\d+}")
     public ParadaDTO getParada(@PathParam("id") Long id) {
-        logger.log(Level.INFO, "Se ejecuta método getParada con id={0}", id);
-        ParadaEntity parada = paradaLogic.getParada(id);
-        return ParadaConverter.fullEntity2DTO(parada);
+        try {
+            logger.log(Level.INFO, "Se ejecuta método getParada con id={0}", id);
+            ParadaEntity parada = paradaLogic.getParada(id);
+            return ParadaConverter.fullEntity2DTO(parada);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
     }
 
     /**
@@ -135,7 +140,6 @@ public class ParadaResource {
     }
 
     // metodos
-
     /**
      * Obtiene una colección de instancias de paradaDTO asociadas a una
      * instancia de Itinerario
@@ -152,8 +156,6 @@ public class ParadaResource {
         return ParadaConverter.listEntity2DTO(paradas);
 
     }
-
-
 
     /**
      * Obtiene un objeto de Parada asociada a un objeto de Itinerario
@@ -222,25 +224,24 @@ public class ParadaResource {
     @DELETE
     @Path("{paradaId: \\d+}")
     public void removeParadaDeItinerario(@PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
-        itinerarioLogic.removeParada( paradaId, itinerarioId);
+        itinerarioLogic.removeParada(paradaId, itinerarioId);
     }
 
     /**
      * Update de parada
+     *
      * @param paradaId
      * @return
      */
     @PUT
     @Path("{paradaId: \\d+}")
     public ParadaDTO updateParadaDeItinerario(ParadaDTO paradaDTO,
-            @PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId){
-        return updateParada(paradaId,paradaDTO, itinerarioId);
+            @PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId) {
+        return updateParada(paradaId, paradaDTO, itinerarioId);
     }
 
-
     // metodos que relacionan evento con parada, son mas parecidos a author-book
-
-     /**
+    /**
      * Obtiene una colección de objetos de EventoDTO asociados a un objeto de
      * Parada
      *
@@ -251,8 +252,13 @@ public class ParadaResource {
     @GET
     @Path("{paradaId: \\d+}/eventos")
     public List<EventoDTO> listEventosDeParada(@PathParam("paradaId") Long paradaId) {
-        List<EventoEntity> eventos = paradaLogic.getEventos(paradaId);
-        return EventoConverter.listEntity2DTO(eventos);
+        try {
+            List<EventoEntity> eventos = paradaLogic.getEventos(paradaId);
+            return EventoConverter.listEntity2DTO(eventos);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
     }
 
     /**
@@ -265,8 +271,13 @@ public class ParadaResource {
     @GET
     @Path("{paradaId: \\d+}/eventos/{eventoId: \\d+}")
     public EventoDTO getEventoDeParada(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
-        EventoEntity evento = paradaLogic.getEvento(paradaId, eventoId);
-        return EventoConverter.fullEntity2DTO(evento);
+        try {
+            EventoEntity evento = paradaLogic.getEvento(paradaId, eventoId);
+            return EventoConverter.fullEntity2DTO(evento);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
     }
 
     /**
@@ -323,19 +334,13 @@ public class ParadaResource {
     @DELETE
     @Path("{paradaId: \\d+}/eventos/{eventoId: \\d+}")
     public void removeEventoDeParada(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
-        paradaLogic.removeEvento(eventoId, paradaId);
+        try {
+            paradaLogic.removeEvento(eventoId, paradaId);
+        } catch (BusinesLogicException ex) {
+            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
+            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * @GET public List<ParadaDTO> getParadas() { return
