@@ -14,7 +14,7 @@
             };
             $scope.records = [];
             $scope.alerts = [];
-
+            
             $scope.today = function () {
                 $scope.value = new Date();
             };

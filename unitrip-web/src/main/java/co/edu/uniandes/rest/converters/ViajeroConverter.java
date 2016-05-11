@@ -40,6 +40,7 @@ public class ViajeroConverter {
         if (entity != null) {
             ViajeroDTO dto = new ViajeroDTO();
             dto.setId(entity.getId());
+            dto.setName(entity.getName());
             dto.setUsuario(entity.getUsuario());
             dto.setEdad(entity.getEdad());
             dto.setMail(entity.getMail());
@@ -83,6 +84,7 @@ public class ViajeroConverter {
         if (entity != null) {
             ViajeroDTO dto = new ViajeroDTO();
             dto.setId(entity.getId());
+            dto.setName(entity.getName());
             dto.setUsuario(entity.getUsuario());
             dto.setEdad(entity.getEdad());
             dto.setMail(entity.getMail());
@@ -108,6 +110,7 @@ public class ViajeroConverter {
         if (dto != null) {
             ViajeroEntity entity = new ViajeroEntity();
             entity.setId(dto.getId());
+            entity.setName(dto.getName());
             entity.setUsuario(dto.getUsuario());
             entity.setEdad(dto.getEdad());
             entity.setMail(dto.getMail());
@@ -133,7 +136,7 @@ public class ViajeroConverter {
         if (entity != null) {
             ViajeroDTO dto = basicEntity2DTO(entity);
             dto.setViajes(ViajesConverter.listEntity2DTO(entity.getViajes()));
-            //dto.setExperiencias(ExperienciaConverter.listEntity2DTO(entity.getExperiencias()));
+            dto.setExperiencias(ExperienciaConverter.listEntity2DTO(entity.getExperiencias()));
             return dto;
         } else {
             return null;
@@ -152,7 +155,7 @@ public class ViajeroConverter {
         if (dto != null) {
             ViajeroEntity entity = basicDTO2Entity(dto);
             entity.setViajes(ViajesConverter.listDTO2Entity(dto.getViajes()));
-            //entity.setExperiencias(ExperienciaConverter.listDTO2Entity(dto.getExperiencias()));
+            entity.setExperiencias(ExperienciaConverter.listDTO2Entity(dto.getExperiencias()));
 
             return entity;
         } else {

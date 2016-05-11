@@ -20,6 +20,8 @@ public class ViajeroDTO {
 
     private String usuario;
 
+    private String name;
+
     private int edad;
 
     private String password;
@@ -55,6 +57,15 @@ public class ViajeroDTO {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
+        public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public int getEdad() {
         return edad;
