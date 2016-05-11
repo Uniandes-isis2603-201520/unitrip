@@ -44,9 +44,9 @@ public class EventoPersistence {
         EventoEntity entity = em.find(EventoEntity.class, id);
         em.remove(entity);
     }
-
+    // "SELECT c FROM Country c WHERE c.name = 'Canada'"
     public List<EventoEntity> findPorCiudad(String ciudad){
-        Query q=em.createQuery("select u from EventoEntity u where (u.ciudad=:ciudad)");
+        Query q=em.createQuery("select u from EventoEntity u where u.ciudad=" +  "'" + ciudad +  "'");
         return q.getResultList();
     }
 }
