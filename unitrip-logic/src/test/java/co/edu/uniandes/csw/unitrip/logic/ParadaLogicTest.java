@@ -244,6 +244,14 @@ public class ParadaLogicTest {
         }
         catch(Exception ex){
         }
+        evento = factory.manufacturePojo(EventoEntity.class);
+        try{
+        eventoR = paradaLogic.getEvento(parada.getId(), evento.getId());
+        eventoR = paradaLogic.addEvento(evento.getId(),parada.getId());
+        paradaLogic.removeEvento(evento.getId(), parada.getId());
+        }
+        catch(Exception ex){
+        }
         }
         catch(Exception e){
             Assert.fail(e.getMessage());
@@ -253,7 +261,23 @@ public class ParadaLogicTest {
 
         }
     }
+@Test
+    public void getEventosTest() {
+        try{
+        List<EventoEntity> list = paradaLogic.getEventos(data.get(0).getId());
+        boolean found = false;
+        for (EventoEntity ent : list) {
+            EventoEntity evento = eventoPersiste.find(eventosData.get(0).getId());
+            if(evento.getId()==ent.getId()){
+                found=true;
+            }
+        }
+         Assert.assertTrue(found);
+        }
+        catch(Exception e){
 
+        }
+    }
 
     public String getRandomDescripcion() {
         return " random descripcion";
