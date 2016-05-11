@@ -8,7 +8,7 @@
 
     var mod = ng.module("itinerarioModule");
 
-    mod.controller("itinerarioCtrl", ["$scope", "itinerarioService", function ($scope, svc, $rootScope) {
+    mod.controller("itinerarioCtrl", ["$scope", "itinerarioService", function ($scope, svc) {
             //Se almacenan todas las alertas
             $scope.alerts = [];
             $scope.currentRecord = {
@@ -20,7 +20,6 @@
                 paradas: [] /*Colección de registros de Paradas*/
             };
             $scope.records = [];
-            $rootScope.viajeActual = $scope.currentRecord.id;
             $scope.today = function () {
                 $scope.value = new Date();
             };
@@ -147,11 +146,6 @@
                 }, responseError);
             };
 
-            /*
-             * Funcion fetchRecords consulta todos los registros del módulo book en base de datos
-             * para desplegarlo en el template de la lista.
-             */
-            this.fetchRecords();
 
         }]);
 

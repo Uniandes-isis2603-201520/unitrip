@@ -14,12 +14,13 @@
              * Obtener la lista de viajes.
              * Hace una petición GET con $http a /viajes para obtener la lista
              * de viajes
+             * @param viajeroId name description
              * @returns {promise} promise para leer la respuesta del servidor}
              * Devuelve una lista de objetos de viajes con sus atributos y reviews
-             *
-            this.fetchRecords = function () {
-                $log.debug();
-                return $http.get();
+             */
+            this.fetchRecords = function (viajeroId) {
+                console.log("Entramos a FETCHRECORDS");
+                return $http.get(context + "/" + viajeroId + "/viajes");
             };
 
             /**
@@ -29,10 +30,9 @@
              * @param {number} id del registro a obtener
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de viajes con sus atributos y reviews
-             *
-            this.fetchRecord = function (id) {
-                $log.debug("GET" + context +"/"+$rootScope.viajeroActual + "/viajes/" + id);
-                return $http.get(context +"/"+$rootScope.viajeroActual + "/viajes/" + id);
+             */
+            this.fetchRecord = function (viajeroId, currentRecord) {
+                return $http.get(context + "/" + viajeroId + "/viajes/" + currentRecord.id);
             };
 
             /**
@@ -44,14 +44,22 @@
              * @param {object} currentRecord instancia de book a guardar/actualizar
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de viajes con sus datos incluyendo el id
-             *
-            this.saveRecord = function (currentRecord) {
-                if (currentRecord.id) {
-                    $log.debug("PUT"+context + "/" + $rootScope.viajeroActual+ "/viajes/" + currentRecord.id, currentRecord);
-                    return $http.put(context + "/" + $rootScope.viajeroActual+ "/viajes/" + currentRecord.id, currentRecord);
-                } else {
-                    return $http.post(context + "/" + $rootScope.viajeroActual+ "/viajes/" + currentRecord.id, currentRecord);
+             */
+            this.saveRecord = function(viajeroId, currentRecord){
+                if(currentRecord.id){
+                    return this.updateViaje(viajeroId, currentRecord.id, currentRecord);
+                }else{
+                    return this.createViaje(viajeroId, currentRecord);
                 }
+            };
+
+            this.createViaje = function (viajeroId, currentRecord) {
+                return $http.post(context + "/" + viajeroId + "/viajes", currentRecord);
+            };
+
+            this.updateViaje = function (viajeroId, currentRecord) {
+                console.log("ENTRAMOS A UPDATE CON ID:"+viajeroId)
+                return $http.put(context + "/" + viajeroId + "/viajes/" + currentRecord.id, currentRecord);
             };
 
             /**
@@ -59,39 +67,12 @@
              * @param {number} id identificador de la instancia de book a eliminar
              * @returns {promise} promise para leer la respuesta del servidor
              * No devuelve datos.
-             *
-            this.deleteRecord = function (id) {
-                $log.debug(context +"/"+$rootScope.viajeroActual+ "/viajes/" + id);
-                return $http.delete(context +"/"+$rootScope.viajeroActual+ "/viajes/" + id);
-            };
-            */
-            this.getViajes = function (viajeroId) {
-                return $http.get(context + "/" + viajeroId + "/viajes");
-            };
-
-            this.getViaje = function (viajeroId, currentRecord) {
-                return $http.get(context + "/" + viajeroId + "/viajes/" + currentRecord.id);
-            };
-
-            this.createViaje = function (viajeroId, currentRecord) {
-                return $http.post(context + "/" + viajeroId + "/viajes", currentRecord);
-            };
-
-            this.updateViaje = function (viajeroId, currentRecord, prize) {
-                return $http.put(context + "/" + viajeroId + "/viajes/" + currentRecord.id, currentRecord);
-            };
-
-            this.deleteViaje = function (viajeroId, currentRecord) {
+             */
+            this.deleteRecord = function (viajeroId, currentRecord) {
                 return $http.delete(context + "/" + viajeroId + "/viajes/" + currentRecord.id);
             };
 
-            this.saveViaje = function(viajeroId, currentRecord){
-                if(currentRecord.id){
-                    return this.updateViaje(viajeroId, currentRecord.id, currentRecord);
-                }else{
-                    return this.createViaje(viajeroId, currentRecord);
-                }
-            };
+
 
         }]);
 })(window.angular);

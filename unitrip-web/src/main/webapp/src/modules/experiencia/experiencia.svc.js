@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -17,8 +17,8 @@
              * @returns {promise} promise para leer la respuesta del servidor}
              * Devuelve una lista de objetos de experiencias con sus atributos y experiencias
              */
-            this.fetchRecords = function () {
-                return $http.get(context);
+            this.fetchRecords = function (viajeroId) {
+                return $http.get(context+"/"+viajeroId+"/experiencias");
             };
 
             /**
@@ -29,8 +29,8 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de experiencias con sus atributos y experiencias
              */
-            this.fetchRecord = function (id) {
-                return $http.get(context + "/" + id);
+            this.fetchRecord = function (viajeroId, currentRecord) {
+                return $http.get(context + "/" + viajeroId + "/experiencias/" + currentRecord.id);
             };
 
             /**
@@ -43,13 +43,13 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de experiencias con sus datos incluyendo el id
              */
-            this.saveRecord = function (currentRecord) {
-                if (currentRecord.id) {
-                    return $http.put(context + "/" + currentRecord.id, currentRecord);
-                } else {
-                    return $http.post(context, currentRecord);
-                }
-            };
+            this.saveRecord = function(viajeroId, currentRecord){
+                if(currentRecord.id){
+                    return this.updateExperiencia(viajeroId, currentRecord.id, currentRecord);
+                }else{
+                    return this.createExperiencia(viajeroId, currentRecord);
+
+            }};
 
             /**
              * Hace una petición DELETE a /experiencias/:id para eliminar un book
@@ -57,8 +57,18 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * No devuelve datos.
              */
-            this.deleteRecord = function (id) {
-                return $http.delete(context + "/" + id);
+            this.deleteRecord = function (viajeroId, currentRecord) {
+                return $http.delete(context + "/" + viajeroId + "/experiencias/" + currentRecord.id);
             };
+
+            this.createExperiencia = function (viajeroId, currentRecord) {
+                return $http.post(context + "/" + viajeroId + "/experiencias", currentRecord);
+            };
+
+            this.updateExperiencia = function (viajeroId, currentRecord) {
+                console.log("ENTRAMOS A UPDATE CON ID:"+viajeroId)
+                return $http.put(context + "/" + viajeroId + "/experiencias/" + currentRecord.id, currentRecord);
+            };
+
         }]);
 })(window.angular);
