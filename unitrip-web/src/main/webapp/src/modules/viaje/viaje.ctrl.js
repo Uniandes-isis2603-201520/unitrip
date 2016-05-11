@@ -80,7 +80,7 @@
                 $scope.refId = args.id;
                 if (args.id) {
                     $scope.records = [];
-                    svc.getViajes(args.id).then(function (response) {
+                    svc.fetchRecords(args.id).then(function (response) {
                         $scope.records = response.data;
                     }, responseError);
                 }
@@ -106,10 +106,12 @@
              *
              */
 
-            this.editRecord = function (record) {
-                return svc.fecthRecord($scope.refId, record.id).then(function (response) {
+            this.editRecord = function (currentRecord) {
+                console.log("ID VIAJE :"+currentRecord.id);
+                return svc.fetchRecord($scope.refId, currentRecord.id).then(function (response) {
                     $scope.currentRecord = response.data;
                     self.editMode = true;
+                    $scope.$broadcast("post-edit-viaje", $scope.currentRecord);
                     return response;
                 }, responseError);
             };
@@ -146,8 +148,8 @@
              * de eliminar el registro asociado.
              * Muestra el template de la lista de records al finalizar el borrado del registro.
              */
-            this.deleteRecord = function (record) {
-                return svc.deleteRecord($scope.refId, record.id).then(function () {
+            this.deleteRecord = function (currentRecord) {
+                return svc.deleteRecord($scope.refId, currentRecord.id).then(function () {
                     self.fetchRecords();
                 }, responseError);
             };

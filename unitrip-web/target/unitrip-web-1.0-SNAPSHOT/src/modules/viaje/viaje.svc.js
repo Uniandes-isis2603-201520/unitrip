@@ -31,8 +31,9 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de viajes con sus atributos y reviews
              */
-            this.fetchRecord = function (viajeroId, currentRecord) {
-                return $http.get(context + "/" + viajeroId + "/viajes/" + currentRecord.id);
+            this.fetchRecord = function (viajeroId, viajeId) {
+                console.log("ID VIAJE :"+viajeId);
+                return $http.get(context + "/" + viajeroId + "/viajes/" + viajeId);
             };
 
             /**
@@ -45,9 +46,9 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de viajes con sus datos incluyendo el id
              */
-            this.saveRecord = function(viajeroId, currentRecord){
+            this.saveRecord = function(viajeroId,currentRecord){
                 if(currentRecord.id){
-                    return this.updateViaje(viajeroId, currentRecord.id, currentRecord);
+                    return this.updateViaje(viajeroId, currentRecord.id ,currentRecord);
                 }else{
                     return this.createViaje(viajeroId, currentRecord);
                 }
@@ -57,9 +58,9 @@
                 return $http.post(context + "/" + viajeroId + "/viajes", currentRecord);
             };
 
-            this.updateViaje = function (viajeroId, currentRecord) {
-                console.log("ENTRAMOS A UPDATE CON ID:"+viajeroId)
-                return $http.put(context + "/" + viajeroId + "/viajes/" + currentRecord.id, currentRecord);
+            this.updateViaje = function (viajeroId, viajeId, currentRecord) {
+                console.log("ENTRAMOS A UPDATE CON ID VIAJERO:"+viajeroId + "ID VIAJE:"+viajeId);
+                return $http.put(context + "/" + viajeroId + "/viajes/" + viajeId, currentRecord);
             };
 
             /**
@@ -68,8 +69,8 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * No devuelve datos.
              */
-            this.deleteRecord = function (viajeroId, currentRecord) {
-                return $http.delete(context + "/" + viajeroId + "/viajes/" + currentRecord.id);
+            this.deleteRecord = function (viajeroId, id) {
+                return $http.delete(context + "/" + viajeroId + "/viajes/" + id);
             };
 
 

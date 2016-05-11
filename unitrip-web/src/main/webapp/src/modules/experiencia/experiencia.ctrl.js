@@ -14,13 +14,12 @@
             $scope.alerts = [];
             $scope.currentRecord = {
                 id: '' /*Tipo Long*/,
+                idViajero: '' ,
                 name: '' /*Tipo String*/,
                 descripcion: '' /*Tipo String*/,
-                fechaPublicacion: '' /*Tipo Date*/,
-                idViajero: ''
+                fechaPublicacion: '' /*Tipo Date*/
             };
             $scope.records = [];
-
             $scope.today = function () {
                 $scope.value = new Date();
             };
@@ -75,6 +74,19 @@
             showMessage("Bienvenido!", "success");
 
 
+            $scope.$on("post-edit", onEdit);
+
+            function onEdit(event, args) {
+                $scope.refId = args.id;
+                if (args.id) {
+                    $scope.records = [];
+                    svc.fetchRecords(args.id).then(function (response) {
+                        $scope.records = response.data;
+                    }, responseError);
+                }
+            }
+
+
             /*
              * Funcion createRecord emite un evento a los $scope hijos del controlador por medio de la
              * sentencia &broadcast ("nombre del evento", record), esto con el fin cargar la información de modulos hijos
@@ -84,10 +96,10 @@
              */
 
             this.createRecord = function () {
-                $scope.$broadcast("pre-create", $scope.currentRecord);
+
                 this.editMode = true;
                 $scope.currentRecord = {};
-                $scope.$broadcast("post-create", $scope.currentRecord);
+
             };
 
             /*
@@ -98,12 +110,10 @@
              *
              */
 
-            this.editRecord = function (record) {
-                $scope.$broadcast("pre-edit", $scope.currentRecord);
-                return svc.fetchRecord(record.id).then(function (response) {
+            this.editRecord = function (currentRecord) {
+                return svc.fetchRecord($scope.refId, currentRecord.id).then(function (response) {
                     $scope.currentRecord = response.data;
                     self.editMode = true;
-                    $scope.$broadcast("post-edit", $scope.currentRecord);
                     return response;
                 }, responseError);
             };
@@ -116,7 +126,17 @@
              */
 
             this.fetchRecords = function () {
-                return svc.fetchRecords($scope.currentRecord.idViajero).then(function (response) {
+                return svc.fetchRecords($scope.refId).then(function (response) {
+                    $scope.records = response.data;
+                    $scope.currentRecord = {};
+                    self.editMode = false;
+                    return response;
+                }, responseError);
+            };
+
+            this.misExperiencias = function () {
+                console.log("MIS EXPERIENCIAS ID ATR :"+$scope.records);
+                return svc.fetchRecords($scope.records.idViajero).then(function (response) {
                     $scope.records = response.data;
                     $scope.currentRecord = {};
                     self.editMode = false;
@@ -130,8 +150,9 @@
              * Muestra el template de la lista de records al finalizar la operación saveRecord
              */
             this.saveRecord = function () {
-                return svc.saveRecord($scope.currentRecord,$scope.currentRecord.idViajero).then(function () {
-                    self.fetchRecords($scope.currentRecord.idViajero);
+                console.log("ID VIAJERO ATRIBUTO: "+$scope.refId);
+                return svc.saveRecord($scope.refId, $scope.currentRecord).then(function () {
+                    self.fetchRecords($scope.refId);
 
                 }, responseError);
             };
@@ -141,17 +162,11 @@
              * de eliminar el registro asociado.
              * Muestra el template de la lista de records al finalizar el borrado del registro.
              */
-            this.deleteRecord = function (record) {
-                return svc.deleteRecord(record.id).then(function () {
+            this.deleteRecord = function (currentRecord) {
+                return svc.deleteRecord($scope.refId, currentRecord.id).then(function () {
                     self.fetchRecords();
                 }, responseError);
             };
-
-            /*
-             * Funcion fetchRecords consulta todos los registros del módulo Experiencia en base de datos
-             * para desplegarlo en el template de la lista.
-             */
-            this.fetchRecords();
 
         }]);
 

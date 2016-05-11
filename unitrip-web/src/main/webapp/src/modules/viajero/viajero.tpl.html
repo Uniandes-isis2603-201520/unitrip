@@ -120,6 +120,10 @@
         <li ng-show="currentRecord.id" role="presentation" ng-class="{active: tab === 'viajes'}">
             <a href ng-click="ctrl.changeTab('viajes')">Mis Viajes</a>
         </li>
+
+        <li ng-show="currentRecord.id" role="presentation" ng-class="{active: tab === 'experiencias'}">
+            <a href ng-click="ctrl.changeTab('experiencias')">Mis Experiencias</a>
+        </li>
     </ul>
     <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente reviewCtrl-->
     <div ng-show="tab === 'viajes'">
@@ -127,4 +131,8 @@
         </div>
     </div>
 
+    <div ng-show="tab === 'experiencias'">
+        <div ng-controller="experienciaCtrl as ctrl" ng-include="'src/modules/experiencia/experiencia2.tpl.html'">
+        </div>
+    </div>
 </section>

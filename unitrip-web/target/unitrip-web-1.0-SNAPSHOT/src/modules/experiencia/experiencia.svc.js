@@ -21,6 +21,7 @@
                 return $http.get(context+"/"+viajeroId+"/experiencias");
             };
 
+
             /**
              * Obtener un registro de experiencias.
              * Hace una petición GET a /experiencias/:id para obtener
@@ -29,9 +30,10 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de experiencias con sus atributos y experiencias
              */
-            this.fetchRecord = function (viajeroId, currentRecord) {
-                return $http.get(context + "/" + viajeroId + "/experiencias/" + currentRecord.id);
+            this.fetchRecord = function (viajeroId, viajeId) {
+                return $http.get(context + "/" + viajeroId + "/experiencias/" + viajeId);
             };
+
 
             /**
              * Guardar un registro de experiencias.
@@ -43,31 +45,33 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de experiencias con sus datos incluyendo el id
              */
-            this.saveRecord = function(viajeroId, currentRecord){
+            this.saveRecord = function(idViajero,currentRecord){
                 if(currentRecord.id){
-                    return this.updateExperiencia(viajeroId, currentRecord.id, currentRecord);
+                    return this.updateExperiencia(idViajero, currentRecord.id ,currentRecord);
                 }else{
-                    return this.createExperiencia(viajeroId, currentRecord);
+                    return this.createExperiencia(idViajero,currentRecord);
 
             }};
 
             /**
              * Hace una petición DELETE a /experiencias/:id para eliminar un book
              * @param {number} id identificador de la instancia de book a eliminar
+             * @idViajero name
              * @returns {promise} promise para leer la respuesta del servidor
              * No devuelve datos.
              */
-            this.deleteRecord = function (viajeroId, currentRecord) {
-                return $http.delete(context + "/" + viajeroId + "/experiencias/" + currentRecord.id);
+            this.deleteRecord = function (idViajero, id) {
+                console.log("DELETE IDVIAJERO:"+idViajero + " -- ID_EXP:"+id);
+                return $http.delete(context + "/" + idViajero + "/experiencias/" + id);
             };
 
-            this.createExperiencia = function (viajeroId, currentRecord) {
-                return $http.post(context + "/" + viajeroId + "/experiencias", currentRecord);
+            this.createExperiencia = function (idViajero, currentRecord) {
+                return $http.post(context + "/" + idViajero + "/experiencias" , currentRecord);
             };
 
-            this.updateExperiencia = function (viajeroId, currentRecord) {
-                console.log("ENTRAMOS A UPDATE CON ID:"+viajeroId)
-                return $http.put(context + "/" + viajeroId + "/experiencias/" + currentRecord.id, currentRecord);
+            this.updateExperiencia = function (idViajero , expId ,currentRecord) {
+                console.log("ENTRAMOS A UPDATE CON ID:"+idViajero+ "ID EXP:"+expId);
+                return $http.put(context + "/" + idViajero + "/experiencias/" + expId, currentRecord);
             };
 
         }]);
