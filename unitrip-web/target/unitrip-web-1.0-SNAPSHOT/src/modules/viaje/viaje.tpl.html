@@ -23,9 +23,6 @@
     </nav>
 </div>
 
-<div class="jumbotronViaje"></div>
-
-
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="color:#ffffff;background-color:#cf71af">{{alert.msg}} </alert>
 
 <div ng-hide="ctrl.editMode">

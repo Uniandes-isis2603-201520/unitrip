@@ -2,13 +2,14 @@
 
     var mod = ng.module("viajeModule");
 
-    mod.controller("viajeCtrl", ["$scope", "viajeService","viajeroService", function ($scope, svc , $location,viajeroSvc) {
+    mod.controller("viajeCtrl", ["$scope", "viajeService","viajeroService", function ($scope, svc , $location) {
 
 
 
             $scope.alerts = [];
             $scope.currentRecord = {
                 id: '' /*Tipo Long*/,
+                idViajero: '',
                 name: '' /*Tipo String*/,
                 itinerarios: [] /*Colección de registros de Itinerarios*/,
                 experiencias: [] /*Colección de registros de Experiencias*/

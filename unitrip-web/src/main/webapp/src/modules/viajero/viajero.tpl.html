@@ -72,7 +72,7 @@
 
 </div>
 
-<div ng-show="ctrl.editMode" class="col-md-6 well" style="color:#ffffff;background-color:#6e1352">
+<section ng-show="ctrl.editMode" class="col-md-6 well" style="color:#ffffff;background-color:#6e1352">
     <form novalidate name="form" id="viajero-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()" style="color:#ffffff;background-color:#6e1352">
         <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required" >
             <div ng-message="required" >
@@ -114,24 +114,17 @@
 
         </fieldset>
     </form>
-</div>
-<!--
-<div ng-show="ctrl.editMode" class="col-md-6 well">
-    <form novalidate name="form" id="viaje-form" role="form" ng-submit="ctrl.saveRecord()">
-        <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required">
-            <div ng-message="required">
-                Please, Fill the required fields!
-            </div>
-        </alert>
-        <fieldset>
-            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                <label for="name" class="col-md-2 control-label">Name</label>
-                <div class="col-md-10">
-                    <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
-                </div>
-            </div>
-        </fieldset>
-    </form>
-</div>
--->
+</section>
+<section id="childs" ng-show="ctrl.editMode" class="col-md-6">
+    <ul class="nav nav-tabs">
+        <li ng-show="currentRecord.id" role="presentation" ng-class="{active: tab === 'viajes'}">
+            <a href ng-click="ctrl.changeTab('viajes')">Mis Viajes</a>
+        </li>
+    </ul>
+    <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente reviewCtrl-->
+    <div ng-show="tab === 'viajes'">
+        <div ng-controller="viajeCtrl as ctrl" ng-include="'src/modules/viaje/viaje.tpl.html'">
+        </div>
+    </div>
+
+</section>
