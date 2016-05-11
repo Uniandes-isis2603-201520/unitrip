@@ -16,7 +16,8 @@
                 id: '' /*Tipo Long*/,
                 name: '' /*Tipo String*/,
                 descripcion: '' /*Tipo String*/,
-                fechaPublicacion: '' /*Tipo Date*/
+                fechaPublicacion: '' /*Tipo Date*/,
+                idViajero: ''
             };
             $scope.records = [];
 
@@ -115,7 +116,7 @@
              */
 
             this.fetchRecords = function () {
-                return svc.fetchRecords().then(function (response) {
+                return svc.fetchRecords($scope.currentRecord.idViajero).then(function (response) {
                     $scope.records = response.data;
                     $scope.currentRecord = {};
                     self.editMode = false;
@@ -129,8 +130,8 @@
              * Muestra el template de la lista de records al finalizar la operación saveRecord
              */
             this.saveRecord = function () {
-                return svc.saveRecord($scope.currentRecord).then(function () {
-                    self.fetchRecords();
+                return svc.saveRecord($scope.currentRecord,$scope.currentRecord.idViajero).then(function () {
+                    self.fetchRecords($scope.currentRecord.idViajero);
 
                 }, responseError);
             };

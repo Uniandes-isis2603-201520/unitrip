@@ -135,29 +135,9 @@ public class ParadaLogic implements IParadaLogic {
         paradaEntity.getEventos().remove(eventoEntity);
     }
 
-    @Override
-    public List<EventoEntity> replaceEventos(List<EventoEntity> eventos, Long paradaId) throws BusinesLogicException {
-        ParadaEntity paradaEntity = getParada(paradaId);
-        paradaEntity.setEventos(eventos);
-        for (EventoEntity evento : eventos) {
-            if (!eventoDentroRango(evento.getFechaInicio(), paradaEntity.getFechaI())) {
-                throw new BusinesLogicException(" el evento no puede comenzar antes de la parada");
-            }
-        }
-        return paradaEntity.getEventos();
-    }
 
     private boolean validateDescripcion(String desc) {
         return !(desc == null || desc.isEmpty());
-    }
-
-    private boolean eventoDentroRango(Date fechaInicioEvento, Date fechaInicioParada) {
-        if (fechaInicioEvento != null && fechaInicioParada != null) {
-            if (inicioParadaBeforeInicioEvento(fechaInicioEvento, fechaInicioParada)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean inicioParadaBeforeInicioEvento (Date fechaInicioEvento, Date fechaInicioParada){

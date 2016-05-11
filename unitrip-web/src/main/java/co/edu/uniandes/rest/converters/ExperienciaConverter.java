@@ -30,8 +30,9 @@ public abstract class ExperienciaConverter {
             ExperienciaDTO dto = new ExperienciaDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setDescripcion(entity.getDescripcion());            
+            dto.setDescripcion(entity.getDescripcion());
             dto.setFechaP(entity.getFechaP());
+            dto.setIdViajero(entity.getViajero().getId());
 
             return dto;
         } else {
@@ -74,6 +75,7 @@ public abstract class ExperienciaConverter {
             dto.setName(entity.getName());
             dto.setDescripcion(entity.getDescripcion());
             dto.setFechaP(entity.getFechaP());
+            dto.setIdViajero(entity.getViajero().getId());
 
             return dto;
         } else {

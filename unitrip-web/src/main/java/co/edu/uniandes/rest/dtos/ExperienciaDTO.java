@@ -22,6 +22,8 @@ public class ExperienciaDTO {
     private String name;
     private String descripcion;
     private String rutaImagen;
+    private Long idViajero;
+
 
     private Date fechaP;
 
@@ -74,6 +76,14 @@ public class ExperienciaDTO {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getIdViajero() {
+        return idViajero;
+    }
+
+    public void setIdViajero(Long idViajero) {
+        this.idViajero = idViajero;
     }
 
     /**

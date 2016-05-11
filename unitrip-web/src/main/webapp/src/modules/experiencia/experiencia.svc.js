@@ -43,31 +43,32 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de experiencias con sus datos incluyendo el id
              */
-            this.saveRecord = function(viajeroId, currentRecord){
-                if(currentRecord.id){
-                    return this.updateExperiencia(viajeroId, currentRecord.id, currentRecord);
+            this.saveRecord = function(currentRecord,idViajero){
+                if(idViajero){
+                    return this.updateExperiencia(currentRecord,idViajero);
                 }else{
-                    return this.createExperiencia(viajeroId, currentRecord);
+                    return this.createExperiencia(currentRecord,idViajero);
 
             }};
 
             /**
              * Hace una petición DELETE a /experiencias/:id para eliminar un book
              * @param {number} id identificador de la instancia de book a eliminar
+             * @idViajero name
              * @returns {promise} promise para leer la respuesta del servidor
              * No devuelve datos.
              */
-            this.deleteRecord = function (viajeroId, currentRecord) {
-                return $http.delete(context + "/" + viajeroId + "/experiencias/" + currentRecord.id);
+            this.deleteRecord = function (idViajero, currentRecord) {
+                return $http.delete(context + "/" + idViajero + "/experiencias/" + currentRecord.id);
             };
 
-            this.createExperiencia = function (viajeroId, currentRecord) {
-                return $http.post(context + "/" + viajeroId + "/experiencias", currentRecord);
+            this.createExperiencia = function (currentRecord,idViajero) {
+                return $http.post(context + "/" + idViajero + "/experiencias", currentRecord);
             };
 
-            this.updateExperiencia = function (viajeroId, currentRecord) {
-                console.log("ENTRAMOS A UPDATE CON ID:"+viajeroId)
-                return $http.put(context + "/" + viajeroId + "/experiencias/" + currentRecord.id, currentRecord);
+            this.updateExperiencia = function (currentRecord,idViajero) {
+                console.log("ENTRAMOS A UPDATE CON ID:"+idViajero);
+                return $http.put(context + "/" + idViajero + "/experiencias/" + currentRecord.id, currentRecord);
             };
 
         }]);

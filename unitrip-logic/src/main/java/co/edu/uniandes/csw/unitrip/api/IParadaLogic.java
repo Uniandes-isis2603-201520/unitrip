@@ -32,8 +32,6 @@ public interface IParadaLogic {
 
     public EventoEntity getEvento(Long paradaId, Long eventoId)throws BusinesLogicException;
 
-    public List<EventoEntity> replaceEventos(List<EventoEntity> eventos, Long paradaId) throws BusinesLogicException;
-
     public void deleteParada(Long id);
 
 }

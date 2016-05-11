@@ -302,27 +302,6 @@ public class ParadaResource {
         }
     }
 
-    /**
-     * Remplaza los objetos de Evento asociados a un objeto de Parada
-     *
-     * @param paradaId Identificador del objeto de Parada
-     * @param eventos Colección de objetos de EventoDTO en representación
-     * minimum a asociar a objeto de Parada
-     * @return Nueva colección de EventoDTO en representación Basic
-     * @generated
-     */
-    @PUT
-    @Path("{itinerarioId: \\d+}/paradas/{paradaId: \\d+}/eventos")
-    public List<EventoDTO> replaceEventos(@PathParam("paradaId") Long paradaId, List<EventoDTO> eventos) {
-        try {
-            List<EventoEntity> eventoList = EventoConverter.listDTO2Entity(eventos);
-            List<EventoEntity> newEventos = paradaLogic.replaceEventos(eventoList, paradaId);
-            return EventoConverter.listEntity2DTO(newEventos);
-        } catch (BusinesLogicException ex) {
-            logger.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-            throw new WebApplicationException(ex.getLocalizedMessage(), ex, Response.Status.BAD_REQUEST);
-        }
-    }
 
     /**
      * Desasocia un Evento existente de un Parada existente
