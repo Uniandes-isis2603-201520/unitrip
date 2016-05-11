@@ -11,9 +11,6 @@ package co.edu.uniandes.csw.unitrip.exceptions;
  */
 public class BusinesLogicException extends Exception {
 
-    public BusinesLogicException() {
-    }
-
     /**
      * Constructor con un mensaje
      *
@@ -23,22 +20,4 @@ public class BusinesLogicException extends Exception {
         super(message);
     }
 
-    /**
-     * Constructor con una causa
-     *
-     * @param cause causa de la excepción. Usada para generar la traza.
-     */
-    public BusinesLogicException(Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Constructor con mensaje y causa.
-     *
-     * @param message mensaje de la excepción
-     * @param cause causa de la excepción. Usada para generar la traza.
-     */
-    public BusinesLogicException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

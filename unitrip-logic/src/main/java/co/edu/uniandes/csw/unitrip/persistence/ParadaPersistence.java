@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.unitrip.persistence;
-
-import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
 import java.util.List;
 import javax.ejb.Stateless;

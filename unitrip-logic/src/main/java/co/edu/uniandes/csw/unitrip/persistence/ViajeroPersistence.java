@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.unitrip.persistence;
-
-import co.edu.uniandes.csw.unitrip.entities.ViajeEntity;
 import co.edu.uniandes.csw.unitrip.entities.ViajeroEntity;
 import java.util.List;
 import java.util.logging.Logger;
