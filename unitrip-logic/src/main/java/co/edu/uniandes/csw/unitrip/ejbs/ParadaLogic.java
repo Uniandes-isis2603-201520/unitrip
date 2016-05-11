@@ -40,12 +40,12 @@ public class ParadaLogic implements IParadaLogic {
     }
 
     @Override
-    public ParadaEntity getParada(Long id) {
+    public ParadaEntity getParada(Long id) throws BusinesLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de consultar parada con id={0}", id);
         ParadaEntity parada = persistence.find(id);
         if (parada == null) {
             LOGGER.log(Level.SEVERE, "La parada con el id {0} no existe", id);
-            throw new IllegalArgumentException("La parada solicitada ( " + id+" ) no existe");
+            throw new BusinesLogicException("La parada solicitada ( " + id+" ) no existe");
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar parada con id={0}", id);
         return parada;
@@ -82,12 +82,12 @@ public class ParadaLogic implements IParadaLogic {
     }
 
     @Override
-    public List<EventoEntity> getEventos(Long paradaId) {
+    public List<EventoEntity> getEventos(Long paradaId)throws BusinesLogicException {
         return getParada(paradaId).getEventos();
     }
 
     @Override
-    public EventoEntity getEvento(Long paradaId, Long eventoId) {
+    public EventoEntity getEvento(Long paradaId, Long eventoId)throws BusinesLogicException {
         List<EventoEntity> eventos = getParada(paradaId).getEventos();
         EventoEntity eventoEntity = eventoPersistence.find(eventoId);
         if (eventoEntity == null) {
@@ -119,13 +119,13 @@ public class ParadaLogic implements IParadaLogic {
         if(paradaFechaF.compareTo(eventoFechaF) < 1){
             throw new BusinesLogicException("la fecha final del evento debe ser igual o antes de la fecha final de la parada");
         }
-        
+
         paradaEntity.getEventos().add(eventoEntity);
         return eventoEntity;
     }
 
     @Override
-    public void removeEvento(Long eventoId, Long paradaId) {
+    public void removeEvento(Long eventoId, Long paradaId) throws BusinesLogicException{
         ParadaEntity paradaEntity = getParada(paradaId);
         EventoEntity eventoEntity = eventoPersistence.find(eventoId);
         if (eventoEntity == null) {

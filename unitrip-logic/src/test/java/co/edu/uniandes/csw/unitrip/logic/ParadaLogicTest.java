@@ -56,8 +56,6 @@ public class ParadaLogicTest {
 
     private List<EventoEntity> eventosData = new ArrayList<>();
 
-    private List<ItinerarioEntity> itinerarioData = new ArrayList<>();
-
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -87,9 +85,11 @@ public class ParadaLogicTest {
     }
 
     private void clearData() {
+        //em.createQuery("delete from PRDNTTYVNTNTTVNTSD").executeUpdate();
+        //em.createQuery("delete from EventoEntity_ParadaEntity").executeUpdate();
         em.createQuery("delete from ParadaEntity").executeUpdate();
-        em.createQuery("delete from EventoEntity").executeUpdate();
-        em.createQuery("delete from ItinerarioEntity").executeUpdate();
+
+
     }
 
     private void insertData() {
@@ -98,19 +98,10 @@ public class ParadaLogicTest {
             em.persist(eventos);
             eventosData.add(eventos);
         }
-
-        for (int i = 0; i < 3; i++) {
-            ItinerarioEntity itinerario = factory.manufacturePojo(ItinerarioEntity.class);
-            em.persist(itinerario);
-            itinerarioData.add(itinerario);
-        }
-
         for (int i = 0; i < 3; i++) {
             ParadaEntity entity = factory.manufacturePojo(ParadaEntity.class);
             entity.setDescription(getRandomDescripcion());
             entity.getEventos().add(eventosData.get(0));
-
-            entity.setItinerario(itinerarioData.get(0));
 
             em.persist(entity);
             data.add(entity);

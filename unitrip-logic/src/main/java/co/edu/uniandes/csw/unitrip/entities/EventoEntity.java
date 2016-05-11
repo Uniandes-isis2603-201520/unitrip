@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -38,8 +39,8 @@ public class EventoEntity extends BaseEntity implements Serializable {
     private Long longitud;
 
 
-    @ManyToMany
-    private List<ParadaEntity> paradas = new ArrayList<>();
+//    @ManyToMany(mappedBy="evento",cascade = CascadeType.ALL)
+//    private List<ParadaEntity> paradas = new ArrayList<>();
 
     //private ParadaEntity parada;
 

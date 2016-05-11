@@ -38,7 +38,7 @@ public class ParadaEntity extends BaseEntity implements Serializable {
     @PodamExclude
     private ItinerarioEntity itinerario;
 
-    @ManyToMany
+    @ManyToMany(targetEntity=EventoEntity.class,cascade=CascadeType.PERSIST)
     private List<EventoEntity> eventos = new ArrayList<>();
 
     /**
