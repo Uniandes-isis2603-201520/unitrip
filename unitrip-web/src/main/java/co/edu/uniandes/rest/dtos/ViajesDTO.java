@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ViajesDTO {
 
     private Long id;
+    private Long idViajero;
     private String name;
     private String descripcion;
     private String image;
@@ -64,6 +65,14 @@ public class ViajesDTO {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdViajero() {
+        return idViajero;
+    }
+
+    public void setIdViajero(Long idViajero) {
+        this.idViajero = idViajero;
     }
 
     /**

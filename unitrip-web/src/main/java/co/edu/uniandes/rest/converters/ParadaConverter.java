@@ -45,6 +45,10 @@ public class ParadaConverter {
             dto.setFechaI(entity.getFechaI());
             dto.setFechaF(entity.getFechaF());
             dto.setCiudad(entity.getCiudad());
+            dto.setFechaF(entity.getFechaF());
+            dto.setIdItinerario(entity.getItinerario().getId());
+            dto.setIdViaje(entity.getItinerario().getViaje().getId());
+            dto.setIdViajero(entity.getItinerario().getViaje().getViajero().getId());
 
             return dto;
         } else {
@@ -91,6 +95,9 @@ public class ParadaConverter {
             dto.setFechaI(entity.getFechaI());
             dto.setFechaF(entity.getFechaF());
             dto.setCiudad(entity.getCiudad());
+            dto.setIdItinerario(entity.getItinerario().getId());
+            dto.setIdViaje(entity.getItinerario().getViaje().getId());
+            dto.setIdViajero(entity.getItinerario().getViaje().getViajero().getId());
 
             return dto;
         } else {

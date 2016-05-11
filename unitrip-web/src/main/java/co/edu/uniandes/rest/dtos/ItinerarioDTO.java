@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class ItinerarioDTO {
 
     private Long id;
+    private Long idViajero;
+    private Long idViaje;
     private String name;
     private String descripcion;
     private Date fechaI;
@@ -62,6 +64,22 @@ public class ItinerarioDTO {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdViajero() {
+        return idViajero;
+    }
+
+    public void setIdViajero(Long idViajero) {
+        this.idViajero = idViajero;
+    }
+
+    public Long getIdViaje() {
+        return idViaje;
+    }
+
+    public void setIdViaje(Long idViaje) {
+        this.idViaje = idViaje;
     }
 
     /**

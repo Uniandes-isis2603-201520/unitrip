@@ -37,7 +37,7 @@ public abstract class ViajesConverter {
             dto.setName(entity.getName());
             dto.setDescripcion(entity.getDescripcion());
             dto.setImg(entity.getImage());
-
+            dto.setIdViajero(entity.getViajero().getId());
             return dto;
         } else {
             return null;
@@ -79,6 +79,7 @@ public abstract class ViajesConverter {
             dto.setName(entity.getName());
             dto.setDescripcion(entity.getDescripcion());
             dto.setImg(entity.getImage());
+            dto.setIdViajero(entity.getViajero().getId());
 
             return dto;
         } else {

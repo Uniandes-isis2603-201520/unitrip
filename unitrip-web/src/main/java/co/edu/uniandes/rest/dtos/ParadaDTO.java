@@ -17,6 +17,9 @@ public class ParadaDTO {
 
 
     private Long id;
+    private Long idItinerario;
+    private Long idViaje;
+    private Long idViajero;
     private String name;
     private Long latitud;
     private Long longitud;
@@ -72,6 +75,30 @@ public class ParadaDTO {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdItinerario() {
+        return idItinerario;
+    }
+
+    public void setIdItinerario(Long idItinerario) {
+        this.idItinerario = idItinerario;
+    }
+
+    public Long getIdViaje() {
+        return idViaje;
+    }
+
+    public void setIdViaje(Long idViaje) {
+        this.idViaje = idViaje;
+    }
+
+    public Long getIdViajero() {
+        return idViajero;
+    }
+
+    public void setIdViajero(Long idViajero) {
+        this.idViajero = idViajero;
     }
 
     /**
@@ -163,7 +190,7 @@ public class ParadaDTO {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
-    
+
     /**
      * @param fechaI fecha de inicio de la parada
      */
