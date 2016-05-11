@@ -13,7 +13,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.ManyToOne;
@@ -70,7 +69,7 @@ public class ParadaEntity extends BaseEntity implements Serializable {
     public void setCiudad(String pCiudad) {
         this.ciudad = pCiudad;
     }
-    
+
     /**
      * @return the image
      */
