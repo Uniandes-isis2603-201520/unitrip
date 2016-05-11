@@ -129,6 +129,11 @@ public class EventoResource {
         eventoLogic.deleteEvento(id);
     }
 
+    @GET
+    @Path("{ciudad}")
+    public List<EventoDTO> getEventosCiudad(@PathParam("ciudad")String ciudad) throws LogicException {
+        return EventoConverter.listEntity2DTO(eventoLogic.getEventosDeCiudad(ciudad));
+    }
 
 
 

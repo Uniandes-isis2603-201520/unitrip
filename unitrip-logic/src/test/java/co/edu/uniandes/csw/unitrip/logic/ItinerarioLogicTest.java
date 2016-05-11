@@ -338,7 +338,59 @@ public class ItinerarioLogicTest {
         } catch (ParseException ex) {
             Logger.getLogger(ItinerarioLogicTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+        paradaEntity = factory.manufacturePojo(ParadaEntity.class);
+        try {
+            paradaEntity = itinerarioLogic.addParada(paradaEntity.getId(), entity.getId());
+        } catch (Exception e) {
+        }
+        fechaItiI = "2016-02-12";
+        fechaItiF = "2019-02-12";
+        fechaPI = "2014-02-03";
+        fechaPF = "2017-11-12";
+        try {
+            fechaItinerarioI = formato.parse(fechaItiI);
+            fechaItinerarioF = formato.parse(fechaItiF);
+            fechaParaI = formato.parse(fechaPI);
+            fechaParaF = formato.parse(fechaPF);
+            entity.setFechaI(fechaItinerarioI);
+            entity.setFechaF(fechaItinerarioF);
+            paradaEntity.setFechaI(fechaParaI);
+            paradaEntity.setFechaF(fechaParaF);
+            itiPersiste.update(entity);
+            paradaPersiste.update(paradaEntity);
+            try {
+                ParadaEntity response = itinerarioLogic.addParada(paradaEntity.getId(), entity.getId());
+            } catch (Exception e) {
 
+            }
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ItinerarioLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fechaItiI = "2016-02-12";
+        fechaItiF = "2018-02-12";
+        fechaPI = "2017-02-03";
+        fechaPF = "2019-11-12";
+        try {
+            fechaItinerarioI = formato.parse(fechaItiI);
+            fechaItinerarioF = formato.parse(fechaItiF);
+            fechaParaI = formato.parse(fechaPI);
+            fechaParaF = formato.parse(fechaPF);
+            entity.setFechaI(fechaItinerarioI);
+            entity.setFechaF(fechaItinerarioF);
+            paradaEntity.setFechaI(fechaParaI);
+            paradaEntity.setFechaF(fechaParaF);
+            itiPersiste.update(entity);
+            paradaPersiste.update(paradaEntity);
+            try {
+                ParadaEntity response = itinerarioLogic.addParada(paradaEntity.getId(), entity.getId());
+            } catch (Exception e) {
+
+            }
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ItinerarioLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
@@ -364,6 +416,12 @@ public class ItinerarioLogicTest {
             itinerarioLogic.removeParada(paradaEntity.getId(), entity.getId());
         } catch (Exception ex) {
             //debería generar excepcion
+        }
+        paradaEntity = factory.manufacturePojo(ParadaEntity.class);
+        try {
+            itinerarioLogic.removeParada(paradaEntity.getId(), entity.getId());
+        } catch (Exception e) {
+
         }
     }
 
