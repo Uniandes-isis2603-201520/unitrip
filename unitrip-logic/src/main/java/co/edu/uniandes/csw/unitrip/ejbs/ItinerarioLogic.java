@@ -107,7 +107,7 @@ public class ItinerarioLogic implements IItinerarioLogic {
         if(fechaFItinerario.compareTo(fechaFParada) < 1){
             throw new BusinesLogicException("La fecha de fin de itineraro no es despues o igual a la fecha fin de parada");
         }
-        
+
         paradaEntity.setItinerario(itinerarioEntity);
         itinerarioEntity.getParadas().add(paradaEntity);
         return paradaEntity;
@@ -140,4 +140,5 @@ public class ItinerarioLogic implements IItinerarioLogic {
         return !(desc == null || desc.isEmpty());
     }
 
+    
 }

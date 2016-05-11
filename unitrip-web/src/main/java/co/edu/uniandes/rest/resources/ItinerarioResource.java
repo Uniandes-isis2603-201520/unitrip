@@ -222,7 +222,6 @@ public class ItinerarioResource {
     @Path("{itinerarioId: \\d+}")
     public void updateItinerarioDeViaje(@PathParam("viajeId") Long viajeId,
             @PathParam("itinerarioId") Long itinerarioId, ItinerarioDTO itinerarioDTO){
-
         updateItinerario(itinerarioId, itinerarioDTO, viajeId);
 
     }

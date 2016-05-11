@@ -4,6 +4,7 @@ import co.edu.uniandes.csw.unitrip.api.IItinerarioLogic;
 import co.edu.uniandes.csw.unitrip.api.IParadaLogic;
 import co.edu.uniandes.csw.unitrip.entities.EventoEntity;
 import co.edu.uniandes.csw.unitrip.entities.ParadaEntity;
+import co.edu.uniandes.csw.unitrip.entities.ItinerarioEntity;
 import co.edu.uniandes.csw.unitrip.exceptions.BusinesLogicException;
 import co.edu.uniandes.rest.converters.EventoConverter;
 import co.edu.uniandes.rest.converters.ParadaConverter;
@@ -98,17 +99,20 @@ public class ParadaResource {
      * @param id Identificador del objeto de Parada a modificar
      * @param dto Representación Basic de parada con los nuevos datos
      * @return Instancia de ParadaDTO con los datos actualizados.
-     * @generated
+     * @generated paradaDTO, paradaId, itinerarioId
      */
     //@PUT
     //@Path("{id: \\d+}")
-    public ParadaDTO updateParada(@PathParam("id") Long id, ParadaDTO dto) {
-        logger.log(Level.INFO, "Se ejecuta método updateParada con id={0}", id);
+    public ParadaDTO updateParada(@PathParam("idParada") Long paradaId, ParadaDTO dto, Long itinerarioId) {
+        logger.log(Level.INFO, "Se ejecuta método updateParada con id={0}", paradaId);
         ParadaEntity entity = ParadaConverter.fullDTO2Entity(dto);
-        entity.setId(id);
-        ParadaEntity oldEntity = paradaLogic.getParada(id);
-        entity.setEventos(oldEntity.getEventos());
+        entity.setId(paradaId);
+
         try {
+            ItinerarioEntity itinerarioEntity = itinerarioLogic.getItinerario(itinerarioId);
+            entity.setItinerario(itinerarioEntity);
+            ParadaEntity oldEntity = paradaLogic.getParada(paradaId);
+            entity.setEventos(oldEntity.getEventos());
             ParadaEntity savedParada = paradaLogic.updateParada(entity);
             return ParadaConverter.fullEntity2DTO(savedParada);
         } catch (BusinesLogicException ex) {
@@ -221,6 +225,18 @@ public class ParadaResource {
         itinerarioLogic.removeParada( paradaId, itinerarioId);
     }
 
+    /**
+     * Update de parada
+     * @param paradaId
+     * @return
+     */
+    @PUT
+    @Path("{paradaId: \\d+}")
+    public ParadaDTO updateParadaDeItinerario(ParadaDTO paradaDTO,
+            @PathParam("itinerarioId") Long itinerarioId, @PathParam("paradaId") Long paradaId){
+        return updateParada(paradaId,paradaDTO, itinerarioId);
+    }
+
 
     // metodos que relacionan evento con parada, son mas parecidos a author-book
 
@@ -309,6 +325,8 @@ public class ParadaResource {
     public void removeEventoDeParada(@PathParam("paradaId") Long paradaId, @PathParam("eventoId") Long eventoId) {
         paradaLogic.removeEvento(eventoId, paradaId);
     }
+
+
 
 
 
