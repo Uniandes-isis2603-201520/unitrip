@@ -33,12 +33,14 @@ public class ParadaEntity extends BaseEntity implements Serializable {
     private Date fechaI;
     @Temporal(TemporalType.DATE)
     private Date fechaF;
+    private String ciudad;
+
 
     @ManyToOne
     @PodamExclude
     private ItinerarioEntity itinerario;
 
-    @ManyToMany
+    @ManyToMany(targetEntity=EventoEntity.class,cascade=CascadeType.PERSIST)
     private List<EventoEntity> eventos = new ArrayList<>();
 
     /**
@@ -55,6 +57,20 @@ public class ParadaEntity extends BaseEntity implements Serializable {
         this.description = descr;
     }
 
+    /**
+     * @return the ciudad
+     */
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    /**
+     * @param pCiudad the image to set
+     */
+    public void setCiudad(String pCiudad) {
+        this.ciudad = pCiudad;
+    }
+    
     /**
      * @return the image
      */

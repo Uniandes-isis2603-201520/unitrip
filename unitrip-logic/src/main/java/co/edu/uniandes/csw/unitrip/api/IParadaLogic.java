@@ -18,7 +18,7 @@ public interface IParadaLogic {
 
     public List<ParadaEntity> getParadas();
 
-    public ParadaEntity getParada(Long id);
+    public ParadaEntity getParada(Long id) throws BusinesLogicException;
 
     public ParadaEntity createParada(ParadaEntity entity) throws BusinesLogicException;
 
@@ -26,11 +26,11 @@ public interface IParadaLogic {
 
     public EventoEntity addEvento(Long eventoId, Long paradaId) throws BusinesLogicException;
 
-    public void removeEvento(Long eventoId, Long paradaId);
+    public void removeEvento(Long eventoId, Long paradaId)throws BusinesLogicException;
 
-    public List<EventoEntity> getEventos(Long paradaId);
+    public List<EventoEntity> getEventos(Long paradaId)throws BusinesLogicException;
 
-    public EventoEntity getEvento(Long paradaId, Long eventoId);
+    public EventoEntity getEvento(Long paradaId, Long eventoId)throws BusinesLogicException;
 
     public List<EventoEntity> replaceEventos(List<EventoEntity> eventos, Long paradaId) throws BusinesLogicException;
 

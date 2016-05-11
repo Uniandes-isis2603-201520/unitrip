@@ -44,6 +44,7 @@ public class ParadaConverter {
             dto.setLongitud(entity.getLongitud());
             dto.setFechaI(entity.getFechaI());
             dto.setFechaF(entity.getFechaF());
+            dto.setCiudad(entity.getCiudad());
 
             return dto;
         } else {
@@ -89,6 +90,7 @@ public class ParadaConverter {
             dto.setLongitud(entity.getLongitud());
             dto.setFechaI(entity.getFechaI());
             dto.setFechaF(entity.getFechaF());
+            dto.setCiudad(entity.getCiudad());
 
             return dto;
         } else {

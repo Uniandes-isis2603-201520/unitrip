@@ -15,12 +15,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement
 public class ParadaDTO {
 
-    
+
     private Long id;
     private String name;
     private Long latitud;
     private Long longitud;
     private String descripcion;
+    private String ciudad;
     private Date fechaI;
     private Date fechaF;
     private List<EventoDTO> eventos;
@@ -102,6 +103,13 @@ public class ParadaDTO {
     }
 
     /**
+     * @return the ciudad
+     */
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    /**
      * @return Fecha de Inicio
      */
     @XmlElement(name = "fechaI")
@@ -149,6 +157,13 @@ public class ParadaDTO {
         this.descripcion = descripcion;
     }
 
+    /**
+     * @param ciudad ciudad a introducir
+     */
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+    
     /**
      * @param fechaI fecha de inicio de la parada
      */

@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -34,12 +35,13 @@ public class EventoEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     private String descripcion;
+    private String ciudad;
     private Long latitud;
     private Long longitud;
 
 
-    @ManyToMany
-    private List<ParadaEntity> paradas = new ArrayList<>();
+//    @ManyToMany(mappedBy="evento",cascade = CascadeType.ALL)
+//    private List<ParadaEntity> paradas = new ArrayList<>();
 
     //private ParadaEntity parada;
 
@@ -90,6 +92,14 @@ public class EventoEntity extends BaseEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+    
     public Long getLatitud() {
         return latitud;
     }

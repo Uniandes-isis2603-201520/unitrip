@@ -23,6 +23,7 @@ public class EventoDTO {
     private Long latitud;
     private Long longitud;
     private String description;
+    private String ciudad;
     private Date fechaInicio;
     private Date fechaFin;
  //   private ParadaDTO parada;
@@ -122,6 +123,21 @@ public class EventoDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
+     /**
+     * @return the ciudad
+     */
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    /**
+     * @param ciudad the ciudad to set
+     */
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+    
 
     /**
      * @return the fechaInicio
