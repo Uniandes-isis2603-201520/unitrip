@@ -2,7 +2,7 @@
 
     var mod = ng.module("viajeroModule");
 
-    mod.controller("viajeroCtrl", ["$scope", "viajeroService", function ($scope, svc, $rootScope) {
+    mod.controller("viajeroCtrl", ["$scope", "viajeroService", function ($scope, svc) {
 
 
 
@@ -20,7 +20,6 @@
 
             };
 
-            $rootScope.viajeroActual='';
             $scope.records = [];
 
             $scope.today = function () {

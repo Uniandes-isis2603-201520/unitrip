@@ -2,7 +2,7 @@
 
     var mod = ng.module("viajeModule");
 
-    mod.controller("viajeCtrl", ["$scope", "viajeService", function ($scope, svc , $location, $rootScope) {
+    mod.controller("viajeCtrl", ["$scope", "viajeService", function ($scope, svc , $location) {
 
 
 
@@ -14,7 +14,7 @@
                 experiencias: [] /*Colección de registros de Experiencias*/
             };
             $scope.records = [];
-            $rootScope.viajeActual = '';
+
             $scope.today = function () {
                 $scope.value = new Date();
             };
@@ -72,6 +72,25 @@
             //Ejemplo alerta
             showMessage("Bienvenido!", "success");
 
+ /*
+             * Funcion fetchRecords consulta todos los registros del módulo viaje en base de datos
+             * para desplegarlo en el template de la lista.
+             */
+            this.fetchRecords();
+
+            function onEdit(event, args) {
+                $scope.refId = args.id;
+                if (args.id) {
+                    $scope.records = [];
+                    svc.getViajes(args.id).then(function (response) {
+                        $scope.records = response.data;
+                    }, responseError);
+                }
+            }
+
+             $scope.$on("post-edit", onEdit);
+
+
 
             /*
              * Funcion createRecord emite un evento a los $scope hijos del controlador por medio de la
@@ -80,12 +99,9 @@
              * Habilita el modo de edicion. El template de la lista cambia por el formulario.
              *
              */
-
             this.createRecord = function () {
-                $scope.$broadcast("pre-create", $scope.currentRecord);
                 this.editMode = true;
                 $scope.currentRecord = {};
-                $scope.$broadcast("post-create", $scope.currentRecord);
             };
 
             /*
@@ -97,11 +113,9 @@
              */
 
             this.editRecord = function (record) {
-                $scope.$broadcast("pre-edit", $scope.currentRecord);
-                return svc.fetchRecord(record.id).then(function (response) {
+                return svc.getViaje($scope.refId, record.id).then(function (response) {
                     $scope.currentRecord = response.data;
                     self.editMode = true;
-                    $scope.$broadcast("post-edit", $scope.currentRecord);
                     return response;
                 }, responseError);
             };
@@ -112,9 +126,8 @@
              * Guarda los registros en la variable $scope.records
              * Muestra el template de la lista de records.
              */
-
             this.fetchRecords = function () {
-                return svc.fetchRecords().then(function (response) {
+                return svc.getViajes($scope.refId).then(function (response) {
                     $scope.records = response.data;
                     $scope.currentRecord = {};
                     self.editMode = false;
@@ -128,7 +141,7 @@
              * Muestra el template de la lista de records al finalizar la operación saveRecord
              */
             this.saveRecord = function () {
-                return svc.saveRecord($scope.currentRecord).then(function () {
+                return svc.saveViaje($scope.refId, $scope.currentRecord).then(function () {
                     self.fetchRecords();
                 }, responseError);
             };
@@ -139,23 +152,10 @@
              * Muestra el template de la lista de records al finalizar el borrado del registro.
              */
             this.deleteRecord = function (record) {
-                return svc.deleteRecord(record.id).then(function () {
+                return svc.deleteViaje($scope.refId, record.id).then(function () {
                     self.fetchRecords();
                 }, responseError);
             };
-
-
-
-            /*
-             * Funcion fetchRecords consulta todos los registros del módulo viaje en base de datos
-             * para desplegarlo en el template de la lista.
-             */
-            this.fetchRecords();
-
-
-
-
-
 
         }]);
 
