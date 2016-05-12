@@ -54,13 +54,13 @@
                     console.log("Viaje ID SAVE : "+viajeId);
                     return this.updateItinerario(viajeroId, viajeId, currentRecord.id ,currentRecord);
                 }else{
-                    return this.createItinerario(viajeroId, currentRecord);
+                    return this.createItinerario(viajeroId, viajeId, currentRecord);
                 }
             };
 
             this.createItinerario = function (viajeroId, viajeId ,currentRecord) {
-                console.log("ENTRAMOS CREATE: "+context + "/" + viajeroId + "/viajes/" + viajeId+"/itinerarios");
-                return $http.post(context + "/" + viajeroId + "/viajes/" + viajeId+"/itinerarios", currentRecord);
+                console.log("ENTRAMOS CREATE: "+context + "/" + viajeroId + "/viajes/" + viajeId +"/itinerarios");
+                return $http.post(context + "/" + viajeroId + "/viajes/" + viajeId +"/itinerarios", currentRecord);
             };
 
             this.updateItinerario = function (viajeroId, viajeId, itinerarioId ,currentRecord) {
