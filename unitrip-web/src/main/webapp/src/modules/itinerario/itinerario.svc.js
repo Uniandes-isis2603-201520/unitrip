@@ -12,12 +12,14 @@
              * Obtener la lista de itinerarios.
              * Hace una petición GET con $http a /itinerarios para obtener la lista
              * de itinerarios
+             * @param viajeroId
+             * @param viajeId
              * @returns {promise} promise para leer la respuesta del servidor}
              * Devuelve una lista de objetos de itinerarios con sus atributos y reviews
              */
-            this.fetchRecords = function () {
-                $log.debug("GET TODOS:"+"viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context);
-                return $http.get("viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context);
+            this.fetchRecords = function (viajeroId,viajeId) {
+                $log.debug("GET TODOS:"+context + "/" + viajeroId + "/viajes/"+viajeId+"/itinerarios");
+                return $http.get("viajeros/"+context + "/" + viajeroId + "/viajes/"+viajeId+"/itinerarios");
             };
 
             /**
@@ -28,9 +30,9 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de itinerarios con sus atributos y reviews
              */
-            this.fetchRecord = function (id) {
-                $log.debug("GET:"+"viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+"/"+ id);
-                return $http.get("viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+"/"+ id);
+            this.fetchRecord = function (viajeroId, viajeId,itiId) {
+                console.log("GET : "+context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
+                return $http.get(context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
             };
 
             /**
@@ -40,27 +42,43 @@
              * Si currentRecord no tiene la propiedad id, se hace un POST a /itinerarios
              * para crear el nuevo registro de itinerarios
              * @param {object} currentRecord instancia de book a guardar/actualizar
+             * @param viajeroId
+             * @param viajeId
+             * @param currentRecord
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de itinerarios con sus datos incluyendo el id
              */
-            this.saveRecord = function (currentRecord) {
-                if (currentRecord.id) {
-                    $log.debug("PUT:"+"viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+ "/" + currentRecord.id);
-                    return $http.put("viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+ "/" + currentRecord.id, currentRecord);
-                } else {
-                    return $http.post(context, currentRecord);
+            this.saveRecord = function (viajeroId, viajeId, currentRecord) {
+                if(currentRecord.id){
+                    console.log("Viajero ID SAVE : "+ viajeroId);
+                    console.log("Viaje ID SAVE : "+viajeId);
+                    return this.updateItinerario(viajeroId, viajeId, currentRecord.id ,currentRecord);
+                }else{
+                    return this.createItinerario(viajeroId, currentRecord);
                 }
+            };
+
+            this.createItinerario = function (viajeroId, viajeId ,currentRecord) {
+                console.log("ENTRAMOS CREATE: "+context + "/" + viajeroId + "/viajes/" + viajeId+"/itinerarios");
+                return $http.post(context + "/" + viajeroId + "/viajes/" + viajeId+"/itinerarios", currentRecord);
+            };
+
+            this.updateItinerario = function (viajeroId, viajeId, itinerarioId ,currentRecord) {
+                console.log("ENTRAMOS UPDATE: "+context + "/" + viajeroId + "/viajes/" + viajeId+"/itinerarios/"+itinerarioId);
+                return $http.put(context + "/" + viajeroId + "/viajes/" + viajeId+"/itinerarios/"+itinerarioId, currentRecord);
             };
 
             /**
              * Hace una petición DELETE a /itinerarios/:id para eliminar un book
-             * @param {number} id identificador de la instancia de book a eliminar
+             * @param viajeroId
+             * @param viajeId
+             * @param itiId
              * @returns {promise} promise para leer la respuesta del servidor
              * No devuelve datos.
              */
-            this.deleteRecord = function (id) {
-                $log.debug("DELETE:"+"viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+ "/" + id);
-                return $http.delete("viajeros/"+$rootScope.viajeroActual+"/viajes/"+$rootScope.viajeActual+"/"+context+ "/" + id);
+            this.deleteRecord = function (viajeroId,viajeId,itiId) {
+                $log.debug("DELETE:"+context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
+                return $http.delete(context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
             };
         }]);
 

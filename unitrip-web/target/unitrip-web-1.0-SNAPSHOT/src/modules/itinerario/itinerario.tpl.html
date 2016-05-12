@@ -71,14 +71,14 @@
 
                     <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
                     <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                        <label for="name" class="col-md-2 control-label">Name</label>
+                        <label for="name" class="col-md-2 control-label">Name</label><br>
                         <div class="col-md-10">
                             <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
                         </div>
                     </div>
 
                     <div class="form-group col-md-12" ng-class="{'has-success': form.descripcion.$valid && form.descripcion.$dirty, 'has-error': form.descripcion.$invalid && (form.descripcion.$dirty || form.$submitted)}" >
-                        <label for="descripcion" class="col-md-2 control-label">Descripcion</label>
+                        <label for="descripcion" class="col-md-2 control-label">Descripcion</label><br>
                         <div class="col-md-10">
                             <input id="descripcion" name="descripcion" class="form-control" type="text" ng-model="currentRecord.descripcion" required />
                         </div>
@@ -86,7 +86,7 @@
 
 
                     <div class="form-group col-md-12" ng-class="{'has-success': !form.fechaI.$error.required && form.fechaI.$dirty, 'has-error': form.fechaI.$error.required && (form.fechaI.$dirty || form.$submitted)}">
-                        <label for="fechaI" class="col-md-2 control-label">Fecha Inicial:</label>
+                        <label for="fechaI" class="col-md-2 control-label">Fecha Inicial:</label><br>
                         <div class="col-md-10">
                             <p class="input-group">
                                 <input type="text" id="fechaI" name="fechaI" class="form-control" ng-model="currentRecord.fechaI" ng-required="model.required" datepicker-popup is-open="opened" readonly required />
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="form-group col-md-12" ng-class="{'has-success': !form.fechaF.$error.required && form.fechaF.$dirty, 'has-error': form.fechaF.$error.required && (form.fechaF.$dirty || form.$submitted)}">
-                        <label for="fechaF" class="col-md-2 control-label">Fecha Final:</label>
+                        <label for="fechaF" class="col-md-2 control-label">Fecha Final:</label><br>
                         <div class="col-md-10">
                             <p class="input-group">
                                 <input type="text" id="fechaF" name="fechaF" class="form-control" ng-model="currentRecord.fechaF" ng-required="model.required" datepicker-popup is-open="opened" readonly required />

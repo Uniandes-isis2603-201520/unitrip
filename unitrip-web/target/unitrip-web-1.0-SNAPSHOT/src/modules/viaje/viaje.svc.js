@@ -20,7 +20,7 @@
              * Devuelve una lista de objetos de viajes con sus atributos y reviews
              */
             this.fetchRecords = function (viajeroId) {
-                console.log("Entramos a FETCHRECORDS");
+                console.log("GET TODOS:"+context + "/" + viajeroId + "/viajes");
                 return $http.get(context + "/" + viajeroId + "/viajes");
             };
 

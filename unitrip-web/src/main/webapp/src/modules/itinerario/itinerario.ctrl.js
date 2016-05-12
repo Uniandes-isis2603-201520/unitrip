@@ -106,10 +106,8 @@
              */
 
             this.createRecord = function () {
-                $scope.$broadcast("pre-create", $scope.currentRecord);
                 this.editMode = true;
                 $scope.currentRecord = {};
-                $scope.$broadcast("post-create", $scope.currentRecord);
             };
 
             /*
@@ -125,7 +123,7 @@
                 return svc.fetchRecord(record.id).then(function (response) {
                     $scope.currentRecord = response.data;
                     self.editMode = true;
-                    $scope.$broadcast("post-edit", $scope.currentRecord);
+                    $scope.$broadcast("post-edit-itinerario", $scope.currentRecord);
                     return response;
                 }, responseError);
             };
@@ -138,7 +136,7 @@
              */
 
             this.fetchRecords = function () {
-                return svc.fetchRecords().then(function (response) {
+                return svc.fetchRecords($scope.refId,$scope.refIdViaje).then(function (response) {
                     $scope.records = response.data;
                     $scope.currentRecord = {};
                     self.editMode = false;
@@ -152,7 +150,9 @@
              * Muestra el template de la lista de records al finalizar la operación saveRecord
              */
             this.saveRecord = function () {
-                return svc.saveRecord($scope.currentRecord).then(function () {
+                console.log("ID VIAJERO: "+$scope.refId);
+                console.log("ID VIAJE: "+$scope.refIdViaje);
+                return svc.saveRecord($scope.refId,$scope.refIdViaje,$scope.currentRecord).then(function () {
                     self.fetchRecords();
                 }, responseError);
             };
@@ -162,8 +162,8 @@
              * de eliminar el registro asociado.
              * Muestra el template de la lista de records al finalizar el borrado del registro.
              */
-            this.deleteRecord = function (record) {
-                return svc.deleteRecord(record.id).then(function () {
+            this.deleteRecord = function (currentRecord) {
+                return svc.deleteRecord($scope.refId,$scope.refIdViaje,currentRecord.id).then(function () {
                     self.fetchRecords();
                 }, responseError);
             };
