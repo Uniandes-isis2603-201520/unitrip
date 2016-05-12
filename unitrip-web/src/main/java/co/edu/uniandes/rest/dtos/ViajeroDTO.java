@@ -6,7 +6,7 @@
 package co.edu.uniandes.rest.dtos;
 
 import java.util.List;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -19,7 +19,7 @@ public class ViajeroDTO {
     private Long id;
 
     private String usuario;
-
+        
     private String name;
 
     private int edad;
@@ -32,12 +32,14 @@ public class ViajeroDTO {
 
     private List<ExperienciaDTO> experiencias;
 
-    private static final Logger LOG = Logger.getLogger(ViajeroDTO.class.getName());
+//    private static final Logger LOG = Logger.getLogger(ViajeroDTO.class.getName());
 
+    
+    /**
     public ViajeroDTO(){
 
     }
-    /**
+    
     public ViajeroDTO(String usuario, int edad, String password, String mail, List<ViajesDTO> viajes, List<ExperienciaDTO> experiencias) {
         this.usuario = usuario;
         this.edad = edad;
@@ -48,8 +50,21 @@ public class ViajeroDTO {
     }
     **/
 
+    /**
+     * public ViajeroDTO(){
 
-
+    }
+    
+    public ViajeroDTO(String usuario, int edad, String password, String mail, List<ViajesDTO> viajes, List<ExperienciaDTO> experiencias) {
+        this.usuario = usuario;
+        this.edad = edad;
+        this.password = password;
+        this.mail = mail;
+        this.viajes = viajes;
+        this.experiencias = experiencias;
+    }
+     * @return
+     */
     public String getUsuario() {
         return usuario;
     }

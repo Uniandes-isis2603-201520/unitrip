@@ -18,6 +18,7 @@ import co.edu.uniandes.rest.dtos.ItinerarioDTO;
 import co.edu.uniandes.rest.dtos.ViajeroDTO;
 import co.edu.uniandes.rest.dtos.ViajesDTO;
 import co.edu.uniandes.rest.exceptions.LogicException;
+import co.edu.uniandes.rest.providers.StatusCreated;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -37,7 +38,7 @@ import javax.ws.rs.core.Response;
 
 @Path("viajeros")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces("application/json")
+@Produces(MediaType.APPLICATION_JSON)
 public class ViajeroResource {
 
     @Inject
@@ -90,6 +91,7 @@ public class ViajeroResource {
      * @generated
      */
     @POST
+    @StatusCreated
     public ViajeroDTO createViajero(ViajeroDTO dto) throws LogicException {
         ViajeroEntity entity = ViajeroConverter.fullDTO2Entity(dto);
         return ViajeroConverter.fullEntity2DTO(viajeroLogic.createViajero(entity));
