@@ -118,9 +118,9 @@
              *
              */
 
-            this.editRecord = function (record) {
+            this.editRecord = function (currentRecord) {
                 $scope.$broadcast("pre-edit", $scope.currentRecord);
-                return svc.fetchRecord(record.id).then(function (response) {
+                return svc.fetchRecord($scope.refId, $scope.refIdViaje,currentRecord.id).then(function (response) {
                     $scope.currentRecord = response.data;
                     self.editMode = true;
                     $scope.$broadcast("post-edit-iti", $scope.currentRecord);
@@ -136,6 +136,7 @@
              */
 
             this.fetchRecords = function () {
+                console.log("ID VIAJE: "+$scope.refIdViaje);
                 return svc.fetchRecords($scope.refId,$scope.refIdViaje).then(function (response) {
                     $scope.records = response.data;
                     $scope.currentRecord = {};

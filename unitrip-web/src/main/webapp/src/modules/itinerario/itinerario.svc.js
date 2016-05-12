@@ -30,7 +30,7 @@
              * @returns {promise} promise para leer la respuesta del servidor
              * Devuelve un objeto de itinerarios con sus atributos y reviews
              */
-            this.fetchRecord = function (viajeroId, viajeId,itiId) {
+            this.fetchRecord = function (viajeroId, viajeId, itiId) {
                 console.log("GET : "+context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
                 return $http.get(context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
             };
