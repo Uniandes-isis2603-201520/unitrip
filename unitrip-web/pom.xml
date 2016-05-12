@@ -28,10 +28,9 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-api-maven</artifactId>
-            <version>2.2.0</version>
+            <artifactId>shrinkwrap-resolver-depchain</artifactId>
             <scope>test</scope>
-            <type>jar</type>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
