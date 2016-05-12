@@ -74,6 +74,28 @@
             //Ejemplo alerta
             showMessage("Bienvenido!", "info");
 
+            $scope.$on("post-edit", onEdit);
+            $scope.$on("post-edit-viaje", onEditViaje);
+
+            function onEdit(event, args) {
+                $scope.refId = args.id;
+                if (args.id) {
+                    $scope.records = [];
+                    svc.fetchRecords(args.id).then(function (response) {
+                        $scope.records = response.data;
+                    }, responseError);
+                }
+            }
+
+            function onEditViaje(event, args) {
+                $scope.refIdViaje = args.id;
+                if (args.id) {
+                    $scope.records = [];
+                    svc.fetchRecords(args.id).then(function (response) {
+                        $scope.records = response.data;
+                    }, responseError);
+                }
+            }
 
             /*
              * Funcion createRecord emite un evento a los $scope hijos del controlador por medio de la

@@ -23,116 +23,103 @@
     </nav>
 </div>
 
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="color:#ffffff;background-color:#cf71af">{{alert.msg}} </alert>
-
-<div ng-hide="ctrl.editMode">
-
-    <!--joda
-    <div ng-hide="ctrl.editMode" class="col-md-6" style="text-align:center">
-        <table class="table table-striped table-bordered" style="color:#ffffff;background-color:#6e1352">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="record in records" style="color:#ffffff;background-color:#a020f0">
-                    <td id="{{$index}}-name">{{record.name}}</td>
-                    <td>
-                        <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)" style="color:#ffffff;background-color:#6e1352"><span class="glyphicon glyphicon-minus"></span> Remove</button>
-                        <button id="{{$index}}-itinerarios-btn" class="btn btn-default btn-sm" ng-click="ctrl.goItinerarios()"><span class="glyphicon glyphicon-minus"></span> Mis Itinerarios</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    -->
-
-    <div ng-repeat="record in records">
-        <div class="col-md-4 col-sm-6 col-lg-3 well">
-
-            <div class="caption" >
-                <p><strong>Name:</strong> <span id="{{$index}}-name">{{record.name}}</span></p>
-                <p><strong>Usuario:</strong> <span id="{{$index}}-usuario">{{record.usuario}}</span></p>
-                <p><strong>PassWord:</strong> <span id="{{$index}}-password">{{record.password}}</span></p>
-                <p><strong>Edad:</strong> <span id="{{$index}}-edad">{{record.edad}}</span></p>
-                <p><strong>E-Mail:</strong> <span id="{{$index}}-mail">{{record.mail}}</span></p>
-            </div>
-            <p class="text-center">
-                <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
-                <button ui-sref="viaje" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Mis Viajes </button>
-                <button ui-sref="experiencia" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Mis Experiencias </button>
-            </p>
-        </div>
-    </div>
-
-
+<div class="jumbotronViaje">
 </div>
 
-<section ng-show="ctrl.editMode" class="col-md-6 well" style="color:#ffffff;background-color:#6e1352">
-    <form novalidate name="form" id="viajero-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()" style="color:#ffffff;background-color:#6e1352">
-        <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required" >
-            <div ng-message="required" >
-                Please, Fill the required field!
-            </div>
-        </alert>
-        <fieldset>
-            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                <label for="name" class="col-md-2 control-label">Name</label>
-                <div class="col-md-10">
-                    <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
-                </div>
-            </div>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.usuario.$valid && form.usuario.$dirty, 'has-error': form.usuario.$invalid && (form.usuario.$dirty || form.$submitted)}" >
-                <label for="usuario" class="col-md-2 control-label">Usuario:</label>
-                <div class="col-md-10">
-                    <input id="usuario" name="usuario" class="form-control" type="text" ng-model="currentRecord.usuario" required />
-                </div>
-            </div>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.password.$valid && form.password.$dirty, 'has-error': form.password.$invalid && (form.password.$dirty || form.$submitted)}" >
-                <label for="password" class="col-md-2 control-label">PassWord:</label>
-                <div class="col-md-10">
-                    <input id="password" name="password" class="form-control" type="text" ng-model="currentRecord.password" required />
-                </div>
-            </div>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.edad.$valid && form.edad.$dirty, 'has-error': form.edad.$invalid && (form.edad.$dirty || form.$submitted)}" >
-                <label for="edad" class="col-md-2 control-label">Edad:</label>
-                <div class="col-md-10">
-                    <input id="edad" name="edad" class="form-control" type="text" ng-model="currentRecord.edad" required />
-                </div>
-            </div>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.mail.$valid && form.mail.$dirty, 'has-error': form.mail.$invalid && (form.mail.$dirty || form.$submitted)}" >
-                <label for="mail" class="col-md-2 control-label">E-Mail:</label>
-                <div class="col-md-10">
-                    <input id="mail" name="mail" class="form-control" type="text" ng-model="currentRecord.mail" required />
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000" style="color:#ffffff;background-color:#cf71af">{{alert.msg}} </alert>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <div ng-hide="ctrl.editMode">
+            <div ng-repeat="record in records">
+                <div class="col-md-4 col-sm-6 col-lg-3 well">
+
+                    <div class="caption" >
+                        <p><strong>Name:</strong> <span id="{{$index}}-name">{{record.name}}</span></p>
+                        <p><strong>Usuario:</strong> <span id="{{$index}}-usuario">{{record.usuario}}</span></p>
+                        <p><strong>PassWord:</strong> <span id="{{$index}}-password">{{record.password}}</span></p>
+                        <p><strong>Edad:</strong> <span id="{{$index}}-edad">{{record.edad}}</span></p>
+                        <p><strong>E-Mail:</strong> <span id="{{$index}}-mail">{{record.mail}}</span></p>
+                    </div>
+                    <p class="text-center">
+                        <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ng-click="ctrl.editRecord(record)"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                        
+                    </p>
                 </div>
             </div>
 
-        </fieldset>
-    </form>
-</section>
-<section id="childs" ng-show="ctrl.editMode" class="col-md-6">
-    <ul class="nav nav-tabs">
-        <li ng-show="currentRecord.id" role="presentation" ng-class="{active: tab === 'viajes'}">
-            <a href ng-click="ctrl.changeTab('viajes')">Mis Viajes</a>
-        </li>
 
-        <li ng-show="currentRecord.id" role="presentation" ng-class="{active: tab === 'experiencias'}">
-            <a href ng-click="ctrl.changeTab('experiencias')">Mis Experiencias</a>
-        </li>
-    </ul>
-    <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente reviewCtrl-->
-    <div ng-show="tab === 'viajes'">
-        <div ng-controller="viajeCtrl as ctrl" ng-include="'src/modules/viaje/viaje.tpl.html'">
         </div>
-    </div>
 
-    <div ng-show="tab === 'experiencias'">
-        <div ng-controller="experienciaCtrl as ctrl" ng-include="'src/modules/experiencia/experiencia2.tpl.html'">
-        </div>
+        <section ng-show="ctrl.editMode" class="col-md-12 well" style="color:#ffffff;background-color:#6e1352">
+            <form novalidate name="form" id="viajero-form" role="form" ng-submit="form.$valid && ctrl.saveRecord()" style="color:#ffffff;background-color:#6e1352">
+                <alert ng-messages="form.$error" type="danger" close="" ng-hide="!form.$error.required" >
+                    <div ng-message="required" >
+                        Please, Fill the required field!
+                    </div>
+                </alert>
+                <fieldset>
+                    <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+                    <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                        <label for="name" class="col-md-2 control-label">Name</label>
+                        <div class="col-md-10">
+                            <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" required />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" ng-class="{'has-success': form.usuario.$valid && form.usuario.$dirty, 'has-error': form.usuario.$invalid && (form.usuario.$dirty || form.$submitted)}" >
+                        <label for="usuario" class="col-md-2 control-label">Usuario:</label>
+                        <div class="col-md-10">
+                            <input id="usuario" name="usuario" class="form-control" type="text" ng-model="currentRecord.usuario" required />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" ng-class="{'has-success': form.password.$valid && form.password.$dirty, 'has-error': form.password.$invalid && (form.password.$dirty || form.$submitted)}" >
+                        <label for="password" class="col-md-2 control-label">PassWord:</label>
+                        <div class="col-md-10">
+                            <input id="password" name="password" class="form-control" type="text" ng-model="currentRecord.password" required />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" ng-class="{'has-success': form.edad.$valid && form.edad.$dirty, 'has-error': form.edad.$invalid && (form.edad.$dirty || form.$submitted)}" >
+                        <label for="edad" class="col-md-2 control-label">Edad:</label>
+                        <div class="col-md-10">
+                            <input id="edad" name="edad" class="form-control" type="text" ng-model="currentRecord.edad" required />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12" ng-class="{'has-success': form.mail.$valid && form.mail.$dirty, 'has-error': form.mail.$invalid && (form.mail.$dirty || form.$submitted)}" >
+                        <label for="mail" class="col-md-2 control-label">E-Mail:</label>
+                        <div class="col-md-10">
+                            <input id="mail" name="mail" class="form-control" type="text" ng-model="currentRecord.mail" required />
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </section>
     </div>
-</section>
+    <br>
+    <div class="col-sm-12">
+       <div id="childs" ng-show="ctrl.editMode" class="col-md-12">
+         <ul class="nav nav-tabs">
+              <li ng-show="currentRecord.id" role="presentation" ng-class="{active: tab === 'viajes'}">
+                  <a href ng-click="ctrl.changeTab('viajes')">Mis Viajes</a>
+              </li>
+
+              <li ng-show="currentRecord.id" role="presentation" ng-class="{active: tab === 'experiencias'}">
+                  <a href ng-click="ctrl.changeTab('experiencias')">Mis Experiencias</a>
+              </li>
+          </ul>
+          <!-- Aquí incluye el template del m�dulo de reviews e indica el controlador correspondiente reviewCtrl-->
+          <div ng-show="tab === 'viajes'">
+              <div ng-controller="viajeCtrl as ctrl" ng-include="'src/modules/viaje/viaje.tpl.html'">
+              </div>
+          </div>
+
+          <div ng-show="tab === 'experiencias'">
+              <div ng-controller="experienciaCtrl as ctrl" ng-include="'src/modules/experiencia/experiencia2.tpl.html'">
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
