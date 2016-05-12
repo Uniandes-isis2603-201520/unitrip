@@ -118,8 +118,6 @@ public abstract class ItinerarioConverter {
             entity.setDescripcion(dto.getDescripcion());
             entity.setFechaI(dto.getFechaI());
             entity.setFechaF(dto.getFechaF());
-            dto.setIdViaje(entity.getViaje().getId());
-            dto.setIdViajero(entity.getViaje().getViajero().getId());
 
             return entity;
         } else {
