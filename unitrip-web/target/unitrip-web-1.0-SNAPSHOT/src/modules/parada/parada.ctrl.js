@@ -14,7 +14,7 @@
             };
             $scope.records = [];
             $scope.alerts = [];
-            
+
             $scope.today = function () {
                 $scope.value = new Date();
             };
@@ -64,6 +64,39 @@
             //Ejemplo alerta
             showMessage("Bienvenido!", "warning");
 
+            $scope.$on("post-edit", onEdit);
+            $scope.$on("post-edit-viaje", onEditViaje);
+            $scope.$on("post-edit-iti", onEditIti);
+
+            function onEdit(event, args) {
+                $scope.refId = args.id;
+                if (args.id) {
+                    $scope.records = [];
+                    svc.fetchRecords(args.id).then(function (response) {
+                        $scope.records = response.data;
+                    }, responseError);
+                }
+            }
+
+            function onEditViaje(event, args) {
+                $scope.refIdViaje = args.id;
+                if (args.id) {
+                    $scope.records = [];
+                    svc.fetchRecords(args.id).then(function (response) {
+                        $scope.records = response.data;
+                    }, responseError);
+                }
+            }
+
+            function onEditIti(event, args) {
+                $scope.refIdIti = args.id;
+                if (args.id) {
+                    $scope.records = [];
+                    svc.fetchRecords(args.id).then(function (response) {
+                        $scope.records = response.data;
+                    }, responseError);
+                }
+            }
 
             this.createRecord = function () {
                 $scope.$broadcast("pre-create", $scope.currentRecord);
@@ -83,7 +116,7 @@
             };
 
             this.fetchRecords = function () {
-                return svc.fetchRecords().then(function (response) {
+                return svc.fetchRecords($scope.refId,$scope.refIdViaje,$scope.refIdIti).then(function (response) {
                     $scope.records = response.data;
                     $scope.currentRecord = {};
                     self.editMode = false;

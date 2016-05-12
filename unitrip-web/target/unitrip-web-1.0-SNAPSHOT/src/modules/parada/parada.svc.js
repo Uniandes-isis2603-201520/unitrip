@@ -10,8 +10,9 @@
              * @returns {promise} promise para leer la respuesta del servidor.
              * Se recibe un array de objetos de paradas.
              */
-            this.fetchRecords = function () {
-                return $http.get(context);
+            this.fetchRecords = function (viajeroId,viajeId,itiId) {
+                console.log("GET TODOS:"+context + "/" + viajeroId + "/viajes/"+viajeId+"/itinerarios/"+itiId+"/paradas");
+                return $http.get("viajeros/"+context + "/" + viajeroId + "/viajes/"+viajeId+"/itinerarios/"+itiId+"/paradas")
             };
 
             /**
@@ -36,58 +37,28 @@
              * @returns {promise} promise para leer la respuesta del servidor.
              * Se recibe un objeto de paradas con su nuevo id
              */
-            this.saveRecord = function (currentRecord) {
-                if (currentRecord.id) {
-                    return $http.put(context + "/" + currentRecord.id, currentRecord);
-                } else {
-                    return $http.post(context, currentRecord);
+            this.saveRecord = function (viajeroId, viajeId, itiId, currentRecord) {
+                if(currentRecord.id){
+                    console.log("Viajero ID SAVE : "+ viajeroId);
+                    console.log("Viaje ID SAVE : "+viajeId);
+                     console.log("Iti ID SAVE : "+itiId);
+                    return this.updateItinerario(viajeroId, viajeId, itiId ,currentRecord.id ,currentRecord);
+                }else{
+                    return this.createItinerario(viajeroId, viajeId, itiId,currentRecord);
                 }
             };
 
-            /**
-             * Hace una petición DELETE a /paradas/:id para eliminar un parada
-             * @param {number} id identificador de la instancia de parada a eliminar
-             * @returns {promise} promise para leer la respuesta del servidor.
-             * No se recibe cuerpo en la respuesta.
-             */
-            this.deleteRecord = function (id) {
-                return $http.delete(context + "/" + id);
+            this.createParada = function (viajeroId, viajeId, itiId ,currentRecord) {
+                console.log("ENTRAMOS CREATE: "+context + "/" + viajeroId + "/viajes/" + viajeId +"/itinerarios");
+                return $http.post(context + "/" + viajeroId + "/viajes/" + viajeId +"/itinerarios/"+itiId, currentRecord);
             };
 
-            /**
-             * Hace una petición GET a /paradas/:id/eventos para obtener la colección
-             * de evento asociados a una parada
-             * @param {number} id Identificador de la instancia de parada
-             * @returns {promise} promise para leer la respuesta del servidor
-             * Devuelve un array de objetos de authors.
-             */
-            this.getEventos = function (id) {
-                return $http.get(context + "/" + id + "/eventos");
+            this.updateParada = function (viajeroId, viajeId, itinerarioId, paradaId ,currentRecord) {
+                console.log("ENTRAMOS UPDATE: "+context + "/" + viajeroId + "/viajes/" + viajeId+"/itinerarios/"+itinerarioId);
+                return $http.put(context + "/" + viajeroId + "/viajes/" + viajeId+"/itinerarios/"+itinerarioId+"/paradas/"+paradaId, currentRecord);
             };
 
-            /**
-             * Hace una petición PUT a /paradas/:id/eventos para reemplazar los
-             * evento asociados a una parada
-             * @param {number} paradaId Identificador de la instancia de parada
-             * @param {array} eventos Colección de eventos nueva
-             * @returns {promise} promise para leer la respuesta del servidor
-             * Devuelve un array de objetos de authors con los nuevos autores
-             */
-            this.replaceEventos = function (paradaId, eventos) {
-                return $http.put(context + "/" + paradaId + "/eventos", eventos);
-            };
 
-            /**
-             * Hace una petición DELETE a /paradas/:id/eventos/:id para remover
-             * un evento de una parada
-             * @param {number} paradaId Identificador de la instancia de parada
-             * @param {number} eventoId Identificador de la instancia de evento
-             * @returns {promise} promise para leer la respuesta del servidor
-             * No devuelve datos.
-             */
-            this.removeEvento = function (paradaId, eventoId) {
-                return $http.delete(context + "/" + paradaId + "/eventos/" + eventoId);
-            };
 
 
         }]);

@@ -123,7 +123,7 @@
                 return svc.fetchRecord(record.id).then(function (response) {
                     $scope.currentRecord = response.data;
                     self.editMode = true;
-                    $scope.$broadcast("post-edit-itinerario", $scope.currentRecord);
+                    $scope.$broadcast("post-edit-iti", $scope.currentRecord);
                     return response;
                 }, responseError);
             };

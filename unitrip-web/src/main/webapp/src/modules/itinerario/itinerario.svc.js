@@ -7,7 +7,7 @@
 
     var mod = ng.module("itinerarioModule");
 
-    mod.service("itinerarioService", ["$http", "itinerarioContext", function ($http, context, $rootScope, $log) {
+    mod.service("itinerarioService", ["$http", "itinerarioContext", function ($http, context, $log) {
             /**
              * Obtener la lista de itinerarios.
              * Hace una petición GET con $http a /itinerarios para obtener la lista
@@ -18,7 +18,7 @@
              * Devuelve una lista de objetos de itinerarios con sus atributos y reviews
              */
             this.fetchRecords = function (viajeroId,viajeId) {
-                $log.debug("GET TODOS:"+context + "/" + viajeroId + "/viajes/"+viajeId+"/itinerarios");
+                console.log("GET TODOS:"+context + "/" + viajeroId + "/viajes/"+viajeId+"/itinerarios");
                 return $http.get("viajeros/"+context + "/" + viajeroId + "/viajes/"+viajeId+"/itinerarios");
             };
 
@@ -77,7 +77,7 @@
              * No devuelve datos.
              */
             this.deleteRecord = function (viajeroId,viajeId,itiId) {
-                $log.debug("DELETE:"+context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
+                console.log("DELETE:"+context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
                 return $http.delete(context + "/" + viajeroId + "/viajes/" + viajeId + "/itinerarios/" + itiId);
             };
         }]);
